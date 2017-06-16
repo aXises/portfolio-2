@@ -1,16 +1,142 @@
 @cyan-cont: #00bdce;
 @oran-cont: #e33f00;
+@light-shade: #dadad2;
+@dark-shade: #333333;
 
 body {
-  padding: 50px;
   font: 14px "Muli", Helvetica, Arial, sans-serif;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+a {
+  color: inherit
+}
+
+h1, h2, h3, h4, h5, h6 {
   font-family: "Open Sans", Arial, sans-serif;
+}
+
+.align-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.nav-menu, nav {
+  position: fixed;
+}
+
+.transition {
+  transition: all 0.45s ease-in-out;
+  -webkit-transition: all 0.45s ease-in-out;
+  -moz-transition: all 0.45s ease-in-out;
+  .fast {
+    transition: all 0.35s ease-in-out;
+    -webkit-transition: all 0.35s ease-in-out;
+    -moz-transition: all 0.35s ease-in-out;
+  }
+  .slow {
+    transition: all 0.55s ease-in-out;
+    -webkit-transition: all 0.55s ease-in-out;
+    -moz-transition: all 0.55s ease-in-out;
+  }
+}
+
+.nav-menu {
+  width: 90px;
+  height: 20px;
+  left: -5px;
+  top: 50px;
+  border-radius: 2px;
+  padding-right: 10px;
+  background-size: 100% 200%;
+  background-color: rgba(255,255,255,0);
+  background-image: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.1) 50%);
+  cursor: pointer;
+  z-index: 200;
+  font-weight: 800;
+  .transition.fast;
+  &:hover {
+    background-position: 0 100%;
+  }
+  .text, span {
+    position: absolute;
+    left: 50px;
+    top: 20px;
+    opacity: 0;
+    pointer-events: none;
+    .transition.fast;
+  }
+  &:hover > .text {
+    top: 0px;
+    opacity: 1;
+  }
+  span {
+    top: 0px;
+    left: 60px;
+    font-size: 20px;
+    opacity: 1;
+  }
+  &:hover > span {
+    top: -20px;
+    opacity: 0;
+  }
+}
+
+@nav-width: 250px;
+
+nav {
+  width: @nav-width;
+  height: 100%;
+  top: 0;
+  left: @nav-width*(-1);
+  .transition;
+  .icon-container {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    cursor: pointer;
+  }
+  .nav-main:extend(nav) {
+    background-color: #d6d5d5;
+    z-index: 3;
+  }
+  .nav-secondary:extend(nav) {
+    width: @nav-width/5;
+    background-color: @dark-shade;
+    z-index: 5;
+    .transition.slow;
+    .nav-close {
+      .icon-container;
+      background-color: @dark-shade;
+      top: 35px;
+      left: 0;
+      border-left: solid 0px transparent;
+      .transition.fast;
+      span {
+        font-size: 30px;
+        color: @light-shade;
+        .align-center;
+      }
+      &:hover {
+        border-left: solid 2px @light-shade;
+        left: 5px;
+      }
+    }
+  }
+  .nav-sub:extend(nav) {
+    width: @nav-width/5;
+    left: 0px;
+    background-color: transparent;
+    z-index: 4;
+  }
+  ul {
+    margin-left: 75px;
+    margin-top: 200px;
+  }
+}
+
+header {
+  text-align: right;
+  margin-right: 30px;
 }

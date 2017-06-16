@@ -14,6 +14,8 @@ var app = express();
 // compile less
 app.use(lessMiddleware(__dirname + '/public'));
 
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

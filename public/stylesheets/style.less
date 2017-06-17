@@ -167,35 +167,26 @@ nav {
         color: @light-shade;
         .align-center;
       }
-      &:hover {
-        border-left: solid 2px @light-shade;
-      }
     }
     ul {
       margin-left: 0;
       li {
+        position: relative;
+        border-radius: 2px;
+        .transition.fast;
         span {
           color: @light-shade;
           padding-bottom: 5px;
           border-bottom: 2px solid transparent;
           cursor: pointer;
           .transition.fast;
-          &:hover {
-            border-bottom: 2px solid @light-shade;
-          }
         }
       }
     }
   }
-  .nav-sub:extend(nav) {
-    width: @nav-width/5;
-    left: 0px;
-    background-color: transparent;
-    z-index: 4;
-  }
   ul {
     margin-left: 50px;
-    margin-top: 200px;
+    margin-top: 250px;
     li {
       padding: 10px 0 10px 0;
       margin: 40px 0 40px 0;

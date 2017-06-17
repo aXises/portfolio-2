@@ -2,16 +2,25 @@
 @oran-cont: #e33f00;
 @light-shade: #dadad2;
 @dark-shade: #333333;
+@nav-secondary: rgba(0, 0, 0, 0.8);
 
 body {
   font: 14px "Muli", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: inherit
+  color: @light-shade;
+  font-weight: 300;
+  &:hover {
+    text-decoration:none;
+    color: white;
+  }
+  &:focus {
+    color: white;
+  }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, a {
   font-family: "Open Sans", Arial, sans-serif;
 }
 
@@ -35,11 +44,17 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-transition: all 0.35s ease-in-out;
     -moz-transition: all 0.35s ease-in-out;
   }
+  .vfast {
+    transition: all 0.25s ease-in-out;
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+  }
   .slow {
     transition: all 0.55s ease-in-out;
     -webkit-transition: all 0.55s ease-in-out;
     -moz-transition: all 0.55s ease-in-out;
   }
+
 }
 
 .nav-menu {
@@ -51,13 +66,15 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: 10px;
   background-size: 100% 200%;
   background-color: rgba(255,255,255,0);
-  background-image: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.1) 50%);
+  background-image: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.5) 50%);
   cursor: pointer;
   z-index: 200;
   font-weight: 800;
+  border-bottom: solid 0px transparent;
   .transition.fast;
   &:hover {
     background-position: 0 100%;
+    border-bottom: solid 1px @cyan-cont;
   }
   .text, span {
     position: absolute;
@@ -65,6 +82,7 @@ h1, h2, h3, h4, h5, h6 {
     top: 20px;
     opacity: 0;
     pointer-events: none;
+    color: @light-shade;
     .transition.fast;
   }
   &:hover > .text {
@@ -98,17 +116,48 @@ nav {
     cursor: pointer;
   }
   .nav-main:extend(nav) {
-    background-color: #d6d5d5;
+    background-color: rgba(95, 91, 91, 0.2);
     z-index: 3;
+    li {
+      .transition.vfast;
+      position: relative;
+      &:after {
+        .transition.vfast;
+        height: 2px;
+        width: 15px;
+        content: "";
+        position: absolute;
+        border-radius: 5px;
+        .align-center;
+        margin-top: 15px;
+      }
+      &:hover {
+        background-color: @nav-secondary;
+        &:after {
+          width: 30px;
+        }
+      }
+    }
+    a.anchor li {
+      &:after {
+        background-color: @cyan-cont;
+      }
+    }
+    a.page li {
+      &:after {
+        background-color: @oran-cont;
+      }
+    }
   }
   .nav-secondary:extend(nav) {
     width: @nav-width/5;
-    background-color: @dark-shade;
+    background-color: @nav-secondary;
     z-index: 5;
     .transition.slow;
     .nav-close {
       .icon-container;
-      background-color: @dark-shade;
+      position: absolute;
+      background-color: @nav-secondary;
       top: 35px;
       left: 0;
       border-left: solid 0px transparent;
@@ -120,7 +169,21 @@ nav {
       }
       &:hover {
         border-left: solid 2px @light-shade;
-        left: 5px;
+      }
+    }
+    ul {
+      margin-left: 0;
+      li {
+        span {
+          color: @light-shade;
+          padding-bottom: 5px;
+          border-bottom: 2px solid transparent;
+          cursor: pointer;
+          .transition.fast;
+          &:hover {
+            border-bottom: 2px solid @light-shade;
+          }
+        }
       }
     }
   }
@@ -131,12 +194,29 @@ nav {
     z-index: 4;
   }
   ul {
-    margin-left: 75px;
+    margin-left: 50px;
     margin-top: 200px;
+    li {
+      padding: 10px 0 10px 0;
+      margin: 40px 0 40px 0;
+      font-size: 20px;
+      text-align: center;
+    }
   }
 }
 
 header {
-  text-align: right;
-  margin-right: 30px;
+  height: 100vh;
+  background-color: transparent !important;
+  text-align: center;
+  color: @light-shade;
+  .text-container {
+    display: inline-block;
+    margin: 50px 30px 0 0;
+    h1, p{
+        margin: 0;
+      }
+  }
+  //Temporary
+  background-image: url(https://images4.alphacoders.com/232/232854.jpg);
 }

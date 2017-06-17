@@ -27,11 +27,24 @@ html
     nav
       div.nav-main
         ul
-          li: a(href="") Anchor
-          li: a(href="") Anchor
-          li: a(href="") Anchor
+          a.anchor(href="") 
+            li Anchor
+          a.anchor(href="") 
+            li Anchor
+          a.anchor(href="") 
+            li Anchor
+          a.anchor(href="") 
+            li Anchor
+          a.page(href="") 
+            li Link
       div.nav-secondary
         div.nav-close
           span.glyphicon.glyphicon-menu-left
+        ul
+          li: span.glyphicon.glyphicon-user
+          li: span.glyphicon.glyphicon-th-list
+          li: span.glyphicon.glyphicon-signal
+          li: span.glyphicon.glyphicon-map-marker
+          li: span.glyphicon.glyphicon-th
       div.nav-sub
     block content

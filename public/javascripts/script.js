@@ -12,18 +12,25 @@ $(document).ready(function() {
     
     $('.nav-main ul li').hover(
         function() {
-            var target = $($(this).attr('target'))
+            var target = $($(this).attr('target'));
             target.parent().css({
                 'background-color': '#dadad2',
             });
             target.css('color', '#333333');
         }, function() {
-            var target = $($(this).attr('target'))
+            var target = $($(this).attr('target'));
             target.parent().css({
                 'background-color': '',
             });
             target.css('color', '');
         });
+
+    //$('.nav-main ul').hover(
+    //    function() {
+    //        $('.nav-main').css('background-color', 'rgba(0, 0, 0, 0.7)');
+    //    }, function() {
+    //        $('.nav-main').css('background-color', '');
+    //    });
 
     $('.nav-menu, .nav-close').click(function() {
         navToggle()

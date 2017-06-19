@@ -11,11 +11,8 @@ body {
 a {
   color: @light-shade;
   font-weight: 300;
-  &:hover {
+  &:hover, &:focus {
     text-decoration:none;
-    color: white;
-  }
-  &:focus {
     color: white;
   }
 }
@@ -124,7 +121,7 @@ nav {
       &:after {
         .transition.vfast;
         height: 2px;
-        width: 15px;
+        width: 10px;
         content: "";
         position: absolute;
         border-radius: 5px;
@@ -177,9 +174,8 @@ nav {
         span {
           color: @light-shade;
           padding-bottom: 5px;
-          border-bottom: 2px solid transparent;
+          margin-bottom: 2px;
           cursor: pointer;
-          .transition.fast;
         }
       }
     }

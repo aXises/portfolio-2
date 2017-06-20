@@ -1,6 +1,56 @@
 $(document).ready(function() {
 
-    var navActive;
+    var aTag = $('nav a');
+
+    for (var i = 0; i < aTag.length; i++) {
+        var link = $(aTag[i]);
+        if (link.attr('href').charAt(0) === '#') {
+            if (document.location.pathname === '/') {
+                link.addClass('anchor');
+            }
+            else {
+                RedirectMethod('external');
+                link.addClass('page');
+            }
+            link.children('li').text(link.children('li').text().slice(1))
+        }
+        else {
+            if (document.location.pathname === '/') {
+                link.addClass('page')
+            }
+            else {
+                if (document.location.pathname.slice(1) !== link.attr('href')) {
+                    link.addClass('page')
+                }
+                link.addClass('anchor');
+            }
+        }
+    }
+
+    function RedirectMethod(type) {
+        $('nav a').click(function(event) {
+            event.preventDefault();
+            var page;
+            if (type = 'external') {
+                // Temp (we'll see).
+                page = '/'
+            }
+            else {
+                page = $(this).attr('href');
+            }
+            var pageUrl = window.location.href
+            var pageLocation = pageUrl.split('/').pop();
+            console.log(page)
+            if (pageLocation === page) {
+            }
+            else {
+                $('body').fadeOut(750, redirect);
+            }
+            function redirect() {
+                window.location = page
+            }
+        });
+    }
 
     var mainNav = $('.nav-main ul li');
     var secNav = $('.nav-secondary ul li span');
@@ -35,6 +85,8 @@ $(document).ready(function() {
             $('.nav-main').css('background-color', '');
         }
     );
+
+    var navActive;
 
     $('.nav-menu, .nav-close').click(function() {
         navToggle();

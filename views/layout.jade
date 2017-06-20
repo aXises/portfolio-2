@@ -28,12 +28,7 @@ html
       div.nav-main
         ul
           each link in navLinks
-            // Test
-            if link === "Anchor"
-              a.anchor(href="") 
-                li #{link}
-            else
-              a.page(href="") 
+              a(href=link)
                 li #{link}
       div.nav-secondary
         div.nav-close

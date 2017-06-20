@@ -100,33 +100,3 @@ $(document).ready(function() {
     }
 
 }); // End of use
-
-/**
-    var aTag = $('nav a');
-
-    for (var i = 0; i < aTag.length; i++) {
-        var link = $(aTag[i]);
-        if (link.attr('href').charAt(0) === '#') {
-            if (document.location.pathname === '/') {
-                link.addClass('anchor');
-            }
-            else {
-                RedirectMethod('external');
-                link.addClass('page');
-            }
-            link.children('li').text(link.children('li').text().slice(1))
-        }
-        else {
-            if (document.location.pathname === '/') {
-                RedirectMethod();
-                link.addClass('page')
-            }
-            else {
-                if (document.location.pathname.slice(1) !== link.attr('href')) {
-                    link.addClass('page')
-                }
-                link.addClass('anchor');
-            }
-        }
-    }
- */

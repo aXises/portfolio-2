@@ -5,52 +5,39 @@ $(document).ready(function() {
     for (var i = 0; i < aTag.length; i++) {
         var link = $(aTag[i]);
         if (link.attr('href').charAt(0) === '#') {
-            if (document.location.pathname === '/') {
-                link.addClass('anchor');
-            }
-            else {
-                RedirectMethod('external');
-                link.addClass('page');
-            }
             link.children('li').text(link.children('li').text().slice(1))
-        }
-        else {
-            if (document.location.pathname === '/') {
-                link.addClass('page')
-            }
-            else {
-                if (document.location.pathname.slice(1) !== link.attr('href')) {
-                    link.addClass('page')
-                }
-                link.addClass('anchor');
-            }
         }
     }
 
-    function RedirectMethod(type) {
-        $('nav a').click(function(event) {
-            event.preventDefault();
-            var page;
-            if (type = 'external') {
-                // Temp (we'll see).
-                page = '/'
+    $('nav a').click(function(event) {
+        event.preventDefault();
+        var pageHash = this.hash
+        if (pageHash.charAt(0) === '#') {
+            if (window.location.pathname === '/') {
+                $('html, body').animate({
+                    scrollTop: $(pageHash).offset().top
+                }, 800, function(){
+                    window.location.hash = pageHash;
+                });
             }
             else {
-                page = $(this).attr('href');
+                redirect();
             }
-            var pageUrl = window.location.href
-            var pageLocation = pageUrl.split('/').pop();
-            console.log(page)
-            if (pageLocation === page) {
-            }
-            else {
-                $('body').fadeOut(750, redirect);
-            }
-            function redirect() {
-                window.location = page
-            }
-        });
-    }
+        }
+        else {
+            redirect();
+        }
+        function redirect() {
+            $('body').fadeOut(750, function() {
+                if (this.href === undefined) {
+                    window.location = '/' + pageHash;
+                }
+                else {
+                    window.location = this.href;
+                }
+            });
+        }
+    });
 
     var mainNav = $('.nav-main ul li');
     var secNav = $('.nav-secondary ul li span');
@@ -100,7 +87,8 @@ $(document).ready(function() {
                 opacity: '0',
                 cursor: 'default'
             });
-        } else {
+        }
+        else {
             $('.nav-main, .nav-secondary').css('left', '');
             $('.nav-menu').css({
                 left: '',
@@ -112,3 +100,33 @@ $(document).ready(function() {
     }
 
 }); // End of use
+
+/**
+    var aTag = $('nav a');
+
+    for (var i = 0; i < aTag.length; i++) {
+        var link = $(aTag[i]);
+        if (link.attr('href').charAt(0) === '#') {
+            if (document.location.pathname === '/') {
+                link.addClass('anchor');
+            }
+            else {
+                RedirectMethod('external');
+                link.addClass('page');
+            }
+            link.children('li').text(link.children('li').text().slice(1))
+        }
+        else {
+            if (document.location.pathname === '/') {
+                RedirectMethod();
+                link.addClass('page')
+            }
+            else {
+                if (document.location.pathname.slice(1) !== link.attr('href')) {
+                    link.addClass('page')
+                }
+                link.addClass('anchor');
+            }
+        }
+    }
+ */

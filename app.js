@@ -14,7 +14,7 @@ var app = express();
 // compile less
 app.use(lessMiddleware(__dirname + '/public'));
 
-app.use('/bower_components',  express.static(__dirname + '/bower_components'));
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+//app.use('/newpg', newpg);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

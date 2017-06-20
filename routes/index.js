@@ -3,7 +3,10 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Axisesio' });
+  res.render('index', { 
+    title: 'Axisesio',
+    navLinks: ['Anchor', 'Anchor', 'Anchor', 'Anchor', 'Link', 'Link']
+  });
 });
 
 module.exports = router;

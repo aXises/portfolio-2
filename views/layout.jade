@@ -27,16 +27,14 @@ html
     nav
       div.nav-main
         ul
-          a.anchor(href="") 
-            li Anchor
-          a.anchor(href="") 
-            li Anchor
-          a.anchor(href="") 
-            li Anchor
-          a.anchor(href="") 
-            li Anchor
-          a.page(href="") 
-            li Link
+          each link in navLinks
+            // Test
+            if link === "Anchor"
+              a.anchor(href="") 
+                li #{link}
+            else
+              a.page(href="") 
+                li #{link}
       div.nav-secondary
         div.nav-close
           span.glyphicon.glyphicon-menu-left
@@ -46,4 +44,5 @@ html
           li: span.glyphicon.glyphicon-signal
           li: span.glyphicon.glyphicon-map-marker
           li: span.glyphicon.glyphicon-folder-close
+          li: span.glyphicon.glyphicon-home
     block content

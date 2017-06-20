@@ -1,5 +1,13 @@
 $(document).ready(function() {
 
+    // For future loading
+    $('#loading').css({
+        'opacity': 0,
+        'pointer-events': 'none',
+    });
+
+    animate();
+
     var aTag = $('nav a');
 
     for (var i = 0; i < aTag.length; i++) {
@@ -97,6 +105,16 @@ $(document).ready(function() {
             });
         }
         navActive = !navActive
+    }
+
+    function animate() {
+        move('.text-container')
+        .ease('in-out')
+        .set('top', '50px')
+        .set('opacity', 1)
+        .set('letter-spacing', '3px')
+        .duration('1.2s')
+        .end();
     }
 
 }); // End of use

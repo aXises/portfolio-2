@@ -2,11 +2,16 @@
 @oran-cont: #e33f00;
 @light-shade: #dadad2;
 @dark-shade: #333333;
+@std-bg: #060a10;
 @nav-secondary: rgba(0, 0, 0, 0.8);
 
 body {
   font: 14px "Muli", Helvetica, Arial, sans-serif;
-  background-color: #060a10;
+  background-color: @std-bg;
+}
+
+.no-js #loading {
+  display: none;
 }
 
 a {
@@ -52,7 +57,16 @@ h1, h2, h3, h4, h5, h6, a {
     -webkit-transition: all 0.55s ease-in-out;
     -moz-transition: all 0.55s ease-in-out;
   }
+}
 
+#loading {
+  position: fixed;
+  width: 100vw;
+  height: 100vw;
+  background-color: black;
+  z-index: 1001;
+  opacity: 1;
+  .transition;
 }
 
 .nav-menu {
@@ -200,11 +214,13 @@ header {
   text-align: center;
   color: @light-shade;
   .text-container {
+    position: relative;
+    top: 45%;
+    opacity: 0;
     display: inline-block;
-    margin: 50px 30px 0 0;
-    h1, p{
-        margin: 0;
-      }
+    h1 {
+      margin: 0;
+    }
   }
   //Temporary
   background-image: url(https://images4.alphacoders.com/232/232854.jpg);

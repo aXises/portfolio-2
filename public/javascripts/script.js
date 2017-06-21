@@ -5,9 +5,16 @@ $(document).ready(function() {
         'opacity': 0,
         'pointer-events': 'none',
     });
-
-    animate();
-
+    
+    $.getScript('javascripts/animations.js', function() {
+        if (document.location.pathname === '/') {
+            indexanimate();
+        }
+        else if (document.location.pathname === '/Gallery') {
+            galleryanimate();
+        }
+    });
+    
     var aTag = $('nav a');
 
     for (var i = 0; i < aTag.length; i++) {
@@ -108,23 +115,6 @@ $(document).ready(function() {
             });
         }
         navActive = !navActive
-    }
-
-    function animate() {
-        move('.text-container')
-        .ease('in-out')
-        .set('top', '50px')
-        .set('opacity', 1)
-        .duration('1s')
-        .end(function() {
-            move('.text-container')
-            .set('letter-spacing', '5px')
-            .set('left', '85%')
-            .set('transform', 'translateX(0)')
-            .duration('1.2s')
-            .ease('in-out')
-            .end();
-        })
     }
 
 }); // End of use

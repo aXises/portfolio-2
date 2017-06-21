@@ -112,9 +112,16 @@ $(document).ready(function() {
         .ease('in-out')
         .set('top', '50px')
         .set('opacity', 1)
-        .set('letter-spacing', '3px')
-        .duration('1.2s')
-        .end();
+        .duration('1s')
+        .end(function() {
+            move('.text-container')
+            .set('letter-spacing', '5px')
+            .set('left', '85%')
+            .set('transform', 'translateX(0)')
+            .duration('1.2s')
+            .ease('in-out')
+            .end();
+        })
     }
 
 }); // End of use

@@ -20,6 +20,7 @@ $(document).ready(function() {
     $('nav a').click(function(event) {
         event.preventDefault();
         var pageHash = this.hash
+        var pageHref = this.href
         if (pageHash.charAt(0) === '#') {
             if (window.location.pathname === '/') {
                 $('html, body').animate({
@@ -29,19 +30,21 @@ $(document).ready(function() {
                 });
             }
             else {
+                pageHash = this.hash
                 redirect();
             }
         }
         else {
+            pageHref = this.href
             redirect();
         }
         function redirect() {
             $('body').fadeOut(750, function() {
-                if (this.href === undefined) {
+                if (pageHash !== '') {
                     window.location = '/' + pageHash;
                 }
                 else {
-                    window.location = this.href;
+                    window.location = pageHref;
                 }
             });
         }

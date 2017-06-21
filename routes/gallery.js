@@ -6,7 +6,6 @@ var fs = require('fs');
 router.get('/', function(req, res, next) {
   var data = JSON.parse(fs.readFileSync('routes/data.json', 'utf8'))
   res.render('index', { 
-    title: 'NEW PAGE',
     navLinks: data.navLinks
   });
 });

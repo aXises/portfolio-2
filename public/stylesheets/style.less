@@ -274,6 +274,7 @@ section#project {
     background-size: cover;
     max-height: 100%;
     max-width: 100%;
+    margin: auto;
   }
   hr {
     text-align: center;
@@ -289,10 +290,6 @@ section#project {
       font-weight: 200;
       font-style: italic;
     }
-  }
-  aside {
-    height: 507px;
-    background-color: transparent;
   }
   ul {
     margin-bottom: 20px;
@@ -317,14 +314,25 @@ section#project {
   }
   ul#tech-list,
   ul#team {
-    p {
-      text-indent: 20px;
-    }
-    li p {
-      text-indent: 40px;
-      &:before {
-        content: '- ';
+    @media (min-width:1200px) {
+      p {
+        text-indent: 20px;
       }
+      li p {
+        text-indent: 40px;
+        &:before {
+          content: '- ';
+        }
+      }
+    }
+  }
+  @media (max-width:1200px) {
+    .button {
+      margin: 10px 0 10px 0;
+    }
+    p, .row {
+      text-align: center;
+      text-indent: 0;
     }
   }
 }

@@ -3,20 +3,21 @@ extends layout
 block content
   header#gallery
     div.text-container
-      p Gallery
+      p.visible-md.visible-lg Gallery
   section#project
     .row
       .container-fluid
           .col-lg-5.col-lg-offset-1
             aside
-              img.img-responsive(src="http://www.bhmpics.com/walls/city_building_and_sun-wide.jpg")
+              // Temp
+              img.img-responsive(src="https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg")
           .col-lg-5
             article
               .row
                 .col-lg-12
                   h1 PROJECT TEMPLATE
               .row
-                .col-lg-6
+                .col-lg-7
                   .container-fluid
                     .row
                       p#date: i 1/2/3456
@@ -28,31 +29,31 @@ block content
                         div
                           .button
                             h4 View
-                .col-lg-6
+                .col-lg-5
                   .container-fluid
-                    .row
+                    .row.status
                       .row
-                        .col-lg-6.col-md-6
+                        .col-lg-6.col-md-12
                           p: strong Status: Completed
-                        .col-lg-6.col-md-6.indicator
+                        .col-lg-6.col-md-6.visible-lg.indicator
                           div.blue
                       .row
-                        .col-lg-6.col-md-6
+                        .col-lg-6.col-md-12
                           p: strong Type: Academic 
-                        .col-lg-6.col-md-6.indicator
+                        .col-lg-6.col-md-6.visible-lg.indicator
                           div.blue
                       .row
-                        .col-lg-6.col-md-6
+                        .col-lg-6.col-md-12
                           p: strong Parent: None
-                        .col-lg-6.col-md-6.indicator
+                        .col-lg-6.col-md-6.visible-lg.indicator
                           div.red
                     .row
                       hr
                       p Technologies:
                       ul#tech-list
-                        p Main
+                        p.visible-lg Main
                         li: p Adobe Photoshop
-                        p Support
+                        p.visible-lg Support
                         li: p Adobe Illustrator
                         li: p Autodesk Inventor
                     .row
@@ -61,4 +62,5 @@ block content
                       ul#team
                         p Lvl 1
                         li: p None
+    
                   

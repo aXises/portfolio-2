@@ -5,62 +5,63 @@ block content
     div.text-container
       p.visible-md.visible-lg Gallery
   section#project
-    .row
-      .container-fluid
-          .col-lg-5.col-lg-offset-1
-            aside
-              // Temp
-              img.img-responsive(src="https://cdn.pixabay.com/photo/2017/04/09/09/56/avenue-2215317_960_720.jpg")
-          .col-lg-5
-            article
-              .row
-                .col-lg-12
-                  h1 PROJECT TEMPLATE
-              .row
-                .col-lg-7
-                  .container-fluid
-                    .row
-                      p#date: i 1/2/3456
-                      p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    .row
-                      a(href="") http://link.net.au
-                    .row
-                      a(href="")
-                        div
-                          .button
-                            h4 View
-                .col-lg-5
-                  .container-fluid
-                    .row.status
+    each item in pageContent
+      - var project = item["PROJECT"]
+      .row
+        .container-fluid
+            .col-lg-5.col-lg-offset-1
+              aside
+                img.img-responsive(src=project["Image"])
+            .col-lg-5
+              article
+                .row
+                  .col-lg-12
+                    h1 #{project["Name"]}
+                .row
+                  .col-lg-7
+                    .container-fluid
                       .row
-                        .col-lg-6.col-md-12
-                          p: strong Status: Completed
-                        .col-lg-6.col-md-6.visible-lg.indicator
-                          div.blue
+                        p#date: i #{project["Date"]}
+                        a(href="https://"+project["Link"]) #{project["Link"]}
                       .row
-                        .col-lg-6.col-md-12
-                          p: strong Type: Academic 
-                        .col-lg-6.col-md-6.visible-lg.indicator
-                          div.blue
+                        p #{project["Description"]}
                       .row
-                        .col-lg-6.col-md-12
-                          p: strong Parent: None
-                        .col-lg-6.col-md-6.visible-lg.indicator
-                          div.red
-                    .row
-                      hr
-                      p Technologies:
-                      ul#tech-list
-                        p.visible-lg Main
-                        li: p Adobe Photoshop
-                        p.visible-lg Support
-                        li: p Adobe Illustrator
-                        li: p Autodesk Inventor
-                    .row
-                      hr
-                      p Team:
-                      ul#team
-                        p Lvl 1
-                        li: p None
-    
+                        a(href=project["DisplayLink"] target="_blank")
+                          div
+                            .button
+                              h4 View
+                  .col-lg-5
+                    .container-fluid
+                      .row.status
+                        .row
+                          .col-lg-6.col-md-12
+                            p: strong Status: #{project["Status"]}
+                          .col-lg-6.col-md-6.visible-lg.indicator
+                            div.blue
+                        .row
+                          .col-lg-6.col-md-12
+                            p: strong Type: #{project["Type"]}
+                          .col-lg-6.col-md-6.visible-lg.indicator
+                            div.blue
+                        .row
+                          .col-lg-6.col-md-12
+                            p: strong Parent: #{project["Parent"]}
+                          .col-lg-6.col-md-6.visible-lg.indicator
+                            div.red
+                      .row
+                        hr
+                        p Technologies:
+                        ul#tech-list
+                          p.visible-lg Main
+                          each prog in project["Technologies"]["Main"]
+                            li: p #{prog}
+                          p.visible-lg Support
+                          each prog in project["Technologies"]["Secondary"]
+                            li: p #{prog}
+                      .row
+                        hr
+                        p Team:
+                        ul#team
+                          each users in project["Team"]
+                            li: p #{users}
                   

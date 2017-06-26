@@ -14,6 +14,24 @@ $(document).ready(function() {
             galleryanimate();
         }
     });
+
+    var displayImg = $('#display img');
+
+    for (var i = 0; i < displayImg.length; i++) {
+        var img = $(displayImg[i]);
+        img.after('<aside>');
+        img.next('aside').css('height', img.height())
+        img.next('aside').css('width', img.width())
+    }
+
+    $('#display img').hover(
+        function() {
+            $(this).next('aside').css('opacity', '1');
+        }, 
+        function() {
+            $(this).next('aside').css('opacity', '0');
+        }
+    );
     
     var aTag = $('nav a');
 

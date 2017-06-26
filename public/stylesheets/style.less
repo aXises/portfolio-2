@@ -255,18 +255,21 @@ section#display {
   article {
     margin: 10px;
     height: 400px;
+    overflow: hidden;
     position: relative;
     img {
       max-height: 100%;
-      .transition.vfast;
-      &:hover {
-        @media (min-width: 992px) {
-          transform: scale(1.05);
-        }    
+      @media (max-width: 992px) {
+        left: 50%;
+        transform:translateX(-50%);
       }
-      @media (max-width: 991px) {
-        .align-center;
-      }
+    }
+    aside {
+      position: absolute;
+      top: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      opacity: 0;
+      pointer-events: none;
     }
   }
 }

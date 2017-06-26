@@ -251,6 +251,26 @@ section {
   z-index: 1;
 }
 
+section#display {
+  article {
+    margin: 10px;
+    height: 400px;
+    position: relative;
+    img {
+      max-height: 100%;
+      .transition.vfast;
+      &:hover {
+        @media (min-width: 992px) {
+          transform: scale(1.05);
+        }    
+      }
+      @media (max-width: 991px) {
+        .align-center;
+      }
+    }
+  }
+}
+
 section#project {
   height: 100%;
   a {

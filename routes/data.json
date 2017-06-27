@@ -1,3 +1,45 @@
 {
-    "navLinks": ["#Section1", "#Section2", "#Section3", "#Section4", "Gallery", "Link"]
+	"navLinks": ["#Section1", "#Section2", "#Section3", "#Section4", "Gallery", "Link"],
+	"Projects":{
+        "ITEM1": {
+            "Image": "http://lorempixel.com/1900/1080/",
+            "Name": "ITEM 1",
+            "Date": "1/2/345",
+            "Description": "Description",
+            "Link": "www.link.com",
+            "DisplayLink": "/project",
+            "Status": "Completed",
+            "Type": "Personal",
+            "Parent": "None",
+            "Technologies": {
+                "Main": ["Adobe Photoshop"],
+                "Secondary": ["Adobe Illustrator", "Autodesk Inventor"]
+            },
+            "Team": ["Member1", "Member2"]
+        },
+        "ITEM2": {
+            "Image": "http://lorempixel.com/1900/1080/"
+        },
+        "ITEM3": {
+            "Image": "http://lorempixel.com/1900/1080/"
+        },
+        "ITEM4": {
+            "Image": "http://lorempixel.com/1900/1080/"
+        },
+        "ITEM5": {
+            "Image": "http://lorempixel.com/1900/1080/"
+        },
+        "ITEM6": {
+            "Image": "http://lorempixel.com/1900/1080/"
+        },
+        "ITEM7": {
+            "Image": "http://lorempixel.com/1900/1080/"
+        },
+        "ITEM8": {
+            "Image": "http://lorempixel.com/1900/1080/"
+        },
+        "ITEM9": {
+            "Image": "http://lorempixel.com/1900/1080/"
+        }
+	}
 }

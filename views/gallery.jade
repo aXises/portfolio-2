@@ -16,12 +16,17 @@ block content
           .row
             - for (var j = i; j <= i + 2; j++)
               - index++
-                article.col-lg-4.col-sm-12
-                  img.img-responsive(src=pageContent["ITEM"+index].Image)
-                  aside
+                a(href="")
+                  article.col-lg-4.col-sm-12
+                    +galleryItem("ITEM"+index)
       - if (semi > 0)
         .row
           - for (var remainder = index; index < remainder + semi; index++)
-            article.col-lg-4.col-md-6.col-sm-12
-              img.img-responsive(src=pageContent["ITEM"+(index+1)].Image)
-              aside
+            a(href="")
+              article.col-lg-4.col-md-6.col-sm-12
+                +galleryItem("ITEM"+(index+1))
+
+mixin galleryItem(key)
+  img.img-responsive(src=pageContent[key].Image)
+  aside
+    h2 Title

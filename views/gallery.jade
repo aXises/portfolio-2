@@ -18,15 +18,25 @@ block content
               - index++
                 a(href="")
                   article.col-lg-4.col-sm-12
-                    +galleryItem("ITEM"+index)
+                    +galleryItem(index)
       - if (semi > 0)
         .row
           - for (var remainder = index; index < remainder + semi; index++)
             a(href="")
               article.col-lg-4.col-md-6.col-sm-12
-                +galleryItem("ITEM"+(index+1))
+                +galleryItem(index+1)
 
-mixin galleryItem(key)
-  img.img-responsive(src=pageContent[key].Image)
+mixin galleryItem(keyIndex)
+  - var keyItem = pageContent["ITEM"+keyIndex]
+  img.img-responsive(src=keyItem.Image)
   aside
-    h2 Title
+    h2 #{keyItem.Name}
+    p #{keyItem.Description}
+    br
+    h5 Status: 
+      strong #{keyItem.Status}
+    h5 Type: 
+      strong #{keyItem.Type}
+    hr
+    - if (keyItem.DisplayLink)
+      p More info avaliable

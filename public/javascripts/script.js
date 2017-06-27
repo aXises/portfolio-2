@@ -1,21 +1,24 @@
 $(document).ready(function() {
 
-    // For future loading
-    $('#loading').css({
-        'opacity': 0,
-        'pointer-events': 'none',
-    });
-    
-    $.getScript('javascripts/animations.js', function() {
-        if (document.location.pathname === '/') {
-            indexanimate();
-        }
-        else if (document.location.pathname === '/Gallery') {
-            galleryanimate();
-        }
-    });
+    window.addEventListener("load", function(){
 
-    setAside();
+        $('body').css('overflow-y', 'auto');
+        $('#loading').css({
+            'opacity': 0,
+            'pointer-events': 'none',
+        });
+
+        $.getScript('javascripts/animations.js', function() {
+            if (document.location.pathname === '/') {
+                indexanimate();
+            }
+            else if (document.location.pathname === '/Gallery') {
+                galleryanimate();
+            }
+        });
+
+        setAside();
+    });
 
     $(window).resize(function() {
         setAside();

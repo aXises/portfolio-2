@@ -15,13 +15,11 @@ $(document).ready(function() {
         }
     });
 
-    var displayImg = $('#display img');
+    setAside();
 
-    for (var i = 0; i < displayImg.length; i++) {
-        var img = $(displayImg[i]);
-        img.next('aside').css('height', img.height())
-        img.next('aside').css('width', img.width())
-    }
+    $(window).resize(function() {
+        setAside();
+    });
 
     $('#display img').hover(
         function() {
@@ -132,6 +130,17 @@ $(document).ready(function() {
             });
         }
         navActive = !navActive
+    }
+
+    function setAside () {
+        
+        var displayImg = $('#display img');
+
+        for (var i = 0; i < displayImg.length; i++) {
+            var img = $(displayImg[i]);
+            img.next('aside').css('height', img.height())
+            img.next('aside').css('width', img.width())
+        }
     }
 
 }); // End of use

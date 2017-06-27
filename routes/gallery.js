@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
     navLinks: data.navLinks,
     pageContent: content.Projects
   });
+      
 });
 
 module.exports = router;

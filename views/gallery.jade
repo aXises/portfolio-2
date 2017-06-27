@@ -6,24 +6,21 @@ block content
       p.visible-md.visible-lg Gallery
   section#display
     .container-fluid
-      .col-lg-4.col-md-6.col-sm-12
-        article.row
-          img.img-responsive(src="https://static.pexels.com/photos/226721/pexels-photo-226721.jpeg")
-        article.row
-          img.img-responsive(src="https://static.pexels.com/photos/169789/pexels-photo-169789.jpeg")
-        article.row
-          img.img-responsive(src="https://static.pexels.com/photos/226721/pexels-photo-226721.jpeg")
-      .col-lg-4.col-md-6.col-sm-12
-        article.row
-          img.img-responsive(src="https://static.pexels.com/photos/226721/pexels-photo-226721.jpeg")
-        article.row
-          img.img-responsive(src="https://static.pexels.com/photos/169789/pexels-photo-169789.jpeg")
-        article.row
-          img.img-responsive(src="https://static.pexels.com/photos/226721/pexels-photo-226721.jpeg")
-      .col-lg-4.col-md-6.col-sm-12
-        article.row
-          img.img-responsive(src="https://static.pexels.com/photos/226721/pexels-photo-226721.jpeg")
-        article.row
-          img.img-responsive(src="https://static.pexels.com/photos/169789/pexels-photo-169789.jpeg")
-        article.row
-          img.img-responsive(src="https://static.pexels.com/photos/226721/pexels-photo-226721.jpeg")
+      - var index = 0
+      - var items = pageContent.length
+      - var semi = items % 3
+      - while (items % 3 !== 0)
+        - items -= 1;
+      - for (var i = 0; i < items; i+=3)
+          .row
+            - for (var j = i; j <= i + 2; j++)
+              - index++
+                article.col-lg-4.col-sm-12
+                  img.img-responsive(src=pageContent[index-1].PROJECT.Image)
+                  aside
+      - if (semi > 0)
+        .row
+          - for (var remainder = index; index < remainder + semi; index++)
+            article.col-lg-4.col-md-6.col-sm-12
+              img.img-responsive(src=pageContent[index].PROJECT.Image)
+              aside

@@ -19,7 +19,6 @@ $(document).ready(function() {
 
     for (var i = 0; i < displayImg.length; i++) {
         var img = $(displayImg[i]);
-        img.after('<aside>');
         img.next('aside').css('height', img.height())
         img.next('aside').css('width', img.width())
     }

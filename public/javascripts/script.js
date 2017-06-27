@@ -24,9 +24,17 @@ $(document).ready(function() {
     $('#display img').hover(
         function() {
             $(this).next('aside').css('opacity', '1');
+            $(this).css({
+                'transform': 'scale(1.05)',
+                'filter': 'blur(2px)'
+            });
         }, 
         function() {
-            $(this).next('aside').css('opacity', '0');
+            $(this).next('aside').css('opacity', '');
+            $(this).css({
+                'transform': '',
+                'filter': ''
+            });
         }
     );
     

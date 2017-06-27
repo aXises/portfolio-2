@@ -253,9 +253,12 @@ section {
 
 section#display {
   article {
-    margin-bottom: 20px;
+    overflow: hidden;
+    padding: 0;
+    
     img {
       max-height: 100%;
+      .transition.vfast;
     }
     aside {
       position: absolute;
@@ -263,6 +266,7 @@ section#display {
       background-color: rgba(0, 0, 0, 0.8);
       opacity: 0;
       pointer-events: none;
+      .transition.vfast;
     }
   }
 }

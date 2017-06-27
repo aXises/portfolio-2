@@ -1,7 +1,7 @@
 {
 	"Projects":[{
 			"PROJECT": {
-				"Image": "https://static.pexels.com/photos/380863/pexels-photo-380863.jpeg",
+				"Image": "http://lorempixel.com/1900/1080/",
 				"Name": "ITEM 1",
 				"Date": "1/2/345",
 				"Description": "Description",
@@ -19,7 +19,7 @@
 		},
 		{
 			"PROJECT": {
-				"Image": "https://static.pexels.com/photos/380863/pexels-photo-380863.jpeg",
+				"Image": "http://lorempixel.com/1900/1080/",
 				"Name": "ITEM 2", 
 				"Date": "6/7/890",
 				"Description": "Description",
@@ -37,7 +37,7 @@
 		},
 		{
 			"PROJECT": {
-				"Image": "https://static.pexels.com/photos/380863/pexels-photo-380863.jpeg",
+				"Image": "http://lorempixel.com/1900/1080/",
 				"Name": "ITEM 2", 
 				"Date": "6/7/890",
 				"Description": "Description",
@@ -55,7 +55,7 @@
 		},
 		{
 			"PROJECT": {
-				"Image": "https://static.pexels.com/photos/380863/pexels-photo-380863.jpeg",
+				"Image": "http://lorempixel.com/1900/1080/",
 				"Name": "ITEM 2", 
 				"Date": "6/7/890",
 				"Description": "Description",
@@ -73,37 +73,37 @@
 		},
 		{
 			"PROJECT": {
-				"Image": "https://static.pexels.com/photos/380863/pexels-photo-380863.jpeg"
+				"Image": "http://lorempixel.com/1900/1080/"
 			}
 		},
 		{
 			"PROJECT": {
-				"Image": "https://static.pexels.com/photos/380863/pexels-photo-380863.jpeg"
+				"Image": "http://lorempixel.com/1900/1080/"
 			}
 		},
 		{
 			"PROJECT": {
-				"Image": "https://static.pexels.com/photos/380863/pexels-photo-380863.jpeg"
+				"Image": "http://lorempixel.com/1900/1080/"
 			}
 		},
 		{
 			"PROJECT": {
-				"Image": "https://static.pexels.com/photos/380863/pexels-photo-380863.jpeg"
+				"Image": "http://lorempixel.com/1900/1080/"
 			}
 		},
 		{
 			"PROJECT": {
-				"Image": "https://static.pexels.com/photos/380863/pexels-photo-380863.jpeg"
+				"Image": "http://lorempixel.com/1900/1080/"
 			}
 		},
 		{
 			"PROJECT": {
-				"Image": "https://static.pexels.com/photos/380863/pexels-photo-380863.jpeg"
+				"Image": "http://lorempixel.com/1900/1080/"
 			}
 		},
 		{
 			"PROJECT": {
-				"Image": "https://static.pexels.com/photos/380863/pexels-photo-380863.jpeg"
+				"Image": "http://lorempixel.com/1900/1080/"
 			}
 		}
 	]

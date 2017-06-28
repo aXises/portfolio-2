@@ -20,4 +20,13 @@ router.get('/Works', function(req, res, next) {
   });
 });
 
+router.get('/:item', function(req, res, next) {
+  res.render('item', {
+    navLinks: links,
+    pageContent: data.Projects,
+    itemKeys: Object.keys(data.Projects),
+    itemID: req.params.item
+  })
+});
+
 module.exports = router;

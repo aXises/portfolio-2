@@ -1,13 +1,8 @@
 $(document).ready(function() {
 
-    if ($('img').length == 0) {
+    $(document).imagesLoaded().always(function() {
         load();
-    }
-    else {
-        window.addEventListener('load', function() {
-            load();
-        });
-    }
+    });
 
     $(window).resize(function() {
         setAside();

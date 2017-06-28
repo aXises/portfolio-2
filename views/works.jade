@@ -3,7 +3,7 @@ extends layout
 block content
   header#gallery
     div.text-container
-      p.visible-md.visible-lg Gallery
+      p.visible-md.visible-lg Item Gallery
   section#display
     .container-fluid
       - var index = 0
@@ -16,7 +16,7 @@ block content
           .row
             - for (var j = i; j <= i + 2; j++)
               - index++
-                a(href="")
+                a(href="item")
                   article.col-lg-4.col-sm-12
                     +galleryItem(index)
       - if (semi > 0)

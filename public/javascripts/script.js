@@ -149,7 +149,7 @@ $(document).ready(function() {
             if (document.location.pathname === '/') {
                 indexanimate();
             }
-            else if (document.location.pathname === '/Gallery') {
+            else if (document.location.pathname === '/Works') {
                 galleryanimate();
             }
         });

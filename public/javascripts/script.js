@@ -1,24 +1,13 @@
 $(document).ready(function() {
 
-    window.addEventListener("load", function(){
-
-        $('body').css('overflow-y', 'auto');
-        $('#loading').css({
-            'opacity': 0,
-            'pointer-events': 'none',
+    if ($('img').length == 0) {
+        load();
+    }
+    else {
+        window.addEventListener('load', function() {
+            load();
         });
-
-        $.getScript('javascripts/animations.js', function() {
-            if (document.location.pathname === '/') {
-                indexanimate();
-            }
-            else if (document.location.pathname === '/Gallery') {
-                galleryanimate();
-            }
-        });
-
-        setAside();
-    });
+    }
 
     $(window).resize(function() {
         setAside();
@@ -154,4 +143,29 @@ $(document).ready(function() {
         }
     }
 
+    function load() {
+        $('body').css('overflow-y', 'auto');
+        $('#loading').css({
+            'opacity': 0,
+            'pointer-events': 'none',
+        });
+
+        $.getScript('javascripts/animations.js', function() {
+            if (document.location.pathname === '/') {
+                indexanimate();
+            }
+            else if (document.location.pathname === '/Gallery') {
+                galleryanimate();
+            }
+        });
+
+        setAside();
+    }
+
 }); // End of use
+
+window.onpageshow = function(event) {
+    if (event.persisted) {
+        alert("From bfcache");
+    }
+};

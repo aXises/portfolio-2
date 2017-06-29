@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "mocha"
   },
   "author": "aXises",
   "license": "ISC",
@@ -18,7 +19,9 @@
     "express": "~4.15.2",
     "jade": "~1.11.0",
     "less-middleware": "^2.2.0",
+    "mocha": "^3.4.2",
     "morgan": "~1.8.1",
+    "request": "^2.81.0",
     "serve-favicon": "~2.4.2"
   }
 }

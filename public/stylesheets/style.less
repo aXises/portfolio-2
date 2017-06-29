@@ -297,6 +297,9 @@ section#project {
     overflow: hidden;
     border-radius: 5px;
     border:1px solid transparent;
+    @media (max-width: 1200px) {
+      display: none;
+    }
     img, 
     .overlay {
       position: absolute;
@@ -317,20 +320,8 @@ section#project {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-  }
-  a {
-    .button {
-      position: relative;
-      width: 95%;
-      height: 35px;
-      margin-top: 10px;
-      border: 1px @light-shade solid;
-      left: 50%;
-      transform: translateX(-50%);
-      h4 {
-        margin: 0;
-        .align-center;
-      }
+    @media (max-width: 1200px) {
+      margin-top: 200px;
     }
   }
   img {
@@ -355,6 +346,9 @@ section#project {
     #date {
       font-weight: 200;
       font-style: italic;
+    }
+    #desc {
+      margin-top: 10px;
     }
   }
   ul {
@@ -388,15 +382,29 @@ section#project {
   }
   ul#tech-list,
   ul#team {
-    @media (min-width:1200px) {
-      p {
-        text-indent: 20px;
+    li {
+      text-indent: 40px;
+      margin: 5px;
+    }
+    .component {
+      &:before {
+        content: "- "
       }
-      li p {
-        text-indent: 40px;
-        &:before {
-          content: '- ';
-        }
+    }
+    .head {
+      text-indent: 20px;
+    }
+    @media (max-width:1200px) {
+      li,
+      .head {
+        text-indent: 0;
+      }
+      .head {
+        margin: 10px 0 10px 0;
+        text-decoration: underline;
+      }
+      .component:before {
+        content: ""
       }
     }
   }

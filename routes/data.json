@@ -15,7 +15,11 @@
                 "Main": ["Adobe Photoshop"],
                 "Secondary": ["Adobe Illustrator", "Autodesk Inventor"]
             },
-            "Team": ["Member1", "Member2"]
+            "Team": {
+                "Name": "TName",
+                "Site": "http://site.com",
+                "Members":["Member1", "Member2"]
+            }
         },
         "ITEM2": {
             "Image": "http://lorempixel.com/1900/1080/"

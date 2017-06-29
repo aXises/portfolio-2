@@ -20,9 +20,10 @@ block content
                   .container-fluid
                     .row
                       p#date: i #{item.Date}
+                    .row
                       a(href="https://"+item.Link) #{item.Link}
                     .row
-                      p #{item.Description}
+                      p#desc #{item.Description}
                 .col-lg-5.col-md-12
                   .container-fluid
                     .row.status
@@ -42,16 +43,30 @@ block content
                         .col-lg-6.col-md-6.visible-lg.indicator
                           div.red
                       .row
-                        hr
-                        p Technologies:
-                        ul#tech-list
-                          p.visible-lg Main
-                          p.visible-lg Support
+                        .col-lg-12
+                          hr
+                          p Technologies:
+                          ul#tech-list
+                            - var keys = Object.keys(item.Technologies)
+                            each key in keys
+                              li.head #{key}
+                              - if (item.Technologies[key].length <= 1)
+                                li.component #{item.Technologies[key]}
+                              - else
+                                each comp in item.Technologies[key]
+                                  li.component #{comp}
                       .row
-                        hr
-                        p Team:
-                        ul#team
-
+                        .col-lg-12
+                          hr
+                          p Team:
+                          ul#team
+                            - if (item.Team["Site"] && item.Team["Name"])
+                              li.head: a(href=item.Team["Site"], target="_blank") #{"@"+item.Team["Name"]}
+                            - else if (item.Team["Name"])
+                              li.head #{"@"+item.Team["Name"]}
+                            li.head Members:
+                            each member in item.Team["Members"]
+                              li.component #{member}
 
 
 

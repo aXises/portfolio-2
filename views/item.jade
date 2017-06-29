@@ -2,9 +2,11 @@ extends layout
 
 block content
   - var item = pageContent[itemID.toUpperCase()]
-  header#items
   section#project
-    .row
+    .bg
+      .overlay
+      img(src=item.Image)
+    .row.item-container
       .container-fluid
           .col-lg-5.col-lg-offset-1
             aside
@@ -21,10 +23,6 @@ block content
                       a(href="https://"+item.Link) #{item.Link}
                     .row
                       p #{item.Description}
-                    .row
-                        div
-                          .button
-                            h4 View
                 .col-lg-5.col-md-12
                   .container-fluid
                     .row.status
@@ -48,9 +46,7 @@ block content
                         p Technologies:
                         ul#tech-list
                           p.visible-lg Main
-
                           p.visible-lg Support
-
                       .row
                         hr
                         p Team:

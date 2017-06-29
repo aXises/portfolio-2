@@ -255,10 +255,6 @@ header#gallery {
   background-image: none;
 }
 
-header#items {
-  height: 100px;
-}
-
 section {
   width: 100%;
   height: 100vh;
@@ -291,7 +287,37 @@ section#display {
 }
 
 section#project {
-  height: 100%;
+  height: 100vh;
+  position: relative;
+  .bg {
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    border:1px solid transparent;
+    img, 
+    .overlay {
+      position: absolute;
+      width: inherit;
+      height: inherit;
+    }
+    img {
+      pointer-events: none;
+      transform: scale(1.1);
+      filter: blur(15px);
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 2;
+    }
+  }
+  .item-container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
   a {
     .button {
       position: relative;

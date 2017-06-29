@@ -1,5 +1,16 @@
 $(document).ready(function() {
 
+    if (document.location.pathname.split('/').pop().slice(0, -1) === 'item') {
+        prepAnimationItem();
+    }
+    
+    function prepAnimationItem() {
+        $('.item-container').css({
+            'padding-top': '50px',
+            'opacity': 0
+        });
+    }
+
     $(document).imagesLoaded().always(function() {
         load();
     });
@@ -145,12 +156,15 @@ $(document).ready(function() {
             'pointer-events': 'none',
         });
 
-        $.getScript('javascripts/animations.js', function() {
+        $.getScript('../javascripts/animations.js', function() {
             if (document.location.pathname === '/') {
                 indexanimate();
             }
             else if (document.location.pathname === '/Works') {
                 galleryanimate();
+            }
+            else if (document.location.pathname.split('/').pop().slice(0, -1) === 'item') {
+                itemanimate();
             }
         });
 
@@ -158,9 +172,3 @@ $(document).ready(function() {
     }
 
 }); // End of use
-
-window.onpageshow = function(event) {
-    if (event.persisted) {
-        alert("From bfcache");
-    }
-};

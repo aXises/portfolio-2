@@ -11,7 +11,15 @@ $(document).ready(function() {
         });
     }
 
-    $(document).imagesLoaded().always(function() {
+    var imagesTotal = $('img').length;
+    var segment = 100/imagesTotal;
+    var loaded = 0;
+    $(document).imagesLoaded().progress(function(instance, image) {
+        if (image.isLoaded) {
+            loaded += segment;
+            $('#loading .progress-bar').css('width', loaded+"%");
+        }
+    }).done(function() {
         load();
     });
 

@@ -64,11 +64,22 @@ h1, h2, h3, h4, h5, h6, a {
 #loading {
   position: fixed;
   width: 100vw;
-  height: 100vw;
+  height: 100vh;
   background-color: black;
   z-index: 1001;
   opacity: 1;
   .transition;
+  .bar, .progress {
+    position: absolute;
+    width: 200px;
+    height: 5px;
+    background-color: @dark-shade;
+    .align-center;
+    .progress-bar {
+      width: 0;
+      background-color: @oran-cont;
+    }
+  }
 }
 
 .nav-menu {

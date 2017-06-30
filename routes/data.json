@@ -2,7 +2,7 @@
 	"navLinks": ["#Section1", "#Section2", "#Section3", "#Section4", "Works", "Link"],
 	"Projects":{
         "ITEM1": {
-            "Image": "http://lorempixel.com/1900/1080/",
+            "Image": "http://lorempixel.com/1900/1080/sports",
             "Name": "ITEM 1",
             "Date": "1/2/345",
             "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -22,25 +22,25 @@
             }
         },
         "ITEM2": {
-            "Image": "http://lorempixel.com/1900/1080/"
+            "Image": "http://lorempixel.com/1900/1080/abstract"
         },
         "ITEM3": {
-            "Image": "http://lorempixel.com/1900/1080/"
+            "Image": "http://lorempixel.com/1900/1080/business"
         },
         "ITEM4": {
-            "Image": "http://lorempixel.com/1900/1080/"
+            "Image": "http://lorempixel.com/1900/1080/technics"
         },
         "ITEM5": {
-            "Image": "http://lorempixel.com/1900/1080/"
+            "Image": "http://lorempixel.com/1900/1080/transport"
         },
         "ITEM6": {
-            "Image": "http://lorempixel.com/1900/1080/"
+            "Image": "http://lorempixel.com/1900/1080/nightlife"
         },
         "ITEM7": {
-            "Image": "http://lorempixel.com/1900/1080/"
+            "Image": "http://lorempixel.com/1900/1080/people"
         },
         "ITEM8": {
-            "Image": "http://lorempixel.com/1900/1080/"
+            "Image": "http://lorempixel.com/1900/1080/city"
         },
         "ITEM9": {
             "Image": "http://lorempixel.com/1900/1080/"

@@ -32,6 +32,9 @@ $(document).ready(function() {
             animateText(before, after);
             $('#loading .progress-bar').css('width', loaded+"%");
         }
+        else {
+            $('.failed').append('<p>Fail to load: '+image.img.src+'</p>');
+        }
     }).done(function() {
         load();
     });
@@ -167,7 +170,10 @@ $(document).ready(function() {
             'opacity': 0,
             'pointer-events': 'none',
         });
-
+        setTimeout(function() {
+            $('#loading').remove();
+        }, 500);
+        
         $.getScript('../javascripts/animations.js', function() {
             if (document.location.pathname === '/') {
                 indexanimate();

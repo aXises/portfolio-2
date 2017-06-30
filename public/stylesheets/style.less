@@ -70,24 +70,31 @@ h1, h2, h3, h4, h5, h6, a {
   opacity: 1;
   .transition;
   .bar, 
-  .progress-text {
+  .progress-text,
+  .failed {
     position: absolute;
     width: 200px;
     height: 5px;
-    background-color: @dark-shade;
+    text-align: center;
     .align-center;
     .progress-bar {
       width: 0;
       background-color: @oran-cont;
     }
   }
+  .bar {
+    background-color: @dark-shade;
+  }
   .progress-text {
     width: 100px;
     height: 30px;
     margin-top: 30px;
-    text-align: center;
-    background-color: transparent;
     font-size: 10px;
+  }
+  .failed {
+    width: 100%;
+    height: 20vh;
+    margin-top: 10%;
   }
   p {
     color: @light-shade;

@@ -27,8 +27,11 @@ html
       div.nav-main
         ul
           each link in navLinks
-              a.anchor(href="/"+link)
-                li #{link}
+            - var href = link
+            - if (link.charAt(0) === '#')
+              - var link = link.slice(1)
+            a.anchor(href="/"+href)
+              li #{link}
       div.nav-secondary
         div.nav-close
           span.glyphicon.glyphicon-menu-left

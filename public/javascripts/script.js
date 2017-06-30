@@ -35,15 +35,6 @@ $(document).ready(function() {
             });
         }
     );
-    
-    var aTag = $('nav a');
-
-    for (var i = 0; i < aTag.length; i++) {
-        var link = $(aTag[i]);
-        if (link.attr('href').charAt(0) === '#') {
-            link.children('li').text(link.children('li').text().slice(1))
-        }
-    }
 
     $('nav a').click(function(event) {
         event.preventDefault();

@@ -69,7 +69,8 @@ h1, h2, h3, h4, h5, h6, a {
   z-index: 1001;
   opacity: 1;
   .transition;
-  .bar, .progress {
+  .bar, 
+  .progress-text {
     position: absolute;
     width: 200px;
     height: 5px;
@@ -79,6 +80,17 @@ h1, h2, h3, h4, h5, h6, a {
       width: 0;
       background-color: @oran-cont;
     }
+  }
+  .progress-text {
+    width: 100px;
+    height: 30px;
+    margin-top: 30px;
+    text-align: center;
+    background-color: transparent;
+    font-size: 10px;
+  }
+  p {
+    color: @light-shade;
   }
 }
 

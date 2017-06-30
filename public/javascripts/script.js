@@ -13,10 +13,23 @@ $(document).ready(function() {
 
     var imagesTotal = $('img').length;
     var segment = 100/imagesTotal;
-    var loaded = 0;
+    var loaded = 0,
+        before = 0,
+        after = 0;
     $(document).imagesLoaded().progress(function(instance, image) {
         if (image.isLoaded) {
+            before = loaded;
             loaded += segment;
+            after = loaded;
+            function animateText(from, to) {
+                $({current:from}).animate({current:to}, {
+                    duration: (segment/0.35)*10,
+                    step: function() {
+                        $('.progress-text p').text((this.current).toFixed(2));
+                    }
+                });
+            }
+            animateText(before, after);
             $('#loading .progress-bar').css('width', loaded+"%");
         }
     }).done(function() {

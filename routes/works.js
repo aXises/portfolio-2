@@ -22,18 +22,16 @@ router.get('/:item', function(req, res, next) {
   }, function(err, page) {
     if (err) {
       console.log('error', err);
+      var err;
       if (req.params.item.replace(/[0-9]/g, '') === "item") {
-        res.render('error', {
-          error: err,
-          type: "NotImplementedError"
-        });
+        err = new Error('NotImplementedError');
+        err.status = 404;
       }
       else {
-        res.render('error', {
-          error: err,
-          type: "UndefinedPage"
-        });
+        err = new Error('UndefinedPage');
+        err.status = 404;
       }
+      next(err);
     }
     else {
       res.end(page);

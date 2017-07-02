@@ -68,8 +68,5 @@ block content
                             each member in item.Team["Members"]
                               li.component #{member}
 
-
-
-
-
-
+  - if (item.Extended)
+    include item.extended.jade

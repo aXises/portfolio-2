@@ -19,7 +19,8 @@
                 "Name": "TName",
                 "Site": "http://site.com",
                 "Members":["Member1", "Member2"]
-            }
+            },
+            "Extended": true
         },
         "ITEM2": {
             "Image": "http://lorempixel.com/1900/1080/abstract"

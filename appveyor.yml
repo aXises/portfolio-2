@@ -3,10 +3,8 @@ environment:
 install:
   - ps: Install-Product node $env:nodejs_version
   - npm install
-before_test:
+test_script:
   - node --version
   - npm --version
-test_script:
-  - npm run artillery-test
   - npm test
 build: off

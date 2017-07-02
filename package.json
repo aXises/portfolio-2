@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha",
-    "artillery-test": "artillery run test/artillery_test.yml"
+    "test": "mocha"
   },
   "author": "aXises",
   "license": "ISC",
@@ -14,7 +13,6 @@
     "url": "https://github.com/aXises/portfolio-2"
   },
   "dependencies": {
-    "artillery": "^1.6.0-2",
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",

@@ -12,6 +12,7 @@ describe("App", function() {
     it("returns status code 200", function(done) {
       request.get(origin, function(err, res) {
         assert.equal(200, res.statusCode);
+        server.close();
         done();
       });
     });

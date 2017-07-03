@@ -14,7 +14,19 @@ insertFile = function (collection, file) {
 	});
 }
 
+getCollection = function(collection, callback) {
+	console.log('test')
+	MongoClient.connect(URICS, function(err, db) {
+		db.collection('data').findOne({}, function(err, result) {
+			if (err) throw err;
+			callback(result);
+		});
+		db.close();
+	});
+}
+
 module.exports = {
-	insertFile
+	insertFile,
+	getCollection
 }
 

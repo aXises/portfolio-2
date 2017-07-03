@@ -14,7 +14,7 @@ var works = require('./routes/works');
 var app = express();
 
 var database = require('./database');
-database.insertFile('data', './routes/data.json'); 
+//database.insertFile('data', './routes/data.json');
 
 // compile less
 app.use(lessMiddleware(__dirname + '/public'));

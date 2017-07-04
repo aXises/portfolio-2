@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var jade = require('jade');
 var database = require('../database');
 
 /* GET works page. */
@@ -14,10 +15,15 @@ router.get('/', function(req, res, next) {
 
 router.get('/:item', function(req, res, next) {
   database.getCollection('data', function(data) {
+    var extension;
+    if (data.Projects[req.params.item.toUpperCase()]['Extended']) {
+      extension = jade.renderFile('views/extensions/'+req.params.item+'.extended.jade');
+    }
     res.render('item', {
       pageContent: data.Projects,
       itemKeys: Object.keys(data.Projects),
-      itemID: req.params.item
+      itemID: req.params.item,
+      extension: extension
     }, function(err, page) {
       if (err) {
         console.log('error', err);
@@ -38,6 +44,5 @@ router.get('/:item', function(req, res, next) {
     });
   });
 });
-
 
 module.exports = router;

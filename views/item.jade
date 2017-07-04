@@ -67,6 +67,7 @@ block content
                             li.head Members:
                             each member in item.Team["Members"]
                               li.component #{member}
+                              li #{extendedState}
 
   - if (item.Extended)
-    include item.extended.jade
+    !{ extension }

@@ -13,8 +13,12 @@ var works = require('./routes/works');
 
 var app = express();
 
+var fs = require('fs');
+var data = JSON.parse(fs.readFileSync('routes/data.json', 'utf8'))
+
 var database = require('./database');
-//database.insertFile('data', './routes/data.json');
+//database.insertCollection('data', data);
+database.replaceCollection('data', data);
 
 // compile less
 app.use(lessMiddleware(__dirname + '/public'));

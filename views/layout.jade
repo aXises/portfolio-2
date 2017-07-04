@@ -31,6 +31,7 @@ html
     nav
       div.nav-main
         ul
+          - var navLinks = ['#Section1','#Section2','#Section3','#Section4','Works','Link']
           each link in navLinks
             - var href = link
             - if (link.charAt(0) === '#')

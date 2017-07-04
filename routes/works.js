@@ -6,7 +6,6 @@ var database = require('../database');
 router.get('/', function(req, res, next) {
   database.getCollection('data', function(data) {
     res.render('works', { 
-      navLinks: data.navLinks,
       pageContent: data.Projects,
       itemKeys: Object.keys(data.Projects)
     });
@@ -16,7 +15,6 @@ router.get('/', function(req, res, next) {
 router.get('/:item', function(req, res, next) {
   database.getCollection('data', function(data) {
     res.render('item', {
-      navLinks: data.navLinks,
       pageContent: data.Projects,
       itemKeys: Object.keys(data.Projects),
       itemID: req.params.item

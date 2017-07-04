@@ -1,5 +1,4 @@
 {
-	"navLinks": ["#Section1", "#Section2", "#Section3", "#Section4", "Works", "Link"],
 	"Projects":{
         "ITEM1": {
             "Image": "http://lorempixel.com/1900/1080/sports",

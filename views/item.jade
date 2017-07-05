@@ -3,6 +3,8 @@ extends layout
 block content
   - var item = pageContent[itemID.toUpperCase()]
   section#project
+    div.text-container
+      p.visible-md.visible-lg #{item.Name} at a glance...
     .bg
       .overlay
       img(src=item.Image)

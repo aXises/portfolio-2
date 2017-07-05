@@ -183,6 +183,7 @@ $(document).ready(function() {
             }
             else if (document.location.pathname.split('/').pop().slice(0, -1) === 'item') {
                 itemanimate();
+                galleryanimate();
             }
         });
 

@@ -275,7 +275,7 @@ header#index {
     }
 }
 
-header#gallery {
+header#gallery, section#project {
   height: 120px;
   .text-container {
     .header-text;
@@ -318,6 +318,13 @@ section#display {
 }
 
 section#project {
+  .text-container {
+    width: 200px;
+    left: 93% !important;
+    position: absolute;
+    z-index: 3;
+    color: @light-shade;
+  }
   @media (min-width:1200px) {
   height: 100vh;
     h1 {

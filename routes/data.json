@@ -1,4 +1,27 @@
 {
+    "Templates": {
+        "Project": {
+            "Image": "http://lorempixel.com/1900/1080/sports",
+            "Name": "ITEM 1",
+            "Date": "1/2/345",
+            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "Link": "www.link.com",
+            "DisplayLink": "/project",
+            "Status": "Completed",
+            "Type": "Personal",
+            "Parent": "None",
+            "Technologies": {
+                "Main": ["Adobe Photoshop"],
+                "Secondary": ["Adobe Illustrator", "Autodesk Inventor"]
+            },
+            "Team": {
+                "Name": "TName",
+                "Site": "http://site.com",
+                "Members":["Member1", "Member2"]
+            },
+            "Extended": true
+        }
+    },
 	"Projects":{
         "ITEM1": {
             "Image": "http://lorempixel.com/1900/1080/sports",

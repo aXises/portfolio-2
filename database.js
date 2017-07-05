@@ -5,7 +5,6 @@ insertCollection = function (collection, data) {
 	MongoClient.connect(URICS, function(err, db) {
 		if (err) throw err;
 		db.collection(collection).insert(data).then(function(result) {
-			if (err) throw err;
 			console.log('Added to', collection);
 		});
 		db.close();
@@ -14,8 +13,10 @@ insertCollection = function (collection, data) {
 
 getCollection = function(collection, callback) {
 	MongoClient.connect(URICS, function(err, db) {
+		if (err) throw err;
 		db.collection(collection).findOne({}, function(err, result) {
 			if (err) throw err;
+			console.log('Got', collection);
 			callback(result);
 		});
 		db.close();
@@ -26,8 +27,9 @@ replaceCollection = function(collection, data) {
 	MongoClient.connect(URICS, function(err, db) {
 		if (err) throw err;
 		db.collection('data').replaceOne({}, data, function() {
-			console.log('Replaced', collection)
+			console.log('Replaced', collection);
 		});
+		db.close();
 	});
 }
 

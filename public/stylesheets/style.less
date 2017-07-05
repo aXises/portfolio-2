@@ -276,7 +276,6 @@ header#index {
 }
 
 header#gallery, section#project {
-  height: 120px;
   .text-container {
     .header-text;
     top: 50px;
@@ -285,6 +284,10 @@ header#gallery, section#project {
     letter-spacing: 5px;
   }
   background-image: none;
+}
+
+header#gallery {
+  height: 120px;
 }
 
 section {
@@ -318,6 +321,9 @@ section#display {
 }
 
 section#project {
+  .right-section {
+    border-left: 1px solid @light-shade;
+  }
   .text-container {
     width: 200px;
     left: 93% !important;

@@ -4,7 +4,7 @@ block content
   - var item = pageContent[itemID.toUpperCase()]
   section#project
     div.text-container
-      p.visible-md.visible-lg #{item.Name} at a glance...
+      p.visible-lg #{item.Name} at a glance...
     .bg
       .overlay
       img(src=item.Image)
@@ -26,7 +26,7 @@ block content
                       a(href="https://"+item.Link) #{item.Link}
                     .row
                       p#desc #{item.Description}
-                .col-lg-5.col-md-12
+                .col-lg-5.col-md-12.right-section
                   .container-fluid
                     .row.status
                       .row

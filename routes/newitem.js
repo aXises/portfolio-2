@@ -6,8 +6,8 @@ var database = require('../database');
 router.get('/', function(req, res, next) {
   database.getCollection('data', function(data) {
     res.render('newitem', { 
-      pageContent: data.Projects,
-      itemKeys: Object.keys(data.Projects)
+      itemKeys: Object.keys(data.Projects),
+      templateKeys: Object.keys(data.Templates["Project"])
     });
   });
 });

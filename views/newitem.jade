@@ -1,3 +1,22 @@
-form
-  p test
-  input
+html
+  link(rel="stylesheet", type="text/css", href="/bower_components/reset-css/reset.css")
+  link(rel="stylesheet", type="text/css", href="/bower_components/bootstrap/dist/css/bootstrap.min.css")
+  style.
+    form, aside {
+      width:900px; 
+      margin:auto; 
+    }
+  body
+    form
+      each field in templateKeys
+        br
+        br
+        p #{field}:
+        input(type="text" name=field)
+      br
+      br
+      input(type="submit" method="post")
+      br
+      br
+    aside
+      p Active keys: #{itemKeys}

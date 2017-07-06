@@ -6,17 +6,35 @@ html
       width:900px; 
       margin:auto; 
     }
+    p {
+      margin: 5px 0 0 0;
+    }
   body
-    form
+    form(action="" method="post")
+      p #{templateKeys["Extended"]}
       each field in templateKeys
-        br
-        br
-        p #{field}:
-        input(type="text" name=field)
+        p: strong #{field}:
+        // p #{typeof(template[field])}
+        - if (field === "Description")
+          textarea(name=field rows=5 cols=50)
+        - else if (typeof(template[field]) === "boolean")
+          | True 
+          input(type="radio" name=field value="true")
+          br
+          | False 
+          input(type="radio" name=field value="false")
+        - else if (typeof(template[field]) === "object")
+          each sub in Object.keys(template[field])
+            p #{sub}
+            input(type="text" name=field)
+        - else
+          input(type="text" name=field)
       br
       br
-      input(type="submit" method="post")
+      input.btn(type="submit")
       br
       br
     aside
       p Active keys: #{itemKeys}
+  script(type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js")
+  script(type="text/javascript" src="/javascripts/form.js")

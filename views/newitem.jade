@@ -19,10 +19,10 @@ html
           textarea(name=field rows=5 cols=50)
         - else if (typeof(template[field]) === "boolean")
           | True 
-          input(type="radio" name=field value="true")
+          input(type="radio" name=field value=true)
           br
           | False 
-          input(type="radio" name=field value="false")
+          input(type="radio" name=field value=false)
         - else if (typeof(template[field]) === "object")
           each sub in Object.keys(template[field])
             p #{sub}

@@ -18,8 +18,17 @@ var fs = require('fs');
 var data = JSON.parse(fs.readFileSync('routes/data.json', 'utf8'))
 
 var database = require('./database');
-//database.insertCollection('data', data);
-database.replaceCollection('data', data);
+
+database.connectDb(function(err) {
+  if (err) throw err;
+  var db = database.getDb();
+  //database.insertCollection('items', {});
+  db.collection('items').find({}).toArray(function(err, result) {
+    //console.log(result)
+  });
+  //database.insertCollection('dataTemplates', data.Templates);
+  //db.collection('items').remove();
+});
 
 // compile less
 app.use(lessMiddleware(__dirname + '/public'));

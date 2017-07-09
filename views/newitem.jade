@@ -29,8 +29,11 @@ html
           each sub in Object.keys(template[field])
             p #{sub}
             - if (typeof(template[field][sub]) === "object")
-              button.btn.btn-sm.btn-success.newsub(attr=sub) Add
+              button.btn.btn-xs.btn-success.newsub(attr=sub) Add
             input(type="text" name="sub"+sub+","+field id=sub)
+        - else if (field === "Image")
+          button.btn.btn-xs.btn-success.newsub(attr="Image") Add
+          input(type="text" name=field id=field)
         - else
           input(type="text" name=field)
       br

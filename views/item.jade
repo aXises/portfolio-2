@@ -52,11 +52,11 @@ block content
                             - var keys = Object.keys(item.Technologies)
                             each key in keys
                               li.head #{key}
-                              - if (item.Technologies[key].length <= 1)
-                                li.component #{item.Technologies[key]}
-                              - else
+                              - if (typeof(item.Technologies[key]) === "array")
                                 each comp in item.Technologies[key]
                                   li.component #{comp}
+                              - else
+                                li.component #{item.Technologies[key]}
                       .row
                         .col-lg-12
                           hr
@@ -67,9 +67,11 @@ block content
                             - else if (item.Team["Name"])
                               li.head #{"@"+item.Team["Name"]}
                             li.head Members:
-                            each member in item.Team["Members"]
-                              li.component #{member}
-
+                            - if (typeof(item.Team["Members"]) === "array")
+                              each member in item.Team["Members"]
+                                li.component #{member}
+                            - else
+                              li #{item.Team["Members"]}
   - if (item.Extended)
     !{ extension }
     

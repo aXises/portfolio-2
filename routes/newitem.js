@@ -21,7 +21,8 @@ database.connectDb(function(err) {
         delete req.body[keys[i]];
       }
     }
-    console.log(req.body)
+    var extended = req.body.Extended
+    req.body.Extended = extended === 'true' ? true : false;
     db.collection('items').find({}).toArray(function(err, result) {
       var items = result,
           itemSize = items.length,

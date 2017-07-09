@@ -4,7 +4,10 @@ html
   style.
     form, aside {
       width:900px; 
-      margin:auto; 
+      margin:auto;
+    }
+    input[type=text] {
+      display:block;
     }
     p {
       margin: 5px 0 0 0;
@@ -14,7 +17,6 @@ html
       p #{templateKeys["Extended"]}
       each field in templateKeys
         p: strong #{field}:
-        // p #{typeof(template[field])}
         - if (field === "Description")
           textarea(name=field rows=5 cols=50)
         - else if (typeof(template[field]) === "boolean")
@@ -26,12 +28,14 @@ html
         - else if (typeof(template[field]) === "object")
           each sub in Object.keys(template[field])
             p #{sub}
-            input(type="text" name=field)
+            - if (typeof(template[field][sub]) === "object")
+              button.btn.btn-sm.btn-success.newsub(attr=sub) Add
+            input(type="text" name="sub"+sub+","+field id=sub)
         - else
           input(type="text" name=field)
       br
       br
-      input.btn(type="submit")
+      input.btn.btn-primary(type="submit")
       br
       br
     aside

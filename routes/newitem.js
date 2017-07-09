@@ -7,12 +7,27 @@ database.connectDb(function(err) {
   if (err) throw err;
   var db = database.getDb();
   router.post('/', function(req, res, next) {
+    var keys = Object.keys(req.body);
+    for(var i = 0; i < keys.length; i++) {
+      if (keys[i].substring(0,3) === 'sub') {
+        var key = keys[i].split(','),
+            field = req.body[keys[i]],
+            sub = key[0].substring(3),
+            main = key[1];
+        if (typeof(req.body[main]) === 'undefined') {
+          req.body[main] = {};
+        }
+        req.body[main][sub] = field;
+        delete req.body[keys[i]];
+      }
+    }
+    console.log(req.body)
     db.collection('items').find({}).toArray(function(err, result) {
-      var items = result;
-      var itemSize = items.length;
-      var item = {};
+      var items = result,
+          itemSize = items.length,
+          item = {};
       item['ITEM'+(itemSize+1)] = req.body;
-      db.collection('items').insert(item)
+      //db.collection('items').insert(item)
       res.redirect('/newitem');
     });
   });

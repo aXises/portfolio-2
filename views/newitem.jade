@@ -6,9 +6,6 @@ html
       width:900px; 
       margin:auto;
     }
-    input[type=text] {
-      display:block;
-    }
     p {
       margin: 5px 0 0 0;
     }
@@ -28,12 +25,13 @@ html
         - else if (typeof(template[field]) === "object")
           each sub in Object.keys(template[field])
             p #{sub}
+            input(type="text" name="sub"+sub+","+field id=sub)
             - if (typeof(template[field][sub]) === "object")
               button.btn.btn-xs.btn-success.newsub(attr=sub) Add
-            input(type="text" name="sub"+sub+","+field id=sub)
+              br
         - else if (field === "Image")
-          button.btn.btn-xs.btn-success.newsub(attr="Image") Add
           input(type="text" name=field id=field)
+          button.btn.btn-xs.btn-success.newsub(attr="Image") Add
         - else
           input(type="text" name=field)
       br
@@ -42,6 +40,6 @@ html
       br
       br
     aside
-      p Active keys: #{itemKeys}
+      p Active keys: #{itemKeys.length}
   script(type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js")
   script(type="text/javascript" src="/javascripts/form.js")

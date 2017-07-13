@@ -4,10 +4,10 @@ $(document).ready(function() {
     });
     $('.newsub').click(function(event) {
         event.preventDefault();
-        var newField = $('#'+$(this).attr('attr')).clone();
+        var newField = $('#' + $(this).attr('attr')).clone();
         newField.attr('id', '')
         newField.val('');
-        $(this).after('<br>');
-        $(this).after(newField);
+        $(this).prev().after('<br>');
+        $(this).prev().after(newField);
     });
 });

@@ -29,9 +29,9 @@ html
             - if (typeof(template[field][sub]) === "object")
               button.btn.btn-xs.btn-success.newsub(attr=sub) Add
               br
-        - else if (field === "Image")
+        - else if (field === "Images")
           input(type="text" name=field id=field)
-          button.btn.btn-xs.btn-success.newsub(attr="Image") Add
+          button.btn.btn-xs.btn-success.newsub(attr=field) Add
         - else
           input(type="text" name=field)
       br

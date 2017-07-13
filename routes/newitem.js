@@ -23,12 +23,16 @@ database.connectDb(function(err) {
     }
     var extended = req.body.Extended
     req.body.Extended = extended === 'true' ? true : false;
+    if (typeof(req.body.Images) !== 'object') {
+      req.body['Image'] = req.body.Images
+    }
+    req.body['Image'] = req.body.Images[0]
     db.collection('items').find({}).toArray(function(err, result) {
       var items = result,
           itemSize = items.length,
           item = {};
       item['ITEM'+(itemSize+1)] = req.body;
-      //db.collection('items').insert(item)
+      db.collection('items').insert(item);
       res.redirect('/newitem');
     });
   });

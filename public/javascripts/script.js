@@ -163,6 +163,9 @@ $(document).ready(function() {
             img.next('aside').css('width', img.width())
         }
     }
+    function setSlide() {
+        
+    }
 
     function load() {
         $('body').css('overflow-y', 'auto');
@@ -188,6 +191,7 @@ $(document).ready(function() {
         });
 
         setAside();
+        setSlide();
     }
 
 }); // End of use

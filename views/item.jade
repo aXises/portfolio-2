@@ -13,6 +13,9 @@ block content
           .col-lg-5.col-lg-offset-1
             aside
               img.img-responsive(src=item.Image)
+            div.slide
+              each image in item.Images
+                img(src=image)
           .col-lg-5
             article
               .row

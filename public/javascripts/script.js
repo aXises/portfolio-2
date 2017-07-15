@@ -163,6 +163,19 @@ $(document).ready(function() {
             img.next('aside').css('width', img.width())
         }
     }
+    $('.img-loading').hide();
+    $('.slide img').click(function() {
+        var main = $('#main-img');
+        main.attr('src', $(this).attr('src'));
+        $('.img-loading').show();
+        main.css('opacity', 0);
+        main.imagesLoaded().done(function() {
+            main.css('opacity', 1);
+            $('.img-loading').hide();
+        });
+           
+    });
+    
     function setSlide() {
         
     }

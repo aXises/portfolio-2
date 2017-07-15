@@ -377,6 +377,27 @@ section#project {
       top: 0;
       transform: none;
     }
+    .img-container {
+      position: relative;
+      .img-loading {
+      border: 2px solid transparent;
+      border-top-color: @cyan-cont;
+      border-bottom-color: @oran-cont;
+      border-radius: 8px;
+      width: 20px;
+      height: 20px;
+      animation: 2s rotate infinite linear;
+      .align-center;
+      }
+      @keyframes rotate{
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    }
   }
   img {
     background-size: cover;

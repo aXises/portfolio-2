@@ -11,8 +11,9 @@ block content
     .row.item-container
       .container-fluid
           .col-lg-5.col-lg-offset-1
-            aside
-              img.img-responsive(src=item.Image)
+            aside.img-container
+              img#main-img.img-responsive(src=item.Images[0])
+              div.img-loading
             div.slide
               each image in item.Images
                 img(src=image)

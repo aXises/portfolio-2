@@ -37,7 +37,9 @@ app.use('/Works', works);
 
 if (app.get('env') === 'development') {
   var newItem = require('./routes/newitem');
+  var editItem = require('./routes/edititem');
   app.use('/newitem', newItem);
+  app.use('/edititem', editItem)
   var fs = require('fs');
   var data = JSON.parse(fs.readFileSync('routes/data.json', 'utf8'))
 

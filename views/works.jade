@@ -16,18 +16,18 @@ block content
           .row
             - for (var j = i; j <= i + 2; j++)
               - index++
-                a(href="Works/item"+(index))
+                a(href="works/item-"+(pageContent[index].Name))
                   article.col-lg-4.col-sm-12
                     +galleryItem(index)
       - if (semi > 0)
         .row
           - for (var remainder = index; index < remainder + semi; index++)
-            a(href="Works/item"+(index+1))
+            a(href="works/item-"+(pageContent[index].Name)+index)
               article.col-lg-4.col-md-6.col-sm-12
-                +galleryItem(index+1)
+                +galleryItem(index)
 
 mixin galleryItem(keyIndex)
-  - var keyItem = pageContent["ITEM"+keyIndex]
+  - var keyItem = pageContent[keyIndex]
   img.img-responsive(src=keyItem.Image)
   aside
     h2 #{keyItem.Name}

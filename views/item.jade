@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  - var item = pageContent[itemID.toUpperCase()]
+  - var item = pageContent
   section#project
     div.text-container
       p.visible-lg #{item.Name} at a glance...
@@ -12,11 +12,12 @@ block content
       .container-fluid
           .col-lg-5.col-lg-offset-1
             aside.img-container
-              img#main-img.img-responsive(src=item.Images[0])
+              img#main-img.img-responsive(src=item.Image)
               div.img-loading
-            div.slide
-              each image in item.Images
-                img(src=image)
+            - if (typeof(item.Images) === 'object')
+              div.slide
+                each image in item.Images
+                  img(src=image)
           .col-lg-5
             article
               .row

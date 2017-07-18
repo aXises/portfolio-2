@@ -9,7 +9,7 @@ database.connectDb(function(err) {
   router.get('/', function(req, res, next) {
     db.collection('items').find({}).toArray(function(err, result) {
       if (err) throw err;
-      var data = processResult(result);
+      var data = result;
       res.render('works', { 
         pageContent: data,
         itemKeys: Object.keys(data)
@@ -20,10 +20,11 @@ database.connectDb(function(err) {
   router.get('/:item', function(req, res, next) {
     db.collection('items').find({}).toArray(function(err, result) {
       if (err) throw err;
-      var data = processResult(result);
+      var data = result[parseInt(req.params.item.substr(-1))];
       var extension;
-      if (data[req.params.item.toUpperCase()]['Extended']) {
-        extension = jade.renderFile('views/extensions/'+req.params.item+'.extended.jade');
+      if (data.Extended) {
+        //extension = jade.renderFile('views/extensions/'+req.params.item+'.extended.jade');
+        extension = jade.renderFile('views/extensions/test.extended.jade');
       }
       res.render('item', {
         pageContent: data,
@@ -51,17 +52,5 @@ database.connectDb(function(err) {
     });
   });
 });
-
-function processResult(result) {
-  var items = result;
-  var data = {};
-  var keys = Object.keys(items);
-  for (var i = 0; i < items.length; i++) {
-    var itemKey = Object.keys(items[i])[1];
-    var item = items[i][itemKey];
-    data[itemKey] = item;
-  }
-  return data;
-}
 
 module.exports = router;

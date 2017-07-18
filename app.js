@@ -15,17 +15,6 @@ var app = express();
 
 var database = require('./database');
 
-database.connectDb(function(err) {
-  if (err) throw err;
-  var db = database.getDb();
-  //database.insertCollection('items', {});
-  db.collection('items').find({}).toArray(function(err, result) {
-    //console.log(result)
-  });
-  //database.insertCollection('dataTemplates', data.Templates);
-  //db.collection('items').remove();
-});
-
 // compile less
 app.use(lessMiddleware(__dirname + '/public'));
 
@@ -46,9 +35,24 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/Works', works);
 
-if (app.get('env') === 'development' ) {
+if (app.get('env') === 'development') {
   var newItem = require('./routes/newitem');
   app.use('/newitem', newItem);
+  var fs = require('fs');
+  var data = JSON.parse(fs.readFileSync('routes/data.json', 'utf8'))
+
+  database.connectDb(function(err) {
+    if (err) throw err;
+    var db = database.getDb();
+    //database.insertCollection('items', {});
+    db.collection('items').find({}).toArray(function(err, result) {
+        //console.log(result)
+    });
+    //db.collection('dataTemplates').remove();
+    //db.collection('items').remove();
+    //database.insertCollection('dataTemplates', data.Templates);
+
+  });
 }
 
 // catch 404 and forward to error handler

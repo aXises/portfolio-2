@@ -1,72 +1,25 @@
 {
     "Templates": {
         "Project": {
-            "Images": "http://lorempixel.com/1900/1080/sports",
-            "Name": "ITEM 1",
-            "Date": "1/2/345",
+            "Images": "http://lorempixel.com/1900/1080/",
+            "Name": "ITEM N",
+            "Date": "1/2/3456",
             "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
             "Link": "www.link.com",
-            "DisplayLink": "/project",
             "Status": "Completed",
             "Type": "Personal",
             "Parent": "None",
             "Technologies": {
-                "Main": ["Adobe Photoshop"],
-                "Secondary": ["Adobe Illustrator", "Autodesk Inventor"]
+                "Main": ["mainTech1", "mainTech2"],
+                "Secondary": ["secTech1", "secTech2"]
             },
             "Team": {
                 "Name": "TName",
+                "Image": "http://lorempixel.com/100/100/",
                 "Site": "http://site.com",
                 "Members": ["Member1", "Member2"]
             },
             "Extended": true
-        }
-    },
-    "Projects": {
-        "ITEM1": {
-            "Image": "http://lorempixel.com/1900/1080/sports",
-            "Name": "ITEM 1",
-            "Date": "1/2/345",
-            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            "Link": "www.link.com",
-            "DisplayLink": "/project",
-            "Status": "Completed",
-            "Type": "Personal",
-            "Parent": "None",
-            "Technologies": {
-                "Main": ["Adobe Photoshop"],
-                "Secondary": ["Adobe Illustrator", "Autodesk Inventor"]
-            },
-            "Team": {
-                "Name": "TName",
-                "Site": "http://site.com",
-                "Members": ["Member1", "Member2"]
-            },
-            "Extended": true
-        },
-        "ITEM2": {
-            "Image": "http://lorempixel.com/1900/1080/abstract"
-        },
-        "ITEM3": {
-            "Image": "http://lorempixel.com/1900/1080/business"
-        },
-        "ITEM4": {
-            "Image": "http://lorempixel.com/1900/1080/technics"
-        },
-        "ITEM5": {
-            "Image": "http://lorempixel.com/1900/1080/transport"
-        },
-        "ITEM6": {
-            "Image": "http://lorempixel.com/1900/1080/nightlife"
-        },
-        "ITEM7": {
-            "Image": "http://lorempixel.com/1900/1080/people"
-        },
-        "ITEM8": {
-            "Image": "http://lorempixel.com/1900/1080/city"
-        },
-        "ITEM9": {
-            "Image": "http://lorempixel.com/1900/1080/"
         }
     }
 }

@@ -23,18 +23,12 @@ database.connectDb(function(err) {
     }
     var extended = req.body.Extended
     req.body.Extended = extended === 'true' ? true : false;
+    req.body['Image'] = req.body.Images[0]
     if (typeof(req.body.Images) !== 'object') {
       req.body['Image'] = req.body.Images
     }
-    req.body['Image'] = req.body.Images[0]
-    db.collection('items').find({}).toArray(function(err, result) {
-      var items = result,
-          itemSize = items.length,
-          item = {};
-      item['ITEM'+(itemSize+1)] = req.body;
-      db.collection('items').insert(item);
-      res.redirect('/newitem');
-    });
+    db.collection('items').insert(req.body);
+    res.redirect('/newitem');
   });
 
   router.get('/', function(req, res, next) {

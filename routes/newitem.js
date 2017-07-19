@@ -38,6 +38,7 @@ database.connectDb(function(err) {
         var items = result;
         res.render('newitem', { 
           itemKeys: Object.keys(items),
+          items: items,
           template: templates["Project"],
           templateKeys: Object.keys(templates["Project"])
         });

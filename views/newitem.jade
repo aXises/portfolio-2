@@ -41,5 +41,9 @@ html
       br
     aside
       p Active keys: #{itemKeys.length}
+      - var i = 0
+      each item in items
+        - i++
+        p #{'Item-'+i+': '+item.Name}
   script(type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js")
   script(type="text/javascript" src="/javascripts/form.js")

@@ -27,7 +27,8 @@ database.connectDb(function(err) {
     if (typeof(req.body.Images) !== 'object') {
       req.body['Image'] = req.body.Images
     }
-    db.collection('items').insert(req.body);
+    processField(req.body);
+    //db.collection('items').insert(req.body);
     res.redirect('/newitem');
   });
 
@@ -46,5 +47,19 @@ database.connectDb(function(err) {
     });
   });
 });
+
+function processField(data) {
+  var keys = Object.keys(data);
+  var fields = [];
+  for (var i = 0; i < keys.length; i++) {
+    if (typeof(data[keys[i]]) === 'object') {
+       fields.push(processField(data[keys[i]]));
+    }
+    else {
+      fields.push(data[keys[i]]);
+    }
+  }
+  return fields;
+}
 
 module.exports = router;

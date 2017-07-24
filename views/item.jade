@@ -14,7 +14,7 @@ block content
             aside.img-container
               img#main-img.img-responsive(src=item.Image)
               div.img-loading
-            - if (typeof(item.Images) === 'object')
+            - if (typeof(item.Images) === "object")
               div.slide
                 each image in item.Images
                   img(src=image)
@@ -57,7 +57,7 @@ block content
                             - var keys = Object.keys(item.Technologies)
                             each key in keys
                               li.head #{key}
-                              - if (typeof(item.Technologies[key]) === "array")
+                              - if (typeof(item.Technologies[key]) === "object")
                                 each comp in item.Technologies[key]
                                   li.component #{comp}
                               - else
@@ -67,16 +67,16 @@ block content
                           hr
                           p Team:
                           ul#team
-                            - if (item.Team["Site"] && item.Team["Name"])
-                              li.head: a(href=item.Team["Site"], target="_blank") #{"@"+item.Team["Name"]}
-                            - else if (item.Team["Name"])
-                              li.head #{"@"+item.Team["Name"]}
+                            - if (item.Team.Site && item.Team.Name)
+                              li.head: a(href=item.Team.Site, target="_blank") #{"@"+item.Team.Name}
+                            - else if (item.Team.Name)
+                              li.head #{"@"+item.Team.Name}
                             li.head Members:
-                            - if (typeof(item.Team["Members"]) === "array")
-                              each member in item.Team["Members"]
+                            - if (typeof(item.Team.Members) === "object")
+                              each member in item.Team.Members
                                 li.component #{member}
                             - else
-                              li #{item.Team["Members"]}
+                              li #{item.Team.Members}
   - if (item.Extended)
     !{ extension }
     

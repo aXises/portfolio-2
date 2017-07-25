@@ -160,7 +160,10 @@ nav {
     cursor: pointer;
   }
   .nav-main:extend(nav) {
-    background-color: rgba(49, 47, 47, 0.09);;
+    background-color: rgba(49, 47, 47, 0.09);
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
     li {
       .transition.vfast;
       position: relative;

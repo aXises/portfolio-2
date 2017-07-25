@@ -118,15 +118,6 @@ $(document).ready(function() {
         }
     );
 
-    $('.nav-main ul').hover(
-        function() {
-            $('.nav-main').css('background-color', 'rgba(0, 0, 0, 0.7)');
-        }, 
-        function() {
-            $('.nav-main').css('background-color', '');
-        }
-    );
-
     var navActive;
 
     $('.nav-menu, .nav-close').click(function() {

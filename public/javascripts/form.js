@@ -10,4 +10,14 @@ $(document).ready(function() {
         $(this).prev().after('<br>');
         $(this).prev().after(newField);
     });
+    $('.edit').click(function() {
+        $.ajax({
+            url: "/newitem/edit",
+            data: {'name':$(this).attr('attr'), 'index': $(this).attr('item')},
+            type: "POST",
+            success: function (data) {
+                console.log(data)
+            }
+        });
+    });
 });

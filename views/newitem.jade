@@ -3,14 +3,39 @@ html
   link(rel="stylesheet", type="text/css", href="/bower_components/bootstrap/dist/css/bootstrap.min.css")
   style.
     form, aside {
-      width:900px; 
-      margin:auto;
+      width: 900px; 
+      margin: auto;
     }
     p {
       margin: 5px 0 0 0;
     }
+    p.item {
+      display: inline-block;
+    }
+    button.btn-success {
+      margin-left: 20px;
+    }
+    .btn-info,
+    .btn-danger {
+      margin: 2px;
+    }
+    .btn-danger {
+      margin-right: 20px;
+    }
   body
-    form(action="" method="post")
+    aside
+      p Active keys: #{itemKeys.length}
+      - var i = 0
+      each item in items
+        button.btn.btn-xs.btn-info.edit(attr=item.Name item=i) Edit
+        button.btn.btn-xs.btn-danger.delete(attr=item.Name item=i) Delete
+        p.item #{item.Name}
+        - i++
+        br
+      br
+      button.btn.btn-xs.btn-primary.new New  
+    br
+    form(action="newitem/new" method="post")
       p #{templateKeys["Extended"]}
       each field in templateKeys
         p: strong #{field}:
@@ -39,11 +64,5 @@ html
       input.btn.btn-primary(type="submit")
       br
       br
-    aside
-      p Active keys: #{itemKeys.length}
-      - var i = 0
-      each item in items
-        - i++
-        p #{'Item-'+i+': '+item.Name}
   script(type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js")
   script(type="text/javascript" src="/javascripts/form.js")

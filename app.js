@@ -36,8 +36,8 @@ app.use('/users', users);
 app.use('/Works', works);
 
 if (app.get('env') === 'development') {
-  var newItem = require('./routes/newitem');
-  app.use('/newitem', newItem);
+  var itemData = require('./routes/itemdata');
+  app.use('/itemdata', itemData);
   var fs = require('fs');
   var data = JSON.parse(fs.readFileSync('routes/data.json', 'utf8'))
 

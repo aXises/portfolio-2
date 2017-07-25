@@ -38,7 +38,7 @@ database.connectDb(function(err) {
       //processField(req.body);
       //db.collection('items').insert(req.body);
       console.log(req.body)
-      res.redirect('/newitem');
+      res.redirect('/works');
     }
   });
 
@@ -47,7 +47,7 @@ database.connectDb(function(err) {
       var templates = result;
       db.collection('items').find({}).toArray(function(err, result) {
         var items = result;
-        res.render('newitem', { 
+        res.render('itemdata', { 
           itemKeys: Object.keys(items),
           items: items,
           template: templates["Project"],

@@ -12,7 +12,7 @@ $(document).ready(function() {
     });
     $('.edit').click(function() {
         $.ajax({
-            url: "/newitem/edit",
+            url: "/itemdata/edit",
             data: {'name':$(this).attr('attr'), 'index': $(this).attr('item')},
             type: "POST",
             success: function (data) {

@@ -3,80 +3,66 @@ extends layout
 block content
   - var item = pageContent
   section#project
-    div.text-container
-      p.visible-lg #{item.Name} at a glance...
     .bg
       .overlay
       img(src=item.Image)
-    .row.item-container
-      .container-fluid
-          .col-lg-5.col-lg-offset-1
-            aside.img-container
-              img#main-img.img-responsive(src=item.Image)
-              div.img-loading
-            - if (typeof(item.Images) === "object")
-              div.slide
-                each image in item.Images
-                  img(src=image)
-          .col-lg-5
-            article
-              .row
-                .col-lg-12.col-md-12
-                  h1 #{item.Name}
-                .col-lg-7.col-md-12
-                  .container-fluid
-                    .row
-                      p#date: i #{item.Date}
-                    .row
-                      a(href="https://"+item.Link) #{item.Link}
-                    .row
-                      p#desc #{item.Description}
-                .col-lg-5.col-md-12.right-section
-                  .container-fluid
-                    .row.status
-                      .row
-                        .col-lg-6.col-md-12
-                          p: strong Status: #{item.Status}
-                        .col-lg-6.col-md-6.visible-lg.indicator
-                          div.blue
-                      .row
-                        .col-lg-6.col-md-12
-                          p: strong Type: #{item.Type}
-                        .col-lg-6.col-md-6.visible-lg.indicator
-                          div.blue
-                      .row
-                        .col-lg-6.col-md-12
-                          p: strong Parent: #{item.Parent}
-                        .col-lg-6.col-md-6.visible-lg.indicator
-                          div.red
-                      .row
-                        .col-lg-12
-                          hr
-                          p Technologies:
-                          ul#tech-list
-                            - var keys = Object.keys(item.Technologies)
-                            each key in keys
-                              li.head #{key}
-                              - if (typeof(item.Technologies[key]) === "object")
-                                each comp in item.Technologies[key]
-                                  li.component #{comp}
-                              - else
-                                li.component #{item.Technologies[key]}
-                      .row
-                        .col-lg-12
-                          hr
-                          p Team:
-                          ul#team
-                            - if (item.Team.Site && item.Team.Name)
-                              li.head: a(href=item.Team.Site, target="_blank") #{"@"+item.Team.Name}
-                            - else if (item.Team.Name)
-                              li.head #{"@"+item.Team.Name}
-                            li.head Members:
-                            - if (typeof(item.Team.Members) === "object")
-                              each member in item.Team.Members
-                                li.component #{member}
-                            - else
-                              li #{item.Team.Members}
+    aside.info
+      #team
+        .container-fluid
+          .img-container
+            img.img-responsive(src=item.Team.Image)
+        article.container-fluid
+          h4 #{item.Team.Name}
+          - if (item.Team.Site)
+            a(href=item.Team.Site target="_blank")
+              h5 #{"@"+item.Team.Site}
+          +iterator(item.Team.Members)
+      #headers
+        article.col-lg-6.col-xs-6
+          h5 Project
+        article.col-lg-6.col-xs-6
+          h5 Team 
+      #item
+        article.container-fluid
+          +detailField('Status', item.Status)
+          +detailField('Type', item.Type)
+          +detailField('Parent', item.Parent)
+      #tech
+        article.container-fluid
+          .col-lg-12
+            .row
+              h4 Technologies
+            .row
+              .col-lg-6.col-xs-6
+                h5 Main
+                +iterator(item.Technologies.Main)
+              .col-lg-6.col-xs-6
+                h5 Secondary
+                +iterator(item.Technologies.Secondary)
+    main.container
+      h1 #{item.Name}
+      - if (item.Link)
+        a(href=item.Team.Site target="_blank")
+          h5 #{item.Link}
+      h5 #{item.Date}
+      .img-container
+        img.img-responsive(src=item.Image)
+      article
+        p #{item.Description}
+
   - if (item.Extended)
-    !{ extension }
+    | !{extension}
     
+  mixin detailField(name, result)
+    .row
+      .col-lg-6.col-xs-6
+        h6 #{name}
+      .col-lg-6.col-xs-6
+        h4 #{result}
+
+  mixin iterator(field)
+    - if (field === "object")
+      each sub in field
+        li #{sub}
+    - else
+      li #{field}

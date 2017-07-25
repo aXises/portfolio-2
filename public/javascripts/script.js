@@ -47,7 +47,7 @@ $(document).ready(function() {
         function() {
             $(this).next('aside').css('opacity', '1');
             $(this).css({
-                'transform': 'scale(1.05)',
+                'transform': 'scale(1.01)',
                 'filter': 'blur(2px)'
             });
         }, 

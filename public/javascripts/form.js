@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     $('.newfield').click(function(event) {
         event.preventDefault();
-        addField($(this).attr('target')); 
+        $('form .' + $(this).attr('target')).parent().append(newField($(this).attr('target')));
     });
 
     $('.edit').click(function() {
@@ -16,21 +16,22 @@ $(document).ready(function() {
         });
     });
 
-    function addField(field) {
+    function newField(field) {
         var target = 'form .'+ field;
         var newField = $(target).clone();
         newField.attr('name', $(target).attr('name'))
         newField.attr('class', field + $('form input[name="'+ $(target).attr('name') + '"]').length)
         newField.val('');
-        $(target).parent().append(newField);
+        return newField;
     }
 
     function insertFields(data) {
         var dataKeys = Object.keys(data);
+        var classIndex = 0;
         for (var i = 0; i < dataKeys.length; i++) {
             if (typeof(data[dataKeys[i]]) === 'string') {
                 if (typeof(data[dataKeys[i]]) === 'object') {
-                    
+                    //$('.' + dataKeys[i]) #Todo
                 } else {
                     var field = $('form').find('[name=' + dataKeys[i] + ']');
                     field.val(data[dataKeys[i]]);

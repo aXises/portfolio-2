@@ -1,12 +1,11 @@
 $(document).ready(function() {
+
     $('.newsub').click(function(event) {
         event.preventDefault();
-        var newField = $('#' + $(this).attr('attr')).clone();
-        newField.attr('id', '')
-        newField.val('');
-        $(this).prev().after('<br>');
-        $(this).prev().after(newField);
+        var field = $('#' + $(this).attr('attr'));
+        addField(field);
     });
+
     $('.edit').click(function() {
         $.ajax({
             url: "/itemdata/edit",
@@ -17,7 +16,13 @@ $(document).ready(function() {
             }
         });
     });
-});
+
+function addField(field) {
+    var newField = field.clone();
+    newField.attr('id', '')
+    newField.val('');
+    $(field).after(newField);
+}
 
 function insertFields(data) {
     var dataKeys = Object.keys(data);
@@ -37,3 +42,5 @@ function insertFields(data) {
         }
     }
 }
+
+});

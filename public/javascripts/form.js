@@ -19,8 +19,8 @@ $(document).ready(function() {
     function addField(field) {
         var target = 'form .'+ field;
         var newField = $(target).clone();
-        newField.attr('name', field)
-        newField.attr('class', field + $('form input[name="'+ field + '"]').length)
+        newField.attr('name', $(target).attr('name'))
+        newField.attr('class', field + $('form input[name="'+ $(target).attr('name') + '"]').length)
         newField.val('');
         $(target).parent().append(newField);
     }

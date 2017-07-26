@@ -6,14 +6,22 @@ html
       width: 900px; 
       margin: auto;
     }
+    input {
+      display: block;
+    }
     p {
       margin: 5px 0 0 0;
     }
     p.item {
       display: inline-block;
     }
+    .container {
+      position: relative;
+    }
     button.btn-success {
-      margin-left: 20px;
+      position: absolute;
+      top: 2px;
+      left: 200px;
     }
     .btn-info,
     .btn-danger {
@@ -36,29 +44,34 @@ html
       button.btn.btn-xs.btn-primary.new New  
     br
     form(action="itemdata/new" method="post")
-      p #{templateKeys["Extended"]}
       each field in templateKeys
         p: strong #{field}:
         - if (field === "Description")
-          textarea(name=field rows=5 cols=50)
+          .container(id=field)
+            textarea(name=field rows=5 cols=50)
         - else if (typeof(template[field]) === "boolean")
-          | True 
-          input(type="radio" name=field value="true")
-          br
-          | False 
-          input(type="radio" name=field value="false")
+          .container(id=field)
+            | True 
+            input(type="radio" name=field value="true")
+            br
+            | False 
+            input(type="radio" name=field value="false")
         - else if (typeof(template[field]) === "object")
-          each sub in Object.keys(template[field])
-            p #{sub}
-            input(type="text" name="sub"+sub+","+field id=sub)
-            - if (typeof(template[field][sub]) === "object")
-              button.btn.btn-xs.btn-success.newsub(attr=sub) Add
-              br
+          .container(id=field)
+            each sub in Object.keys(template[field])
+              p #{sub}
+              .container
+                input(type="text" name="sub"+sub+","+field class=sub)
+                - if (typeof(template[field][sub]) === "object")
+                  button.btn.btn-xs.btn-success.newfield(target=sub) Add
+                  br
         - else if (field === "Images")
-          input(type="text" name=field id=field)
-          button.btn.btn-xs.btn-success.newsub(attr=field) Add
+          .container(id=field)
+            input(type="text" name=field class=field)
+            button.btn.btn-xs.btn-success.newfield(target=field) Add
         - else
-          input(type="text" name=field)
+          .container(id=field)
+            input(type="text" name=field)
       br
       br
       input.btn.btn-primary(type="submit")

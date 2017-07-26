@@ -1,9 +1,8 @@
 $(document).ready(function() {
 
-    $('.newsub').click(function(event) {
+    $('.newfield').click(function(event) {
         event.preventDefault();
-        var field = $('#' + $(this).attr('attr'));
-        addField(field);
+        addField($(this).attr('target')); 
     });
 
     $('.edit').click(function() {
@@ -16,20 +15,27 @@ $(document).ready(function() {
             }
         });
     });
+});
 
 function addField(field) {
-    var newField = field.clone();
-    newField.attr('id', '')
+    var target = 'form .'+ field;
+    var newField = $(target).clone();
+    newField.attr('name', field)
+    newField.attr('class', field + $('form input[name="'+ field + '"]').length)
     newField.val('');
-    $(field).after(newField);
+    $(target).parent().append(newField);
 }
 
 function insertFields(data) {
     var dataKeys = Object.keys(data);
     for (var i = 0; i < dataKeys.length; i++) {
         if (typeof(data[dataKeys[i]]) === 'string') {
-            var field = $('form').find('[name=' + dataKeys[i] + ']');
-            field.val(data[dataKeys[i]]);
+            if (typeof(data[dataKeys[i]]) === 'object') {
+
+            } else {
+                var field = $('form').find('[name=' + dataKeys[i] + ']');
+                field.val(data[dataKeys[i]]);
+            }
         }
         else if (typeof(data[dataKeys[i]]) === 'object') {
             var keys = Object.keys(data[dataKeys[i]]);
@@ -42,5 +48,3 @@ function insertFields(data) {
         }
     }
 }
-
-});

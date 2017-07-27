@@ -11,6 +11,7 @@ $(document).ready(function() {
             data: {'name':$(this).attr('attr'), 'index': $(this).attr('item')},
             type: "POST",
             success: function (data) {
+                deleteFields();
                 insertFields(data);
             }
         });
@@ -23,6 +24,15 @@ $(document).ready(function() {
         newField.attr('class', field + $('form input[name="'+ $(target).attr('name') + '"]').length)
         newField.val('');
         return newField;
+    }
+
+    function deleteFields() {
+        var fields = $('input');
+        for (var i = 0; i < fields.length; i++) {
+            if ($(fields[i]).attr('new')) {
+                $(fields[i]).remove();
+            }
+        }
     }
 
     function insertFields(data) {

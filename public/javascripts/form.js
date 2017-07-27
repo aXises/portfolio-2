@@ -20,8 +20,11 @@ $(document).ready(function() {
     function newField(field) {
         var target = 'form .'+ field;
         var newField = $(target).clone();
-        newField.attr('name', $(target).attr('name'))
-        newField.attr('class', field + $('form input[name="'+ $(target).attr('name') + '"]').length)
+        newField.attr({
+            'name': $(target).attr('name'),
+            'class': field + $('form input[name="'+ $(target).attr('name') + '"]').length,
+            'new': true
+        });
         newField.val('');
         return newField;
     }

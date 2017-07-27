@@ -40,25 +40,38 @@ $(document).ready(function() {
 
     function insertFields(data) {
         var dataKeys = Object.keys(data);
-        var classIndex = 0;
         for (var i = 0; i < dataKeys.length; i++) {
             if (typeof(data[dataKeys[i]]) === 'string') {
-                if (typeof(data[dataKeys[i]]) === 'object') {
-                    //$('.' + dataKeys[i]) #Todo
-                } else {
-                    var field = $('form').find('[name=' + dataKeys[i] + ']');
-                    field.val(data[dataKeys[i]]);
-                }
+                var field = $('form').find('[name=' + dataKeys[i] + ']');
+                field.val(data[dataKeys[i]]);
             }
             else if (typeof(data[dataKeys[i]]) === 'object') {
-                var keys = Object.keys(data[dataKeys[i]]);
-                var subData = data[dataKeys[i]];
-                for (var j = 0; j < keys.length; j++) {
-                    var name = '[name="sub' + keys[j] + ',' + dataKeys[i] + '"]';
-                    var field = $('form').find(name);
-                    field.val(subData[keys[j]]);
+                if (dataKeys[i] === 'Images') {
+                    $('form').find('[name=' + dataKeys[i] + ']').val(data[dataKeys[i]].shift());
+                    data[dataKeys[i]].forEach(function(element) {
+                        $('#Images').append(newField(dataKeys[i]).val(element));
+                    }, this);
+                }
+                else { 
+                    var keys = Object.keys(data[dataKeys[i]]);
+                    var subData = data[dataKeys[i]];
+                    for (var j = 0; j < keys.length; j++) {
+                        var selec = $('button[target="' + keys[j] + '"]');
+                        var name = '[name="sub' + keys[j] + ',' + dataKeys[i] + '"]';
+                        var field = $('form').find(name);
+                        if (typeof(subData[keys[j]]) === 'object') {
+                            $(field).val(subData[keys[j]].shift());
+                            subData[keys[j]].forEach(function(element) {
+                                selec.parent().append(newField(keys[j]).val(element));
+                            }, this);
+                        }
+                        else {
+                            field.val(subData[keys[j]]);
+                        }
+                    }
                 }
             }
+            
         }
     }
 

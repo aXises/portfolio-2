@@ -8,8 +8,13 @@ database.connectDb(function(err) {
   var db = database.getDb();
   router.post('/:method', function(req, res, next) {
     if (req.params.method === 'edit') {
-      db.collection('items').find({}).toArray(function(err, result) {
-        res.send(result[req.body.index]);
+      db.collection('items').find({'_id':database.getID(req.body.id)}).toArray(function(err, result) {
+        if (err) {
+          throw err;
+        } 
+        else {
+          res.send(result[0]);
+        }
       });
     }
     else {

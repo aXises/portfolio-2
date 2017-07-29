@@ -35,8 +35,8 @@ html
       p Active keys: #{itemKeys.length}
       - var i = 0
       each item in items
-        button.btn.btn-xs.btn-info.edit(attr=item.Name item=i) Edit
-        button.btn.btn-xs.btn-danger.delete(attr=item.Name item=i) Delete
+        button.btn.btn-xs.btn-info.edit(attr=item.Name id=item._id) Edit
+        button.btn.btn-xs.btn-danger.delete(attr=item.Name id=item._id) Delete
         p.item #{item.Name}
         - i++
         br

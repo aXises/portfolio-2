@@ -8,7 +8,7 @@ $(document).ready(function() {
     $('.edit').click(function() {
         $.ajax({
             url: "/itemdata/edit",
-            data: {'name':$(this).attr('attr'), 'index': $(this).attr('item')},
+            data: {'name':$(this).attr('attr'), 'id': $(this).attr('id')},
             type: "POST",
             success: function (data) {
                 deleteFields();

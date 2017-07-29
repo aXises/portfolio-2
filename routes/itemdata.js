@@ -13,7 +13,6 @@ database.connectDb(function(err) {
           throw err;
         } 
         else {
-          //db.collection('items').update({'_id':database.getID(req.body.id)}, result[0]);
           res.send(result[0]);
         }
       });
@@ -53,8 +52,6 @@ database.connectDb(function(err) {
         delete req.body.mode;
         db.collection('items').update({'_id':database.getID(modeID)}, req.body);
       }
-      //processField(req.body);
-      //console.log(req.body)
       res.redirect('/works');
     }
   });
@@ -74,19 +71,5 @@ database.connectDb(function(err) {
     });
   });
 });
-
-function processField(data) {
-  var keys = Object.keys(data);
-  var fields = [];
-  for (var i = 0; i < keys.length; i++) {
-    if (typeof(data[keys[i]]) === 'object') {
-       fields.push(processField(data[keys[i]]));
-    }
-    else {
-      fields.push(data[keys[i]]);
-    }
-  }
-  return fields;
-}
 
 module.exports = router;

@@ -6,7 +6,7 @@ block content
       p.visible-md.visible-lg Item Gallery
   section#display
     .container-fluid
-      - var index = -1
+      - var index = 0
       - var keys = itemKeys
       - var items = keys.length
       - var semi = items % 3
@@ -19,14 +19,14 @@ block content
               - var itemName = (pageContent[index].Name).toLowerCase().split(' ').join('')
               a(href="works/item-"+itemName+"-"+index)
                 article.col-lg-4.col-sm-12
-                  +galleryItem(index)
+                  +galleryItem(index-1)
       - if (semi > 0)
         .row
           - for (var remainder = index; index < remainder + semi; index++)
             - var itemName = (pageContent[index].Name).toLowerCase().split(' ').join('')
             a(href="works/item-"+itemName)
-            article.col-lg-4.col-md-6.col-sm-12
-              +galleryItem(index)
+              article.col-lg-4.col-md-6.col-sm-12
+                +galleryItem(index)
 
 mixin galleryItem(keyIndex)
   - var keyItem = pageContent[keyIndex]

@@ -17,6 +17,11 @@ database.connectDb(function(err) {
         }
       });
     }
+    else if (req.params.method === 'delete') {
+      db.collection('items').deleteOne({'_id':database.getID(req.body.id)}, function(err) {
+        if (err) throw err;
+      });
+    }
     else {
       var keys = Object.keys(req.body);
       for(var i = 0; i < keys.length; i++) {

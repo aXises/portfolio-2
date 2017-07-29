@@ -17,6 +17,14 @@ $(document).ready(function() {
         });
     });
 
+    $('.delete').click(function() {
+        $.ajax({
+            url: "/itemdata/delete",
+            data: {'name':$(this).attr('attr'), 'id': $(this).attr('id')},
+            type: "POST"
+        });
+    });
+
     function newField(field) {
         var target = 'form .'+ field;
         var newField = $(target).clone();

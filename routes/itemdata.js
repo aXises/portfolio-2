@@ -13,6 +13,7 @@ database.connectDb(function(err) {
           throw err;
         } 
         else {
+          //db.collection('items').update({'_id':database.getID(req.body.id)}, result[0]);
           res.send(result[0]);
         }
       });
@@ -43,9 +44,17 @@ database.connectDb(function(err) {
       if (typeof(req.body.Images) !== 'object') {
         req.body['Image'] = req.body.Images
       }
+      if (req.body.mode === 'new') {
+        delete req.body.mode;
+        db.collection('items').insert(req.body);
+      }
+      else {
+        var modeID = req.body.mode
+        delete req.body.mode;
+        db.collection('items').update({'_id':database.getID(modeID)}, req.body);
+      }
       //processField(req.body);
-      //db.collection('items').insert(req.body);
-      console.log(req.body)
+      //console.log(req.body)
       res.redirect('/works');
     }
   });

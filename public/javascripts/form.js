@@ -5,10 +5,15 @@ $(document).ready(function() {
         $('form .' + $(this).attr('target')).parent().append(newField($(this).attr('target')));
     });
 
+    $('.new').click(function() {
+        $('#mode').attr('value', 'new');
+    });
+
     $('.edit').click(function() {
+        $('#mode').attr('value', $(this).attr('id'));
         $.ajax({
             url: "/itemdata/edit",
-            data: {'name':$(this).attr('attr'), 'id': $(this).attr('id')},
+            data: {'id': $(this).attr('id')},
             type: "POST",
             success: function (data) {
                 deleteFields();
@@ -20,7 +25,7 @@ $(document).ready(function() {
     $('.delete').click(function() {
         $.ajax({
             url: "/itemdata/delete",
-            data: {'name':$(this).attr('attr'), 'id': $(this).attr('id')},
+            data: {'id': $(this).attr('id')},
             type: "POST"
         });
     });

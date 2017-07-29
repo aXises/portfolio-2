@@ -15,10 +15,15 @@ getDb = function() {
 	return db;
 }
 
+var ObjectID = require('mongodb').ObjectID;
 
+getID = function(id) {
+	return new ObjectID(id);
 }
 
 module.exports = {
 	connectDb,
+	getDb,
+	getID
 }
 

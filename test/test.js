@@ -33,6 +33,10 @@ describe('App', function() {
   });
 });
 
+after(function() {
+  server.close();
+});
+
 function testPages(page) {
   it('returns status code 200', function(done) {
     request.get(page, function(err, res, body) {

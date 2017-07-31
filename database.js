@@ -6,7 +6,7 @@ connectDb = function(callback) {
 	MongoClient.connect(URICS, function(err, database) {
 		if (err) throw err;
 		db = database;
-		console.log('connected');
+		//console.log('connected');
 		return callback(err);
 	});
 }

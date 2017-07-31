@@ -1,28 +1,64 @@
 $(document).ready(function() {
 
-    // For future loading
-    $('#loading').css({
-        'opacity': 0,
-        'pointer-events': 'none',
-    });
-    
-    $.getScript('javascripts/animations.js', function() {
-        if (document.location.pathname === '/') {
-            indexanimate();
-        }
-        else if (document.location.pathname === '/Gallery') {
-            galleryanimate();
-        }
-    });
-    
-    var aTag = $('nav a');
-
-    for (var i = 0; i < aTag.length; i++) {
-        var link = $(aTag[i]);
-        if (link.attr('href').charAt(0) === '#') {
-            link.children('li').text(link.children('li').text().slice(1))
-        }
+    if (document.location.pathname.split('/').pop().slice(0, -1) === 'item') {
+        prepAnimationItem();
     }
+    
+    function prepAnimationItem() {
+        $('.item-container').css({
+            'padding-top': '50px',
+            'opacity': 0
+        });
+    }
+
+    var imagesTotal = $('img').length;
+    var segment = 100/imagesTotal;
+    var loaded = 0,
+        before = 0,
+        after = 0;
+    $(document).imagesLoaded().progress(function(instance, image) {
+        if (image.isLoaded) {
+            before = loaded;
+            loaded += segment;
+            after = loaded;
+            function animateText(from, to) {
+                $({current:from}).animate({current:to}, {
+                    duration: (segment/0.35)*10,
+                    step: function() {
+                        $('.progress-text p').text((this.current).toFixed(2));
+                    }
+                });
+            }
+            animateText(before, after);
+            $('#loading .progress-bar').css('width', loaded+"%");
+        }
+        else {
+            $('.failed').append('<p>Fail to load: '+image.img.src+'</p>');
+        }
+    }).done(function() {
+        load();
+    });
+
+    $(window).resize(function() {
+        setAside();
+    });
+
+    $('#display img').hover(
+        function() {
+            $(this).next('aside').css('opacity', '1');
+            $(this).css({
+                'transform': 'scale(1.01)',
+                'filter': 'blur(2px)'
+            });
+        }, 
+        function() {
+            $(this).next('aside').css('opacity', '');
+            $(this).css({
+                'transform': '',
+                'filter': ''
+            });
+        }
+    );
 
     $('nav a').click(function(event) {
         event.preventDefault();
@@ -82,15 +118,6 @@ $(document).ready(function() {
         }
     );
 
-    $('.nav-main ul').hover(
-        function() {
-            $('.nav-main').css('background-color', 'rgba(0, 0, 0, 0.7)');
-        }, 
-        function() {
-            $('.nav-main').css('background-color', '');
-        }
-    );
-
     var navActive;
 
     $('.nav-menu, .nav-close').click(function() {
@@ -115,6 +142,60 @@ $(document).ready(function() {
             });
         }
         navActive = !navActive
+    }
+
+    function setAside () {
+        
+        var displayImg = $('#display img');
+
+        for (var i = 0; i < displayImg.length; i++) {
+            var img = $(displayImg[i]);
+            img.next('aside').css('height', img.height())
+            img.next('aside').css('width', img.width())
+        }
+    }
+    $('.img-loading').hide();
+    $('.slide img').click(function() {
+        var main = $('#main-img');
+        main.attr('src', $(this).attr('src'));
+        $('.img-loading').show();
+        main.css('opacity', 0);
+        main.imagesLoaded().done(function() {
+            main.css('opacity', 1);
+            $('.img-loading').hide();
+        });
+           
+    });
+    
+    function setSlide() {
+        
+    }
+
+    function load() {
+        $('body').css('overflow-y', 'auto');
+        $('#loading').css({
+            'opacity': 0,
+            'pointer-events': 'none',
+        });
+        setTimeout(function() {
+            $('#loading').remove();
+        }, 500);
+        
+        $.getScript('../javascripts/animations.js', function() {
+            if (document.location.pathname === '/') {
+                indexanimate();
+            }
+            else if (document.location.pathname === '/Works') {
+                galleryanimate();
+            }
+            else if (document.location.pathname.split('/').pop().slice(0, -1) === 'item') {
+                itemanimate();
+                galleryanimate();
+            }
+        });
+
+        setAside();
+        setSlide();
     }
 
 }); // End of use

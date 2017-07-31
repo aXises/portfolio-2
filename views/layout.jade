@@ -19,6 +19,11 @@ html
     meta(name="theme-color" content="#ffffff")
   body
     div#loading
+      .bar
+        .progress-bar
+      .progress-text
+        p.percentage
+      .failed
     div.nav-menu
       span.glyphicon.glyphicon-list
       div.text
@@ -26,9 +31,13 @@ html
     nav
       div.nav-main
         ul
+          - var navLinks = ['#Section1','#Section2','#Section3','#Section4','Works','Link']
           each link in navLinks
-              a.anchor(href=link)
-                li #{link}
+            - var href = link
+            - if (link.charAt(0) === '#')
+              - var link = link.slice(1)
+            a.anchor(href="/"+href)
+              li #{link}
       div.nav-secondary
         div.nav-close
           span.glyphicon.glyphicon-menu-left
@@ -42,4 +51,5 @@ html
     block content
     script(type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js")
     script(type="text/javascript" src="/bower_components/move.js/move.min.js")
+    script(type="text/javascript" src="/bower_components/imagesloaded/imagesloaded.pkgd.min.js")
     script(type="text/javascript" src="/javascripts/script.js")

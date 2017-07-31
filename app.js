@@ -5,12 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var lessMiddleware = require('less-middleware');
+var mocha = require('mocha');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var gallery = require('./routes/gallery');
+var works = require('./routes/works');
 
 var app = express();
+
+var database = require('./database');
 
 // compile less
 app.use(lessMiddleware(__dirname + '/public'));
@@ -30,7 +33,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/gallery', gallery);
+app.use('/Works', works);
+
+if (app.get('env') === 'development') {
+  var itemData = require('./routes/itemdata');
+  app.use('/itemdata', itemData);
+  var fs = require('fs');
+  var data = JSON.parse(fs.readFileSync('routes/data.json', 'utf8'))
+
+  database.connectDb(function(err) {
+    if (err) throw err;
+    var db = database.getDb();
+    //database.insertCollection('items', {});
+    db.collection('items').find({}).toArray(function(err, result) {
+        //console.log(result)
+    });
+    //db.collection('dataTemplates').remove();
+    //db.collection('items').remove();
+    //database.insertCollection('dataTemplates', data.Templates);
+
+  });
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

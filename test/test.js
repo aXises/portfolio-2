@@ -3,6 +3,7 @@ var assert = require('assert');
 var origin = "http://localhost:3000/"
 var http = require('http');
 var app = require('../app');
+var cheerio = require('cheerio');
 
 var server = http.createServer(app);
 server.listen("3000");

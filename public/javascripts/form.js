@@ -31,8 +31,8 @@ $(document).ready(function() {
     });
 
     function newField(field) {
-        var target = 'form .'+ field;
-        var newField = $(target).clone();
+        var target = 'form .'+ field,
+            newField = $(target).clone();
         newField.attr({
             'name': $(target).attr('name'),
             'class': field + $('form input[name="'+ $(target).attr('name') + '"]').length,
@@ -66,12 +66,12 @@ $(document).ready(function() {
                     }, this);
                 }
                 else { 
-                    var keys = Object.keys(data[dataKeys[i]]);
-                    var subData = data[dataKeys[i]];
+                    var keys = Object.keys(data[dataKeys[i]]),
+                        subData = data[dataKeys[i]];
                     for (var j = 0; j < keys.length; j++) {
-                        var selec = $('button[target="' + keys[j] + '"]');
-                        var name = '[name="sub' + keys[j] + ',' + dataKeys[i] + '"]';
-                        var field = $('form').find(name);
+                        var selec = $('button[target="' + keys[j] + '"]'),
+                            name = '[name="sub' + keys[j] + ',' + dataKeys[i] + '"]',
+                            field = $('form').find(name);
                         if (typeof(subData[keys[j]]) === 'object') {
                             $(field).val(subData[keys[j]].shift());
                             subData[keys[j]].forEach(function(element) {
@@ -87,5 +87,5 @@ $(document).ready(function() {
             
         }
     }
-
+    
 });

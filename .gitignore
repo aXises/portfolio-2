@@ -85,3 +85,4 @@ $RECYCLE.BIN/
 *.lnk
 .vscode/settings.json
 *.png
+views/custom.index.jade

@@ -31,23 +31,6 @@ database.connectDb(function(err) {
         itemKeys: Object.keys(data),
         itemID: req.params.item,
         extension: extension
-      }, function(err, page) {
-        if (err) {
-          console.log('error', err);
-          var err;
-          if (req.params.item.replace(/[0-9]/g, '') === "item") {
-            err = new Error('NotImplementedError');
-            err.status = 404;
-          }
-          else {
-            err = new Error('UndefinedPage');
-            err.status = 404;
-          }
-          next(err);
-        }
-        else {
-          res.end(page);
-        }
       });
     });
   });

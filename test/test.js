@@ -9,23 +9,24 @@ var testLinks = ['/', '/works'];
 var server = http.createServer(app);
 server.listen('3000');
 
-before(function(done) {
-  this.timeout(20000);
-  database.connectDb(function () {
-    var db = database.getDb()
-    describe('MongoDB', function() {
-      describe('Database connection', function() {
-        it('Connects to Mongo Atlas', function(done) {
-          assert.ok(db.serverConfig.isConnected());
-          done();
+describe('App', function() {
+  before(function(done) {
+    this.timeout(20000);
+    database.connectDb(function () {
+      var db = database.getDb()
+      describe('MongoDB', function() {
+        describe('Database connection', function() {
+          it('Connects to Mongo Atlas', function(done) {
+            assert.ok(db.serverConfig.isConnected());
+            done();
+          });
         });
       });
+      setTimeout(function() {
+        done();
+      }, 10000)
     });
-    done();
   });
-});
-
-describe('App', function() {
   describe('Pages', function() {
     for (var i = 0; i < testLinks.length; i++) {
       testPages(origin + testLinks[i])

@@ -1,6 +1,6 @@
 @cyan-cont: #00bdce;
 @oran-cont: #e33f00;
-@light-shade: #dadad2;
+@light-shade: #e8e8e6;
 @dark-shade: #333333;
 @std-bg: #060a10;
 @nav-secondary: rgba(0, 0, 0, 0.8);
@@ -267,15 +267,19 @@ header#items {
 }
 
 header#index {
-  .main.image-container {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      overflow: hidden;
-      border-radius: 5px;
-      border: 1px solid transparent;
-    }
+  position: relative;
+  .image-container,
+  .item-display {
+    position: absolute;
+  }
+  .image-container {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    border-radius: 5px;
+    border: 1px solid transparent;
+  }
 }
 
 header#gallery {
@@ -295,7 +299,62 @@ header#gallery {
 
 main#index {
   section {
-    height: 100vh;
+    background-color: @light-shade;
+  }
+  @main_height: 600px;
+  img {
+    background-size: cover;
+    max-height: 100%;
+  }
+  #info {
+    div {
+      padding: 0;
+      overflow: hidden;
+      img {
+        filter: blur(5px);
+        transform: scale(1.02);
+      }
+      .info {
+        width: 400px;
+        height: 500px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        color: white;
+        padding: 15px;
+        pointer-events: none;
+      }
+      .info-right {
+        left: 0;
+        text-align: left;
+      }
+      .info-left {
+        right: 0;
+        text-align: right;
+      }
+      .overlay {
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.0);
+        position: absolute;
+        z-index: 1;
+        .transition.vfast;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.7);
+        }
+      }
+    }
+    #latest,
+    #upcoming {
+      height: 100vh;
+    }
+    #latest {
+      border-right: 1px solid white;
+    }
+    #upcoming {
+
+    }
   }
 }
 

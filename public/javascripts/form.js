@@ -12,9 +12,9 @@ $(document).ready(function() {
     $('.edit').click(function() {
         $('#mode').attr('value', $(this).attr('id'));
         $.ajax({
-            url: "/itemdata/edit",
+            url: '/itemdata/edit',
             data: {'id': $(this).attr('id')},
-            type: "POST",
+            type: 'POST',
             success: function (data) {
                 deleteFields();
                 insertFields(data);
@@ -24,9 +24,9 @@ $(document).ready(function() {
 
     $('.delete').click(function() {
         $.ajax({
-            url: "/itemdata/delete",
+            url: '/itemdata/delete',
             data: {'id': $(this).attr('id')},
-            type: "POST"
+            type: 'POST'
         });
     });
 

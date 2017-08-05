@@ -26,7 +26,6 @@ function getItem(data, status) {
   sortedData = sortedData.reverse();
   for (var i = 0; i < sortedData.length; i++) {
     if (sortedData[i].Status.toLowerCase() === status) {
-      console.log(sortedData[i]);
       return sortedData[i];
     }
   }

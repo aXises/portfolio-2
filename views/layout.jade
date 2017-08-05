@@ -15,7 +15,7 @@ html
     link(rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png")
     link(rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png")
     link(rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png")
-    link(rel="manifest" href="/images//manifest.json")
+    link(rel="manifest" href="/images/manifest.json")
     meta(name="theme-color" content="#ffffff")
   body
     div#loading
@@ -31,7 +31,7 @@ html
     nav
       div.nav-main
         ul
-          - var navLinks = ['#Section1','#Section2','#Section3','#Section4','Works','Link']
+          - var navLinks = ['#Section1','#info','#Section3','#Section4','Works','Link']
           each link in navLinks
             - var href = link
             - if (link.charAt(0) === '#')

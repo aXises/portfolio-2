@@ -1,25 +1,29 @@
 body#itemdata {
   background-color: white;
   form, aside {
-  width: 900px; 
-  margin: auto;
+    width: 900px; 
+    margin: auto;
   }
-  input {
-    display: block;
+  form {
+    margin-top: 50px;
+    margin-bottom: 100px;
   }
-  p {
-    margin: 5px 0 0 0;
-  }
+  input,
   p.item {
     display: inline-block;
   }
+  p {
+    padding: 5px 0 0 0;
+  }
   .container {
     position: relative;
+    margin-top: 20px;
   }
-  button.btn-success {
+  .newfield {
+    margin-left: 20px;
     position: absolute;
-    top: 2px;
     left: 200px;
+    top: 34px;
   }
   .btn-info,
   .btn-danger {
@@ -27,6 +31,9 @@ body#itemdata {
   }
   .btn-danger {
     margin-right: 20px;
+  }
+  input[type='submit'] {
+    margin-top: 50px;
   }
 }
 

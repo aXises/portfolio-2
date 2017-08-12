@@ -39,6 +39,8 @@ html
           .container(id=field)
             input(type="text" name=field class=field)
             button.btn.btn-xs.btn-success.newfield(target=field) Add
+  extends layout
+  block content
         - else
           .container(id=field)
             input(type="text" name=field)
@@ -50,3 +52,4 @@ html
       br
   script(type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js")
   script(type="text/javascript" src="/javascripts/form.js")
+    script(type="text/javascript" src="/javascripts/form.js")

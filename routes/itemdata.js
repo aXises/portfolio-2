@@ -42,12 +42,12 @@ router.post('/:method', function(req, res, next) {
     }
     if (req.body.mode === 'new') {
       delete req.body.mode;
-      database.getDb().collection('items').insert(req.body);
+      //database.getDb().collection('items').insert(req.body);
     }
     else {
       var modeID = req.body.mode
       delete req.body.mode;
-      database.getDb().collection('items').update({'_id':database.getID(modeID)}, req.body);
+      //database.getDb().collection('items').update({'_id':database.getID(modeID)}, req.body);
     }
     res.redirect('/works');
   }

@@ -7,17 +7,17 @@ var bodyParser = require('body-parser');
 var lessMiddleware = require('less-middleware');
 var mocha = require('mocha');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-var works = require('./routes/works');
-
 var app = express();
 
 var database = require('./database');
 
-// compile less
-app.use(lessMiddleware(__dirname + '/public'));
+// routes setup
+var index = require('./routes/index');
+var users = require('./routes/users');
+var works = require('./routes/works');
 
+// middleware setup
+app.use(lessMiddleware(__dirname + '/public'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
 // view engine setup
@@ -31,10 +31,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// views setup
 app.use('/', index);
 app.use('/users', users);
 app.use('/Works', works);
 
+// set environment
 if (app.get('env') === 'development') {
   var itemData = require('./routes/itemdata');
   app.use('/itemdata', itemData);

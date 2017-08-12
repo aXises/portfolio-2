@@ -38,21 +38,6 @@ app.use('/Works', works);
 if (app.get('env') === 'development') {
   var itemData = require('./routes/itemdata');
   app.use('/itemdata', itemData);
-  var fs = require('fs');
-  var data = JSON.parse(fs.readFileSync('routes/data.json', 'utf8'))
-
-  database.connectDb(function(err) {
-    if (err) throw err;
-    var db = database.getDb();
-    //database.insertCollection('items', {});
-    db.collection('items').find({}).toArray(function(err, result) {
-        //console.log(result)
-    });
-    //db.collection('dataTemplates').remove();
-    //db.collection('items').remove();
-    //database.insertCollection('dataTemplates', data.Templates);
-
-  });
 }
 
 // catch 404 and forward to error handler

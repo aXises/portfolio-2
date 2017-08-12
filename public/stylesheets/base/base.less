@@ -1,0 +1,43 @@
+body {
+  background-color: @std-bg;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.no-js #loading {
+  display: none;
+}
+
+a {
+  color: @light-shade;
+}
+
+.header-text {
+    position: relative;
+    top: 45%;
+    left: 50%;
+    transform:translateX(-50%);
+    text-align: right;
+    display: inline-block;
+}
+
+header#index, 
+header#gallery,
+header#items {
+  height: 100vh;
+  background-color: transparent !important;
+  color: @light-shade;
+  .text-container {
+    .header-text;
+    opacity: 0;
+    h1 {
+      margin: 0;
+    }
+  }
+}
+
+section {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}

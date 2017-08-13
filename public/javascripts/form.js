@@ -9,6 +9,9 @@ $(document).ready(function () {
   $('.new').click(function () {
     $('#mode-display').text('Create new item');
     $('#mode').attr('value', 'new');
+  });
+
+  $('.clear').click(function () {
     clearFields();
   });
 

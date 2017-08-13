@@ -22,11 +22,11 @@ router.post('/:method', function(req, res, next) {
   else {
     var keys = Object.keys(req.body);
     for(var i = 0; i < keys.length; i++) {
-      if (keys[i].substring(0,3) === 'sub') {
-        var key = keys[i].split(','),
+      if (keys[i].indexOf(':') > -1) {
+        var key = keys[i].split(':'),
             field = req.body[keys[i]],
-            sub = key[0].substring(3),
-            main = key[1];
+            sub = key[1],
+            main = key[0];
         if (typeof(req.body[main]) === 'undefined') {
           req.body[main] = {};
         }
@@ -42,14 +42,14 @@ router.post('/:method', function(req, res, next) {
     }
     if (req.body.mode === 'new') {
       delete req.body.mode;
-      //database.getDb().collection('items').insert(req.body);
+      database.getDb().collection('items').insert(req.body);
     }
     else {
       var modeID = req.body.mode
       delete req.body.mode;
-      //database.getDb().collection('items').update({'_id':database.getID(modeID)}, req.body);
+      database.getDb().collection('items').update({'_id':database.getID(modeID)}, req.body);
     }
-    res.redirect('/works');
+    res.redirect('back');
   }
 });
 

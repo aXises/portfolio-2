@@ -3,19 +3,16 @@ var router = express.Router();
 var database = require('../database');
 
 /* GET home page. */
-database.connectDb(function(err) {
-  if (err) throw err;
-  var db = database.getDb();
-  db.collection('items').find({}).toArray(function(err, result) {
-    router.get('/', function(req, res, next) {
-      res.render('index', {
-        title: 'Axisesio',
-        latest: getItem(result, 'completed'),
-        upcoming: getItem(result, 'in progress')
-      });
+router.get('/', function(req, res, next) {
+  database.getDb().collection('items').find({}).toArray(function(err, result) {
+    res.render('index', {
+      title: 'Axisesio',
+      latest: getItem(result, 'completed'),
+      upcoming: getItem(result, 'in progress')
     });
   });
 });
+
 
 function getItem(data, status) {
   var sortedData = data.sort(function(a,b) {

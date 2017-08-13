@@ -1,91 +1,89 @@
-$(document).ready(function() {
+$(document).ready(function () {
+  'use strict';
 
-    $('.newfield').click(function(event) {
-        event.preventDefault();
-        $('form .' + $(this).attr('target')).parent().append(newField($(this).attr('target')));
+  $('.newfield').click(function () {
+    var field = $(this).parent().find('input:first-of-type');
+    $(field).after($(field).clone().css('display', 'block').attr('extra', true).val(''));
+  });
+
+  $('.new').click(function () {
+    $('#mode-display').text('Create new item');
+    $('#mode').attr('value', 'new');
+  });
+
+  $('.clear').click(function () {
+    clearFields();
+  });
+
+  $('.edit').click(function () {
+    var parentId = $(this).parent().attr('id');
+    $('#mode-display').text('Editing '+parentId );
+    $('#mode').attr('value', parentId.split(':')[1]);
+    $.ajax({
+      url: '/itemdata/edit',
+      data: { 'id': parentId.split(':')[1] },
+      type: 'POST',
+      success: function (data) {
+        clearFields();
+        insertFields(data);
+      }
     });
+  });
 
-    $('.new').click(function() {
-        $('#mode').attr('value', 'new');
+  $('.delete').click(function () {
+    var parentId = $(this).parent().attr('id');
+    $.ajax({
+      url: '/itemdata/delete',
+      data: { 'id': parentId.split(':')[1] },
+      type: 'POST'
     });
+  });
 
-    $('.edit').click(function() {
-        $('#mode').attr('value', $(this).attr('id'));
-        $.ajax({
-            url: '/itemdata/edit',
-            data: {'id': $(this).attr('id')},
-            type: 'POST',
-            success: function (data) {
-                deleteFields();
-                insertFields(data);
-            }
-        });
-    });
-
-    $('.delete').click(function() {
-        $.ajax({
-            url: '/itemdata/delete',
-            data: {'id': $(this).attr('id')},
-            type: 'POST'
-        });
-    });
-
-    function newField(field) {
-        var target = 'form .'+ field,
-            newField = $(target).clone();
-        newField.attr({
-            'name': $(target).attr('name'),
-            'class': field + $('form input[name="'+ $(target).attr('name') + '"]').length,
-            'new': true
-        });
-        newField.val('');
-        return newField;
+  function clearFields() {
+    var fields = $('input, textarea');
+    for (var i = 0; i < fields.length; i++) {
+      var type = $(fields[i]).attr('type')
+      if (type === 'hidden' || type === 'submit' || type ==='radio') {
+      }
+      else {
+        $(fields[i]).val('');
+      }
+      if ($(fields[i]).attr('extra')) {
+        $(fields[i]).remove();
+      }
     }
+  }
 
-    function deleteFields() {
-        var fields = $('input');
-        for (var i = 0; i < fields.length; i++) {
-            if ($(fields[i]).attr('new')) {
-                $(fields[i]).remove();
-            }
+  function insertFields(data) {
+    var dataKeys = Object.keys(data);
+    for (var i = 0; i < dataKeys.length; i++) {
+      var key = dataKeys[i]
+      var keyData = data[key]
+      if (typeof (keyData) === 'string' || key === 'Images') {
+        addFieldData(key, keyData)
+      }
+      else if (typeof (keyData) === 'object') {
+        var key_2 = Object.keys(keyData)
+        var keyData_2 = keyData 
+        for (var j = 0; j < key_2.length; j++) {
+          addFieldData(key +'\\:'+ key_2[j], keyData_2[key_2[j]]);   
         }
+      }
     }
+  }
 
-    function insertFields(data) {
-        var dataKeys = Object.keys(data);
-        for (var i = 0; i < dataKeys.length; i++) {
-            if (typeof(data[dataKeys[i]]) === 'string') {
-                var field = $('form').find('[name=' + dataKeys[i] + ']');
-                field.val(data[dataKeys[i]]);
-            }
-            else if (typeof(data[dataKeys[i]]) === 'object') {
-                if (dataKeys[i] === 'Images') {
-                    $('form').find('[name=' + dataKeys[i] + ']').val(data[dataKeys[i]].shift());
-                    data[dataKeys[i]].forEach(function(element) {
-                        $('#Images').append(newField(dataKeys[i]).val(element));
-                    }, this);
-                }
-                else { 
-                    var keys = Object.keys(data[dataKeys[i]]),
-                        subData = data[dataKeys[i]];
-                    for (var j = 0; j < keys.length; j++) {
-                        var selec = $('button[target="' + keys[j] + '"]'),
-                            name = '[name="sub' + keys[j] + ',' + dataKeys[i] + '"]',
-                            field = $('form').find(name);
-                        if (typeof(subData[keys[j]]) === 'object') {
-                            $(field).val(subData[keys[j]].shift());
-                            subData[keys[j]].forEach(function(element) {
-                                selec.parent().append(newField(keys[j]).val(element));
-                            }, this);
-                        }
-                        else {
-                            field.val(subData[keys[j]]);
-                        }
-                    }
-                }
-            }
-            
-        }
+  function addFieldData(key, data) {
+    var field = $('form').find('#'+key).children('[name='+key+']');
+    if (!Array.isArray(data)) {
+      field.val(data);
     }
-    
+    else {
+      data = data.reverse()
+      $(field).val(data.pop())
+      for (var i = 0; i < data.length; i++) {
+        $(field).after($(field).clone().css('display', 'block').attr('extra', true).val(data[i]));
+      }
+    }
+  }
+
 });

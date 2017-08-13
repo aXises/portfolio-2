@@ -21,7 +21,6 @@ $(document).ready(function () {
       data: { 'id': parentId.split(':')[1] },
       type: 'POST',
       success: function (data) {
-        //console.log(data)
         clearFields();
         insertFields(data);
       }
@@ -40,7 +39,9 @@ $(document).ready(function () {
   function clearFields() {
     var fields = $('input, textarea');
     for (var i = 0; i < fields.length; i++) {
-      if ($(fields[i]).attr('type') !== 'hidden') {
+      if ($(fields[i]).attr('type') === 'hidden' || $(fields[i]).attr('type') === 'submit') {
+      }
+      else {
         $(fields[i]).val('');
       }
       if ($(fields[i]).attr('extra')) {
@@ -61,7 +62,6 @@ $(document).ready(function () {
         var key_2 = Object.keys(keyData)
         var keyData_2 = keyData 
         for (var j = 0; j < key_2.length; j++) {
-          console.log(key_2[j])
           addFieldData(key +'\\:'+ key_2[j], keyData_2[key_2[j]]);   
         }
       }

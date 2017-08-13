@@ -42,7 +42,8 @@ $(document).ready(function () {
   function clearFields() {
     var fields = $('input, textarea');
     for (var i = 0; i < fields.length; i++) {
-      if ($(fields[i]).attr('type') === 'hidden' || $(fields[i]).attr('type') === 'submit') {
+      var type = $(fields[i]).attr('type')
+      if (type === 'hidden' || type === 'submit' || type ==='radio') {
       }
       else {
         $(fields[i]).val('');

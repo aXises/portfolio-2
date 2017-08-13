@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var jade = require('jade');
 var database = require('../database');
+var fs = require('fs');
 
 /* GET works page. */
 router.get('/', function(req, res, next) {
@@ -21,15 +22,32 @@ router.get('/:id', function(req, res, next) {
     var data = result[0];
     var extension;
     if (data.Extended) {
-      //extension = jade.renderFile('views/extensions/'+req.params.item+'.extended.jade');
-      extension = jade.renderFile('views/extensions/test.extended.jade');
+      var file = 'views/extensions/'+req.params.id+'.jade';
+      fs.exists(file, function(exists) {
+        if (!exists) {
+          console.log(exists)
+          fs.writeFile(file, 'h3 Extends:'+req.params.id, function (err) {
+            if (err) throw err;
+            extension = jade.renderFile(file);
+            render();
+          });
+        }
+        else {
+          extension = jade.renderFile(file);
+          render();
+        }
+      });
+    } else {
+      render();
     }
-    res.render('item', {
-      pageContent: data,
-      itemKeys: Object.keys(data),
-      itemID: req.params.item,
-      extension: extension
-    });
+    function render() {
+      res.render('item', {
+        pageContent: data,
+        itemKeys: Object.keys(data),
+        itemID: req.params.item,
+        extension: extension
+      });
+    }
   });
 });
 

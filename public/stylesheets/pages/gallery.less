@@ -1,0 +1,38 @@
+header#gallery {
+  .text-container {
+    .header-text;
+    top: 50px;
+    left: 90%;
+    opacity: 0;
+    letter-spacing: 5px;
+  }
+  background-image: none;
+}
+
+header#gallery {
+  height: 120px;
+}
+
+section#display {
+  article {
+    overflow: hidden;
+    padding: 0;
+    img {
+      .transition.vfast;
+    }
+    aside {
+      padding: 10px;
+      position: absolute;
+      top: 0;
+      background-color: @nav-secondary;
+      opacity: 0;
+      pointer-events: none;
+      text-align: center;
+      color: @light-shade;
+      .transition.vfast;
+      hr {
+        width: 5%;
+      }
+    }
+  }
+}

@@ -1,82 +1,43 @@
 html
-  link(rel="stylesheet", type="text/css", href="/bower_components/reset-css/reset.css")
-  link(rel="stylesheet", type="text/css", href="/bower_components/bootstrap/dist/css/bootstrap.min.css")
-  style.
-    form, aside {
-      width: 900px; 
-      margin: auto;
-    }
-    input {
-      display: block;
-    }
-    p {
-      margin: 5px 0 0 0;
-    }
-    p.item {
-      display: inline-block;
-    }
-    .container {
-      position: relative;
-    }
-    button.btn-success {
-      position: absolute;
-      top: 2px;
-      left: 200px;
-    }
-    .btn-info,
-    .btn-danger {
-      margin: 2px;
-    }
-    .btn-danger {
-      margin-right: 20px;
-    }
-  body
-    aside
-      p Active keys: #{itemKeys.length}
-      - var i = 0
-      each item in items
-        button.btn.btn-xs.btn-info.edit(attr=item.Name id=item._id) Edit
-        button.btn.btn-xs.btn-danger.delete(attr=item.Name id=item._id) Delete
-        p.item #{item.Name}
-        - i++
-        br
-      br
-      button.btn.btn-xs.btn-primary.new New  
-    br
-    form(action="itemdata/new" method="post")
-      each field in templateKeys
-        p: strong #{field}:
-        - if (field === "Description")
-          .container(id=field)
-            textarea(name=field rows=5 cols=50)
-        - else if (typeof(template[field]) === "boolean")
-          .container(id=field)
-            | True 
-            input(type="radio" name=field value="true")
-            br
-            | False 
-            input(type="radio" name=field value="false")
-        - else if (typeof(template[field]) === "object")
-          .container(id=field)
-            each sub in Object.keys(template[field])
-              p #{sub}
-              .container
-                input(type="text" name="sub"+sub+","+field class=sub)
-                - if (typeof(template[field][sub]) === "object")
-                  button.btn.btn-xs.btn-success.newfield(target=sub) Add
-                  br
-        - else if (field === "Images")
-          .container(id=field)
-            input(type="text" name=field class=field)
-            button.btn.btn-xs.btn-success.newfield(target=field) Add
+  extends layout
+  block content
+    body#itemdata
+      aside.active-keys
+        p Active keys: #{itemKeys.length}
+        - var i = 0
+        each item in items
+          div(id='item:'+item._id)
+            button.btn.btn-xs.btn-info.edit Edit
+            button.btn.btn-xs.btn-danger.delete Delete
+            p.item #{item.Name}
+            - i++
+
+        button.btn.btn-xs.btn-primary.new New
+        button.btn.btn-xs.btn-primary.clear Clear 
+
+      form(action="itemdata/new" method="post")
+        h4#mode-display Create New Item
+        - var inputs = [['Images', 'text', true], ['Name', 'text', false], ['Date', 'text', false], ['Description', 'textarea', false], ['Link', 'text', false], ['Status', 'text', false], ['Type', 'text', false], ['Parent', 'text', false], ['Technologies:Main', 'text', true], ['Technologies:Secondary', 'text', true], ['Team:Name', 'text', false], ['Team:Image', 'text', false], ['Team:Site', 'text', false], ['Team:Members', 'text', true]]
+        - for(var i = 0; i < inputs.length; i++)
+          +createInput(inputs[i][0], inputs[i][1], inputs[i][2])
+        .container#Extended
+          p Extended
+          | True 
+          input(type="radio" name="Extended" value="true")
+          br
+          | False 
+          input(type="radio" name="Extended" value="false")
+        input(type="hidden" name="mode" value="new" id="mode")
+        input.btn.btn-primary(type="submit")
+
+    mixin createInput(fieldName, fieldType, multi=false)
+      .container(id=fieldName)
+        p #{fieldName}
+        - if (fieldType === "textarea")
+          textarea(name=fieldName class=fieldName rows=5 cols=50)
         - else
-          .container(id=field)
-            input(type="text" name=field)
-      input(type="hidden" name="mode" value="new" id="mode")
-      br
-      br
-      input.btn.btn-primary(type="submit")
-      br
-      br
-  script(type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js")
-  script(type="text/javascript" src="/javascripts/form.js")
+          input(type=fieldType name=fieldName class=fieldName)
+        - if (multi)
+          .btn.btn-xs.btn-success.newfield Add
+  
+    script(type="text/javascript" src="/javascripts/form.js")

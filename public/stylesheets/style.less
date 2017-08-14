@@ -1,34 +1,18 @@
-@cyan-cont: #00bdce;
-@oran-cont: #e33f00;
-@light-shade: #dadad2;
-@dark-shade: #333333;
-@std-bg: #060a10;
-@nav-secondary: rgba(0, 0, 0, 0.8);
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
 
-body {
-  font: 14px "Muli", Helvetica, Arial, sans-serif;
-  background-color: @std-bg;
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
+@import 'vendors/reset';
+@import 'vendors/bootstrap';
 
-.no-js #loading {
-  display: none;
-}
+@import 'base/base';
+@import 'base/typography';
 
-a {
-  color: @light-shade;
-  font-weight: 300;
-  &:hover, &:focus {
-    text-decoration:none;
-    color: white;
-  }
-}
+@import 'layout/navigation';
 
-h1, h2, h3, h4, h5, h6, a {
-  font-family: "Open Sans", Arial, sans-serif;
-}
+@import 'components/loading';
 
+<<<<<<< HEAD
 .align-center {
   position: absolute;
   top: 50%;
@@ -501,3 +485,9 @@ section#extended {
   overflow-x: auto;
   white-space: nowrap;
 }
+=======
+@import 'pages/index';
+@import 'pages/gallery';
+@import 'pages/item';
+@import 'pages/itemdata';
+>>>>>>> refs/remotes/origin/staging

@@ -8,5 +8,18 @@ block content
       h1= title
       p Welcome to #{title}
   main#index
+    .container-fluid
+      .row
+        #info-current
+          .col-lg-6.latest
+            img(src=latest.Image)
+            .overlay
+              h3
+                i Latest
+          .col-lg-6.upcoming
+            img(src=upcoming.Image)
+            .overlay
+              h3 
+                i Upcoming
     include custom.index.jade
   footer

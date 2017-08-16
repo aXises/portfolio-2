@@ -1,6 +1,61 @@
 $(document).ready ->
   'use strict'
   
+  prepAnimationItem = ->
+    $('.item-container').css
+      'padding-top': '50px'
+      'opacity': 0
+    return
+
+  navActive = null;
+  navToggle = ->
+    if !navActive
+      $('.nav-main, .nav-secondary').css 'left', '0px'
+      $('.nav-menu').css
+        left: '-80px'
+        opacity: '0'
+        cursor: 'default'
+    else
+      $('.nav-main, .nav-secondary').css 'left', ''
+      $('.nav-menu').css
+        left: ''
+        opacity: ''
+        cursor: ''
+    navActive = !navActive
+    return
+
+  setAside = ->
+    displayImg = $('#display img')
+    i = 0
+    while i < displayImg.length
+      img = $(displayImg[i])
+      img.next('aside').css 'height', img.height()
+      img.next('aside').css 'width', img.width()
+      i++
+    return
+
+  load = ->
+    $('body').css 'overflow-y', 'auto'
+    $('#loading').css
+      'opacity': 0
+      'pointer-events': 'none'
+    setTimeout (->
+      $('#loading').remove()
+      return
+    ), 500
+    $.getScript '../javascripts/animations.js', ->
+      if document.location.pathname == '/'
+        indexanimate()
+      else if document.location.pathname == '/Works'
+        galleryanimate()
+      else if document.location.pathname.split('/').pop().slice(0, -1) == 'item'
+        itemanimate()
+        galleryanimate()
+      return
+    setAside()
+    #setSlide()
+    return
+  
   if document.location.pathname.split('/').pop().slice(0, -1) == 'item'
     prepAnimationItem()
   imagesTotal = $('img').length
@@ -89,7 +144,6 @@ $(document).ready ->
     target.css 'color', ''
     return
 
-  navActive = undefined
   $('.nav-menu, .nav-close').click ->
     navToggle()
     return
@@ -107,58 +161,4 @@ $(document).ready ->
       return
     return
   return
-
-  prepAnimationItem = ->
-  $('.item-container').css
-    'padding-top': '50px'
-    'opacity': 0
-  return
-
-  navToggle = ->
-    if !navActive
-      $('.nav-main, .nav-secondary').css 'left', '0px'
-      $('.nav-menu').css
-        left: '-80px'
-        opacity: '0'
-        cursor: 'default'
-    else
-      $('.nav-main, .nav-secondary').css 'left', ''
-      $('.nav-menu').css
-        left: ''
-        opacity: ''
-        cursor: ''
-    navActive = !navActive
-    return
-
-  setAside = ->
-    displayImg = $('#display img')
-    i = 0
-    while i < displayImg.length
-      img = $(displayImg[i])
-      img.next('aside').css 'height', img.height()
-      img.next('aside').css 'width', img.width()
-      i++
-    return
-
-  load = ->
-    $('body').css 'overflow-y', 'auto'
-    $('#loading').css
-      'opacity': 0
-      'pointer-events': 'none'
-    setTimeout (->
-      $('#loading').remove()
-      return
-    ), 500
-    $.getScript '../javascripts/animations.js', ->
-      if document.location.pathname == '/'
-        indexanimate()
-      else if document.location.pathname == '/Works'
-        galleryanimate()
-      else if document.location.pathname.split('/').pop().slice(0, -1) == 'item'
-        itemanimate()
-        galleryanimate()
-      return
-    setAside()
-    setSlide()
-    return
 

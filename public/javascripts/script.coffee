@@ -1,11 +1,5 @@
 $(document).ready ->
   'use strict'
-  
-  prepAnimationItem = ->
-    $('.item-container').css
-      'padding-top': '50px'
-      'opacity': 0
-    return
 
   navActive = null;
   navToggle = ->
@@ -43,21 +37,9 @@ $(document).ready ->
       $('#loading').remove()
       return
     ), 500
-    $.getScript '../javascripts/animations.js', ->
-      if document.location.pathname == '/'
-        indexanimate()
-      else if document.location.pathname == '/Works'
-        galleryanimate()
-      else if document.location.pathname.split('/').pop().slice(0, -1) == 'item'
-        itemanimate()
-        galleryanimate()
-      return
     setAside()
-    #setSlide()
     return
   
-  if document.location.pathname.split('/').pop().slice(0, -1) == 'item'
-    prepAnimationItem()
   imagesTotal = $('img').length
   segment = 100 / imagesTotal
   loaded = 0

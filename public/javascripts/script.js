@@ -2,13 +2,7 @@
 (function() {
   $(document).ready(function() {
     'use strict';
-    var after, before, i, imagesTotal, load, loaded, mainNav, navActive, navToggle, prepAnimationItem, secNav, segment, setAside;
-    prepAnimationItem = function() {
-      $('.item-container').css({
-        'padding-top': '50px',
-        'opacity': 0
-      });
-    };
+    var after, before, i, imagesTotal, load, loaded, mainNav, navActive, navToggle, secNav, segment, setAside;
     navActive = null;
     navToggle = function() {
       if (!navActive) {
@@ -48,21 +42,8 @@
       setTimeout((function() {
         $('#loading').remove();
       }), 500);
-      $.getScript('../javascripts/animations.js', function() {
-        if (document.location.pathname === '/') {
-          indexanimate();
-        } else if (document.location.pathname === '/Works') {
-          galleryanimate();
-        } else if (document.location.pathname.split('/').pop().slice(0, -1) === 'item') {
-          itemanimate();
-          galleryanimate();
-        }
-      });
       setAside();
     };
-    if (document.location.pathname.split('/').pop().slice(0, -1) === 'item') {
-      prepAnimationItem();
-    }
     imagesTotal = $('img').length;
     segment = 100 / imagesTotal;
     loaded = 0;

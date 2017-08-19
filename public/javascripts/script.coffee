@@ -6,8 +6,10 @@ $(document).ready ->
     $('#globalnav').css 'width', '0%'
     $('#index .corners').css 
       'opacity': 0
-      'left': '-50px'
-    $('#index .text-container h6').css 'letter-spacing', '15px'
+      'left': '-150px'
+    $('#index .text-container h6').css 
+      'opacity': 0
+      'letter-spacing': '30px'
     return
 
   prepAnimations()
@@ -48,7 +50,11 @@ $(document).ready ->
       $('#index .corners').css 
         'opacity': ''
         'left': ''
-      $('#index .text-container h6').css 'letter-spacing', ''
+      setTimeout (->
+        $('#index .text-container h6').css 
+          'opacity': 1
+          'letter-spacing': ''
+      ), 450
       return
     ), 750
     setAside()

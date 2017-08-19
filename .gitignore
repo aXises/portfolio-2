@@ -88,3 +88,5 @@ $RECYCLE.BIN/
 views/custom.index.jade
 
 views/extensions/
+
+bower_components

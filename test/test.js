@@ -5,29 +5,35 @@ var app = require('../app');
 var database = require('../database');
 var origin = 'http://localhost:3000';
 var testLinks = ['/', '/works', '/itemdata'];
-var server = http.createServer(app);
-server.listen('3000');
 
 describe('App', function() {
   before(function(done) {
     this.timeout(20000);
     database.connectDb(function (err) {
       if (err) throw err;
+      var server = http.createServer(app);
+      server.listen('3000');
       done();
     });
   });
-  describe('Pages', function() {
-    it(origin + '/' + ' returns status code 200', function(done) {
-      request.get(origin, function(err, res, body) {
-        if (err) throw err;
-        console.log(err)
-        console.log(body)
-        assert.equal(200, res.statusCode);
+  describe('MongoDB', function() {
+    describe('Database connection', function() {
+      it('Connects to Mongo Atlas', function(done) {
+        assert.ok(database.getDb().serverConfig.isConnected());
         done();
       });
     });
   });
-  after(function () {
-    //server.close();
+  describe('Pages', function() {
+    for (var i = 0; i < testLinks.length; i++) {
+      var page = origin + testLinks[i];
+      it(page + ' returns status code 200', function(done) {
+        this.timeout(5000);
+        request.get(page, function(err, res) {
+          assert.equal(200, res.statusCode);
+          done();
+        });
+      });
+    }
   });
 });

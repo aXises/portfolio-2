@@ -54,7 +54,7 @@ $(document).ready ->
         $('#index .text-container h6').css 
           'opacity': 1
           'letter-spacing': ''
-      ), 450
+      ), 750
       return
     ), 750
     setAside()

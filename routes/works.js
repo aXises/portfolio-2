@@ -29,19 +29,19 @@ router.get('/:id', function(req, res, next) {
           fs.writeFile(file, 'h3 Extends:'+req.params.id, function (err) {
             if (err) throw err;
             extension = jade.renderFile(file);
-            render();
+            render('item');
           });
         }
         else {
           extension = jade.renderFile(file);
-          render();
+          render('item');
         }
       });
     } else {
-      render();
+      render('item');
     }
-    function render() {
-      res.render('item', {
+    function render(layout) {
+      res.render(layout, {
         pageContent: data,
         itemKeys: Object.keys(data),
         itemID: req.params.item,

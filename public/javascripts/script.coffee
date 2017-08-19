@@ -2,8 +2,14 @@ $(document).ready ->
   'use strict'
 
   prepAnimations = ->
+    $('body').addClass 'no-transitions'
     $('#globalnav').css 'width', '0%'
+    $('#index .corners').css 
+      'opacity': 0
+      'left': '-50px'
+    $('#index .text-container h6').css 'letter-spacing', '15px'
     return
+
   prepAnimations()
 
   navActive = null;
@@ -32,14 +38,19 @@ $(document).ready ->
     return
 
   load = ->
+    $('body').removeClass 'no-transitions'
     $('body').css 'overflow-y', 'auto'
-    $('#loading').css
+    $('#loader').css
       'opacity': 0
       'pointer-events': 'none'
     setTimeout (->
-      $('#loading').remove()
+      $('#loader').remove()
+      $('#index .corners').css 
+        'opacity': ''
+        'left': ''
+      $('#index .text-container h6').css 'letter-spacing', ''
       return
-    ), 500
+    ), 750
     setAside()
     return
   
@@ -61,7 +72,7 @@ $(document).ready ->
       loaded += segment
       after = loaded
       animateText before, after
-      $('#loading .progress-bar').css 'width', loaded + '%'
+      $('#loader .progress-bar').css 'width', loaded + '%'
     else
       $('.failed').append '<p>Fail to load: ' + image.img.src + '</p>'
     return
@@ -133,16 +144,16 @@ $(document).ready ->
     navToggle()
     return
 
-  $('.img-loading').hide()
+  $('.img-loader').hide()
 
   $('.slide img').click ->
     main = $('#main-img')
     main.attr 'src', $(this).attr('src')
-    $('.img-loading').show()
+    $('.img-loader').show()
     main.css 'opacity', 0
     main.imagesLoaded().done ->
       main.css 'opacity', 1
-      $('.img-loading').hide()
+      $('.img-loader').hide()
       return
     return
   return

@@ -4,7 +4,13 @@
     'use strict';
     var after, before, i, imagesTotal, load, loaded, mainNav, navActive, navToggle, prepAnimations, secNav, segment, setAside;
     prepAnimations = function() {
+      $('body').addClass('no-transitions');
       $('#globalnav').css('width', '0%');
+      $('#index .corners').css({
+        'opacity': 0,
+        'left': '-50px'
+      });
+      $('#index .text-container h6').css('letter-spacing', '15px');
     };
     prepAnimations();
     navActive = null;
@@ -34,14 +40,20 @@
       }
     };
     load = function() {
+      $('body').removeClass('no-transitions');
       $('body').css('overflow-y', 'auto');
-      $('#loading').css({
+      $('#loader').css({
         'opacity': 0,
         'pointer-events': 'none'
       });
       setTimeout((function() {
-        $('#loading').remove();
-      }), 500);
+        $('#loader').remove();
+        $('#index .corners').css({
+          'opacity': '',
+          'left': ''
+        });
+        $('#index .text-container h6').css('letter-spacing', '');
+      }), 750);
       setAside();
     };
     imagesTotal = $('img').length;
@@ -68,7 +80,7 @@
         loaded += segment;
         after = loaded;
         animateText(before, after);
-        $('#loading .progress-bar').css('width', loaded + '%');
+        $('#loader .progress-bar').css('width', loaded + '%');
       } else {
         $('.failed').append('<p>Fail to load: ' + image.img.src + '</p>');
       }
@@ -147,16 +159,16 @@
     $('.navtoggle').click(function() {
       navToggle();
     });
-    $('.img-loading').hide();
+    $('.img-loader').hide();
     $('.slide img').click(function() {
       var main;
       main = $('#main-img');
       main.attr('src', $(this).attr('src'));
-      $('.img-loading').show();
+      $('.img-loader').show();
       main.css('opacity', 0);
       main.imagesLoaded().done(function() {
         main.css('opacity', 1);
-        $('.img-loading').hide();
+        $('.img-loader').hide();
       });
     });
   });

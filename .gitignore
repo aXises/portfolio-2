@@ -88,6 +88,5 @@ $RECYCLE.BIN/
 *.png
 
 # Custom
-views/custom.index.jade
 views/extensions/
 public/stylesheets/style.css

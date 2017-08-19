@@ -1,25 +1,24 @@
 extends layout
 
 block content
-  header#index
-    div.image-container
-      img(src="https://images4.alphacoders.com/232/232854.jpg")
-    div.text-container
-      h1= title
-      p Welcome to #{title}
-  main#index
-    .container-fluid
-      .row
-        #info-current
-          .col-lg-6.latest
-            img(src=latest.Image)
-            .overlay
-              h3
-                i Latest
-          .col-lg-6.upcoming
-            img(src=upcoming.Image)
-            .overlay
-              h3 
-                i Upcoming
-    include custom.index.jade
-  footer
+  #index.container-fluid
+    header.row
+      .elem-container
+        .text-main
+          h1 AXISESIO
+        .corners
+          a.corner.cornertl(href="")
+            .text-container.hidden-xs
+              h6 ABOUT
+          a.corner.cornertr(href="")
+            .text-container.hidden-xs
+              h6 PORTFOLIO
+          a.corner.cornerbl(href="")
+            .text-container.hidden-xs
+              h6 DESIGN BLOG
+          a.corner.cornerbr(href="")
+            .text-container.hidden-xs
+              h6 SHOP
+
+  include custom.index.jade
+    main.row

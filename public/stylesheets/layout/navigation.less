@@ -1,142 +1,34 @@
-.nav-menu, nav {
+nav#globalnav {
   position: fixed;
-}
-
-.nav-menu {
-  width: 90px;
-  height: 20px;
-  left: -5px;
-  top: 50px;
-  border-radius: 2px;
-  padding-right: 10px;
-  background-size: 100% 200%;
-  background-color: rgba(255,255,255,0);
-  cursor: pointer;
-  z-index: 200;
-  font-weight: 800;
-  border-bottom: solid 0px transparent;
-  .transition.fast;
-  &:hover {
-    background-position: 0 100%;
-    border-bottom: solid 1px @cyan-const;
-  }
-  .text, span {
-    position: absolute;
+  width: 100%;
+  height: 100px;
+  z-index: 5;
+  background-color: @nav-primary;
+  .transition(0.45s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
+  .navtoggle {
+    font-size: 2.5em;
     left: 50px;
-    top: 20px;
-    opacity: 0;
-    pointer-events: none;
-    color: @light-shade;
-    .transition.fast;
-  }
-  &:hover > .text {
-    top: 0px;
-    opacity: 1;
-  }
-  span {
-    top: 0px;
-    left: 60px;
-    font-size: 20px;
-    opacity: 1;
-  }
-  &:hover > span {
-    top: -20px;
-    opacity: 0;
-  }
-}
-
-nav {
-  width: @nav-width;
-  height: 100%;
-  top: 0;
-  left: @nav-width*(-1);
-  z-index: 3;
-  .transition;
-  .icon-container {
-    position: relative;
-    width: 100%;
-    height: 50px;
     cursor: pointer;
-  }
-  .nav-main:extend(nav) {
-    background-color: rgba(49, 47, 47, 0.09);
+    width: 50px;
+    height: 50px;
+    .centerY;
+    .transition.vfast;
     &:hover {
-      background-color: rgba(0, 0, 0, 0.7);
+
     }
-    li {
-      .transition.vfast;
-      position: relative;
-      &:after {
-        .transition.vfast;
-        height: 2px;
-        width: 10px;
-        content: "";
-        position: absolute;
-        border-radius: 5px;
-        .centerXY;
-        margin-top: 15px;
-      }
-      &:hover {
-        background-color: @nav-secondary;
-        &:after {
-          width: 30px;
-        }
-      }
-    }
-    a.anchor li {
-      &:after {
-        background-color: @cyan-const;
-      }
-    }
-    a.page li {
-      &:after {
-        background-color: @oran-const;
-      }
-    }
-  }
-  .nav-secondary:extend(nav) {
-    width: @nav-width/5;
-    background-color: @nav-secondary;
-    z-index: 5;
-    .transition.slow;
-    .nav-close {
-      .icon-container;
+    i {
       position: absolute;
-      background-color: @nav-secondary;
-      top: 35px;
-      left: 0;
-      border-left: solid 0px transparent;
-      .transition.fast;
-      span {
-        font-size: 30px;
-        color: @light-shade;
-        .centerXY;
-      }
+      opacity: 1;
+      left: 0px;
+      .transition.vfast;
     }
-    ul {
-      margin-left: 0;
-      li {
-        position: relative;
-        border-radius: 2px;
-        .transition;
-        span {
-          color: @light-shade;
-          padding-bottom: 5px;
-          margin-bottom: 2px;
-          cursor: pointer;
-          .transition;
-        }
-      }
+    i.back {
+      left: 50px;
+      color: @light-shade;
     }
-  }
-  ul {
-    margin-left: 50px;
-    margin-top: 250px;
-    li {
-      padding: 10px 0 10px 0;
-      margin: 40px 0 40px 0;
-      font-size: 20px;
-      text-align: center;
+    .disable {
+      pointer-events: none;
+      opacity: 0;
     }
   }
 }

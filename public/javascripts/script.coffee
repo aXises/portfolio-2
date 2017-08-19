@@ -1,20 +1,31 @@
 $(document).ready ->
   'use strict'
 
+  prepAnimations = ->
+    $('body').addClass 'no-transitions'
+    $('#globalnav').css 'width', '0%'
+    $('#index .corners').css 
+      'opacity': 0
+      'left': '-150px'
+    $('#index .text-container h6').css 
+      'opacity': 0
+      'letter-spacing': '30px'
+    return
+
+  prepAnimations()
+
   navActive = null;
   navToggle = ->
     if !navActive
-      $('.nav-main, .nav-secondary').css 'left', '0px'
-      $('.nav-menu').css
-        left: '-80px'
-        opacity: '0'
-        cursor: 'default'
+      $('#globalnav').css 'width', '100%'
+      $('#globalnav .navtoggle .default, #globalnav .navtoggle .back').toggleClass 'disable'
+      $('#globalnav .navtoggle .default').css 'left', '-50px'
+      $('#globalnav .navtoggle .back').css 'left', '0px'
     else
-      $('.nav-main, .nav-secondary').css 'left', ''
-      $('.nav-menu').css
-        left: ''
-        opacity: ''
-        cursor: ''
+      $('#globalnav').css 'width', '0%'
+      $('#globalnav .navtoggle .default, #globalnav .navtoggle .back').toggleClass 'disable'
+      $('#globalnav .navtoggle .default').css 'left', ''
+      $('#globalnav .navtoggle .back').css 'left', ''
     navActive = !navActive
     return
 
@@ -29,14 +40,23 @@ $(document).ready ->
     return
 
   load = ->
+    $('body').removeClass 'no-transitions'
     $('body').css 'overflow-y', 'auto'
-    $('#loading').css
+    $('#loader').css
       'opacity': 0
       'pointer-events': 'none'
     setTimeout (->
-      $('#loading').remove()
+      $('#loader').remove()
+      $('#index .corners').css 
+        'opacity': ''
+        'left': ''
+      setTimeout (->
+        $('#index .text-container h6').css 
+          'opacity': 1
+          'letter-spacing': ''
+      ), 450
       return
-    ), 500
+    ), 750
     setAside()
     return
   
@@ -58,7 +78,7 @@ $(document).ready ->
       loaded += segment
       after = loaded
       animateText before, after
-      $('#loading .progress-bar').css 'width', loaded + '%'
+      $('#loader .progress-bar').css 'width', loaded + '%'
     else
       $('.failed').append '<p>Fail to load: ' + image.img.src + '</p>'
     return
@@ -126,20 +146,20 @@ $(document).ready ->
     target.css 'color', ''
     return
 
-  $('.nav-menu, .nav-close').click ->
+  $('.navtoggle').click ->
     navToggle()
     return
 
-  $('.img-loading').hide()
+  $('.img-loader').hide()
 
   $('.slide img').click ->
     main = $('#main-img')
     main.attr 'src', $(this).attr('src')
-    $('.img-loading').show()
+    $('.img-loader').show()
     main.css 'opacity', 0
     main.imagesLoaded().done ->
       main.css 'opacity', 1
-      $('.img-loading').hide()
+      $('.img-loader').hide()
       return
     return
   return

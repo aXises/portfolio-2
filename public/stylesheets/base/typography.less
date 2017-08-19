@@ -1,8 +1,14 @@
-body {
-  font: 14px "Muli", Helvetica, Arial, sans-serif;
+body,
+p {
+  font-family :"Lato", Helvetica, Arial, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, a {
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6 {
   font-family: "Muli", Helvetica, Arial, sans-serif;
 }
 
@@ -10,10 +16,25 @@ i {
   font-style: italic;
 }
 
+b {
+  font-weight: bold;
+}
+
 a {
   font-weight: 300;
   &:hover, &:focus {
     text-decoration:none;
-    color: white;
+  }
+  h6 {
+    font-family :"Lato", Helvetica, Arial, sans-serif;
+    letter-spacing: 5px;
+    font-size: 16px;
+    font-weight: 300;
+  }
+}
+
+.text-main {
+  h1 {
+    font-weight: 700;
   }
 }

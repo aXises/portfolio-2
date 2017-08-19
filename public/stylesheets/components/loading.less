@@ -1,11 +1,18 @@
-#loading {
+#loader {
+  &:extend(#index);
   position: fixed;
   width: 100vw;
   height: 100vh;
-  background-color: black;
+  background-color: @dark-shade !important;
   z-index: 1001;
   opacity: 1;
-  .transition;
+  display: inline-block;
+  .elem-container:extend(#index header .elem-container) {
+    .text-main:extend(#index header .elem-container .text-main) {
+      padding-right: 10px;
+    }
+  }
+  .transition.slow;
   .bar, 
   .progress-text,
   .failed {

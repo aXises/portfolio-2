@@ -1,20 +1,23 @@
 $(document).ready ->
   'use strict'
 
+  prepAnimations = ->
+    $('#globalnav').css 'width', '0%'
+    return
+  prepAnimations()
+
   navActive = null;
   navToggle = ->
     if !navActive
-      $('.nav-main, .nav-secondary').css 'left', '0px'
-      $('.nav-menu').css
-        left: '-80px'
-        opacity: '0'
-        cursor: 'default'
+      $('#globalnav').css 'width', '100%'
+      $('#globalnav .navtoggle .default, #globalnav .navtoggle .back').toggleClass 'disable'
+      $('#globalnav .navtoggle .default').css 'left', '-50px'
+      $('#globalnav .navtoggle .back').css 'left', '0px'
     else
-      $('.nav-main, .nav-secondary').css 'left', ''
-      $('.nav-menu').css
-        left: ''
-        opacity: ''
-        cursor: ''
+      $('#globalnav').css 'width', '0%'
+      $('#globalnav .navtoggle .default, #globalnav .navtoggle .back').toggleClass 'disable'
+      $('#globalnav .navtoggle .default').css 'left', ''
+      $('#globalnav .navtoggle .back').css 'left', ''
     navActive = !navActive
     return
 
@@ -126,7 +129,7 @@ $(document).ready ->
     target.css 'color', ''
     return
 
-  $('.nav-menu, .nav-close').click ->
+  $('.navtoggle').click ->
     navToggle()
     return
 

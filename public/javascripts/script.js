@@ -2,23 +2,23 @@
 (function() {
   $(document).ready(function() {
     'use strict';
-    var after, before, i, imagesTotal, load, loaded, mainNav, navActive, navToggle, secNav, segment, setAside;
+    var after, before, i, imagesTotal, load, loaded, mainNav, navActive, navToggle, prepAnimations, secNav, segment, setAside;
+    prepAnimations = function() {
+      $('#globalnav').css('width', '0%');
+    };
+    prepAnimations();
     navActive = null;
     navToggle = function() {
       if (!navActive) {
-        $('.nav-main, .nav-secondary').css('left', '0px');
-        $('.nav-menu').css({
-          left: '-80px',
-          opacity: '0',
-          cursor: 'default'
-        });
+        $('#globalnav').css('width', '100%');
+        $('#globalnav .navtoggle .default, #globalnav .navtoggle .back').toggleClass('disable');
+        $('#globalnav .navtoggle .default').css('left', '-50px');
+        $('#globalnav .navtoggle .back').css('left', '0px');
       } else {
-        $('.nav-main, .nav-secondary').css('left', '');
-        $('.nav-menu').css({
-          left: '',
-          opacity: '',
-          cursor: ''
-        });
+        $('#globalnav').css('width', '0%');
+        $('#globalnav .navtoggle .default, #globalnav .navtoggle .back').toggleClass('disable');
+        $('#globalnav .navtoggle .default').css('left', '');
+        $('#globalnav .navtoggle .back').css('left', '');
       }
       navActive = !navActive;
     };
@@ -144,7 +144,7 @@
       });
       target.css('color', '');
     });
-    $('.nav-menu, .nav-close').click(function() {
+    $('.navtoggle').click(function() {
       navToggle();
     });
     $('.img-loading').hide();

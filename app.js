@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var lessMiddleware = require('less-middleware');
 var mocha = require('mocha');
+var coffeeScript = require('coffeescript');
 
 var app = express();
 

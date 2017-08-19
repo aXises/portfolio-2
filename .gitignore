@@ -26,6 +26,7 @@ build/Release
 # Dependency directories
 node_modules
 jspm_packages
+bower_components
 
 # Optional npm cache directory
 .npm
@@ -85,8 +86,8 @@ $RECYCLE.BIN/
 *.lnk
 .vscode/settings.json
 *.png
+
+# Custom
 views/custom.index.jade
-
 views/extensions/
-
-bower_components
+public/stylesheets/style.css

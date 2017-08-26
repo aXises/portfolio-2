@@ -11,24 +11,25 @@ $(document).ready ->
       'opacity': 0
       'letter-spacing': '30px'
     return
-
   prepAnimations()
 
   navActive = null;
+
   navToggle = ->
+    $('#globalnav .navtoggle .default, #globalnav .navtoggle .back').toggleClass 'disable'
     if !navActive
       $('#globalnav').css 'width', '100%'
-      $('#globalnav .navtoggle .default, #globalnav .navtoggle .back').toggleClass 'disable'
       $('#globalnav .navtoggle .default').css 'left', '-50px'
       $('#globalnav .navtoggle .back').css 'left', '0px'
+      $('#globalnav .buttonContainer').fadeIn();
     else
       $('#globalnav').css 'width', '0%'
-      $('#globalnav .navtoggle .default, #globalnav .navtoggle .back').toggleClass 'disable'
       $('#globalnav .navtoggle .default').css 'left', ''
       $('#globalnav .navtoggle .back').css 'left', ''
+      $('#globalnav .buttonContainer').fadeOut();
     navActive = !navActive
     return
-
+  
   setAside = ->
     displayImg = $('#display img')
     i = 0
@@ -90,67 +91,12 @@ $(document).ready ->
     setAside()
     return
 
-  $('#display img').hover (->
-    $(this).next('aside').css 'opacity', '1'
-    $(this).css
-      'transform': 'scale(1.01)'
-      'filter': 'blur(2px)'
-    return
-  ), ->
-    $(this).next('aside').css 'opacity', ''
-    $(this).css
-      'transform': ''
-      'filter': ''
-    return
-
   $('nav a').click (event) ->
-    redirect = ->
-      $('body').fadeOut 750, ->
-        if pageHash != ''
-          window.location = '/' + pageHash
-        else
-          window.location = pageHref
-        return
-      return
-    event.preventDefault()
-    pageHash = @hash
-    pageHref = @href
-    if pageHash.charAt(0) == '#'
-      if window.location.pathname == '/'
-        $('html, body').animate { scrollTop: $(pageHash).offset().top }, 800, ->
-          window.location.hash = pageHash
-          return
-      else
-        pageHash = @hash
-        redirect()
-    else
-      pageHref = @href
-      redirect()
-    return
-
-  mainNav = $('.nav-main ul li')
-  secNav = $('.nav-secondary ul li span')
-  i = 0
-  while i < mainNav.length
-    $(mainNav[i]).attr 'target', '#nav-span' + i
-    $(secNav[i]).attr 'id', 'nav-span' + i
-    i++
-  $('.nav-main ul li').hover (->
-    target = $($(this).attr('target'))
-    target.parent().css 'background-color': '#dadad2'
-    target.css 'color', '#333333'
-    return
-  ), ->
-    target = $($(this).attr('target'))
-    target.parent().css 'background-color': ''
-    target.css 'color', ''
     return
 
   $('.navtoggle').click ->
     navToggle()
     return
-
-  $('.img-loader').hide()
 
   $('.slide img').click ->
     main = $('#main-img')

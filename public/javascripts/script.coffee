@@ -122,5 +122,5 @@ $(document).ready ->
       $('.img-loader').hide()
       return
     return
-  return
 
+  return

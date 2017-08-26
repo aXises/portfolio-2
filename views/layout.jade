@@ -30,6 +30,11 @@ html
       .navtoggle
         i.ion-navicon.default
         i.ion-ios-arrow-back.back.disable
+      .buttonContainer
+        - var links = [['About', 'about'], ['Portfolio', 'portfolio'], ['Home', '/'], ['Design Blog', 'designblog'], ['Shop', 'shop']]
+        each link in links
+          a(href=link[1])
+            h6 #{link[0]}
     block content
     script(type="text/javascript" src="/bower_components/move.js/move.min.js")
     script(type="text/javascript" src="/bower_components/imagesloaded/imagesloaded.pkgd.min.js")

@@ -16,6 +16,7 @@ var database = require('./database');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var works = require('./routes/works');
+var portfolio  = require('./routes/portfolio');
 
 // middleware setup
 app.use(lessMiddleware(__dirname + '/public'));
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/Works', works);
+app.use('/portfolio', portfolio);
 
 // set environment
 if (app.get('env') === 'development') {

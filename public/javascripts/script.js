@@ -103,6 +103,20 @@
     $('.navtoggle').click(function() {
       navToggle();
     });
+    $('#latest, #featured, #upcoming').hover(function() {
+      $(this).find('img').css('transform', 'scale(1.02)');
+      return $(this).find('.info').css('opacity', '1');
+    }, function() {
+      $(this).find('img').css('transform', '');
+      return $(this).find('.info').css('opacity', '');
+    });
+    $('#portfolio .item a').hover(function() {
+      $(this).find('img').css('transform', 'scale(1.02)');
+      return $(this).find('aside').css('opacity', '1');
+    }, function() {
+      $(this).find('img').css('transform', '');
+      return $(this).find('aside').css('opacity', '');
+    });
     $('.slide img').click(function() {
       var main;
       main = $('#main-img');

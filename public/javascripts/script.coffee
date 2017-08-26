@@ -98,6 +98,20 @@ $(document).ready ->
     navToggle()
     return
 
+  $('#latest, #featured, #upcoming').hover ->
+    $(this).find('img').css 'transform', 'scale(1.02)'
+    $(this).find('.info').css 'opacity', '1'
+  , -> 
+    $(this).find('img').css 'transform', ''
+    $(this).find('.info').css 'opacity', ''
+
+  $('#portfolio .item a').hover ->
+    $(this).find('img').css 'transform', 'scale(1.02)'
+    $(this).find('aside').css 'opacity', '1'
+  , -> 
+    $(this).find('img').css 'transform', ''
+    $(this).find('aside').css 'opacity', ''
+
   $('.slide img').click ->
     main = $('#main-img')
     main.attr 'src', $(this).attr('src')

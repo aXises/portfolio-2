@@ -9,15 +9,15 @@ html
           div(id='item:'+item._id)
             button.btn.btn-xs.btn-info.edit Edit
             button.btn.btn-xs.btn-danger.delete Delete
-            p.item #{item.Name}
+            p.item #{item.name}
             - i++
 
         button.btn.btn-xs.btn-primary.new New
         button.btn.btn-xs.btn-primary.clear Clear 
 
-      form(action="itemdata/new" method="post")
+      form(action="/itemdata/new" method="post")
         h4#mode-display Create New Item
-        - var inputs = [['Images', 'text', true], ['Name', 'text', false], ['Date', 'text', false], ['Description', 'textarea', false], ['Link', 'text', false], ['Status', 'text', false], ['Type', 'text', false], ['Parent', 'text', false], ['Technologies:Main', 'text', true], ['Technologies:Secondary', 'text', true], ['Team:Name', 'text', false], ['Team:Image', 'text', false], ['Team:Site', 'text', false], ['Team:Members', 'text', true]]
+        - var inputs = [['Images', 'text', true], ['Name', 'text', false], ['Date', 'text', false], ['Description', 'textarea', false], ['Link', 'text', false], ['Status', 'text', false], ['Type', 'text', false], ['Technologies', 'text', true]]
         - for(var i = 0; i < inputs.length; i++)
           +createInput(inputs[i][0], inputs[i][1], inputs[i][2])
         .container#Extended
@@ -27,6 +27,12 @@ html
           br
           | False 
           input(type="radio" name="Extended" value="false")
+        .container#partOfCollection
+          p Collections
+          - for(var i = 0; i < collections.length; i++)
+            p #{collections[i].name}
+            input(type="checkbox" name="collection", value=collections[i]._id)
+            
         input(type="hidden" name="mode" value="new" id="mode")
         input.btn.btn-primary(type="submit")
 
@@ -40,4 +46,4 @@ html
         - if (multi)
           .btn.btn-xs.btn-success.newfield Add
   
-    script(type="text/javascript" src="/javascripts/form.js")
+    script(type="text/javascript" src="/javascripts/itemform.js")

@@ -17,11 +17,11 @@ html
 
       form(action="/itemdata/new" method="post")
         h4#mode-display Create New Item
-        - var inputs = [['Images', 'text', true], ['Name', 'text', false], ['Date', 'text', false], ['Description', 'textarea', false], ['Link', 'text', false], ['Status', 'text', false], ['Type', 'text', false], ['Technologies', 'text', true]]
+        - var inputs = [['images', 'text', true], ['name', 'text', false], ['date', 'text', false], ['description', 'textarea', false], ['link', 'text', false], ['status', 'text', false], ['type', 'text', false], ['technologies', 'text', true]]
         - for(var i = 0; i < inputs.length; i++)
           +createInput(inputs[i][0], inputs[i][1], inputs[i][2])
         .container#Extended
-          p Extended
+          p Extended Page
           | True 
           input(type="radio" name="Extended" value="true")
           br

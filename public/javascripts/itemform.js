@@ -9,7 +9,7 @@
       i = 0;
       while (i < fields.length) {
         type = $(fields[i]).attr('type');
-        if (type === 'hidden' || type === 'submit' || type === 'radio') {
+        if (type === 'hidden' || type === 'submit' || type === 'radio' || type === 'checkbox') {
 
         } else {
           $(fields[i]).val('');
@@ -21,8 +21,21 @@
       }
     };
     insertFields = function(data) {
-      var dataKeys, i, j, key, keyData, keyData_2, key_2;
+      var checkbox, dataKeys, i, id, j, k, key, keyData, keyData_2, key_2, l, len, len1, ref, ref1;
       dataKeys = Object.keys(data);
+      if (data.collection) {
+        ref = data.collection;
+        for (k = 0, len = ref.length; k < len; k++) {
+          id = ref[k];
+          ref1 = $('#partOfCollection input');
+          for (l = 0, len1 = ref1.length; l < len1; l++) {
+            checkbox = ref1[l];
+            if (id === $(checkbox).val()) {
+              $(checkbox).prop('checked', true);
+            }
+          }
+        }
+      }
       i = 0;
       while (i < dataKeys.length) {
         key = dataKeys[i];

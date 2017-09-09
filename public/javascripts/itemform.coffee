@@ -6,7 +6,7 @@ $(document).ready ->
     i = 0
     while i < fields.length
       type = $(fields[i]).attr('type')
-      if type == 'hidden' or type == 'submit' or type == 'radio'
+      if type == 'hidden' or type == 'submit' or type == 'radio' or type == 'checkbox'
       else
         $(fields[i]).val ''
       if $(fields[i]).attr('extra')
@@ -16,6 +16,11 @@ $(document).ready ->
 
   insertFields = (data) ->
     dataKeys = Object.keys(data)
+    if data.collection
+      for id in data.collection
+        for checkbox in $('#partOfCollection input')
+          if id == $(checkbox).val()
+            $(checkbox).prop('checked', true)
     i = 0
     while i < dataKeys.length
       key = dataKeys[i]

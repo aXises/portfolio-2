@@ -74,12 +74,13 @@
       $('#mode-display').text('Editing ' + parentId);
       $('#mode').attr('value', parentId.split(':')[1]);
       $.ajax({
-        url: '/itemdata/edit',
+        url: '/itemdata/getItem',
         data: {
           'id': parentId.split(':')[1]
         },
         type: 'POST',
         success: function(data) {
+          console.log(data);
           clearFields();
           insertFields(data);
         }

@@ -5,12 +5,13 @@
     hasProp = {}.hasOwnProperty;
 
   baseItem = (function() {
-    function baseItem(_id, name, status, type, link) {
+    function baseItem(_id, name, status, type, link, description) {
       this._id = _id;
       this.name = name;
       this.status = status;
       this.type = type;
       this.link = link;
+      this.description = description;
     }
 
     return baseItem;
@@ -20,13 +21,29 @@
   item = (function(superClass) {
     extend(item, superClass);
 
-    function item() {
-      return item.__super__.constructor.apply(this, arguments);
+    function item(_id, name, status, type, link, description, date, technologies, images) {
+      this._id = _id;
+      this.name = name;
+      this.status = status;
+      this.type = type;
+      this.link = link;
+      this.description = description;
+      this.date = date;
+      this.technologies = technologies;
+      this.images = images;
+      item.__super__.constructor.call(this, this._id, this.name, this.status, this.type, this.link, this.description);
+      this.itemType = 'item';
+      this.collection = [];
     }
 
     item.prototype.setCollection = function(collection) {
       collection.addItem(this._id);
-      this.collection = collection._id;
+      return this.collection.push(collection._id);
+    };
+
+    item.prototype.setTeam = function(team) {
+      this.team = team._id;
+      return team.addItem(this._id);
     };
 
     return item;
@@ -36,18 +53,29 @@
   collection = (function(superClass) {
     extend(collection, superClass);
 
-    function collection(_id, name, status, type, link) {
+    function collection(_id, name, status, type, link, description, image, hasItems) {
       this._id = _id;
       this.name = name;
       this.status = status;
       this.type = type;
       this.link = link;
-      collection.__super__.constructor.call(this, this._id, this.name, this.status, this.type, this.link);
-      this.childrens = [];
+      this.description = description;
+      this.image = image;
+      this.hasItems = hasItems;
+      collection.__super__.constructor.call(this, this._id, this.name, this.status, this.type, this.link, this.description);
+      this.itemType = 'collection';
+      if (!this.hasItems) {
+        this.hasItems = [];
+      }
     }
 
     collection.prototype.addItem = function(items) {
-      this.childrens.push(items);
+      console.log('additemmethod');
+      return this.hasItems.push(items);
+    };
+
+    collection.prototype.setTeam = function(team) {
+      return team.addCollection(this._id);
     };
 
     return collection;
@@ -55,23 +83,39 @@
   })(baseItem);
 
   team = (function() {
-    function team(name, logo, members1, site) {
+    function team(_id, name, logo, members1, site, description) {
+      this._id = _id;
       this.name = name;
       this.logo = logo;
       this.members = members1;
       this.site = site;
+      this.description = description;
+      this.itemType = 'team';
+      this.hasItems = [];
+      this.hasCollections = [];
     }
 
     team.prototype.addMember = function(members) {
-      var i, len, member;
-      if (typeof (members === 'object')) {
+      var i, len, member, results;
+      console.log(members, typeof members);
+      if (typeof members === 'object') {
+        results = [];
         for (i = 0, len = members.length; i < len; i++) {
           member = members[i];
-          this.members.push(member);
+          results.push(this.members.push(member));
         }
+        return results;
       } else {
-        this.members.push(member);
+        return this.members.push(members);
       }
+    };
+
+    team.prototype.addItem = function(items) {
+      return this.hasItems.push(items);
+    };
+
+    team.prototype.addCollection = function(collection) {
+      return this.hasCollections.push(collection);
     };
 
     return team;
@@ -80,7 +124,8 @@
 
   module.exports = {
     item: item,
-    collection: collection
+    collection: collection,
+    team: team
   };
 
 }).call(this);

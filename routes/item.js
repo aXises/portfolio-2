@@ -37,7 +37,6 @@
     }
 
     item.prototype.setCollection = function(collection) {
-      console.log('setting', collection);
       collection.addItem(this._id);
       if (!this.collection.includes(collection._id)) {
         return this.collection.push(collection._id);
@@ -73,8 +72,8 @@
       }
     }
 
-    collection.prototype.addItem = function(items) {
-      return this.hasItems.push(items);
+    collection.prototype.addItem = function(item) {
+      return this.hasItems.push(item);
     };
 
     collection.prototype.setTeam = function(team) {

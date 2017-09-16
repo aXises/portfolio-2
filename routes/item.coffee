@@ -8,7 +8,6 @@ class item extends baseItem
     @collection = []
 
   setCollection: (collection) ->
-    console.log 'setting', collection
     collection.addItem(@_id)
     if !@collection.includes(collection._id) then @collection.push(collection._id)
 
@@ -23,8 +22,8 @@ class collection extends baseItem
     if !@hasItems
       @hasItems = []
     
-  addItem: (items) ->
-    @hasItems.push(items)
+  addItem: (item) ->
+    @hasItems.push(item)
 
   setTeam: (team) ->
     team.addCollection(@_id)

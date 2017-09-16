@@ -53,8 +53,17 @@ router.post '/deleteItem', (req, res, next) ->
 router.post '/deleteCollection', (req, res, next) ->
   db = database.getDb()
   db.collection('collection').find({'_id':database.getId(req.body.id)}).toArray (err, result) ->
-    db.collection('collection').remove {'_id':database.getId(req.body.id)}, ->
-      res.redirect 'back'
+    if result[0].hasItems.length > 0
+      for itemIds in result[0].hasItems
+        db.collection('item').find({'_id':database.getId(itemIds)}).toArray (err, result) ->
+          console.log result[0]
+          currentItem = new item.item result[0]._id, result[0].name, result[0].status, result[0].type, result[0].link, result[0].description, result[0].date, result[0].technologies, result[0].images
+          db.collection('item').update {'_id':database.getId(result[0]._id)}, currentItem
+      db.collection('collection').remove {'_id':database.getId(req.body.id)}, ->
+        res.redirect 'back'
+    else
+      db.collection('collection').remove {'_id':database.getId(req.body.id)}, ->
+        res.redirect 'back'
 
 router.get '/', (req, res, next) ->
   database.getDb().collection('item').find({}).toArray (err, items) ->

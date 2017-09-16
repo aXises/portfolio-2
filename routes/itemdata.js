@@ -112,11 +112,34 @@
     return db.collection('collection').find({
       '_id': database.getId(req.body.id)
     }).toArray(function(err, result) {
-      return db.collection('collection').remove({
-        '_id': database.getId(req.body.id)
-      }, function() {
-        return res.redirect('back');
-      });
+      var i, itemIds, len, ref;
+      if (result[0].hasItems.length > 0) {
+        ref = result[0].hasItems;
+        for (i = 0, len = ref.length; i < len; i++) {
+          itemIds = ref[i];
+          db.collection('item').find({
+            '_id': database.getId(itemIds)
+          }).toArray(function(err, result) {
+            var currentItem;
+            console.log(result[0]);
+            currentItem = new item.item(result[0]._id, result[0].name, result[0].status, result[0].type, result[0].link, result[0].description, result[0].date, result[0].technologies, result[0].images);
+            return db.collection('item').update({
+              '_id': database.getId(result[0]._id)
+            }, currentItem);
+          });
+        }
+        return db.collection('collection').remove({
+          '_id': database.getId(req.body.id)
+        }, function() {
+          return res.redirect('back');
+        });
+      } else {
+        return db.collection('collection').remove({
+          '_id': database.getId(req.body.id)
+        }, function() {
+          return res.redirect('back');
+        });
+      }
     });
   });
 

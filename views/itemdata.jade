@@ -15,25 +15,17 @@ html
         button.btn.btn-xs.btn-primary.new New
         button.btn.btn-xs.btn-primary.clear Clear 
 
-      form(action="/itemdata/new" method="post")
+      form(action="/itemdata/newItem" method="post")
         h4#mode-display Create New Item
         - var inputs = [['images', 'text', true], ['name', 'text', false], ['date', 'text', false], ['description', 'textarea', false], ['link', 'text', false], ['status', 'text', false], ['type', 'text', false], ['technologies', 'text', true]]
         - for(var i = 0; i < inputs.length; i++)
           +createInput(inputs[i][0], inputs[i][1], inputs[i][2])
-        .container#Extended
-          p Extended Page
-          | True 
-          input(type="radio" name="Extended" value="true")
-          br
-          | False 
-          input(type="radio" name="Extended" value="false")
         .container#partOfCollection
           p Collections
           - for(var i = 0; i < collections.length; i++)
             p #{collections[i].name}
-            input(type="checkbox" name="collection", value=collections[i]._id)
+            input(type="radio" name="collection", value=collections[i]._id)
             
-        input(type="hidden" name="mode" value="new" id="mode")
         input.btn.btn-primary(type="submit")
 
     mixin createInput(fieldName, fieldType, multi=false)

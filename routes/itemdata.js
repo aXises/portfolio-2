@@ -11,10 +11,10 @@
   item = require('../routes/item');
 
   router.post('/newItem', function(req, res, next) {
-    var db, newItem, updateCollectionSet;
+    var db, newItem;
     db = database.getDb();
     newItem = new item.item(database.getId(), req.body.name, req.body.status, req.body.type, req.body.link, req.body.description, req.body.date, req.body.technologies, req.body.images);
-    db.collection('collection').find({
+    return db.collection('collection').find({
       '_id': database.getId(req.body.collection)
     }).toArray(function(err, result) {
       var currentCollection;
@@ -23,22 +23,19 @@
       db.collection('collection').update({
         '_id': database.getId(req.body.collection)
       }, currentCollection);
-      db.collection('item').insert(newItem);
+      return db.collection('item').insert(newItem, function() {
+        return res.redirect('back');
+      });
+    });
+  });
+
+  router.post('/newCollection', function(req, res, next) {
+    var db, newCollection;
+    db = database.getDb();
+    newCollection = new item.collection(database.getId(), req.body.name, req.body.status, req.body.type, req.body.link, req.body.description, req.body.image, req.body.items, req.body.showcase);
+    return db.collection('collection').insert(newCollection, function() {
       return res.redirect('back');
     });
-    return updateCollectionSet = function() {
-      return db.collection('collection').find({
-        '_id': database.getId(req.body.collection)
-      }).toArray(function(err, result) {
-        var currentCollection;
-        currentCollection = new item.collection(result[0]._id, result[0].name, result[0].status, result[0].type, result[0].link, result[0].description, result[0].image, result[0].hasItems);
-        newItem.setCollection(currentCollection);
-        db.collection('item').insert(newItem);
-        return db.collection('collection').update({
-          '_id': database.getId(req.body.collection)
-        }, currentCollection);
-      });
-    };
   });
 
   router.post('/getItem', function(req, res, next) {
@@ -73,9 +70,9 @@
     return db.collection('item').find({
       '_id': database.getId(req.body.id)
     }).toArray(function(err, result) {
-      var belongsTo;
+      var itemId;
       if (result[0].collection[0]) {
-        belongsTo = result[0].collection[0];
+        itemId = req.body.id;
         return db.collection('collection').find({
           '_id': database.getId(result[0].collection[0])
         }).toArray(function(err, result) {
@@ -84,13 +81,13 @@
           ref = result[0].hasItems;
           for (i = 0, len = ref.length; i < len; i++) {
             id = ref[i];
-            if (belongsTo !== id) {
+            if (itemId !== String(id)) {
               updatedItemList.push(id);
             }
           }
           currentCollection = new item.collection(result[0]._id, result[0].name, result[0].status, result[0].type, result[0].link, result[0].description, result[0].image, updatedItemList);
           return db.collection('collection').update({
-            '_id': database.getId(result[0].collection[0])
+            '_id': database.getId(result[0]._id)
           }, currentCollection, function() {
             return db.collection('item').remove({
               '_id': database.getId(req.body.id)
@@ -115,7 +112,7 @@
     return db.collection('collection').find({
       '_id': database.getId(req.body.id)
     }).toArray(function(err, result) {
-      return db.collection('item').remove({
+      return db.collection('collection').remove({
         '_id': database.getId(req.body.id)
       }, function() {
         return res.redirect('back');

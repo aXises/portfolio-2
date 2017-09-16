@@ -29,9 +29,16 @@ router.post '/getItem', (req, res, next) ->
     return
   return
 
-router.post '/updateItem', (req, res, next) ->
+router.post '/updateItem/:id', (req, res, next) ->
   db = database.getDb()
-  console.log 'editing'
+  db.collection('item').find({'_id':database.getId(req.params.id)}).toArray (err, result) ->
+    editedItem = new item.item database.getId(req.params.id), req.body.name, req.body.status, req.body.type, req.body.link, req.body.description, req.body.date, req.body.technologies, req.body.images
+    db.collection('item').update {'_id':database.getId(req.params.id)}, editedItem, ->
+      res.redirect('back')
+
+router.post '/deleteItem', (req, res, next) ->
+  db = database.getDb()
+  db.collection('item').remove {'_id':database.getId(req.body.id)}
 
 router.get '/', (req, res, next) ->
   database.getDb().collection('item').find({}).toArray (err, items) ->

@@ -10,42 +10,40 @@
 
   item = require('../routes/item');
 
-  router.post('/new', function(req, res, next) {
-    var currentItem, db, i, id, insert, len, ref;
+  router.post('/newItem', function(req, res, next) {
+    var db, newItem, updateCollectionSet;
     db = database.getDb();
-    currentItem = new item.item(database.getId(), req.body.Name, req.body.Status, req.body.Type, req.body.Link, req.body.Description, req.body.Date, req.body.Technologies, req.body.Images);
-    if (typeof req.body.collection === 'object') {
-      ref = req.body.collection;
-      for (i = 0, len = ref.length; i < len; i++) {
-        id = ref[i];
-        db.collection('collection').find({
-          '_id': database.getId(id)
-        }).toArray(function(err, result) {
-          console.log(result);
-          return result[0].hasItems.push(currentItem._id);
-        });
-      }
-    } else {
-      db.collection('collection').find({
+    newItem = new item.item(database.getId(), req.body.name, req.body.status, req.body.type, req.body.link, req.body.description, req.body.date, req.body.technologies, req.body.images);
+    db.collection('collection').find({
+      '_id': database.getId(req.body.collection)
+    }).toArray(function(err, result) {
+      var currentCollection;
+      currentCollection = new item.collection(result[0]._id, result[0].name, result[0].status, result[0].type, result[0].link, result[0].description, result[0].image, result[0].hasItems);
+      newItem.setCollection(currentCollection);
+      db.collection('collection').update({
+        '_id': database.getId(req.body.collection)
+      }, currentCollection);
+      db.collection('item').insert(newItem);
+      return res.redirect('back');
+    });
+    updateCollectionSet = function() {
+      return db.collection('collection').find({
         '_id': database.getId(req.body.collection)
       }).toArray(function(err, result) {
         var currentCollection;
         currentCollection = new item.collection(result[0]._id, result[0].name, result[0].status, result[0].type, result[0].link, result[0].description, result[0].image, result[0].hasItems);
-        currentItem.setCollection(currentCollection);
-        console.log(currentItem);
-        return console.log(currentCollection);
+        newItem.setCollection(currentCollection);
+        db.collection('item').insert(newItem);
+        return db.collection('collection').update({
+          '_id': database.getId(req.body.collection)
+        }, currentCollection);
       });
-    }
-    insert = function(item, collection) {
-      db.collection('item').insert(item);
-      db.collection('collection').insert(collection);
     };
   });
 
   router.post('/getItem', function(req, res, next) {
     var db;
     db = database.getDb();
-    console.log('getting', req.body.id);
     db.collection('item').find({
       '_id': database.getId(req.body.id)
     }).toArray(function(err, result) {
@@ -53,10 +51,28 @@
     });
   });
 
-  router.post('/updateItem', function(req, res, next) {
+  router.post('/updateItem/:id', function(req, res, next) {
     var db;
     db = database.getDb();
-    return console.log('editing');
+    return db.collection('item').find({
+      '_id': database.getId(req.params.id)
+    }).toArray(function(err, result) {
+      var editedItem;
+      editedItem = new item.item(database.getId(req.params.id), req.body.name, req.body.status, req.body.type, req.body.link, req.body.description, req.body.date, req.body.technologies, req.body.images);
+      return db.collection('item').update({
+        '_id': database.getId(req.params.id)
+      }, editedItem, function() {
+        return res.redirect('back');
+      });
+    });
+  });
+
+  router.post('/deleteItem', function(req, res, next) {
+    var db;
+    db = database.getDb();
+    return db.collection('item').remove({
+      '_id': database.getId(req.body.id)
+    });
   });
 
   router.get('/', function(req, res, next) {

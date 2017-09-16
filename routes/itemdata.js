@@ -26,7 +26,7 @@
       db.collection('item').insert(newItem);
       return res.redirect('back');
     });
-    updateCollectionSet = function() {
+    return updateCollectionSet = function() {
       return db.collection('collection').find({
         '_id': database.getId(req.body.collection)
       }).toArray(function(err, result) {
@@ -44,10 +44,10 @@
   router.post('/getItem', function(req, res, next) {
     var db;
     db = database.getDb();
-    db.collection('item').find({
+    return db.collection('item').find({
       '_id': database.getId(req.body.id)
     }).toArray(function(err, result) {
-      res.send(result[0]);
+      return res.send(result[0]);
     });
   });
 
@@ -70,15 +70,49 @@
   router.post('/deleteItem', function(req, res, next) {
     var db;
     db = database.getDb();
-    return db.collection('item').remove({
+    return db.collection('item').find({
       '_id': database.getId(req.body.id)
+    }).toArray(function(err, result) {
+      var belongsTo;
+      if (result[0].collection[0]) {
+        belongsTo = result[0].collection[0];
+        return db.collection('collection').find({
+          '_id': database.getId(result[0].collection[0])
+        }).toArray(function(err, result) {
+          var currentCollection, i, id, len, ref, updatedItemList;
+          updatedItemList = [];
+          ref = result[0].hasItems;
+          for (i = 0, len = ref.length; i < len; i++) {
+            id = ref[i];
+            if (belongsTo !== id) {
+              updatedItemList.push(id);
+            }
+          }
+          currentCollection = new item.collection(result[0]._id, result[0].name, result[0].status, result[0].type, result[0].link, result[0].description, result[0].image, updatedItemList);
+          return db.collection('collection').update({
+            '_id': database.getId(result[0].collection[0])
+          }, currentCollection, function() {
+            return db.collection('item').remove({
+              '_id': database.getId(req.body.id)
+            }, function() {
+              return res.redirect('back');
+            });
+          });
+        });
+      } else {
+        return db.collection('item').remove({
+          '_id': database.getId(req.body.id)
+        }, function() {
+          return res.redirect('back');
+        });
+      }
     });
   });
 
   router.get('/', function(req, res, next) {
-    database.getDb().collection('item').find({}).toArray(function(err, items) {
-      database.getDb().collection('collection').find({}).toArray(function(err, collections) {
-        res.render('itemdata', {
+    return database.getDb().collection('item').find({}).toArray(function(err, items) {
+      return database.getDb().collection('collection').find({}).toArray(function(err, collections) {
+        return res.render('itemdata', {
           itemKeys: Object.keys(items),
           items: items,
           collectionKeys: Object.keys(collections),

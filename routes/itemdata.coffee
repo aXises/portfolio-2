@@ -50,6 +50,11 @@ router.post '/deleteItem', (req, res, next) ->
       db.collection('item').remove {'_id':database.getId(req.body.id)}, ->
         res.redirect 'back'
 
+router.post '/deleteCollection', (req, res, next) ->
+  db = database.getDb()
+  db.collection('collection').find({'_id':database.getId(req.body.id)}).toArray (err, result) ->
+    db.collection('item').remove {'_id':database.getId(req.body.id)}, ->
+      res.redirect 'back'
 router.get '/', (req, res, next) ->
   database.getDb().collection('item').find({}).toArray (err, items) ->
     database.getDb().collection('collection').find({}).toArray (err, collections) ->

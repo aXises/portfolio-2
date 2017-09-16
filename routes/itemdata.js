@@ -109,6 +109,20 @@
     });
   });
 
+  router.post('/deleteCollection', function(req, res, next) {
+    var db;
+    db = database.getDb();
+    return db.collection('collection').find({
+      '_id': database.getId(req.body.id)
+    }).toArray(function(err, result) {
+      return db.collection('item').remove({
+        '_id': database.getId(req.body.id)
+      }, function() {
+        return res.redirect('back');
+      });
+    });
+  });
+
   router.get('/', function(req, res, next) {
     return database.getDb().collection('item').find({}).toArray(function(err, items) {
       return database.getDb().collection('collection').find({}).toArray(function(err, collections) {

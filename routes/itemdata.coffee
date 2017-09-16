@@ -28,8 +28,17 @@ router.post '/updateItem/:id', (req, res, next) ->
   db = database.getDb()
   db.collection('item').find({'_id':database.getId(req.params.id)}).toArray (err, result) ->
     editedItem = new item.item database.getId(req.params.id), req.body.name, req.body.status, req.body.type, req.body.link, req.body.description, req.body.date, req.body.technologies, req.body.images
-    db.collection('item').update {'_id':database.getId(req.params.id)}, editedItem, ->
-      res.redirect 'back'
+    if req.body.collection
+      db.collection('collection').find({'_id':database.getId(req.body.collection)}).toArray (err, result) ->
+        currentCollection = new item.collection result[0]._id, result[0].name, result[0].status, result[0].type, result[0].link, result[0].description, result[0].image, result[0].hasItems
+        console.log currentCollection
+        editedItem.setCollection currentCollection
+        db.collection('collection').update {'_id':database.getId(req.body.collection)}, currentCollection, ->
+          db.collection('item').update {'_id':database.getId(req.params.id)}, editedItem, ->
+            res.redirect 'back'
+    else
+      db.collection('item').update {'_id':database.getId(req.params.id)}, editedItem, ->
+        res.redirect 'back'
 
 router.post '/deleteItem', (req, res, next) ->
   db = database.getDb()

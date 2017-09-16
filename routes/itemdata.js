@@ -56,11 +56,31 @@
     }).toArray(function(err, result) {
       var editedItem;
       editedItem = new item.item(database.getId(req.params.id), req.body.name, req.body.status, req.body.type, req.body.link, req.body.description, req.body.date, req.body.technologies, req.body.images);
-      return db.collection('item').update({
-        '_id': database.getId(req.params.id)
-      }, editedItem, function() {
-        return res.redirect('back');
-      });
+      if (req.body.collection) {
+        return db.collection('collection').find({
+          '_id': database.getId(req.body.collection)
+        }).toArray(function(err, result) {
+          var currentCollection;
+          currentCollection = new item.collection(result[0]._id, result[0].name, result[0].status, result[0].type, result[0].link, result[0].description, result[0].image, result[0].hasItems);
+          console.log(currentCollection);
+          editedItem.setCollection(currentCollection);
+          return db.collection('collection').update({
+            '_id': database.getId(req.body.collection)
+          }, currentCollection, function() {
+            return db.collection('item').update({
+              '_id': database.getId(req.params.id)
+            }, editedItem, function() {
+              return res.redirect('back');
+            });
+          });
+        });
+      } else {
+        return db.collection('item').update({
+          '_id': database.getId(req.params.id)
+        }, editedItem, function() {
+          return res.redirect('back');
+        });
+      }
     });
   });
 

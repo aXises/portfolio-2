@@ -3,34 +3,28 @@ router = express.Router()
 database = require '../routes/database'
 item = require '../routes/item'
 
-router.post '/new', (req, res, next) ->
+router.post '/newItem', (req, res, next) ->
   db = database.getDb()
-  currentItem = new item.item database.getId(), req.body.Name, req.body.Status, req.body.Type, req.body.Link, req.body.Description, req.body.Date, req.body.Technologies, req.body.Images
-  if typeof(req.body.collection) == 'object'
-    for id in req.body.collection
-      db.collection('collection').find({'_id':database.getId(id)}).toArray (err, result) ->
-        console.log(result)
-        result[0].hasItems.push(currentItem._id)
-  else
+  newItem = new item.item database.getId(), req.body.name, req.body.status, req.body.type, req.body.link, req.body.description, req.body.date, req.body.technologies, req.body.images
+  db.collection('collection').find({'_id':database.getId(req.body.collection)}).toArray (err, result) ->
+    currentCollection = new item.collection result[0]._id, result[0].name, result[0].status, result[0].type, result[0].link, result[0].description, result[0].image, result[0].hasItems
+    newItem.setCollection(currentCollection)
+    db.collection('collection').update({'_id':database.getId(req.body.collection)}, currentCollection)
+    db.collection('item').insert(newItem)
+    res.redirect('back')
+
+  updateCollectionSet = ->
     db.collection('collection').find({'_id':database.getId(req.body.collection)}).toArray (err, result) ->
-        #console.log(result)
-        currentCollection = new item.collection result[0]._id, result[0].name, result[0].status, result[0].type, result[0].link, result[0].description, result[0].image, result[0].hasItems
-        currentItem.setCollection(currentCollection)
-        console.log(currentItem)
-        console.log(currentCollection)
-        #db.collection('item').insert(currentItem)
-        #db.collection('collection').update({'_id':database.getId(req.body.collection)}, currentCollection)
-  insert = (item, collection) ->
-    db.collection('item').insert(item)
-    db.collection('collection').insert(collection)
-    return
+      currentCollection = new item.collection result[0]._id, result[0].name, result[0].status, result[0].type, result[0].link, result[0].description, result[0].image, result[0].hasItems
+      newItem.setCollection(currentCollection)
+      db.collection('item').insert(newItem)
+      db.collection('collection').update({'_id':database.getId(req.body.collection)}, currentCollection)
+
   return
 
 router.post '/getItem', (req, res, next) ->
   db = database.getDb()
-  console.log 'getting', req.body.id
   db.collection('item').find({'_id':database.getId(req.body.id)}).toArray (err, result) ->
-    #console.log result
     res.send(result[0])
     return
   return

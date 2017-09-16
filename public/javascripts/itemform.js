@@ -76,20 +76,21 @@
     });
     $('.new').click(function() {
       $('#mode-display').text('Create new item');
-      $('#mode').attr('value', 'new');
+      $('form').attr('action', 'itemdata/new');
     });
     $('.clear').click(function() {
       clearFields();
     });
     $('.edit').click(function() {
-      var parentId;
+      var itemId, parentId;
       parentId = $(this).parent().attr('id');
+      itemId = parentId.split(':')[1];
+      $('form').attr('action', 'itemdata/updateItem/' + itemId);
       $('#mode-display').text('Editing ' + parentId);
-      $('#mode').attr('value', parentId.split(':')[1]);
       $.ajax({
         url: '/itemdata/getItem',
         data: {
-          'id': parentId.split(':')[1]
+          'id': itemId
         },
         type: 'POST',
         success: function(data) {
@@ -103,7 +104,7 @@
       var parentId;
       parentId = $(this).parent().attr('id');
       $.ajax({
-        url: '/itemdata/delete',
+        url: '/itemdata/deleteItem',
         data: {
           'id': parentId.split(':')[1]
         },

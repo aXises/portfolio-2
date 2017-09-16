@@ -8,22 +8,22 @@ class item extends baseItem
     @collection = []
 
   setCollection: (collection) ->
+    console.log 'setting', collection
     collection.addItem(@_id)
-    @collection.push(collection._id)
+    if !@collection.includes(collection._id) then @collection.push(collection._id)
 
   setTeam: (team) ->
     @team = team._id
     team.addItem(@_id)
 
 class collection extends baseItem
-  constructor: (@_id, @name, @status, @type, @link, @description, @image, @hasItems) ->
+  constructor: (@_id, @name, @status, @type, @link, @description, @image, @hasItems, @showcase) ->
     super(@_id, @name, @status, @type, @link, @description)
     @itemType = 'collection'
     if !@hasItems
       @hasItems = []
     
   addItem: (items) ->
-    console.log 'additemmethod'
     @hasItems.push(items)
 
   setTeam: (team) ->

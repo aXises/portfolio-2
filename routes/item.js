@@ -37,8 +37,11 @@
     }
 
     item.prototype.setCollection = function(collection) {
+      console.log('setting', collection);
       collection.addItem(this._id);
-      return this.collection.push(collection._id);
+      if (!this.collection.includes(collection._id)) {
+        return this.collection.push(collection._id);
+      }
     };
 
     item.prototype.setTeam = function(team) {
@@ -53,7 +56,7 @@
   collection = (function(superClass) {
     extend(collection, superClass);
 
-    function collection(_id, name, status, type, link, description, image, hasItems) {
+    function collection(_id, name, status, type, link, description, image, hasItems, showcase) {
       this._id = _id;
       this.name = name;
       this.status = status;
@@ -62,6 +65,7 @@
       this.description = description;
       this.image = image;
       this.hasItems = hasItems;
+      this.showcase = showcase;
       collection.__super__.constructor.call(this, this._id, this.name, this.status, this.type, this.link, this.description);
       this.itemType = 'collection';
       if (!this.hasItems) {
@@ -70,7 +74,6 @@
     }
 
     collection.prototype.addItem = function(items) {
-      console.log('additemmethod');
       return this.hasItems.push(items);
     };
 

@@ -5,6 +5,9 @@ item = require '../routes/item'
 
 convertToArrayIfNot = (field) ->
   if typeof(field) != 'object' then return [field] else return field
+
+getDelta = (arr1, arr2) ->
+  return arr1.filter((x) => arr2.indexOf(x) == -1)
     
 router.post '/newItem', (req, res, next) ->
   db = database.getDb()
@@ -57,30 +60,58 @@ router.post '/newTeam', (req, res, next) ->
     res.redirect 'back'
 
 router.post '/update/:collection/:id', (req, res, next) ->
-  collection = database.getDb().collection(req.params.collection)
+  db = database.getDb()
+  collection = db.collection(req.params.collection)
 
-  updateItem = ->
+  updateItem = (itemId, data) ->
     return
 
-  updateCollection = ->
+  updateCollection = (collectionId, data) ->
     return
 
-  updateTeam = ->
-    req.body.hasCollections = convertToArrayIfNot(req.body.hasCollections)
-    req.body.hasItems = convertToArrayIfNot(req.body.hasItems)
-    collection.findOneAndUpdate(
-      {
-        '_id': database.getId(req.params.id)
-      },
-      {
-        $set: req.body
-      }
-    )
-
+  updateTeam = (teamId, data) ->
+    data.hasCollections = convertToArrayIfNot(data.hasCollections)
+    data.hasItems = convertToArrayIfNot(data.hasItems)
+    collection.find({'_id': database.getId(teamId)}).toArray (err, result) ->
+      if getDelta(data.hasItems, result[0].hasItems).length >= 1
+        itemDiff = getDelta(data.hasItems, result[0].hasItems)
+        for itemId in itemDiff
+          db.collection('item').findOneAndUpdate(
+            {
+              '_id': database.getId(itemId)
+            },
+            {
+              $set: {
+                'partOfTeam': req.params.id
+              }
+            }
+          )
+      else if getDelta(result[0].hasItems, data.hasItems).length >= 1
+        itemDiff = getDelta(result[0].hasItems, data.hasItems)
+        for itemId in itemDiff
+          db.collection('item').findOneAndUpdate(
+            {
+              '_id': database.getId(itemId)
+            },
+            {
+              $set: {
+                'partOfTeam': ''
+              }
+            }
+          )
+      collection.findOneAndUpdate(
+        {
+          '_id': database.getId(req.params.id)
+        },
+        {
+          $set: data
+        }
+      )
+      
   switch req.params.collection
-    when 'item' then updateItem()
-    when 'collection' then updateCollection()
-    when 'team' then updateTeam()
+    when 'item' then updateItem(req.params.id, req.body)
+    when 'collection' then updateCollection(req.params.id, req.body)
+    when 'team' then updateTeam(req.params.id, req.body)
     else
       throw new ReferenceError()
 

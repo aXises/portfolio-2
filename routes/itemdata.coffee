@@ -52,7 +52,8 @@ router.post '/newTeam', (req, res, next) ->
           }
         }
       )
-  res.redirect 'back'
+  db.collection('team').insert newTeam, ->
+    res.redirect 'back'
 
 router.post '/getItem', (req, res, next) ->
   db = database.getDb()

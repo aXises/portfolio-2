@@ -55,6 +55,26 @@ router.post '/newTeam', (req, res, next) ->
   db.collection('team').insert newTeam, ->
     res.redirect 'back'
 
+router.post '/update/:collection/:id', (req, res, next) ->
+  collection = database.getDb().collection(req.params.collection)
+  console.log req.params
+  updateItem = ->
+    return
+  updateCollection = ->
+    return
+  updateTeam = ->
+    return
+
+  switch req.params.collection
+    when 'item' then updateItem()
+    when 'collection' then updateCollection()
+    when 'team' then updateTeam()
+    else
+      throw new ReferenceError()
+      
+  res.redirect 'back'
+
+
 router.post '/getData/:collection', (req, res, next) ->
   db = database.getDb()
   db.collection(req.params.collection).find({'_id':database.getId(req.body.id)}).toArray (err, result) ->

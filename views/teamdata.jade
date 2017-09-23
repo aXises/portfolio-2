@@ -1,0 +1,52 @@
+html
+  extends layout
+  block content
+    body#itemdata
+      aside.active-keys
+        p Active keys: #{teamKeys.length}
+        - var i = 0
+        each team in teams
+          div(id='collection:'+team._id)
+            button.btn.btn-xs.btn-info.edit Edit
+            button.btn.btn-xs.btn-danger.delete Delete
+            p.item #{team.name}
+            - i++
+
+        button.btn.btn-xs.btn-primary.new New
+        button.btn.btn-xs.btn-primary.clear Clear 
+
+      form(action="/itemdata/newTeam" method="post")
+        h4#mode-display Create New Collection
+        - var inputs = [['logo', 'text', false], ['name', 'text', false], ['date', 'text', false], ['description', 'textarea', false], ['link', 'text', false], ['members', 'text', true]]
+        - for(var i = 0; i < inputs.length; i++)
+          +createInput(inputs[i][0], inputs[i][1], inputs[i][2])
+        .container#Extended
+          p Showcase website?
+          | True 
+          input(type="radio" name="showcase" value="true")
+          br
+          | False 
+          input(type="radio" name="showcase" value="false")
+        .container#hasCollections
+          p Collections
+          - for(var i = 0; i < collections.length; i++)
+            p #{collections[i].name}
+            input(type="checkbox" name="collections", value=collections[i]._id)
+        .container#hasItems
+          p Items
+          - for(var i = 0; i < items.length; i++)
+            p #{items[i].name}
+            input(type="checkbox" name="items", value=items[i]._id)
+        input.btn.btn-primary(type="submit")
+
+    mixin createInput(fieldName, fieldType, multi=false)
+      .container(id=fieldName)
+        p #{fieldName}
+        - if (fieldType === "textarea")
+          textarea(name=fieldName class=fieldName rows=5 cols=50)
+        - else
+          input(type=fieldType name=fieldName class=fieldName)
+        - if (multi)
+          .btn.btn-xs.btn-success.newfield Add
+  
+    script(type="text/javascript" src="/javascripts/teamform.js")

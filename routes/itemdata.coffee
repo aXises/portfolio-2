@@ -3,6 +3,12 @@ router = express.Router()
 database = require '../routes/database'
 item = require '../routes/item'
 
+convertToArrayIfNot = (field) ->
+  if typeof(field) != 'object'
+    return [field]
+  else
+    return field
+    
 router.post '/newItem', (req, res, next) ->
   db = database.getDb()
   newItem = new item.item database.getId(), req.body.name, req.body.status, req.body.type, req.body.link, req.body.description, req.body.date, req.body.technologies, req.body.images
@@ -22,10 +28,9 @@ router.post '/newCollection', (req, res, next) ->
 router.post '/newTeam', (req, res, next) ->
   db = database.getDb()
   newTeam = new item.team database.getId(), req.body.name, req.body.logo, req.body.link, req.body.description, req.body.showcase, req.body.members
-  if req.body.collections
-    if typeof(req.body.collections) != 'object'
-      req.body.collections = [req.body.collections]
-    for collectionId in req.body.collections
+  if req.body.hasCollections
+    req.body.hasCollections = convertToArrayIfNot(req.body.hasCollections)
+    for collectionId in req.body.hasCollections
       newTeam.addCollection(collectionId)
       db.collection('collection').findOneAndUpdate(
         {
@@ -37,10 +42,9 @@ router.post '/newTeam', (req, res, next) ->
           }
         }
       )
-  if req.body.items
-    if typeof(req.body.items) != 'object'
-      req.body.items = [req.body.items]
-    for itemId in req.body.items
+  if req.body.hasItems
+    req.body.hasItems = convertToArrayIfNot(req.body.hasItems)
+    for itemId in req.body.hasItems
       newTeam.addItem(itemId)
       db.collection('item').findOneAndUpdate(
         {

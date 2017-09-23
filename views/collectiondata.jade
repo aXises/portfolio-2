@@ -6,7 +6,7 @@ html
         p Active keys: #{itemKeys.length}
         - var i = 0
         each item in items
-          div(id='item:'+item._id)
+          div(id='collection:'+item._id)
             button.btn.btn-xs.btn-info.edit Edit
             button.btn.btn-xs.btn-danger.delete Delete
             p.item #{item.name}
@@ -15,19 +15,18 @@ html
         button.btn.btn-xs.btn-primary.new New
         button.btn.btn-xs.btn-primary.clear Clear 
 
-      form(action="/collectiondata/new" method="post")
+      form(action="/itemdata/newCollection" method="post")
         h4#mode-display Create New Collection
-        - var inputs = [['Image', 'text', false], ['Name', 'text', false], ['Description', 'textarea', false], ['Link', 'text', false], ['Status', 'text', false], ['Type', 'text', false]]
+        - var inputs = [['image', 'text', false], ['name', 'text', false], ['date', 'text', false], ['description', 'textarea', false], ['link', 'text', false], ['status', 'text', false], ['type', 'text', false], ['technologies', 'text', true]]
         - for(var i = 0; i < inputs.length; i++)
           +createInput(inputs[i][0], inputs[i][1], inputs[i][2])
         .container#Extended
-          p Extended
+          p Showcase website?
           | True 
-          input(type="radio" name="Extended" value="true")
+          input(type="radio" name="showcase" value="true")
           br
           | False 
-          input(type="radio" name="Extended" value="false")
-        input(type="hidden" name="mode" value="new" id="mode")
+          input(type="radio" name="showcase" value="false")
         input.btn.btn-primary(type="submit")
 
     mixin createInput(fieldName, fieldType, multi=false)
@@ -40,4 +39,4 @@ html
         - if (multi)
           .btn.btn-xs.btn-success.newfield Add
   
-    script(type="text/javascript" src="/javascripts/itemform.js")
+    script(type="text/javascript" src="/javascripts/collectionform.js")

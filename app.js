@@ -41,10 +41,10 @@ app.use('/portfolio', portfolio);
 if (app.get('env') === 'development') {
   var itemData = require('./routes/itemdata');
   var collectionData = require('./routes/collectiondata');
-  //var teamData = require('./routes/itemdata');
+  var teamData = require('./routes/teamdata');
   app.use('/itemdata', itemData);
   app.use('/collectiondata', collectionData);
-  //app.use('/teamdata', teamData);
+  app.use('/teamdata', teamData);
 }
 
 // catch 404 and forward to error handler

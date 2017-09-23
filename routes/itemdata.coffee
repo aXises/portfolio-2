@@ -55,9 +55,9 @@ router.post '/newTeam', (req, res, next) ->
   db.collection('team').insert newTeam, ->
     res.redirect 'back'
 
-router.post '/getItem', (req, res, next) ->
+router.post '/getData/:collection', (req, res, next) ->
   db = database.getDb()
-  db.collection('item').find({'_id':database.getId(req.body.id)}).toArray (err, result) ->
+  db.collection(req.params.collection).find({'_id':database.getId(req.body.id)}).toArray (err, result) ->
     res.send(result[0])
 
 router.post '/updateItem/:id', (req, res, next) ->

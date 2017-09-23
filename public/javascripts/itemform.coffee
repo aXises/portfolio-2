@@ -70,7 +70,7 @@ $(document).ready ->
     $('form').attr 'action', 'itemdata/updateItem/' + itemId
     $('#mode-display').text 'Editing ' + parentId
     $.ajax
-      url: '/itemdata/getItem'
+      url: '/itemdata/getData/item'
       data: 'id': itemId
       type: 'POST'
       success: (data) ->

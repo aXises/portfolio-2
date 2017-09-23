@@ -4,10 +4,7 @@ database = require '../routes/database'
 item = require '../routes/item'
 
 convertToArrayIfNot = (field) ->
-  if typeof(field) != 'object'
-    return [field]
-  else
-    return field
+  if typeof(field) != 'object' then return [field] else return field
     
 router.post '/newItem', (req, res, next) ->
   db = database.getDb()

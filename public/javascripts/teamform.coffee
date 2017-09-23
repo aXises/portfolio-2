@@ -16,11 +16,18 @@ $(document).ready ->
 
   insertFields = (data) ->
     dataKeys = Object.keys(data)
-    if data.collection
-      for id in data.collection
-        for checkbox in $('#partOfCollection input')
+    if data.hasItems
+      for id in data.hasItems
+        for checkbox in $('#hasItems input')
           if id == $(checkbox).val()
             $(checkbox).prop('checked', true)
+            break
+    if data.hasCollections
+      for id in data.hasCollections
+        for checkbox in $('#hasCollections input')
+          if id == $(checkbox).val()
+            $(checkbox).prop('checked', true)
+            break
     i = 0
     while i < dataKeys.length
       key = dataKeys[i]
@@ -86,5 +93,6 @@ $(document).ready ->
       url: '/itemdata/deleteTeam'
       data: 'id': parentId.split(':')[1]
       type: 'POST'
+        location.reload()
     return
   return

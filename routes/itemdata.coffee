@@ -61,13 +61,24 @@ router.post '/newTeam', (req, res, next) ->
 
 router.post '/update/:collection/:id', (req, res, next) ->
   collection = database.getDb().collection(req.params.collection)
-  console.log req.params
+
   updateItem = ->
     return
+
   updateCollection = ->
     return
+
   updateTeam = ->
-    return
+    req.body.hasCollections = convertToArrayIfNot(req.body.hasCollections)
+    req.body.hasItems = convertToArrayIfNot(req.body.hasItems)
+    collection.findOneAndUpdate(
+      {
+        '_id': database.getId(req.params.id)
+      },
+      {
+        $set: req.body
+      }
+    )
 
   switch req.params.collection
     when 'item' then updateItem()
@@ -75,7 +86,7 @@ router.post '/update/:collection/:id', (req, res, next) ->
     when 'team' then updateTeam()
     else
       throw new ReferenceError()
-      
+
   res.redirect 'back'
 
 router.post '/delete/:collection', (req, res, next) ->

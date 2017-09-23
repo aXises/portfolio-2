@@ -27,7 +27,7 @@ class collection extends baseItem
     team.addCollection(@_id)
 
 class team
-  constructor: (@_id, @name, @logo, @site, @description, @showcase, @members) ->
+  constructor: (@_id, @name, @logo, @link, @description, @showcase, @members) ->
     @itemType = 'team'
     @hasItems = []
     @hasCollections = []

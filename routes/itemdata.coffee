@@ -74,6 +74,9 @@ router.post '/update/:collection/:id', (req, res, next) ->
       
   res.redirect 'back'
 
+router.post '/delete/:collection', (req, res, next) ->
+  database.getDb().collection(req.params.collection).findOneAndDelete({'_id': database.getId(req.body.id)})
+  res.redirect 'back'
 
 router.post '/getData/:collection', (req, res, next) ->
   db = database.getDb()

@@ -15,8 +15,8 @@ html
         button.btn.btn-xs.btn-primary.new New
         button.btn.btn-xs.btn-primary.clear Clear 
 
-      form(action="/itemdata/newTeam" method="post")
-        h4#mode-display Create New Collection
+      form(action="/teamdata/new" method="post")
+        h4#mode-display Create New Team
         - var inputs = [['logo', 'text', false], ['name', 'text', false], ['description', 'textarea', false], ['link', 'text', false], ['members', 'text', true]]
         - for(var i = 0; i < inputs.length; i++)
           +createInput(inputs[i][0], inputs[i][1], inputs[i][2])
@@ -27,16 +27,6 @@ html
           br
           | False 
           input(type="radio" name="showcase" value="false")
-        .container#hasCollections
-          p Collections
-          - for(var i = 0; i < collections.length; i++)
-            p #{collections[i].name}
-            input(type="checkbox" name="hasCollections", value=collections[i]._id)
-        .container#hasItems
-          p Items
-          - for(var i = 0; i < items.length; i++)
-            p #{items[i].name}
-            input(type="checkbox" name="hasItems", value=items[i]._id)
         input.btn.btn-primary(type="submit")
 
     mixin createInput(fieldName, fieldType, multi=false)

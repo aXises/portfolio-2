@@ -63,7 +63,7 @@ $(document).ready ->
     return
 
   $('.new').click ->
-    $('#mode-display').text 'Create new item'
+    $('#mode-display').text 'Create new team'
     $('form').attr 'action', 'itemdata/newTeam'
     return
 
@@ -74,14 +74,13 @@ $(document).ready ->
   $('.edit').click ->
     parentId = $(this).parent().attr('id')
     itemId = parentId.split(':')[1]
-    $('form').attr 'action', 'itemdata/update/team/' + itemId
+    $('form').attr 'action', 'teamdata/update/' + itemId
     $('#mode-display').text 'Editing ' + parentId
     $.ajax
-      url: '/itemdata/getData/team'
+      url: '/teamdata/getData'
       data: 'id': itemId
       type: 'POST'
       success: (data) ->
-        console.log data
         clearFields()
         insertFields data
         return
@@ -90,10 +89,11 @@ $(document).ready ->
   $('.delete').click ->
     parentId = $(this).parent().attr('id')
     $.ajax
-      url: '/itemdata/delete/team'
+      url: '/teamdata/delete'
       data: 'id': parentId.split(':')[1]
       type: 'POST',
-      success: ->
-        location.reload()
+      success: (res) ->
+        if res
+          location.reload()
     return
   return

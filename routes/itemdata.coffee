@@ -9,9 +9,15 @@ getDelta = (arr1, arr2) ->
   res = arr1.filter((x) => arr2.indexOf(x) == -1)
   if !(res[0]) then return null else return res
 
+router.post '/new', (req, res, next) ->
+  db = database.getDb()
+  req.body._id = database.getId()
+  #db.collection('item').insert req.body
+
 router.get '/', (req, res, next) ->
-  database.getDb().collection('item').find({}).toArray (err, items) ->
-    database.getDb().collection('collection').find({}).toArray (err, collections) ->
+  db = database.getDb()
+  db.collection('item').find({}).toArray (err, items) ->
+    db.collection('collection').find({}).toArray (err, collections) ->
       res.render 'itemdata',
         itemKeys: Object.keys items
         items: items

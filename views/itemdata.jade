@@ -15,7 +15,7 @@ html
         button.btn.btn-xs.btn-primary.new New
         button.btn.btn-xs.btn-primary.clear Clear 
 
-      form(action="/itemdata/newItem" method="post")
+      form(action="/itemdata/new" method="post")
         h4#mode-display Create New Item
         - var inputs = [['images', 'text', true], ['name', 'text', false], ['date', 'text', false], ['description', 'textarea', false], ['link', 'text', false], ['status', 'text', false], ['type', 'text', false], ['technologies', 'text', true]]
         - for(var i = 0; i < inputs.length; i++)
@@ -24,7 +24,7 @@ html
           p Collections
           - for(var i = 0; i < collections.length; i++)
             p #{collections[i].name}
-            input(type="radio" name="collection", value=collections[i]._id)
+            input(type="radio" name="parentCollection", value=collections[i]._id)
             
         input.btn.btn-primary(type="submit")
 

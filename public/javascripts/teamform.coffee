@@ -64,7 +64,7 @@ $(document).ready ->
 
   $('.new').click ->
     $('#mode-display').text 'Create new team'
-    $('form').attr 'action', 'itemdata/newTeam'
+    $('form').attr 'action', 'teamdata/new'
     return
 
   $('.clear').click ->

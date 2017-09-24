@@ -7,8 +7,40 @@ convertToArrayIfNot = (field) ->
   if typeof(field) != 'object' then return [field] else return field
 
 getDelta = (arr1, arr2) ->
-  return arr1.filter((x) => arr2.indexOf(x) == -1)
-    
+  res = arr1.filter((x) => arr2.indexOf(x) == -1)
+  if !(res[0]) then return null else return res
+
+UpdateAdjacent = (incomingCollection, incomingId, incomingParam, remoteCollection, remoteParam, updateParam) ->
+  db = database.getDb()
+  db.collection(incomingCollection).find({'_id': database.getId(incomingId)}).toArray (err, result) ->
+    if (getDelta(incomingParam, result[0][remoteParam]))
+      console.log 'adding', getDelta(incomingParam, result[0][remoteParam])
+      if getDelta(incomingParam, result[0][remoteParam]).length >= 1
+        itemDiff = getDelta incomingParam, result[0][remoteParam]
+        for itemId in itemDiff
+          query = {
+                    '_id': database.getId itemId
+                  }
+          queryParam = {
+            $set:{}
+          }
+          queryParam['$set'][updateParam] = incomingId
+          db.collection(remoteCollection).findOneAndUpdate query, queryParam
+          console.log 'adding', query, queryParam
+    if (getDelta(result[0][remoteParam], incomingParam))
+      console.log 'removing', getDelta(result[0][remoteParam], incomingParam)
+      if getDelta(result[0][remoteParam], incomingParam).length >= 1
+        itemDiff = getDelta result[0].hasItems, incomingParam
+        for itemId in itemDiff
+          query = {
+                    '_id': database.getId itemId
+                  }
+          queryParam = {
+            $set:{}
+          }
+          queryParam['$set'][updateParam] = ''
+          db.collection(remoteCollection).findOneAndUpdate query, queryParam
+          console.log 'removing', query, queryParam
 router.post '/newItem', (req, res, next) ->
   db = database.getDb()
   newItem = new item.item database.getId(), req.body.name, req.body.status, req.body.type, req.body.link, req.body.description, req.body.date, req.body.technologies, req.body.images
@@ -30,32 +62,10 @@ router.post '/newTeam', (req, res, next) ->
   newTeam = new item.team database.getId(), req.body.name, req.body.logo, req.body.link, req.body.description, req.body.showcase, req.body.members
   if req.body.hasCollections
     req.body.hasCollections = convertToArrayIfNot(req.body.hasCollections)
-    for collectionId in req.body.hasCollections
-      newTeam.addCollection(collectionId)
-      db.collection('collection').findOneAndUpdate(
-        {
-          '_id': database.getId(collectionId)
-        },
-        {
-          $set: {
-            'partOfTeam': newTeam._id
-          }
-        }
-      )
+    UpdateAdjacent 'team', teamId, req.body.hasCollections, 'collection', 'hasCollections', 'partOfTeam'
   if req.body.hasItems
     req.body.hasItems = convertToArrayIfNot(req.body.hasItems)
-    for itemId in req.body.hasItems
-      newTeam.addItem(itemId)
-      db.collection('item').findOneAndUpdate(
-        {
-          '_id': database.getId(itemId)
-        },
-        {
-          $set: {
-            'partOfTeam': newTeam._id
-          }
-        }
-      )
+    UpdateAdjacent 'team', teamId, req.body.hasItems, 'item', 'hasItems', 'partOfTeam'
   db.collection('team').insert newTeam, ->
     res.redirect 'back'
 
@@ -70,43 +80,55 @@ router.post '/update/:collection/:id', (req, res, next) ->
     return
 
   updateTeam = (teamId, data) ->
-    data.hasCollections = convertToArrayIfNot(data.hasCollections)
-    data.hasItems = convertToArrayIfNot(data.hasItems)
     collection.find({'_id': database.getId(teamId)}).toArray (err, result) ->
-      if getDelta(data.hasItems, result[0].hasItems).length >= 1
-        itemDiff = getDelta(data.hasItems, result[0].hasItems)
-        for itemId in itemDiff
-          db.collection('item').findOneAndUpdate(
-            {
-              '_id': database.getId(itemId)
-            },
-            {
-              $set: {
-                'partOfTeam': req.params.id
-              }
-            }
-          )
-      else if getDelta(result[0].hasItems, data.hasItems).length >= 1
-        itemDiff = getDelta(result[0].hasItems, data.hasItems)
-        for itemId in itemDiff
-          db.collection('item').findOneAndUpdate(
-            {
-              '_id': database.getId(itemId)
-            },
-            {
-              $set: {
-                'partOfTeam': ''
-              }
-            }
-          )
+      data.hasItems = convertToArrayIfNot(data.hasItems)
+      UpdateAdjacent 'team', teamId, data.hasItems, 'item', result[0].hasItems, 'partOfTeam'
+      data.hasCollections = convertToArrayIfNot(data.hasCollections)
+      UpdateAdjacent 'team', teamId, data.hasCollections, 'collection', 'hasCollections', 'partOfTeam'
       collection.findOneAndUpdate(
         {
-          '_id': database.getId(req.params.id)
+          '_id': database.getId(teamId)
         },
         {
           $set: data
         }
       )
+    
+    # collection.find({'_id': database.getId(teamId)}).toArray (err, result) ->
+    #   if getDelta(data.hasItems, result[0].hasItems).length >= 1
+    #     itemDiff = getDelta(data.hasItems, result[0].hasItems)
+    #     for itemId in itemDiff
+    #       db.collection('item').findOneAndUpdate(
+    #         {
+    #           '_id': database.getId(itemId)
+    #         },
+    #         {
+    #           $set: {
+    #             'partOfTeam': req.params.id
+    #           }
+    #         }
+    #       )
+    #   else if getDelta(result[0].hasItems, data.hasItems).length >= 1
+    #     itemDiff = getDelta(result[0].hasItems, data.hasItems)
+    #     for itemId in itemDiff
+    #       db.collection('item').findOneAndUpdate(
+    #         {
+    #           '_id': database.getId(itemId)
+    #         },
+    #         {
+    #           $set: {
+    #             'partOfTeam': ''
+    #           }
+    #         }
+    #       )
+    #   collection.findOneAndUpdate(
+    #     {
+    #       '_id': database.getId(req.params.id)
+    #     },
+    #     {
+    #       $set: data
+    #     }
+    #   )
       
   switch req.params.collection
     when 'item' then updateItem(req.params.id, req.body)

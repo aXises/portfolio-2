@@ -20,6 +20,13 @@ html
         - var inputs = [['images', 'text', true], ['name', 'text', false], ['date', 'text', false], ['description', 'textarea', false], ['link', 'text', false], ['status', 'text', false], ['type', 'text', false], ['technologies', 'text', true]]
         - for(var i = 0; i < inputs.length; i++)
           +createInput(inputs[i][0], inputs[i][1], inputs[i][2])
+        .container#extended
+          p Showcase website?
+          | True 
+          input(type="radio" name="showcase" value="true")
+          br
+          | False 
+          input(type="radio" name="showcase" value="false")
         .container#partOfCollection
           p Collections
           p No Collection

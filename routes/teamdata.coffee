@@ -20,7 +20,7 @@ router.post '/delete', (req, res, next) ->
     },
     {
       $set: { 
-        'parentTeam': null
+        'parentTeam': ''
         }
     }
   ).then () ->

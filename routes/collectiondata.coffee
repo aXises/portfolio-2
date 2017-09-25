@@ -14,8 +14,18 @@ router.post '/getData', (req, res, next) ->
     res.send result
 
 router.post '/delete', (req, res, next) ->
-  db.deleteOne({'_id': database.getId req.body.id}).then () ->
-    res.send true
+  database.getDb().collection('item').updateMany(
+    {
+      'parentCollection': req.body.id
+    },
+    {
+      $set: { 
+        'parentCollection': null
+        }
+    }
+  ).then () ->
+      db.deleteOne({'_id': database.getId req.body.id}).then () ->
+        res.send true
 
 router.post '/update/:id', (req, res, next) ->
   db.updateOne(

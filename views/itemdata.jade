@@ -27,7 +27,6 @@ html
           - for(var i = 0; i < collections.length; i++)
             p #{collections[i].name}
             input(type="radio" name="parentCollection", value=collections[i]._id)
-            
         input.btn.btn-primary(type="submit")
 
     mixin createInput(fieldName, fieldType, multi=false)

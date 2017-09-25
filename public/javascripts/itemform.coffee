@@ -66,7 +66,7 @@ $(document).ready ->
   $('.edit').click ->
     parentId = $(this).parent().attr('id')
     itemId = parentId.split(':')[1]
-    $('form').attr 'action', 'itemdata/update' + itemId
+    $('form').attr 'action', 'itemdata/update/' + itemId
     $('#mode-display').text 'Editing ' + parentId
     $.ajax
       url: '/itemdata/getData'

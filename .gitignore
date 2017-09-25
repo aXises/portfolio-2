@@ -90,3 +90,5 @@ $RECYCLE.BIN/
 # Custom
 views/showcases
 public/stylesheets/style.css
+routes/*.js
+public/javascripts/*.js

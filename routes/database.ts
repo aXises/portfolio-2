@@ -5,6 +5,7 @@ var async = require('async');
 var URICS: string;
 var db;
 
+URICS = "mongodb://tonyli139:RDyMScAWKpj0Fl1O@p2cluster-shard-00-00-ccvtw.mongodb.net:27017,p2cluster-shard-00-01-ccvtw.mongodb.net:27017,p2cluster-shard-00-02-ccvtw.mongodb.net:27017/<DATABASE>?ssl=true&replicaSet=p2Cluster-shard-0&authSource=admin";
 
 module.exports = {
 	connectDb: function connectDb(callback) {

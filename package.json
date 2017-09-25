@@ -13,6 +13,7 @@
     "url": "https://github.com/aXises/portfolio-2"
   },
   "dependencies": {
+    "@types/node": "^8.0.30",
     "async": "^2.5.0",
     "body-parser": "~1.17.1",
     "coffeescript": "^1.12.7",

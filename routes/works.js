@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var jade = require('jade');
-var database = require('../database');
+var database = require('../routes/database');
 var fs = require('fs');
 
 /* GET works page. */

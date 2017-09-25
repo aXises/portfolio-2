@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var database = require('../database');
+var database = require('../routes/database');
 var item = require('./item')
 var jade = require('jade');
 var fs = require('fs');

@@ -9,12 +9,11 @@ var mocha = require('mocha');
 
 var app = express();
 
-var database = require('./database');
-
 // routes setup
 var index = require('./routes/index');
 var users = require('./routes/users');
-var works = require('./routes/works');
+//var works = require('./routes/works');
+//var portfolio  = require('./routes/portfolio');
 
 // middleware setup
 app.use(lessMiddleware(__dirname + '/public'));
@@ -34,12 +33,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 // views setup
 app.use('/', index);
 app.use('/users', users);
-app.use('/Works', works);
+//app.use('/Works', works);
+//app.use('/portfolio', portfolio);
 
 // set environment
 if (app.get('env') === 'development') {
   var itemData = require('./routes/itemdata');
+  var collectionData = require('./routes/collectiondata');
+  var teamData = require('./routes/teamdata');
   app.use('/itemdata', itemData);
+  app.use('/collectiondata', collectionData);
+  app.use('/teamdata', teamData);
 }
 
 // catch 404 and forward to error handler

@@ -7,7 +7,7 @@ html
     meta(name="description", content="Portfolio-2")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     title= title
-    link(href="https://fonts.googleapis.com/css?family=Muli:200,200i,300,300i,400,800|Open+Sans:300,300i,400,400i,800" rel="stylesheet")
+    link(href="https://fonts.googleapis.com/css?family=Lato|Muli:300,300i,400,700" rel="stylesheet")
     link(rel="stylesheet", type="text/css", href="/stylesheets/style.css")
     link(rel="icon" href="/images/favicon.ico")
     link(rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png")
@@ -17,36 +17,24 @@ html
     meta(name="theme-color" content="#ffffff")
     script(type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js")
   body
-    div#loading
+    div#loader
+      .elem-container
+        .text-main
+          h1 AXISESIO
       .bar
         .progress-bar
       .progress-text
         p.percentage
       .failed
-    div.nav-menu
-      span.glyphicon.glyphicon-list
-      div.text
-        p Menu
-    nav
-      div.nav-main
-        ul
-          - var navLinks = ['#Section1','#info','#Section3','#Section4','Works','Link']
-          each link in navLinks
-            - var href = link
-            - if (link.charAt(0) === '#')
-              - var link = link.slice(1)
-            a.anchor(href="/"+href)
-              li #{link}
-      div.nav-secondary
-        div.nav-close
-          span.glyphicon.glyphicon-menu-left
-        ul
-          li: span.glyphicon.glyphicon-user
-          li: span.glyphicon.glyphicon-th-list
-          li: span.glyphicon.glyphicon-signal
-          li: span.glyphicon.glyphicon-map-marker
-          li: span.glyphicon.glyphicon-folder-close
-          li: span.glyphicon.glyphicon-home
+    nav#globalnav
+      .navtoggle
+        i.ion-navicon.default
+        i.ion-ios-arrow-back.back.disable
+      .buttonContainer
+        - var links = [['About', 'about'], ['Portfolio', 'portfolio'], ['Home', '/'], ['Design Blog', 'designblog'], ['Shop', 'shop']]
+        each link in links
+          a(href=link[1])
+            h6 #{link[0]}
     block content
     script(type="text/javascript" src="/bower_components/move.js/move.min.js")
     script(type="text/javascript" src="/bower_components/imagesloaded/imagesloaded.pkgd.min.js")

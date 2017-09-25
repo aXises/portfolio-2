@@ -1,12 +1,26 @@
 extends layout
 
 block content
-  header#index
-    div.image-container
-      img(src="https://images4.alphacoders.com/232/232854.jpg")
-    div.text-container
-      h1= title
-      p Welcome to #{title}
-  main#index
-    include custom.index.jade
-  footer
+  #index.container-fluid
+    header.row
+      .elem-container
+        .text-main
+          h1 AXISESIO
+        .corners
+          a.corner.cornertl.about(href="#about")
+            .text-container.hidden-xs
+              h6 ABOUT
+          a.corner.cornertr(href="/portfolio")
+            .text-container.hidden-xs
+              h6 PORTFOLIO
+          a.corner.cornerbl(href="/designblog")
+            .text-container.hidden-xs
+              h6 DESIGN BLOG
+          a.corner.cornerbr(href="/shop")
+            .text-container.hidden-xs
+              h6 SHOP
+  #about
+    .elem-container
+      h3 ABSTRACT ABOUT PAGE
+  // include custom.index.jade
+    main.row

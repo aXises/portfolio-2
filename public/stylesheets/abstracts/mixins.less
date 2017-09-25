@@ -11,9 +11,31 @@
   }
 }
 
+.centerX,
+.centerY,
 .centerXY {
   position: absolute;
-  top: 50%;
+}
+
+.centerX {
   left: 50%;
+  transform: translateX(-50%);
+}
+
+.centerY {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.centerXY {
+  .centerX;
+  .centerY;
   transform: translate(-50%, -50%);
+}
+
+.no-transitions * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
 }

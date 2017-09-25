@@ -1,76 +1,85 @@
-header#index {
-  position: relative;
-  .image-container,
-  .item-display {
-    position: absolute;
-  }
-  .image-container {
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    border-radius: 5px;
-    border: 1px solid transparent;
-  }
-}
-
-main#index {
-  section {
-    background-color: @light-shade;
-  }
-  @main_height: 600px;
-  img {
-    background-size: cover;
-    max-height: 100%;
-  }
-  #info {
-    div {
-      padding: 0;
-      overflow: hidden;
-      img {
-        filter: blur(5px);
-        transform: scale(1.02);
+#index {
+  background-color: @light-shade;
+  header {
+    height: 100vh;
+    position: relative;
+    .elem-container {
+      width: 500px;
+      height: 500px;
+      .centerXY;
+      .text-main {
+        letter-spacing: 15px;
+        text-indent: 15px;
+        .centerXY;
       }
-      .info {
-        width: 400px;
-        height: 500px;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 2;
-        color: white;
-        padding: 15px;
-        pointer-events: none;
-      }
-      .info-right {
-        left: 0;
-        text-align: left;
-      }
-      .info-left {
-        right: 0;
-        text-align: right;
-      }
-      .overlay {
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.0);
-        position: absolute;
-        z-index: 1;
-        .transition.vfast;
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.7);
+      .corners {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          left: 0;
+          .transition(0.75s, cubic-bezier(0.32, 0.21, 0.15, 1.2));
+        .text-container {
+          width: 500px;
+          position: absolute;
+          h6 {
+            .transition(0.95s, cubic-bezier(0.71, 0.17, 0.39, 1.01));
+          }
+        }
+        .corner {
+          width: 50px;
+          height: 50px;
+          position: absolute;
+          color: @dark-shade;
+        }
+        .cornertl,
+        .cornertr {
+          top: 0;
+          border-top: @border-dark-std;
+          .text-container { 
+            top: -40px;
+          }
+        }
+        .cornertl {
+          left: 0;
+          border-left: @border-dark-std;
+          .text-container { 
+            left: -450px;
+            text-align: right;
+          }
+        }
+        .cornertr {
+          right: 0;
+          border-right: @border-dark-std;
+        }
+        .cornerbl,
+        .cornerbr {
+          bottom: 0;
+          border-bottom: @border-dark-std;
+          .text-container {
+            bottom: -40px;
+          }
+        }
+        .cornerbl {
+          left: 0;
+          border-left: @border-dark-std;
+          .text-container { 
+            left: -450px;
+            text-align: right;
+          }
+        }
+        .cornerbr {
+          right: 0;
+          border-right: @border-dark-std;
         }
       }
     }
-    #latest,
-    #upcoming {
-      height: 100vh;
+    .nav-container {
+      width: 550px;
+      height: 550px;
+      .centerXY
     }
-    #latest {
-      border-right: 1px solid white;
-    }
-    #upcoming {
+  }
+  main {
 
-    }
   }
 }

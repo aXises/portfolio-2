@@ -2,9 +2,9 @@ var request = require('request');
 var assert = require('assert');
 var http = require('http');
 var app = require('../app');
-var database = require('../database');
+var database = require('../routes/database');
 var origin = 'http://localhost:3000';
-var testLinks = ['/', '/works', '/itemdata'];
+var testLinks = ['/', '/itemdata', '/collectiondata', '/teamdata'];
 
 describe('App', function() {
   before(function(done) {
@@ -27,13 +27,17 @@ describe('App', function() {
   describe('Pages', function() {
     for (var i = 0; i < testLinks.length; i++) {
       var page = origin + testLinks[i];
-      it(page + ' returns status code 200', function(done) {
-        this.timeout(5000);
-        request.get(page, function(err, res) {
-          assert.equal(200, res.statusCode);
-          done();
-        });
-      });
+      testPages(page);
     }
   });
 });
+
+function testPages(page) {
+  it(page + ' returns status code 200', function(done) {
+    this.timeout(5000);
+    request.get(page, function(err, res) {
+      assert.equal(200, res.statusCode);
+      done();
+    });
+  });
+}

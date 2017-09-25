@@ -28,6 +28,7 @@ $(document).ready ->
           if id == $(checkbox).val()
             $(checkbox).prop('checked', true)
             break
+    if data.showcase == 'true' then $('#extended input[value="true"]').prop 'checked', true else $('#extended input[value="false"]').prop 'checked', true
     i = 0
     while i < dataKeys.length
       key = dataKeys[i]

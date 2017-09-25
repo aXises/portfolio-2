@@ -16,11 +16,10 @@ $(document).ready ->
 
   insertFields = (data) ->
     dataKeys = Object.keys(data)
-    if data.collection
-      for id in data.collection
-        for checkbox in $('#partOfCollection input')
-          if id == $(checkbox).val()
-            $(checkbox).prop('checked', true)
+    if data.parentCollection
+      for radio in $('#partOfCollection input')
+        if data.parentCollection == $(radio).val()
+          $(radio).prop('checked', true)
     i = 0
     while i < dataKeys.length
       key = dataKeys[i]
@@ -67,14 +66,13 @@ $(document).ready ->
   $('.edit').click ->
     parentId = $(this).parent().attr('id')
     itemId = parentId.split(':')[1]
-    $('form').attr 'action', 'itemdata/updateItem/' + itemId
+    $('form').attr 'action', 'itemdata/update' + itemId
     $('#mode-display').text 'Editing ' + parentId
     $.ajax
-      url: '/itemdata/getData/item'
+      url: '/itemdata/getData'
       data: 'id': itemId
       type: 'POST'
       success: (data) ->
-        console.log data
         clearFields()
         insertFields data
         return
@@ -83,7 +81,7 @@ $(document).ready ->
   $('.delete').click ->
     parentId = $(this).parent().attr('id')
     $.ajax
-      url: '/itemdata/delete/item'
+      url: '/itemdata/delete'
       data: 'id': parentId.split(':')[1]
       type: 'POST',
       success: ->

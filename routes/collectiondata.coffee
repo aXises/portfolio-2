@@ -6,7 +6,6 @@ db = null
 
 router.post '/new', (req, res, next) ->
   req.body._id = database.getId()
-  console.log req.body
   db.insertOne(req.body).then () ->
     res.redirect 'back'
 
@@ -19,7 +18,6 @@ router.post '/delete', (req, res, next) ->
     res.send true
 
 router.post '/update/:id', (req, res, next) ->
-  console.log req.body
   db.updateOne(
     {'_id': database.getId req.params.id},
     {$set: req.body}

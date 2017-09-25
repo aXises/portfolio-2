@@ -22,6 +22,8 @@ html
           +createInput(inputs[i][0], inputs[i][1], inputs[i][2])
         .container#partOfCollection
           p Collections
+          p No Collection
+          input(type="radio" name="parentCollection", value='')
           - for(var i = 0; i < collections.length; i++)
             p #{collections[i].name}
             input(type="radio" name="parentCollection", value=collections[i]._id)

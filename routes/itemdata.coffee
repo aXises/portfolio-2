@@ -1,6 +1,7 @@
 express = require 'express'
 router = express.Router()
 database = require '../routes/database'
+db = null
 
 convertToArrayIfNot = (field) ->
   if typeof(field) != 'object' then return [field] else return field
@@ -10,14 +11,29 @@ getDelta = (arr1, arr2) ->
   if !(res[0]) then return null else return res
 
 router.post '/new', (req, res, next) ->
-  db = database.getDb()
   req.body._id = database.getId()
-  #db.collection('item').insert req.body
+  db.insertOne(req.body).then () ->
+    res.redirect 'back'
+
+router.post '/getData', (req, res, next) ->
+  db.findOne({'_id': database.getId req.body.id}).then (result) ->
+    res.send result
+
+router.post '/delete', (req, res, next) ->
+  db.deleteOne({'_id': database.getId req.body.id}).then () ->
+    res.send true
+
+router.post '/update/:id', (req, res, next) ->
+  db.updateOne(
+    {'_id': database.getId req.params.id},
+    {$set: req.body}
+  ).then () ->
+    res.redirect 'back'
 
 router.get '/', (req, res, next) ->
-  db = database.getDb()
-  db.collection('item').find({}).toArray (err, items) ->
-    db.collection('collection').find({}).toArray (err, collections) ->
+  db = database.getDb().collection('item')
+  db.find({}).toArray (err, items) ->
+    database.getDb().collection('collection').find({}).toArray (err, collections) ->
       res.render 'itemdata',
         itemKeys: Object.keys items
         items: items

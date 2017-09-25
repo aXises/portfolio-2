@@ -21,13 +21,13 @@ getDb = function() {
 	}
 }
 
-getID = function(id) {
+getId = function(id) {
 	return new ObjectID(id);
 }
 
 module.exports = {
 	connectDb,
 	getDb,
-	getID
+	getId
 }
 

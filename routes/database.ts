@@ -1,3 +1,7 @@
+declare var require: any;
+declare var module: any;
+declare var __dirname: any;
+
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
 var fs = require('fs');

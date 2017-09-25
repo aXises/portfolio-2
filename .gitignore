@@ -88,5 +88,7 @@ $RECYCLE.BIN/
 *.png
 
 # Custom
-views/extensions/
+views/showcases
 public/stylesheets/style.css
+routes/*.js
+public/javascripts/*.js

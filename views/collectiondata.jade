@@ -3,19 +3,19 @@ html
   block content
     body#itemdata
       aside.active-keys
-        p Active keys: #{itemKeys.length}
+        p Active keys: #{collectionKeys.length}
         - var i = 0
-        each item in items
-          div(id='collection:'+item._id)
+        each collection in collections
+          div(id='collection:'+collection._id)
             button.btn.btn-xs.btn-info.edit Edit
             button.btn.btn-xs.btn-danger.delete Delete
-            p.item #{item.name}
+            p.item #{collection.name}
             - i++
 
         button.btn.btn-xs.btn-primary.new New
         button.btn.btn-xs.btn-primary.clear Clear 
 
-      form(action="/itemdata/newCollection" method="post")
+      form(action="/collectiondata/new" method="post")
         h4#mode-display Create New Collection
         - var inputs = [['image', 'text', false], ['name', 'text', false], ['date', 'text', false], ['description', 'textarea', false], ['link', 'text', false], ['status', 'text', false], ['type', 'text', false], ['technologies', 'text', true]]
         - for(var i = 0; i < inputs.length; i++)
@@ -27,6 +27,13 @@ html
           br
           | False 
           input(type="radio" name="showcase" value="false")
+        .container#partOfTeam
+          p Parent Team
+          p No team
+          input(type="radio" name="parentTeam", value='')
+          - for(var i = 0; i < teams.length; i++)
+            p #{teams[i].name}
+            input(type="radio" name="parentTeam", value=teams[i]._id)
         input.btn.btn-primary(type="submit")
 
     mixin createInput(fieldName, fieldType, multi=false)

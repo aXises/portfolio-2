@@ -1,8 +1,16 @@
 environment:
   nodejs_version: "6"
+cache:
+  - node_modules 
 install:
   - ps: Install-Product node $env:nodejs_version
   - npm install
+  - npm install coffeescript -g
+  - npm install typescript -g
+  - npm install @types/node --save -g
+before_test:
+ - coffee -c .
+ - tsc routes/database
 test_script:
   - node --version
   - npm --version

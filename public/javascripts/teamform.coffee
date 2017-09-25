@@ -28,6 +28,7 @@ $(document).ready ->
           if id == $(checkbox).val()
             $(checkbox).prop('checked', true)
             break
+    if data.showcase == 'true' then $('#extended input[value="true"]').prop 'checked', true else $('#extended input[value="false"]').prop 'checked', true
     i = 0
     while i < dataKeys.length
       key = dataKeys[i]
@@ -63,8 +64,8 @@ $(document).ready ->
     return
 
   $('.new').click ->
-    $('#mode-display').text 'Create new item'
-    $('form').attr 'action', 'itemdata/newTeam'
+    $('#mode-display').text 'Create new team'
+    $('form').attr 'action', 'teamdata/new'
     return
 
   $('.clear').click ->
@@ -74,14 +75,13 @@ $(document).ready ->
   $('.edit').click ->
     parentId = $(this).parent().attr('id')
     itemId = parentId.split(':')[1]
-    $('form').attr 'action', 'itemdata/update/team/' + itemId
+    $('form').attr 'action', 'teamdata/update/' + itemId
     $('#mode-display').text 'Editing ' + parentId
     $.ajax
-      url: '/itemdata/getData/team'
+      url: '/teamdata/getData'
       data: 'id': itemId
       type: 'POST'
       success: (data) ->
-        console.log data
         clearFields()
         insertFields data
         return
@@ -90,10 +90,11 @@ $(document).ready ->
   $('.delete').click ->
     parentId = $(this).parent().attr('id')
     $.ajax
-      url: '/itemdata/delete/team'
+      url: '/teamdata/delete'
       data: 'id': parentId.split(':')[1]
       type: 'POST',
-      success: ->
-        location.reload()
+      success: (res) ->
+        if res
+          location.reload()
     return
   return

@@ -2,9 +2,9 @@ var request = require('request');
 var assert = require('assert');
 var http = require('http');
 var app = require('../app');
-var database = require('../database');
+var database = require('../routes/database');
 var origin = 'http://localhost:3000';
-var testLinks = ['/', '/works', '/itemdata'];
+var testLinks = ['/', '/itemdata', '/collectiondata', '/teamdata'];
 
 describe('App', function() {
   before(function(done) {

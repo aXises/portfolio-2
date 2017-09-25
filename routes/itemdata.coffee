@@ -12,7 +12,10 @@ getDelta = (arr1, arr2) ->
 
 router.post '/new', (req, res, next) ->
   req.body._id = database.getId()
+  showcase = req.body.showcase == 'true'
   db.insertOne(req.body).then () ->
+    if showcase
+      database.generateShowcase 'items', req.params.id, req.body
     res.redirect 'back'
 
 router.post '/getData', (req, res, next) ->
@@ -24,10 +27,13 @@ router.post '/delete', (req, res, next) ->
     res.send true
 
 router.post '/update/:id', (req, res, next) ->
+  showcase = req.body.showcase == 'true'
   db.updateOne(
     {'_id': database.getId req.params.id},
     {$set: req.body}
   ).then () ->
+    if showcase
+      database.generateShowcase 'items', req.params.id, req.body
     res.redirect 'back'
 
 router.get '/', (req, res, next) ->

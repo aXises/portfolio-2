@@ -1,6 +1,18 @@
 $(document).ready ->
   'use strict'
 
+  $('#globalnav a').hover ->
+    $('#globalnav .followBar').css {
+      opacity: 1,
+      width: $(this).width(),
+      left: 970 + $(this).position().left + 'px'
+    }
+  , ->
+    $('#globalnav .followBar').css {
+      width: 0,
+      left: 970 + $(this).position().left + 'px'
+    }
+
   prepAnimations = ->
     $('body').addClass 'no-transitions'
     $('#globalnav').css 'width', '0%'
@@ -10,7 +22,6 @@ $(document).ready ->
     $('#index .text-container h6').css 
       'opacity': 0
       'letter-spacing': '30px'
-    return
   prepAnimations()
 
   navActive = null;
@@ -22,13 +33,14 @@ $(document).ready ->
       $('#globalnav .navtoggle .default').css 'left', '-50px'
       $('#globalnav .navtoggle .back').css 'left', '0px'
       $('#globalnav .buttonContainer').fadeIn();
+      $('#globalnav a').css 'pointer-events', ''
     else
       $('#globalnav').css 'width', '0%'
       $('#globalnav .navtoggle .default').css 'left', ''
       $('#globalnav .navtoggle .back').css 'left', ''
       $('#globalnav .buttonContainer').fadeOut();
+      $('#globalnav a').css 'pointer-events', 'none'
     navActive = !navActive
-    return
   
   setAside = ->
     displayImg = $('#display img')
@@ -38,7 +50,6 @@ $(document).ready ->
       img.next('aside').css 'height', img.height()
       img.next('aside').css 'width', img.width()
       i++
-    return
 
   load = ->
     $('body').removeClass 'no-transitions'

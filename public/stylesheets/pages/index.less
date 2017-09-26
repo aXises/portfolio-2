@@ -1,5 +1,13 @@
 #index {
   background-color: @light-shade;
+  padding: 0;
+  background-image: url('../images/index.jpg');
+  .bgOverlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
   header {
     height: 100vh;
     position: relative;
@@ -10,6 +18,7 @@
       .text-main {
         letter-spacing: 15px;
         text-indent: 15px;
+        color: @light-shade;
         .centerXY;
       }
       .corners {
@@ -29,19 +38,19 @@
           width: 50px;
           height: 50px;
           position: absolute;
-          color: @dark-shade;
+          color: @light-shade;
         }
         .cornertl,
         .cornertr {
           top: 0;
-          border-top: @border-dark-std;
+          border-top: @border-std;
           .text-container { 
             top: -40px;
           }
         }
         .cornertl {
           left: 0;
-          border-left: @border-dark-std;
+          border-left: @border-std;
           .text-container { 
             left: -450px;
             text-align: right;
@@ -49,19 +58,19 @@
         }
         .cornertr {
           right: 0;
-          border-right: @border-dark-std;
+          border-right: @border-std;
         }
         .cornerbl,
         .cornerbr {
           bottom: 0;
-          border-bottom: @border-dark-std;
+          border-bottom: @border-std;
           .text-container {
             bottom: -40px;
           }
         }
         .cornerbl {
           left: 0;
-          border-left: @border-dark-std;
+          border-left: @border-std;
           .text-container { 
             left: -450px;
             text-align: right;
@@ -69,7 +78,7 @@
         }
         .cornerbr {
           right: 0;
-          border-right: @border-dark-std;
+          border-right: @border-std;
         }
       }
     }

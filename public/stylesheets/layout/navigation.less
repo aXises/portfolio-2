@@ -3,25 +3,36 @@ nav#globalnav {
   width: 100%;
   height: 80px;
   z-index: 5;
-  background-color: @nav-primary;
+  background-color: rgba(0, 0, 0, 0.6);
   .transition(0.45s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
+  .followBar {
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    height: 4px;
+    width: 120px;
+    background-color: @cyan-const;
+    .transition(0.2s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
+  }
   .buttonContainer {
-    width: 800px;
+    position: absolute;
     height: 100%;
     height: inherit;
     margin: 0;
     display: none;
-    .centerX;
+    right: 250px;
     a {
-      width: 20%;
+      width: 120px;
       height: inherit;
       float: left;
       color: @light-shade;
       cursor: pointer;
+      margin: 0 10px 0 10px;
       h6 {
-        margin: 0;
         width: inherit;
-        text-align: center;
+        border-top: 1px solid @light-shade;
+        margin: 0;
+        padding: 5px;
         .centerY;
         letter-spacing: normal;
         font-weight: 800;
@@ -43,11 +54,11 @@ nav#globalnav {
       position: absolute;
       opacity: 1;
       left: 0px;
+      color: @light-shade;
       .transition.vfast;
     }
     i.back {
       left: 50px;
-      color: @light-shade;
     }
     .disable {
       pointer-events: none;

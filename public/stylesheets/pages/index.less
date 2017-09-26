@@ -1,7 +1,6 @@
 #index {
-  background-color: @light-shade;
+  background-color: @dark-shade;
   padding: 0;
-  background-image: url('../images/index.jpg');
   .bgOverlay {
     position: fixed;
     width: 100%;
@@ -20,6 +19,10 @@
         text-indent: 15px;
         color: @light-shade;
         .centerXY;
+        span {
+          color: transparent;
+          -webkit-text-stroke: 1px @oran-const;
+        }
       }
       .corners {
           width: 100%;

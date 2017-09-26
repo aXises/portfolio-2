@@ -9,6 +9,9 @@ $(document).ready ->
     }
     if $(this).hasClass('ext')
       $('#globalnav .followBar').css 'background-color', '#00bdce'
+      $('#globalnav .divider').css 'border-left', '4px solid #00bdce'
+    else 
+      $('#globalnav .divider').css 'border-left', ''
   , ->
     $('#globalnav .followBar').css {
       'background-color': '',

@@ -5,17 +5,19 @@ $(document).ready ->
     $('#globalnav .followBar').css {
       opacity: 1,
       width: $(this).width(),
-      left: 970 + $(this).position().left + 'px'
+      left: $('#globalnav .buttonContainer').position().left + $(this).position().left + 10 +'px'
     }
+    if $(this).hasClass('ext')
+      $('#globalnav .followBar').css 'background-color', '#00bdce'
   , ->
     $('#globalnav .followBar').css {
+      'background-color': '',
       width: 0,
-      left: 970 + $(this).position().left + 'px'
+      left: $('#globalnav .buttonContainer').position().left + $(this).position().left + 10 + 'px'
     }
 
   prepAnimations = ->
     $('body').addClass 'no-transitions'
-    $('#globalnav').css 'width', '0%'
     $('#index .corners').css 
       'opacity': 0
       'left': '-150px'
@@ -27,19 +29,19 @@ $(document).ready ->
   navActive = null;
 
   navToggle = ->
-    $('#globalnav .navtoggle .default, #globalnav .navtoggle .back').toggleClass 'disable'
+    $('.navtoggle .default,.navtoggle .back').toggleClass 'disable'
     if !navActive
-      $('#globalnav').css 'width', '100%'
-      $('#globalnav .navtoggle .default').css 'left', '-50px'
-      $('#globalnav .navtoggle .back').css 'left', '0px'
+      $('#globalnav').css 'left', '0px'
       $('#globalnav .buttonContainer').fadeIn();
       $('#globalnav a').css 'pointer-events', ''
+      $('.navtoggle .default').css 'left', '-50px'
+      $('.navtoggle .back').css 'left', '0px'
     else
-      $('#globalnav').css 'width', '0%'
-      $('#globalnav .navtoggle .default').css 'left', ''
-      $('#globalnav .navtoggle .back').css 'left', ''
+      $('#globalnav').css 'left', $('#globalnav').width()
       $('#globalnav .buttonContainer').fadeOut();
       $('#globalnav a').css 'pointer-events', 'none'
+      $('.navtoggle .default').css 'left', ''
+      $('.navtoggle .back').css 'left', ''
     navActive = !navActive
   
   setAside = ->

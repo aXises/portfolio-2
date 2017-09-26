@@ -1,5 +1,6 @@
 nav#globalnav {
   position: fixed;
+  left: 100%;
   width: 100%;
   height: 80px;
   z-index: 5;
@@ -11,7 +12,7 @@ nav#globalnav {
     top: 100%;
     height: 4px;
     width: 120px;
-    background-color: @cyan-const;
+    background-color: @oran-const;
     .transition(0.2s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
   }
   .buttonContainer {
@@ -20,8 +21,9 @@ nav#globalnav {
     height: inherit;
     margin: 0;
     display: none;
-    right: 250px;
+    right: 0;
     a {
+      position: relative;
       width: 120px;
       height: inherit;
       float: left;
@@ -37,32 +39,54 @@ nav#globalnav {
         letter-spacing: normal;
         font-weight: 800;
       }
+      i {
+        font-size: 2em;;
+        .centerXY
+      }
+    }
+    a.ext {
+      width: 50px;
     }
   }
-  .navtoggle {
-    font-size: 2.5em;
-    left: 50px;
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-    .centerY;
-    .transition.vfast;
-    &:hover {
+  .externalSites {
+    height: 100%;
+    float: left;
+    margin-left: 25px;
+    &:before {
+      position: relative;
+      top: 30px;
+      left: -215px;
+      content: "";
+      border-left: 1px solid white;
+    }
+  }
+}
 
-    }
-    i {
-      position: absolute;
-      opacity: 1;
-      left: 0px;
-      color: @light-shade;
-      .transition.vfast;
-    }
-    i.back {
-      left: 50px;
-    }
-    .disable {
-      pointer-events: none;
-      opacity: 0;
-    }
+.navtoggle {
+  position: fixed;
+  z-index: 6;
+  font-size: 2.5em;
+  left: 50px;
+  top: 15px;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  .transition.vfast;
+  &:hover {
+
+  }
+  i {
+    position: absolute;
+    opacity: 1;
+    left: 0px;
+    color: @light-shade;
+    .transition.vfast;
+  }
+  i.back {
+    left: 50px;
+  }
+  .disable {
+    pointer-events: none;
+    opacity: 0;
   }
 }

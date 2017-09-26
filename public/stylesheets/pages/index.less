@@ -1,12 +1,6 @@
 #index {
-  background-color: @dark-shade;
+  background-color: @std-bg;
   padding: 0;
-  .bgOverlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-  }
   header {
     height: 100vh;
     position: relative;
@@ -17,7 +11,7 @@
       .text-main {
         letter-spacing: 15px;
         text-indent: 15px;
-        color: @light-shade;
+        color: @dark-shade;
         .centerXY;
         span {
           color: transparent;
@@ -31,9 +25,11 @@
           left: 0;
           .transition(0.75s, cubic-bezier(0.32, 0.21, 0.15, 1.2));
         .text-container {
-          width: 500px;
           position: absolute;
+          white-space: nowrap;
+          overflow: hidden;
           h6 {
+            display: inline-block;
             .transition(0.95s, cubic-bezier(0.71, 0.17, 0.39, 1.01));
           }
         }
@@ -41,7 +37,7 @@
           width: 50px;
           height: 50px;
           position: absolute;
-          color: @light-shade;
+          color: @dark-shade;
         }
         .cornertl,
         .cornertr {
@@ -55,7 +51,7 @@
           left: 0;
           border-left: @border-std;
           .text-container { 
-            left: -450px;
+            right: 0;
             text-align: right;
           }
         }
@@ -75,7 +71,7 @@
           left: 0;
           border-left: @border-std;
           .text-container { 
-            left: -450px;
+            right: 0;
             text-align: right;
           }
         }

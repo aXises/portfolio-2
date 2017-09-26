@@ -1,6 +1,10 @@
 $(document).ready ->
   'use strict'
 
+  $(window).scroll ->
+    if navActive
+      navToggle()
+
   $('#globalnav a').hover ->
     $('#globalnav .followBar').css {
       opacity: 1,

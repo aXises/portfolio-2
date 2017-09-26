@@ -4,8 +4,13 @@ nav#globalnav {
   width: 100%;
   height: 50px;
   z-index: 5;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: @navPrimary;
+  border-bottom: 1px solid transparent;
   .transition(0.45s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
+  &:hover {
+    border-bottom: 1px solid rgba(66, 66, 66, 0.20);
+    .transition(0.2s, ease-in-out);
+  }
   .followBar {
     opacity: 0;
     position: absolute;
@@ -27,12 +32,12 @@ nav#globalnav {
       width: 100px;
       height: inherit;
       float: left;
-      color: @light-shade;
+      color: @navText;
       cursor: pointer;
       margin: 0 10px 0 10px;
       h6 {
         width: inherit;
-        border-top: 1px solid @light-shade;
+        border-top: 1px solid @navText;
         margin: 0;
         padding: 5px;
         letter-spacing: normal;
@@ -69,7 +74,7 @@ nav#globalnav {
   position: fixed;
   z-index: 6;
   font-size: 2.5em;
-  left: 50px;
+  left: 15px;
   cursor: pointer;
   width: 50px;
   height: 50px;
@@ -81,11 +86,16 @@ nav#globalnav {
     position: absolute;
     opacity: 1;
     left: 0px;
-    color: @light-shade;
+    padding: 0 20px 0 20px;
+    color: @navToggle;
     .transition.vfast;
   }
   i.back {
     left: 50px;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      .transition(0.2s, ease-in-out);
+    }
   }
   .disable {
     pointer-events: none;

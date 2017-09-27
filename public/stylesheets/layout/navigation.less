@@ -6,6 +6,9 @@ nav#globalnav {
   z-index: 5;
   background-color: @navPrimary;
   border-bottom: 1px solid transparent;
+  @media (max-width: 850px) {
+    height: 400px;
+  }
   .transition(0.45s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
   &:hover {
     border-bottom: 1px solid rgba(66, 66, 66, 0.20);
@@ -52,6 +55,17 @@ nav#globalnav {
     }
     a.ext {
       width: 35px;
+    }
+    @media (max-width: 850px) {
+      height: initial;
+      right: 20px;
+      .centerY;
+      a {
+        float: none;
+        h6 {
+          position: static;
+        }
+      }
     }
   }
   .externalSites {

@@ -1,3 +1,81 @@
 #portfolio {
-  
+  width: 100%;
+  nav {
+    position: fixed;
+    display: inline-block;
+    padding: 50px 50px 0px 35px;
+    height: 100vh;
+    border-right: @borderOutline;
+    .transition(0.2s, ease-in-out);
+    &:hover {
+      border-right: 1px solid @cyan-const;
+    }
+    .selection {
+      button {
+        border-left: 1px solid @dark-shade;
+        margin-top: 20px;
+      }
+    }
+  }
+  #selectedWorks {
+    margin-left: 195px;
+    width: 100%;
+    .work {
+      height: 600px;
+      background-color: #D8DBDE;
+      overflow: hidden;
+      position: relative;
+      border-bottom: @borderOutline;
+      .info,
+      .name {
+        position: absolute;
+        width: 400px;
+        height: 100%;
+        top: 0;
+        background-color: @navPrimary;
+      }
+      .info {
+        padding: 10px;
+      }
+      .name {
+        width: initial;
+        height: initial;
+        background-color: rgba(244, 244, 244, 0.3);
+        padding: 10px;
+        h1 {
+          margin: 0;
+          font-size: 4em;
+          font-weight: bold;
+          white-space: nowrap;
+        }
+        h5 {
+          text-align: right;
+          color: white;
+        }
+      }
+      &:nth-of-type(1) .info {
+        left: 200px;
+      }
+      &:nth-of-type(1) .name {
+        top: 70%;
+        left: 400px;
+        //color: @oran-const;
+      }
+      &:nth-of-type(2) .info {
+        left: 400px;
+      }
+      &:nth-of-type(2) .name {
+        top: 20%;
+        left: 810px;
+        //color: @cyan-const;
+      }
+      &:nth-of-type(3) .info {
+        left: 950px;
+      }
+      &:nth-of-type(3) .name {
+        top: 40%;
+        left: 400px;
+      }
+    }
+  }
 }

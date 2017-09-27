@@ -71,18 +71,18 @@ $(document).ready ->
     $('#loader').css
       'opacity': 0
       'pointer-events': 'none'
-    setTimeout (->
+    setTimeout ->
       $('#loader').remove()
       $('#index .corners').css 
         'opacity': ''
         'left': ''
-      setTimeout (->
+      setTimeout ->
         $('#index .text-container h6').css 
           'opacity': 1
           'letter-spacing': ''
-      ), 750
+      , 750
       return
-    ), 750
+    , 750
     setAside()
     return
   
@@ -97,8 +97,6 @@ $(document).ready ->
         duration: segment / 0.35 * 10
         step: ->
           $('.progress-text p').text @current.toFixed(2)
-          return
-      return
     if image.isLoaded
       before = loaded
       loaded += segment
@@ -107,10 +105,10 @@ $(document).ready ->
       $('#loader .progress-bar').css 'width', loaded + '%'
     else
       $('.failed').append '<p>Fail to load: ' + image.img.src + '</p>'
-    return
   ).done ->
-    load()
-    return
+    setTimeout ->
+      load()
+    , 1000
 
   $(window).resize ->
     setAside()

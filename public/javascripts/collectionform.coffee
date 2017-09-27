@@ -21,6 +21,7 @@ $(document).ready ->
         if data.parentTeam == $(radio).val()
           $(radio).prop('checked', true)
     if data.showcase == 'true' then $('#extended input[value="true"]').prop 'checked', true else $('#extended input[value="false"]').prop 'checked', true
+    if data.featured == 'true' then $('#featured input[value="true"]').prop 'checked', true else $('#featured input[value="false"]').prop 'checked', true
     i = 0
     while i < dataKeys.length
       key = dataKeys[i]
@@ -57,7 +58,7 @@ $(document).ready ->
 
   $('.new').click ->
     $('#mode-display').text 'Create new item'
-    $('form').attr 'action', 'collection/new'
+    $('form').attr 'action', 'collectiondata/new'
     return
 
   $('.clear').click ->

@@ -20,13 +20,20 @@ html
         - var inputs = [['image', 'text', false], ['name', 'text', false], ['date', 'text', false], ['description', 'textarea', false], ['link', 'text', false], ['status', 'text', false], ['type', 'text', false], ['technologies', 'text', true]]
         - for(var i = 0; i < inputs.length; i++)
           +createInput(inputs[i][0], inputs[i][1], inputs[i][2])
-        .container#Extended
+        .container#extended
           p Showcase website?
           | True 
           input(type="radio" name="showcase" value="true")
           br
           | False 
           input(type="radio" name="showcase" value="false")
+        .container#featured
+          p Feature?
+          | True 
+          input(type="radio" name="featured" value="true")
+          br
+          | False 
+          input(type="radio" name="featured" value="false")
         .container#partOfTeam
           p Parent Team
           p No team

@@ -16,34 +16,9 @@ $(document).ready ->
 
   insertFields = (data) ->
     dataKeys = Object.keys(data)
-    if data.hasItems
-      for id in data.hasItems
-        for checkbox in $('#hasItems input')
-          if id == $(checkbox).val()
-            $(checkbox).prop('checked', true)
-            break
-    if data.hasCollections
-      for id in data.hasCollections
-        for checkbox in $('#hasCollections input')
-          if id == $(checkbox).val()
-            $(checkbox).prop('checked', true)
-            break
     if data.showcase == 'true' then $('#extended input[value="true"]').prop 'checked', true else $('#extended input[value="false"]').prop 'checked', true
-    i = 0
-    while i < dataKeys.length
-      key = dataKeys[i]
-      keyData = data[key]
-      if typeof keyData == 'string' or key == 'Images'
-        addFieldData key, keyData
-      else if typeof keyData == 'object'
-        key_2 = Object.keys(keyData)
-        keyData_2 = keyData
-        j = 0
-        while j < key_2.length
-          addFieldData key + '\\:' + key_2[j], keyData_2[key_2[j]]
-          j++
-      i++
-    return
+    for key in Object.keys(data)
+      addFieldData key, data[key]
 
   addFieldData = (key, data) ->
     field = $('form').find('#' + key).children('[name=' + key + ']')
@@ -56,7 +31,6 @@ $(document).ready ->
       while i < data.length
         $(field).after $(field).clone().css('display', 'block').attr('extra', true).val(data[i])
         i++
-    return
     
   $('.newfield').click ->
     field = $(this).parent().find('input:first-of-type')

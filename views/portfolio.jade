@@ -18,16 +18,29 @@ block content
               p=collection.description
               .container-fluid
                 h5 Project Info
+                  hr
                 each info in infos
                   +Info(info + ' :', collection[info.toLowerCase()])
+                +InfowButton('Project Size :', collection.collectionSize + ' Items', 'View')
+              - if (collection.parentTeamData)
+                .container-fluid
+                  +InfowButton('Part of Team :', collection.parentTeamData.name, 'More Info')
             .name
               h1=collection.name
               h5=collection.for + ' '+ collection.date
 
+  mixin InfowButton(title, desc, btnTxt)
+    .row
+      .col-lg-4
+        p.title=title
+      .col-lg-4
+        p=desc
+      .col-lg-4.link
+        button=btnTxt
   mixin Info(title, desc)
     .row
       .col-lg-4
-        p=title
+        p.title=title
       - if(typeof(desc) == 'object')
         .col-lg-8
           each elem in desc

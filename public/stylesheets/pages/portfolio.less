@@ -26,6 +26,9 @@
       overflow: hidden;
       position: relative;
       border-bottom: @borderOutline;
+      img {
+        pointer-events: none;
+      }
       .info,
       .name {
         position: absolute;
@@ -51,6 +54,36 @@
 
         }
       }
+      .team {
+        position: absolute;
+        height: 100%;
+        top: 100%;
+        .transition(0.45s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
+        img {
+          max-height: 200px;
+          .centerX;
+        }
+        h3,
+        .text {
+          text-align: center;
+        }
+        .teamInfo {
+          margin-top: 220px;
+        }
+        .close {
+          position: absolute;
+          width: 50px;
+          height: 50px;
+          bottom: 10px;
+          left: 10px;
+          opacity: 0.8;
+          i {
+            font-size: 2em;
+            color: @dark-shade;
+            .centerXY;
+          }
+        }
+      }
       .name {
         width: initial;
         height: initial;
@@ -72,7 +105,7 @@
       }
       &:nth-of-type(n+1) .name {
         top: 70%;
-        left: 400px;
+        left: 500px;
         color: @oran-const;
       }
       &:nth-of-type(n+2) .info {

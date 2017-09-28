@@ -121,29 +121,10 @@ $(document).ready ->
     navToggle()
     return
 
-  $('#latest, #featured, #upcoming').hover ->
-    $(this).find('img').css 'transform', 'scale(1.02)'
-    $(this).find('.info').css 'opacity', '1'
-  , -> 
-    $(this).find('img').css 'transform', ''
-    $(this).find('.info').css 'opacity', ''
+  $('.teamInfoView').click ->
+    $(this).closest('.work').find('.team').css 'top', '0'
 
-  $('#portfolio .item a').hover ->
-    $(this).find('img').css 'transform', 'scale(1.02)'
-    $(this).find('aside').css 'opacity', '1'
-  , -> 
-    $(this).find('img').css 'transform', ''
-    $(this).find('aside').css 'opacity', ''
-
-  $('.slide img').click ->
-    main = $('#main-img')
-    main.attr 'src', $(this).attr('src')
-    $('.img-loader').show()
-    main.css 'opacity', 0
-    main.imagesLoaded().done ->
-      main.css 'opacity', 1
-      $('.img-loader').hide()
-      return
-    return
+  $('.close').click ->
+    $(this).closest('.overlay').attr 'style', ''
 
   return

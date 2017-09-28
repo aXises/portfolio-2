@@ -44,7 +44,7 @@ $(document).ready ->
     return
 
   $('.new').click ->
-    $('#mode-display').text 'Create new item'
+    $('#mode-display').text 'Create new collection'
     $('form').attr 'action', 'collectiondata/new'
     return
 

@@ -3,6 +3,13 @@ router = express.Router()
 database = require '../routes/database'
 async = require 'async'
 
+sortDate = (data) ->
+  data.sort (a, b) ->
+    if a.date && b.date
+      a = a.date.split('/').reverse().join('');
+      b = b.date.split('/').reverse().join('');
+      return a > b ? 1 : a < b ? -1 : 0;
+
 router.get '/', (req, res, next) ->
   db = database.getDb()
   colDatas = []
@@ -30,10 +37,13 @@ router.get '/', (req, res, next) ->
           colDatas.push(colData)
           callback()
     , (err) ->
-      if err then throw err
-      res.render 'portfolio', {
-        title: 'AXISIO'
-        selectedCollections: colDatas.reverse()
-      }
+      db.collection('item').find({}).toArray (err, allItems) ->
+        db.collection('collection').find({}).toArray (err, allCollections) ->
+          console.log allItems
+          res.render 'portfolio', {
+            title: 'AXISIO'
+            selectedCollections: colDatas.reverse(),
+            items: sortDate(allItems.concat(allCollections)).reverse()
+          }
 
 module.exports = router

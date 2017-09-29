@@ -40,7 +40,19 @@ block content
             .name
               h1=collection.name
               h5=collection.for + ' '+ collection.date
-
+    #allWorks
+      .container-fluid
+      .container-fluid.allWorkContainer
+        each item in items
+          .item
+            -if(typeof(item.images) == 'object')
+              <img src=#{item.image[0]}>
+            - else
+              <img src=#{item.image}>
+            -if(item.itemType == "collection")
+              .itemType.isCol
+            -else if(item.itemType == "item")
+              .itemType.isItem
   mixin InfowButton(title, desc, btnTxt, cls)
     .row
       .col-lg-4

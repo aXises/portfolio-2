@@ -17,7 +17,8 @@
       }
     }
   }
-  #selectedWorks {
+  #selectedWorks,
+  #allWorks {
     margin-left: 195px;
     width: 100%;
     .work {
@@ -105,7 +106,7 @@
       }
       &:nth-of-type(n+1) .name {
         top: 70%;
-        left: 500px;
+        left: 565px;
         color: @oran-const;
       }
       &:nth-of-type(n+2) .info {
@@ -122,6 +123,36 @@
       &:nth-of-type(n+3) .name {
         top: 40%;
         left: 400px;
+      }
+    }
+  }
+  #allWorks {
+    width: 90%;
+    .allWorkContainer {
+      .item {
+        position: relative;
+        float: left;
+        margin-top: 10px;
+        img {
+          height: 200px;
+          max-width: 100%;
+          max-height: 100%;
+        }
+        .itemType {
+          position: absolute;
+          width: 10px;
+          height: 10px;
+          top: 10px;
+          left: 10px;
+          border-radius: 5px;
+          box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(255, 255, 255, 0.60);
+        }
+        .isItem{
+          background-color: @oran-const;
+        }
+        .isCol{
+          background-color: @cyan-const;
+        }
       }
     }
   }

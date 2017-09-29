@@ -7,6 +7,7 @@ db = null
 router.post '/new', (req, res, next) ->
   req.body._id = database.getId()
   showcase = req.body.showcase == 'true'
+  req.body.itemType = 'collection'
   db.insertOne(req.body).then () ->
     if showcase
       database.generateShowcase 'collections', req.params.id, req.body

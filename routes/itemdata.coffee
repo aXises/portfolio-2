@@ -13,6 +13,7 @@ getDelta = (arr1, arr2) ->
 router.post '/new', (req, res, next) ->
   req.body._id = database.getId()
   showcase = req.body.showcase == 'true'
+  req.body.itemType = 'item'
   db.insertOne(req.body).then () ->
     if showcase
       database.generateShowcase 'items', req.params.id, req.body

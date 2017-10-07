@@ -17,6 +17,7 @@ $(document).ready ->
       $('.itemInfoOverlay .parent').removeClass 'disabled'
     if data.parentTeam 
       $('.itemInfoOverlay .team').removeClass 'disabled'
+    $('.itemInfoOverlay .loading').fadeOut()
 
   setGrid = (callback) ->
     $(".allWorkContainer .row").rowGrid {
@@ -173,6 +174,7 @@ $(document).ready ->
       type: 'POST'
 
   $('.item').click ->
+    $('.itemInfoOverlay .loading').show()
     $('.itemInfoOverlay').addClass 'overlayVisible'
     $('
       .itemInfoOverlay .showcase, 

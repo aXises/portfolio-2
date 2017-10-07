@@ -5,6 +5,12 @@ $(document).ready ->
     if navActive
       navToggle()
 
+  generateInfo = (data) ->
+    $('.itemInfoOverlay .title').text data.name
+    $('.itemInfoOverlay .date').text data.date
+    $('.itemInfoOverlay .desc').text data.description
+    $('.itemInfoOverlay .title').text data.title
+
   setGrid = (callback) ->
     $(".allWorkContainer .row").rowGrid {
       minMargin: 10, 
@@ -152,6 +158,20 @@ $(document).ready ->
   $(window).resize ->
     setAside()
     return
+
+  getData = (type, id) ->
+    $.ajax
+      url: type + 'data/getData'
+      data: 'id': id
+      type: 'POST'
+
+  $('.item').click ->
+    $('.itemInfoOverlay').addClass 'overlayVisible'
+    getData($(this).attr('id').split(':')[0], $(this).attr('id').split(':')[1]).then (res) ->
+      generateInfo res
+
+  $('.closeOverlay').click ->
+    $('.itemInfoOverlay').removeClass 'overlayVisible'
 
   $('nav a').click (event) ->
     return

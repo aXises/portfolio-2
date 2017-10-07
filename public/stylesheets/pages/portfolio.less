@@ -188,11 +188,34 @@
     }
     .itemInfoOverlay {
       position: fixed;
-      height: 100vh;
-      width: 100%;
+      top: -600px;
+      height: 600px;
+      width: 90%;
       margin-left: -15px;
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: @navPrimary;
+      z-index: 2;
+      padding: 40px;
+      .transition(0.2s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
+      .title {
+        font-weight: bold;
+      }
+      .date {
+        color: @oran-const;
+      }
+      .buttonContainer {
+        button {
+          display: block;
+          width: 200px;
+          padding: 10px;
+          border: 1px solid black;
+          margin: auto;
+          margin-top: 15%;
+        }
+      }
     }
+  }
+  .overlayVisible {
+    top: 0 !important;
   }
   .isItem{
     background-color: @oran-const;

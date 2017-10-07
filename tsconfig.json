@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
-    "types" : ["node"]
-  },
-  "typeRoots": [
-    "typings/global",
-    "typings/modules",
-    "node_modules/@types"
-  ]
+    "types": ["node"],
+    "typeRoots": ["node_modules/@types"]
+  }
 }

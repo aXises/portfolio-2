@@ -1,7 +1,3 @@
-declare var require: NodeRequire;
-declare var module: NodeModule;
-declare var __dirname: string;
-
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
 var fs = require('fs');

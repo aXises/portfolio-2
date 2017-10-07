@@ -7,7 +7,6 @@ install:
   - npm install
   - npm install coffeescript -g
   - npm install typescript -g
-  - npm install @types/node --save -g
 before_test:
  - coffee -c .
  - tsc routes/database

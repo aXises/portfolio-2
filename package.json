@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha"
+    "test": "mocha",
+    "postinstall": "bower install && coffee -c . && tsc routes/database"
   },
   "author": "aXises",
   "license": "BSD 3-Clause",

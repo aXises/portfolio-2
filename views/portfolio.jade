@@ -57,21 +57,24 @@ block content
               p.desc
             .col-lg-3
               .buttonContainer
-                button Showcase View
-                button Parent Collection
-                button Team Information
+                a.disabled.showcase Showcase View
+                a.disabled.parent Parent Collection
+                a.disabled.team Team Information
                 button.closeOverlay Close
       .container-fluid.allWorkContainer
-        each item in items
-          .item
-            -if(typeof(item.images) == 'object')
-              <img src=#{item.image[0]}>
-            - else
-              <img src=#{item.image}>
-            -if(item.itemType == "collection")
-              .itemType.isCol
-            -else if(item.itemType == "item")
-              .itemType.isItem
+        .row
+          each item in items
+            .item(id=item.itemType + ':' + item._id)
+              -if(typeof(item.images) == 'object')
+                <img src=#{item.image[0]}>
+              - else
+                <img src=#{item.image}>
+              -if(item.itemType == "collection")
+                .itemType.isCol
+              -else if(item.itemType == "item")
+                .itemType.isItem
+        
+
   mixin InfowButton(title, desc, btnTxt, cls)
     .row
       .col-lg-4

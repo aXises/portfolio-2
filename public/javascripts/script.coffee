@@ -10,6 +10,13 @@ $(document).ready ->
     $('.itemInfoOverlay .date').text data.date
     $('.itemInfoOverlay .desc').text data.description
     $('.itemInfoOverlay .title').text data.title
+    if data.showcase == 'true'
+      $('.itemInfoOverlay .showcase').removeClass 'disabled'
+      $('.itemInfoOverlay .showcase').attr 'href', 'showcases/' + data.itemType + '/' + data._id
+    if data.parent 
+      $('.itemInfoOverlay .parent').removeClass 'disabled'
+    if data.parentTeam 
+      $('.itemInfoOverlay .team').removeClass 'disabled'
 
   setGrid = (callback) ->
     $(".allWorkContainer .row").rowGrid {
@@ -167,6 +174,11 @@ $(document).ready ->
 
   $('.item').click ->
     $('.itemInfoOverlay').addClass 'overlayVisible'
+    $('
+      .itemInfoOverlay .showcase, 
+      .itemInfoOverlay .parent,
+      .itemInfoOverlay .team
+    ').addClass 'disabled'
     getData($(this).attr('id').split(':')[0], $(this).attr('id').split(':')[1]).then (res) ->
       generateInfo res
 

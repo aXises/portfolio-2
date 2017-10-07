@@ -14,7 +14,7 @@ router.post '/new', (req, res, next) ->
     res.redirect 'back'
 
 router.post '/getData', (req, res, next) ->
-  db.findOne({'_id': database.getId req.body.id}).then (result) ->
+  database.getDb().collection('collection').findOne({'_id': database.getId req.body.id}).then (result) ->
     res.send result
 
 router.post '/delete', (req, res, next) ->

@@ -41,6 +41,9 @@ $(document).ready ->
       }
       setGrid ->
         $('#selectedWorks').fadeOut()
+        setTimeout ->
+          $('#allWorks .loading').fadeOut()
+        , 500
     else if view == 'selectedWorks'
       $('#selectedWorks').fadeIn()
       $('.vaExt').css {

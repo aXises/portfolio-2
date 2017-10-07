@@ -176,45 +176,6 @@
       z-index: 2;
       padding: 40px;
       .transition(0.2s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
-      .loading {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: @std-bg;
-        z-index: 3;
-        .anim {
-          .centerXY;
-          .dot {
-            width: 10px;
-            height: 10px;
-            float: left;
-            margin: 5px;
-            border-radius: 10px;
-            border: 1px solid @dark-shade;
-            background-color: transparent;
-            animation: shift 1.5s infinite;
-            &:nth-child(2) {
-              animation-delay: 0.5s;
-            }
-            &:nth-child(3) {
-              animation-delay: 1s;
-            }
-          }
-        }
-        @keyframes shift {
-          0% {
-            background-color: transparent;
-          }
-          50% {
-            background-color: @oran-const;
-          }
-          100% {
-            background-color: transparent;
-          }
-        }
-      }
       .title {
         font-weight: bold;
       }
@@ -249,5 +210,44 @@
   }
   .isCol{
     background-color: @cyan-const;
+  }
+  .loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: @std-bg;
+    z-index: 3;
+    .anim {
+      .centerXY;
+      .dot {
+        width: 10px;
+        height: 10px;
+        float: left;
+        margin: 5px;
+        border-radius: 10px;
+        border: 1px solid @dark-shade;
+        background-color: transparent;
+        animation: shift 1.5s infinite;
+        &:nth-child(2) {
+          animation-delay: 0.5s;
+        }
+        &:nth-child(3) {
+          animation-delay: 1s;
+        }
+      }
+    }
+    @keyframes shift {
+      0% {
+        background-color: transparent;
+      }
+      50% {
+        background-color: @oran-const;
+      }
+      100% {
+        background-color: transparent;
+      }
+    }
   }
 }

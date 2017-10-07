@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
     "types" : ["node"]
-  }
+  },
+  "typeRoots": [
+    "typings/global",
+    "typings/modules"
+  ]
 }

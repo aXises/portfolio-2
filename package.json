@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "test": "mocha",
-    "postinstall": "bower install && coffee -c . && tsc routes/database"
+    "postinstall": "bower install && coffee -c . && tsc"
   },
   "author": "aXises",
   "license": "BSD 3-Clause",
@@ -17,6 +17,7 @@
     "@types/node": "^8.0.30",
     "async": "^2.5.0",
     "body-parser": "~1.17.1",
+    "bower": "^1.8.2",
     "coffeescript": "^1.12.7",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",

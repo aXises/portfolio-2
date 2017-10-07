@@ -5,6 +5,37 @@ $(document).ready ->
     if navActive
       navToggle()
 
+  setGrid = (callback) ->
+    $(".allWorkContainer .row").rowGrid {
+      minMargin: 10, 
+      maxMargin: 20, 
+      itemSelector: '.item',
+      resize: true
+    }
+    typeof callback == 'function' && callback()
+
+  setCurrentView = (view) ->
+    if view == 'allWorks'
+      $('.vaExt').css {
+        top: 0,
+        opacity: 1,
+        'pointer-events': 'all'
+      }
+      setGrid ->
+        $('#selectedWorks').fadeOut()
+    else if view == 'selectedWorks'
+      $('#selectedWorks').fadeIn()
+      $('.vaExt').css {
+        top: '',
+        opacity: ''
+      }
+
+  $('.swSelec').click ->
+    setCurrentView 'selectedWorks'
+
+  $('.vaSelec').click ->
+    setCurrentView 'allWorks'
+
   $('.elem-container a').hover ->
     $(this).css 'border-color', '#00bdce'
   , ->
@@ -66,6 +97,7 @@ $(document).ready ->
       i++
 
   load = ->
+    setGrid()
     $('body').removeClass 'no-transitions'
     $('body').css 'overflow-y', 'auto'
     $('#loader').css
@@ -81,7 +113,6 @@ $(document).ready ->
           'opacity': 1
           'letter-spacing': ''
       , 750
-      return
     , 750
     setAside()
     return

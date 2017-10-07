@@ -15,12 +15,40 @@
         border-left: 1px solid @dark-shade;
         margin-top: 20px;
       }
+      .vaExt {
+        position: relative;
+        top: 100px;
+        opacity: 0;
+        pointer-events: none;
+        .transition(0.2s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
+        .selecItem,
+        .selecCol {
+          width: 100%;
+          text-align: left;
+          font-size: 12px;
+          border: none;
+          text-indent: 25px;
+        }
+        .row {
+          position: relative;
+          .itemType {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: 25px;
+            left: 10px;
+            border-radius: 5px;
+          }
+        }
+      }
     }
   }
   #selectedWorks,
   #allWorks {
     margin-left: 195px;
     width: 100%;
+    position: relative;
+    z-index: 2;
     .work {
       height: 600px;
       background-color: #D8DBDE;
@@ -128,11 +156,18 @@
   }
   #allWorks {
     width: 90%;
+    top: 0;
+    z-index: 1;
+    padding-right: 15px;
+    padding-left: 15px;
+    overflow-y: scroll;
     .allWorkContainer {
       .item {
         position: relative;
         float: left;
         margin-top: 10px;
+        cursor: pointer;
+        .transition(0.45s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
         img {
           height: 200px;
           max-width: 100%;
@@ -147,13 +182,20 @@
           border-radius: 5px;
           box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(255, 255, 255, 0.60);
         }
-        .isItem{
-          background-color: @oran-const;
-        }
-        .isCol{
-          background-color: @cyan-const;
-        }
       }
     }
+    .itemInfoOverlay {
+      position: fixed;
+      height: 100vh;
+      width: 100%;
+      margin-left: -15px;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  }
+  .isItem{
+    background-color: @oran-const;
+  }
+  .isCol{
+    background-color: @cyan-const;
   }
 }

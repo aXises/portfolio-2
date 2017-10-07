@@ -4,6 +4,7 @@
   },
   "typeRoots": [
     "typings/global",
-    "typings/modules"
+    "typings/modules",
+    "node_modules/@types"
   ]
 }

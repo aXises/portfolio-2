@@ -21,6 +21,10 @@ $(document).ready ->
         opacity: 1,
         'pointer-events': 'all'
       }
+      $('#allWorks').css {
+        height: 'initial',
+        overflow: 'scroll'
+      }
       setGrid ->
         $('#selectedWorks').fadeOut()
     else if view == 'selectedWorks'
@@ -28,6 +32,10 @@ $(document).ready ->
       $('.vaExt').css {
         top: '',
         opacity: ''
+      }
+      $('#allWorks').css {
+        height: '',
+        overflow: ''
       }
 
   $('.swSelec').click ->

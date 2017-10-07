@@ -63,11 +63,12 @@
         position: absolute;
         width: 400px;
         height: 100%;
-        top: 0;
         background-color: @navPrimary;
       }
       .info {
         padding: 10px;
+        left: 200px;
+        top: 0;
         .title {
           font-weight: 600;
         }
@@ -118,6 +119,8 @@
         height: initial;
         background-color: rgba(244, 244, 244, 0.3);
         padding: 10px;
+        left: 650px;
+        bottom: 0;
         h1 {
           margin: 0;
           font-size: 4em;
@@ -128,29 +131,6 @@
           text-align: right;
           color: white;
         }
-      }
-      &:nth-of-type(n+1) .info {
-        left: 200px;
-      }
-      &:nth-of-type(n+1) .name {
-        top: 70%;
-        left: 565px;
-        color: @oran-const;
-      }
-      &:nth-of-type(n+2) .info {
-        left: 400px;
-      }
-      &:nth-of-type(n+2) .name {
-        top: 20%;
-        left: 810px;
-        color: @cyan-const;
-      }
-      &:nth-of-type(n+3) .info {
-        left: 950px;
-      }
-      &:nth-of-type(n+3) .name {
-        top: 40%;
-        left: 400px;
       }
     }
   }
@@ -222,7 +202,6 @@
               animation-delay: 1s;
             }
           }
-
         }
         @keyframes shift {
           0% {

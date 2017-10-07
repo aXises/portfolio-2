@@ -23,7 +23,7 @@ $(document).ready ->
       }
       $('#allWorks').css {
         height: 'initial',
-        overflow: 'scroll'
+        overflow: 'auto'
       }
       setGrid ->
         $('#selectedWorks').fadeOut()

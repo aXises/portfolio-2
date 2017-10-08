@@ -1,3 +1,5 @@
+image:
+  - Visual Studio 2017
 environment:
   nodejs_version: "6"
 cache:
@@ -9,8 +11,10 @@ install:
   - npm install coffeescript -g
   - npm install typescript -g
 before_test:
- - coffee -c .
- - tsc --module commonjs routes/database
+  - coffee -v
+  - tsc -v
+  - coffee -c .
+  - tsc --module commonjs routes/database
 test_script:
   - node --version
   - npm --version

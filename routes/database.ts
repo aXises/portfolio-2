@@ -1,7 +1,13 @@
-var MongoClient = require('mongodb').MongoClient;
-var ObjectID = require('mongodb').ObjectID;
-var fs = require('fs');
-var async = require('async');
+declare var module:any;
+declare var __dirname:any;
+
+import * as mongodb from 'mongodb';
+import * as fs from 'fs';
+import * as async from 'async';
+
+var MongoClient = mongodb.MongoClient;
+var ObjectID = mongodb.ObjectID;
+
 var URICS: string;
 var db;
 
@@ -36,34 +42,34 @@ module.exports = {
 				if (!fs.existsSync(path + '/index.html')) {
 					fs.writeFile(path + '/index.jade', 'div Markup for ' + data.name + ' ' + id, function(err) {
 						if (err) throw err;
-						callback()
-					})
+						callback();
+					});
 				}
 			},
 			function(callback) {
 				if (!fs.existsSync(path + '/style.css')) {
 					fs.writeFile(path + '/style.css', '/* Stylesheet for ' + data.name + ' ' + id +' */', function(err) {
 						if (err) throw err;
-						callback()
-					})
+						callback();
+					});
 				}
 			},
 			function(callback) {
 				if (!fs.existsSync(path + '/script.js')) {
 					fs.writeFile(path + '/script.js', '// Script for ' + data.name + ' ' + id, function(err) {
 						if (err) throw err;
-						callback()
-					})
+						callback();
+					});
 				}
 			},
 			function(callback) {
 				fs.writeFile(path + '/data.json', JSON.stringify(data), function(err) {
 					if (err) throw err;
-					callback()
-				})
+					callback();
+				});
 			}
 		], function () {
-			console.log('generated files')
+			console.log('generated files');
 		});
   }
 };

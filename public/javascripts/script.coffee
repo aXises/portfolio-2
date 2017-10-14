@@ -17,11 +17,6 @@ $(document).ready ->
         scrollTop: $(href).offset().top
       }, 350
 
-  $('.elem-container a').hover ->
-    $(this).css 'border-color', '#00bdce'
-  , ->
-    $(this).css 'border-color', ''
-
   $('#globalnav a').hover ->
     $('#globalnav .followBar').css {
       opacity: 1,

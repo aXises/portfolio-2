@@ -20,7 +20,23 @@ block content
       .container-fluid
         each collection in selectedCollections
           .row.work
-            <img src=#{collection.image} />
+            .container-fluid.head
+              .shift
+                <img src=#{collection.image} />
+                .name
+                  h1=collection.name
+                  h5=collection.for
+                  h6=collection.date
+              .buttonContainer
+                .col-lg-6.col
+                  a(herf="")
+                    button
+                      i.ion-stats-bars
+                .col-lg-6.col
+                  a
+                    button
+                      i.ion-ios-lightbulb-outline
+              
             .container.info
                 p=collection.description
                 .container-fluid
@@ -46,7 +62,6 @@ block content
                   i.ion-ios-close-empty
             .name
               h1=collection.name
-              h5=collection.for + ' '+ collection.date
     #allWorks
       .loading
         .anim

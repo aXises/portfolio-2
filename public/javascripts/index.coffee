@@ -6,3 +6,4 @@ $(document).ready ->
   , ->
     $(this).css 'border-color', ''
 
+  particlesJS.load 'pbg', 'other/particlesjs.json'

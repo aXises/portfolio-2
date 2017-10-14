@@ -21,6 +21,7 @@
     "move.js": "^0.3.3",
     "reset-css": "^2.2.0",
     "Ionicons": "ionicons#^2.0.1",
-    "rowGrid.js": "^1.0.6"
+    "rowGrid.js": "^1.0.6",
+    "particles.js": "^2.0.0"
   }
 }

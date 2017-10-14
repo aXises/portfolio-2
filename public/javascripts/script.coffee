@@ -112,11 +112,11 @@ $(document).ready ->
       loaded += segment
       after = loaded
       animateText before, after
-      $('#loader .progress-bar').css 'width', loaded + '%'
     else
       $('.failed').append '<p>Fail to load: ' + image.img.src + '</p>'
   ).done ->
     setTimeout ->
+      $('.progress-text p').text 100
       load()
     , 1000
 

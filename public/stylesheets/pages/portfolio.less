@@ -16,6 +16,12 @@
         border-left: 1px solid @dark-shade;
         margin-top: 20px;
       }
+      a {
+        margin-top: 20px;
+        display: block;
+        color: @dark2Shade;
+        text-align: center;
+      }
       .vaExt {
         position: relative;
         top: 100px;
@@ -95,7 +101,7 @@
               width: 100px;
               border: @borderOutline;
               border-radius: 25px;
-              color: grey;
+              color: @dark2Shade;
               i {
                 font-size: 2em;
                 .centerXY;
@@ -104,16 +110,17 @@
           }
         }
       }
-      .info {
+      .info,
+      .team {
         display: none;
-        position: absolute;
         width: 400px;
-        height: 95%;
+        height: 600px;
         background-color: @navPrimary;
         padding: 10px;
         right: 50px;
         top: 0;
         border-bottom: @borderOutline;
+        .centerY;
         .title {
           font-weight: 600;
         }
@@ -130,9 +137,6 @@
         }
       }
       .team {
-        position: absolute;
-        height: 100%;
-        top: 100%;
         .transition(0.45s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
         img {
           max-height: 200px;

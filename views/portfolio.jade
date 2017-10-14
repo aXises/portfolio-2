@@ -6,6 +6,9 @@ block content
       .selection.container-fluid
         .row
           button.swSelec Selected Works
+          .container-fluid
+            each collection in selectedCollections
+              a=collection.name
         .row
           button.va.vaSelec View All
           .container-fluid.va.vaExt
@@ -60,8 +63,6 @@ block content
                   +Info('Members :', collection.parentTeamData.members)
                 .close
                   i.ion-ios-close-empty
-            .name
-              h1=collection.name
     #allWorks
       .loading
         .anim

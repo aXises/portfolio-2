@@ -30,7 +30,7 @@ $(document).ready ->
 
   setCurrentView = (view) ->
     if view == 'allWorks'
-      $('.vaExt').css {
+      $('.va').css {
         top: 0,
         opacity: 1,
         'pointer-events': 'all'
@@ -46,7 +46,7 @@ $(document).ready ->
         , 500
     else if view == 'selectedWorks'
       $('#selectedWorks').fadeIn()
-      $('.vaExt').css {
+      $('.va').css {
         top: '',
         opacity: ''
       }

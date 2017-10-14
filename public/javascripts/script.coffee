@@ -5,6 +5,18 @@ $(document).ready ->
     if navActive
       navToggle()
 
+  $('a').click (e) ->
+    e.preventDefault()
+    href = $(this).attr 'href'
+    if !$(this).hasClass 'anchor'
+      $('body').fadeOut 250, ->
+        window.location = href
+    else
+      console.log $(href).offset()
+      $('html, body').animate {
+        scrollTop: $(href).offset().top
+      }, 350
+
   $('.elem-container a').hover ->
     $(this).css 'border-color', '#00bdce'
   , ->
@@ -83,7 +95,6 @@ $(document).ready ->
       , 750
     , 750
     setAside()
-    return
   
   imagesTotal = $('img').length
   segment = 100 / imagesTotal
@@ -111,7 +122,6 @@ $(document).ready ->
 
   $(window).resize ->
     setAside()
-    return
 
   $('.navtoggle').click ->
     navToggle()
@@ -119,4 +129,3 @@ $(document).ready ->
   $('.close').click ->
     $(this).closest('.overlay').attr 'style', ''
 
-  return

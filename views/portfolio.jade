@@ -8,7 +8,7 @@ block content
           button.swSelec Selected Works
           .container-fluid
             each collection in selectedCollections
-              a=collection.name
+              a.anchor(href='#'+collection._id)=collection.name
         .row
           button.va.vaSelec View All
           .container-fluid.va.vaExt
@@ -22,7 +22,7 @@ block content
       - var infos = ['Type', 'Status', 'Technologies']
       .container-fluid
         each collection in selectedCollections
-          .row.work
+          .row.work(id=collection._id)
             .container-fluid.head
               .shift
                 <img src=#{collection.image} />

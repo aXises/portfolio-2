@@ -38,13 +38,14 @@ router.post '/update/:id', (req, res, next) ->
     res.redirect 'back'
 
 router.get '/', (req, res, next) ->
-  db = database.getDb().collection('item')
-  db.find({}).toArray (err, items) ->
-    database.getDb().collection('collection').find({}).toArray (err, collections) ->
-      res.render 'itemdata',
-        itemKeys: Object.keys items
-        items: items
-        collectionKeys: Object.keys collections
-        collections: collections
+  if express().get('env') == 'development'
+    db = database.getDb().collection('item')
+    db.find({}).toArray (err, items) ->
+      database.getDb().collection('collection').find({}).toArray (err, collections) ->
+        res.render 'itemdata',
+          itemKeys: Object.keys items
+          items: items
+          collectionKeys: Object.keys collections
+          collections: collections
 
 module.exports = router

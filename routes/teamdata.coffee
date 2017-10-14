@@ -42,10 +42,11 @@ router.post '/update/:id', (req, res, next) ->
     res.redirect 'back'
 
 router.get '/', (req, res, next) ->
-  db = database.getDb().collection('team')
-  db.find({}).toArray (err, teams) ->
-    res.render 'teamdata',
-      teamKeys: Object.keys(teams),
-      teams: teams,
+  if express().get('env') == 'development'
+    db = database.getDb().collection('team')
+    db.find({}).toArray (err, teams) ->
+      res.render 'teamdata',
+        teamKeys: Object.keys(teams),
+        teams: teams,
 
 module.exports = router

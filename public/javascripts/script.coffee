@@ -12,7 +12,6 @@ $(document).ready ->
       $('body').fadeOut 250, ->
         window.location = href
     else
-      console.log $(href).offset()
       $('html, body').animate {
         scrollTop: $(href).offset().top
       }, 350

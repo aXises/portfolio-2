@@ -36,16 +36,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // views setup
 app.use('/', index);
 app.use('/users', users);
-//app.use('/Works', works);
 app.use('/portfolio', portfolio);
 app.use('/showcases', showcases);
 
-// set environment
-if (app.get('env') === 'development') {
-  app.use('/itemdata', itemData);
-  app.use('/collectiondata', collectionData);
-  app.use('/teamdata', teamData);
-}
+app.use('/itemdata', itemData);
+app.use('/collectiondata', collectionData);
+app.use('/teamdata', teamData);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

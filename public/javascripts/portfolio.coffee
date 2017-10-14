@@ -21,16 +21,16 @@ $(document).ready ->
       $('.itemInfoOverlay .team').removeClass 'disabled'
     $('.itemInfoOverlay .loading').fadeOut()
 
-  setGrid = (callback) ->
+  setGrid = (selec, callback) ->
     $(".allWorkContainer .row").rowGrid {
-      minMargin: 10, 
-      maxMargin: 20, 
-      itemSelector: '.item',
-      resize: true
+      minMargin: 5
+      maxMargin: 10
+      itemSelector: selec
     }
     typeof callback == 'function' && callback()
 
   setCurrentView = (view) ->
+    $('#allWorks .loading').fadeIn()
     if view == 'allWorks'
       $('.va').css {
         top: 0,
@@ -41,7 +41,7 @@ $(document).ready ->
         height: 'initial',
         overflow: 'auto'
       }
-      setGrid ->
+      setGrid '.post', ->
         $('#selectedWorks').fadeOut()
         setTimeout ->
           $('#allWorks .loading').fadeOut()
@@ -57,7 +57,18 @@ $(document).ready ->
         overflow: ''
       }
 
-  $('.item').click ->
+  $('.anchor').click ->
+    setCurrentView('selectedWorks')
+
+  $('.selecItem').click ->
+    $('.collection').hide()
+    setGrid '.item'
+
+  $('.selecCol').click ->
+    $('.item').hide()
+    setGrid '.collection'
+
+  $('.post').click ->
     $('.itemInfoOverlay .loading').show()
     $('.itemInfoOverlay').addClass 'overlayVisible'
     $('

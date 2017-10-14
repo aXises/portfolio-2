@@ -90,7 +90,7 @@ block content
       .container-fluid.allWorkContainer
         .row
           each item in items
-            .item(id=item.itemType + ':' + item._id)
+            .post(id=item.itemType + ':' + item._id class=item.itemType)
               -if(typeof(item.images) == 'object')
                 <img src=#{item.image[0]}>
               - else
@@ -99,7 +99,26 @@ block content
                 .itemType.isCol
               -else if(item.itemType == "item")
                 .itemType.isItem
-        
+          each item in items
+            .post(id=item.itemType + ':' + item._id class=item.itemType)
+              -if(typeof(item.images) == 'object')
+                <img src=#{item.image[0]}>
+              - else
+                <img src=#{item.image}>
+              -if(item.itemType == "collection")
+                .itemType.isCol
+              -else if(item.itemType == "item")
+                .itemType.isItem
+          each item in items
+            .post(id=item.itemType + ':' + item._id class=item.itemType)
+              -if(typeof(item.images) == 'object')
+                <img src=#{item.image[0]}>
+              - else
+                <img src=#{item.image}>
+              -if(item.itemType == "collection")
+                .itemType.isCol
+              -else if(item.itemType == "item")
+                .itemType.isItem
 
   mixin InfowButton(title, desc, btnTxt, cls)
     .row
@@ -120,3 +139,4 @@ block content
       - else
         .col-lg-8
           p=desc
+      script(type="text/javascript" src="/javascripts/portfolio.js")

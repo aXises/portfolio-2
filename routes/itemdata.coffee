@@ -47,5 +47,9 @@ router.get '/', (req, res, next) ->
           items: items
           collectionKeys: Object.keys collections
           collections: collections
-
+  else 
+    err = new Error('Forbidden')
+    err.status = 403
+    next(err)
+    
 module.exports = router

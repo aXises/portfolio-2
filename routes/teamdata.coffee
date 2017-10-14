@@ -48,5 +48,9 @@ router.get '/', (req, res, next) ->
       res.render 'teamdata',
         teamKeys: Object.keys(teams),
         teams: teams,
-
+  else 
+    err = new Error('Forbidden')
+    err.status = 403
+    next(err)
+    
 module.exports = router

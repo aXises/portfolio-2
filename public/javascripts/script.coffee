@@ -116,7 +116,7 @@ $(document).ready ->
       $('.failed').append '<p>Fail to load: ' + image.img.src + '</p>'
   ).done ->
     setTimeout ->
-      $('.progress-text p').text 100
+      $('.progress-text p').text '100.00'
       load()
     , 1000
 

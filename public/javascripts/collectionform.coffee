@@ -21,21 +21,9 @@ $(document).ready ->
         if data.parentTeam == $(radio).val()
           $(radio).prop('checked', true)
     if data.showcase == 'true' then $('#extended input[value="true"]').prop 'checked', true else $('#extended input[value="false"]').prop 'checked', true
-    i = 0
-    while i < dataKeys.length
-      key = dataKeys[i]
-      keyData = data[key]
-      if typeof keyData == 'string' or key == 'Images'
-        addFieldData key, keyData
-      else if typeof keyData == 'object'
-        key_2 = Object.keys(keyData)
-        keyData_2 = keyData
-        j = 0
-        while j < key_2.length
-          addFieldData key + '\\:' + key_2[j], keyData_2[key_2[j]]
-          j++
-      i++
-    return
+    if data.featured == 'true' then $('#featured input[value="true"]').prop 'checked', true else $('#featured input[value="false"]').prop 'checked', true
+    for key in Object.keys(data)
+      addFieldData key, data[key]
 
   addFieldData = (key, data) ->
     field = $('form').find('#' + key).children('[name=' + key + ']')
@@ -56,8 +44,8 @@ $(document).ready ->
     return
 
   $('.new').click ->
-    $('#mode-display').text 'Create new item'
-    $('form').attr 'action', 'collection/new'
+    $('#mode-display').text 'Create new collection'
+    $('form').attr 'action', 'collectiondata/new'
     return
 
   $('.clear').click ->

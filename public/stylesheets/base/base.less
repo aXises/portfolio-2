@@ -36,15 +36,25 @@ header#items {
   }
 }
 
+.orange {
+  color: @oran-const;
+}
+
 section {
   width: 100%;
   position: relative;
   z-index: 1;
 }
 
+button {
+  background: none;
+  outline: none;
+  border: none;
+}
+
 body::-webkit-scrollbar {
   width: 10px;
-  background-color: @light-shade;
+  background-color: @std-bg;
 }
 
 body::-webkit-scrollbar-thumb {

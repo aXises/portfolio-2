@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "mocha"
+    "test": "mocha",
+    "postinstall": "bower install && coffee -c . && tsc"
   },
   "author": "aXises",
   "license": "BSD 3-Clause",
@@ -13,9 +14,9 @@
     "url": "https://github.com/aXises/portfolio-2"
   },
   "dependencies": {
-    "@types/node": "^8.0.30",
     "async": "^2.5.0",
     "body-parser": "~1.17.1",
+    "bower": "^1.8.2",
     "coffeescript": "^1.12.7",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
@@ -28,5 +29,8 @@
     "request": "^2.81.0",
     "serve-favicon": "~2.4.2",
     "typescript": "^2.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.33"
   }
 }

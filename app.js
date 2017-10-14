@@ -12,8 +12,11 @@ var app = express();
 // routes setup
 var index = require('./routes/index');
 var users = require('./routes/users');
-//var works = require('./routes/works');
-//var portfolio  = require('./routes/portfolio');
+var portfolio = require('./routes/portfolio');
+var showcases = require('./routes/showcases');
+var itemData = require('./routes/itemdata');
+var collectionData = require('./routes/collectiondata');
+var teamData = require('./routes/teamdata');
 
 // middleware setup
 app.use(lessMiddleware(__dirname + '/public'));
@@ -34,13 +37,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 //app.use('/Works', works);
-//app.use('/portfolio', portfolio);
+app.use('/portfolio', portfolio);
+app.use('/showcases', showcases);
 
 // set environment
 if (app.get('env') === 'development') {
-  var itemData = require('./routes/itemdata');
-  var collectionData = require('./routes/collectiondata');
-  var teamData = require('./routes/teamdata');
   app.use('/itemdata', itemData);
   app.use('/collectiondata', collectionData);
   app.use('/teamdata', teamData);

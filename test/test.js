@@ -4,7 +4,7 @@ var http = require('http');
 var app = require('../app');
 var database = require('../routes/database');
 var origin = 'http://localhost:3000';
-var testLinks = ['/', '/itemdata', '/collectiondata', '/teamdata'];
+var testLinks = ['/', '/itemdata', '/collectiondata', '/teamdata', '/portfolio'];
 
 describe('App', function() {
   before(function(done) {

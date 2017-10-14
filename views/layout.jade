@@ -21,21 +21,34 @@ html
       .elem-container
         .text-main
           h1 AXISESIO
-      .bar
-        .progress-bar
-      .progress-text
-        p.percentage
-      .failed
+        .spinnerContainer
+          .block
+          .spinner.top
+          .spinner.bot
+        .progress-text
+          p.percentage
+        .failed
+    .navtoggle
+      i.ion-navicon.default
+      i.ion-ios-arrow-back.back.disable
     nav#globalnav
-      .navtoggle
-        i.ion-navicon.default
-        i.ion-ios-arrow-back.back.disable
+      .followBar.hidden-xs.hidden-sm
       .buttonContainer
-        - var links = [['About', 'about'], ['Portfolio', 'portfolio'], ['Home', '/'], ['Design Blog', 'designblog'], ['Shop', 'shop']]
+        - var links = [['About', 'about'], ['Portfolio', 'portfolio'], ['Design Blogs', 'designblogs'], ['Shop', 'shop'], ['Contact', 'contact']]
         each link in links
           a(href=link[1])
             h6 #{link[0]}
+        .divider.hidden-xs.hidden-sm
+        .externalSites.hidden-xs.hidden-sm
+          a.ext(href='')
+            i.ion-social-github
+          a.ext(href='')
+            i.ion-social-linkedin
+          a.ext(href='')
+            i.ion-social-facebook
     block content
     script(type="text/javascript" src="/bower_components/move.js/move.min.js")
     script(type="text/javascript" src="/bower_components/imagesloaded/imagesloaded.pkgd.min.js")
+    script(type="text/javascript" src="/bower_components/rowGrid.js/jquery.row-grid.min.js")
+    script(type="text/javascript" src="/bower_components/particles.js/particles.min.js")
     script(type="text/javascript" src="/javascripts/script.js")

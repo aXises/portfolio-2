@@ -17,10 +17,10 @@ html
 
       form(action="/teamdata/new" method="post")
         h4#mode-display Create New Team
-        - var inputs = [['logo', 'text', false], ['name', 'text', false], ['description', 'textarea', false], ['link', 'text', false], ['members', 'text', true]]
+        - var inputs = [['logo', 'text', false], ['name', 'text', false], ['description', 'textarea', false], ['link', 'text', false], ['members', 'text', true], ['status', 'text', false]]
         - for(var i = 0; i < inputs.length; i++)
           +createInput(inputs[i][0], inputs[i][1], inputs[i][2])
-        .container#Extended
+        .container#extended
           p Showcase website?
           | True 
           input(type="radio" name="showcase" value="true")

@@ -1,57 +1,118 @@
 nav#globalnav {
   position: fixed;
+  left: 100%;
   width: 100%;
-  height: 80px;
+  height: 50px;
   z-index: 5;
-  background-color: @nav-primary;
+  background-color: @navPrimary;
+  border-bottom: 1px solid transparent;
+  @media (max-width: 850px) {
+    height: 400px;
+  }
   .transition(0.45s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
+  &:hover {
+    border-bottom: 1px solid rgba(66, 66, 66, 0.20);
+    .transition(0.2s, ease-in-out);
+  }
+  .followBar {
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    height: 4px;
+    width: 120px;
+    background-color: @oran-const;
+    .transition(0.2s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
+  }
   .buttonContainer {
-    width: 800px;
+    position: absolute;
     height: 100%;
     height: inherit;
     margin: 0;
     display: none;
-    .centerX;
+    right: 0;
     a {
-      width: 20%;
+      position: relative;
+      width: 100px;
       height: inherit;
       float: left;
-      color: @light-shade;
+      color: @navText;
       cursor: pointer;
+      margin: 0 10px 0 10px;
       h6 {
-        margin: 0;
         width: inherit;
-        text-align: center;
-        .centerY;
+        border-top: 1px solid @navText;
+        margin: 0;
+        padding: 5px;
         letter-spacing: normal;
         font-weight: 800;
+        font-size: 1em;
+        .centerY;
+      }
+      i {
+        font-size: 1.8em;
+        .centerXY
+      }
+    }
+    a.ext {
+      width: 35px;
+    }
+    @media (max-width: 850px) {
+      height: initial;
+      right: 20px;
+      .centerY;
+      a {
+        float: none;
+        h6 {
+          position: static;
+        }
       }
     }
   }
-  .navtoggle {
-    font-size: 2.5em;
-    left: 50px;
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-    .centerY;
-    .transition.vfast;
-    &:hover {
+  .externalSites {
+    height: 100%;
+    float: left;
+  }
+  .divider {
+    position: relative;
+    height: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    float: left;
+    border-left: 4px solid @oran-const;
+    margin: 0 15px 0 15px;
+    .transition(0.5s, ease)
+  }
+}
 
+.navtoggle {
+  position: fixed;
+  z-index: 6;
+  font-size: 2.5em;
+  left: 15px;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  .transition.vfast;
+  &:hover {
+
+  }
+  i {
+    position: absolute;
+    opacity: 1;
+    left: 0px;
+    padding: 0 20px 0 20px;
+    color: @navToggle;
+    .transition.vfast;
+  }
+  i.back {
+    left: 50px;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      .transition(0.2s, ease-in-out);
     }
-    i {
-      position: absolute;
-      opacity: 1;
-      left: 0px;
-      .transition.vfast;
-    }
-    i.back {
-      left: 50px;
-      color: @light-shade;
-    }
-    .disable {
-      pointer-events: none;
-      opacity: 0;
-    }
+  }
+  .disable {
+    pointer-events: none;
+    opacity: 0;
   }
 }

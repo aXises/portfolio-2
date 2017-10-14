@@ -7,13 +7,14 @@ db = null
 router.post '/new', (req, res, next) ->
   req.body._id = database.getId()
   showcase = req.body.showcase == 'true'
+  req.body.itemType = 'collection'
   db.insertOne(req.body).then () ->
     if showcase
       database.generateShowcase 'collections', req.params.id, req.body
     res.redirect 'back'
 
 router.post '/getData', (req, res, next) ->
-  db.findOne({'_id': database.getId req.body.id}).then (result) ->
+  database.getDb().collection('collection').findOne({'_id': database.getId req.body.id}).then (result) ->
     res.send result
 
 router.post '/delete', (req, res, next) ->

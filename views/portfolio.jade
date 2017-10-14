@@ -2,48 +2,141 @@ extends layout
 
 block content
   #portfolio
-    header.container-fluid
-      .row
-        .col-lg-4#latest
-          .row
-            img.img-responsive(src=latest.Image)
-            .info
-              aside.col-lg-6
-                h3 Latest
-              aside.col-lg-6
-                p #{latest.Name}
-                P #{latest.Date}
-        .col-lg-4#featured
-          .row
-            img.img-responsive(src=latest.Image)
-            .info
-              aside.col-lg-6
-                h3 Featured
-              aside.col-lg-6
-                p #{latest.Name}
-                P #{latest.Date}
-        .col-lg-4#upcoming
-          .row
-            img.img-responsive(src=upcoming.Image)
-            .info
-              aside.col-lg-6
-                h3 Upcoming
-              aside.col-lg-6
-                p #{upcoming.Name}
-                P #{upcoming.Date}
-    main
-      section#display
+    nav
+      .selection.container-fluid
+        .row
+          button.swSelec Selected Works
+          .container-fluid
+            each collection in selectedCollections
+              a.anchor(href='#'+collection._id)=collection.name
+        .row
+          button.va.vaSelec View All
+          .container-fluid.va.vaExt
+            .row
+              button.selecItem Items
+              .itemType.isItem
+            .row
+              button.selecCol Collections
+              .itemType.isCol
+    #selectedWorks
+      - var infos = ['Type', 'Status', 'Technologies']
+      .container-fluid
+        each collection in selectedCollections
+          .row.work(id=collection._id)
+            .container-fluid.head
+              .shift
+                <img src=#{collection.image} />
+                .name
+                  h1=collection.name
+                  h5=collection.for
+                  h6=collection.date
+              .buttonContainer
+                .col-lg-6.col
+                  a(herf="")
+                    button
+                      i.ion-stats-bars
+                .col-lg-6.col
+                  a
+                    button
+                      i.ion-ios-lightbulb-outline
+              
+            .container.info
+                p=collection.description
+                .container-fluid
+                  h5 Project Information
+                    hr
+                  each info in infos
+                    +Info(info + ' :', collection[info.toLowerCase()])
+                  +InfowButton('Project Size :', collection.collectionSize + ' Item/s', 'View', 'projectSizeView')
+                - if (collection.parentTeamData)
+                  .container-fluid
+                    +InfowButton('Part of Team :', collection.parentTeamData.name, 'More Info', 'teamInfoView')
+            - if (collection.parentTeamData)
+              .container.info.team.overlay
+                h3=collection.parentTeamData.name
+                img(src=collection.parentTeamData.logo)
+                .container-fluid.teamInfo
+                  p.text=collection.parentTeamData.description
+                  h5 Team Information
+                    hr
+                  +Info('Status :', collection.parentTeamData.status)
+                  +Info('Members :', collection.parentTeamData.members)
+                .close
+                  i.ion-ios-close-empty
+    #allWorks
+      .loading
+        .anim
+          .dot
+          .dot
+          .dot
+      .itemInfoOverlay
+        .loading
+          .anim
+            .dot
+            .dot
+            .dot
         .container-fluid
           .row
-            - var keys = itemKeys
-            - var items = keys.length
-            - for (var i = 0; i < items; i++)
-                +createItem(i)
+            .col-lg-9
+              h1.title
+              p.date
+              p.desc
+            .col-lg-3
+              .buttonContainer
+                a.disabled.showcase Showcase View
+                a.disabled.parent Parent Collection
+                a.disabled.team Team Information
+                button.closeOverlay Close
+      .container-fluid.allWorkContainer
+        .row
+          each item in items
+            .post(id=item.itemType + ':' + item._id class=item.itemType)
+              -if(typeof(item.images) == 'object')
+                <img src=#{item.image[0]}>
+              - else
+                <img src=#{item.image}>
+              -if(item.itemType == "collection")
+                .itemType.isCol
+              -else if(item.itemType == "item")
+                .itemType.isItem
+          each item in items
+            .post(id=item.itemType + ':' + item._id class=item.itemType)
+              -if(typeof(item.images) == 'object')
+                <img src=#{item.image[0]}>
+              - else
+                <img src=#{item.image}>
+              -if(item.itemType == "collection")
+                .itemType.isCol
+              -else if(item.itemType == "item")
+                .itemType.isItem
+          each item in items
+            .post(id=item.itemType + ':' + item._id class=item.itemType)
+              -if(typeof(item.images) == 'object')
+                <img src=#{item.image[0]}>
+              - else
+                <img src=#{item.image}>
+              -if(item.itemType == "collection")
+                .itemType.isCol
+              -else if(item.itemType == "item")
+                .itemType.isItem
 
-    mixin createItem(index)
-      article.col-lg-2.col-md-3.col-sm-6.item
-        a(href="portfolio/item/" + pageContent[index]._id)
-          - var keyItem = pageContent[index]
-          img.img-responsive(src=keyItem.Image)
-          aside
-            h5 #{keyItem.Name}
+  mixin InfowButton(title, desc, btnTxt, cls)
+    .row
+      .col-lg-4
+        p.title=title
+      .col-lg-4
+        p=desc
+      .col-lg-4.link
+        button(class=cls)=btnTxt
+  mixin Info(title, desc)
+    .row
+      .col-lg-4
+        p.title=title
+      - if(typeof(desc) == 'object')
+        .col-lg-8
+          each elem in desc
+            p=elem
+      - else
+        .col-lg-8
+          p=desc
+      script(type="text/javascript" src="/javascripts/portfolio.js")

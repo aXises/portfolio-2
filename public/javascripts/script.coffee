@@ -1,34 +1,67 @@
 $(document).ready ->
   'use strict'
 
+  $(window).scroll ->
+    if navActive
+      navToggle()
+
+  $('a').click (e) ->
+    e.preventDefault()
+    href = $(this).attr 'href'
+    if !$(this).hasClass 'anchor'
+      $('body').fadeOut 250, ->
+        window.location = href
+    else
+      console.log $(href).offset()
+      $('html, body').animate {
+        scrollTop: $(href).offset().top
+      }, 350
+
+  $('#globalnav a').hover ->
+    $('#globalnav .followBar').css {
+      opacity: 1,
+      width: $(this).width(),
+      left: $('#globalnav .buttonContainer').position().left + $(this).position().left + 10 +'px'
+    }
+    if $(this).hasClass('ext')
+      $('#globalnav .followBar').css 'background-color', '#00bdce'
+      $('#globalnav .divider').css 'border-left', '4px solid #00bdce'
+    else 
+      $('#globalnav .divider').css 'border-left', ''
+  , ->
+    $('#globalnav .followBar').css {
+      'background-color': '',
+      width: 0,
+      left: $('#globalnav .buttonContainer').position().left + $(this).position().left + 10 + 'px'
+    }
+
   prepAnimations = ->
     $('body').addClass 'no-transitions'
-    $('#globalnav').css 'width', '0%'
     $('#index .corners').css 
       'opacity': 0
       'left': '-150px'
     $('#index .text-container h6').css 
       'opacity': 0
       'letter-spacing': '30px'
-    return
   prepAnimations()
 
   navActive = null;
 
   navToggle = ->
-    $('#globalnav .navtoggle .default, #globalnav .navtoggle .back').toggleClass 'disable'
+    $('.navtoggle .default,.navtoggle .back').toggleClass 'disable'
     if !navActive
-      $('#globalnav').css 'width', '100%'
-      $('#globalnav .navtoggle .default').css 'left', '-50px'
-      $('#globalnav .navtoggle .back').css 'left', '0px'
+      $('#globalnav').css 'left', '0px'
       $('#globalnav .buttonContainer').fadeIn();
+      $('#globalnav a').css 'pointer-events', ''
+      $('.navtoggle .default').css 'left', '-50px'
+      $('.navtoggle .back').css 'left', '0px'
     else
-      $('#globalnav').css 'width', '0%'
-      $('#globalnav .navtoggle .default').css 'left', ''
-      $('#globalnav .navtoggle .back').css 'left', ''
+      $('#globalnav').css 'left', $('#globalnav').width()
       $('#globalnav .buttonContainer').fadeOut();
+      $('#globalnav a').css 'pointer-events', 'none'
+      $('.navtoggle .default').css 'left', ''
+      $('.navtoggle .back').css 'left', ''
     navActive = !navActive
-    return
   
   setAside = ->
     displayImg = $('#display img')
@@ -38,7 +71,6 @@ $(document).ready ->
       img.next('aside').css 'height', img.height()
       img.next('aside').css 'width', img.width()
       i++
-    return
 
   load = ->
     $('body').removeClass 'no-transitions'
@@ -46,20 +78,18 @@ $(document).ready ->
     $('#loader').css
       'opacity': 0
       'pointer-events': 'none'
-    setTimeout (->
+    setTimeout ->
       $('#loader').remove()
       $('#index .corners').css 
         'opacity': ''
         'left': ''
-      setTimeout (->
+      setTimeout ->
         $('#index .text-container h6').css 
           'opacity': 1
           'letter-spacing': ''
-      ), 750
-      return
-    ), 750
+      , 750
+    , 750
     setAside()
-    return
   
   imagesTotal = $('img').length
   segment = 100 / imagesTotal
@@ -72,55 +102,25 @@ $(document).ready ->
         duration: segment / 0.35 * 10
         step: ->
           $('.progress-text p').text @current.toFixed(2)
-          return
-      return
     if image.isLoaded
       before = loaded
       loaded += segment
       after = loaded
       animateText before, after
-      $('#loader .progress-bar').css 'width', loaded + '%'
     else
       $('.failed').append '<p>Fail to load: ' + image.img.src + '</p>'
-    return
   ).done ->
-    load()
-    return
+    setTimeout ->
+      $('.progress-text p').text '100.00'
+      load()
+    , 1000
 
   $(window).resize ->
     setAside()
-    return
-
-  $('nav a').click (event) ->
-    return
 
   $('.navtoggle').click ->
     navToggle()
-    return
 
-  $('#latest, #featured, #upcoming').hover ->
-    $(this).find('img').css 'transform', 'scale(1.02)'
-    $(this).find('.info').css 'opacity', '1'
-  , -> 
-    $(this).find('img').css 'transform', ''
-    $(this).find('.info').css 'opacity', ''
+  $('.close').click ->
+    $(this).closest('.overlay').attr 'style', ''
 
-  $('#portfolio .item a').hover ->
-    $(this).find('img').css 'transform', 'scale(1.02)'
-    $(this).find('aside').css 'opacity', '1'
-  , -> 
-    $(this).find('img').css 'transform', ''
-    $(this).find('aside').css 'opacity', ''
-
-  $('.slide img').click ->
-    main = $('#main-img')
-    main.attr 'src', $(this).attr('src')
-    $('.img-loader').show()
-    main.css 'opacity', 0
-    main.imagesLoaded().done ->
-      main.css 'opacity', 1
-      $('.img-loader').hide()
-      return
-    return
-
-  return

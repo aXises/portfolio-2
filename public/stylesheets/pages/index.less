@@ -1,5 +1,6 @@
 #index {
-  background-color: @light-shade;
+  background-color: @std-bg;
+  padding: 0;
   header {
     height: 100vh;
     position: relative;
@@ -7,10 +8,18 @@
       width: 500px;
       height: 500px;
       .centerXY;
+      a {
+        .transition(0.1s, ease);
+      }
       .text-main {
         letter-spacing: 15px;
         text-indent: 15px;
+        color: @dark-shade;
         .centerXY;
+        span {
+          color: transparent;
+          -webkit-text-stroke: 1px @oran-const;
+        }
       }
       .corners {
           width: 100%;
@@ -19,9 +28,11 @@
           left: 0;
           .transition(0.75s, cubic-bezier(0.32, 0.21, 0.15, 1.2));
         .text-container {
-          width: 500px;
           position: absolute;
+          white-space: nowrap;
+          overflow: hidden;
           h6 {
+            display: inline-block;
             .transition(0.95s, cubic-bezier(0.71, 0.17, 0.39, 1.01));
           }
         }
@@ -34,42 +45,42 @@
         .cornertl,
         .cornertr {
           top: 0;
-          border-top: @border-dark-std;
+          border-top: @border-std;
           .text-container { 
             top: -40px;
           }
         }
         .cornertl {
           left: 0;
-          border-left: @border-dark-std;
+          border-left: @border-std;
           .text-container { 
-            left: -450px;
+            right: 0;
             text-align: right;
           }
         }
         .cornertr {
           right: 0;
-          border-right: @border-dark-std;
+          border-right: @border-std;
         }
         .cornerbl,
         .cornerbr {
           bottom: 0;
-          border-bottom: @border-dark-std;
+          border-bottom: @border-std;
           .text-container {
             bottom: -40px;
           }
         }
         .cornerbl {
           left: 0;
-          border-left: @border-dark-std;
+          border-left: @border-std;
           .text-container { 
-            left: -450px;
+            right: 0;
             text-align: right;
           }
         }
         .cornerbr {
           right: 0;
-          border-right: @border-dark-std;
+          border-right: @border-std;
         }
       }
     }

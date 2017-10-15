@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var lessMiddleware = require('less-middleware');
 var mocha = require('mocha');
+var cors = require('cors');
 
 var app = express();
 
@@ -21,6 +22,7 @@ var teamData = require('./routes/teamdata');
 // middleware setup
 app.use(lessMiddleware(__dirname + '/public'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,7 +40,6 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/portfolio', portfolio);
 app.use('/showcases', showcases);
-
 app.use('/itemdata', itemData);
 app.use('/collectiondata', collectionData);
 app.use('/teamdata', teamData);

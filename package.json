@@ -17,11 +17,13 @@
     "url": "https://github.com/aXises/portfolio-2"
   },
   "dependencies": {
+    "@types/node": "^8.0.33",
     "async": "^2.5.0",
     "body-parser": "~1.17.1",
     "bower": "^1.8.2",
     "coffeescript": "^1.12.7",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "jade": "~1.11.0",
@@ -31,7 +33,6 @@
     "morgan": "~1.8.1",
     "request": "^2.81.0",
     "serve-favicon": "~2.4.2",
-    "typescript": "^2.5.2",
-    "@types/node": "^8.0.33"
+    "typescript": "^2.5.2"
   }
 }

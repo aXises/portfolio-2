@@ -32,15 +32,15 @@ block content
                   h6=collection.date
               .buttonContainer
                 .col-lg-6.col
-                  a(herf="")
-                    button
+                  .click
+                    button.stat
                       i.ion-stats-bars
                 .col-lg-6.col
                   a
                     button
                       i.ion-ios-lightbulb-outline
               
-            .container.info
+            .container.info.proj
                 p=collection.description
                 .container-fluid
                   h5 Project Information
@@ -51,18 +51,18 @@ block content
                 - if (collection.parentTeamData)
                   .container-fluid
                     +InfowButton('Part of Team :', collection.parentTeamData.name, 'More Info', 'teamInfoView')
-            - if (collection.parentTeamData)
-              .container.info.team.overlay
-                h3=collection.parentTeamData.name
-                img(src=collection.parentTeamData.logo)
-                .container-fluid.teamInfo
-                  p.text=collection.parentTeamData.description
-                  h5 Team Information
-                    hr
-                  +Info('Status :', collection.parentTeamData.status)
-                  +Info('Members :', collection.parentTeamData.members)
-                .close
-                  i.ion-ios-close-empty
+                - if (collection.parentTeamData)
+                  .container.info.team.overlay
+                    h3=collection.parentTeamData.name
+                    img(src=collection.parentTeamData.logo)
+                    .container-fluid.teamInfo
+                      p.text=collection.parentTeamData.description
+                      h5 Team Information
+                        hr
+                      +Info('Status :', collection.parentTeamData.status)
+                      +Info('Members :', collection.parentTeamData.members)
+                    .close
+                      i.ion-ios-close-empty
     #allWorks
       .loading
         .anim
@@ -128,6 +128,7 @@ block content
         p=desc
       .col-lg-4.link
         button(class=cls)=btnTxt
+
   mixin Info(title, desc)
     .row
       .col-lg-4
@@ -139,4 +140,4 @@ block content
       - else
         .col-lg-8
           p=desc
-      script(type="text/javascript" src="/javascripts/portfolio.js")
+  script(type="text/javascript" src="/javascripts/portfolio.js")

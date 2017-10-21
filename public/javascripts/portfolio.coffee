@@ -57,6 +57,9 @@ $(document).ready ->
         overflow: ''
       }
 
+  $('.stat').click ->
+    $(this).closest('.head').find('.shift').toggleClass('left')
+
   $('.anchor').click ->
     setCurrentView('selectedWorks')
 
@@ -86,7 +89,8 @@ $(document).ready ->
     setCurrentView 'allWorks'
 
   $('.teamInfoView').click ->
-    $(this).closest('.work').find('.team').css 'top', '0'
+
+  $('.info.team .close').click ->
 
   $('.closeOverlay').click ->
     $('.itemInfoOverlay').removeClass 'overlayVisible'

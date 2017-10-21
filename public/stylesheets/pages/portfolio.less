@@ -195,7 +195,6 @@
         float: left;
         margin-top: 10px;
         cursor: pointer;
-        .transition(0.45s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
         img {
           height: 200px;
           max-width: 100%;
@@ -213,10 +212,11 @@
       }
     }
     .loading {
-      position: absolute;
+      display: none;
+      position: fixed;
       top: 0;
-      left: 0;
-      width: 100%;
+      left: 200px;
+      width: calc(~'100% - 200px');
       height: 100vh;
       background-color: @std-bg;
       z-index: 3;

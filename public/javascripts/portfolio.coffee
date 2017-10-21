@@ -15,7 +15,7 @@ $(document).ready ->
     if data.showcase == 'true'
       $('.itemInfoOverlay .showcase').removeClass 'disabled'
       $('.itemInfoOverlay .showcase').attr 'href', 'showcases/' + data.itemType + '/' + data._id
-    if data.parent 
+    if data.parentCollection
       $('.itemInfoOverlay .parent').removeClass 'disabled'
     if data.parentTeam 
       $('.itemInfoOverlay .team').removeClass 'disabled'
@@ -42,9 +42,12 @@ $(document).ready ->
         overflow: 'auto'
       }
       setGrid '.post', ->
-        $('#selectedWorks').fadeOut()
+        $('#selectedWorks').fadeOut 500, ->
+          $(window).scrollTop(0)
         $('#allWorks .loading').fadeOut()
+
     else if view == 'selectedWorks'
+      $('#allWorks .loading').hide()
       $('#selectedWorks').fadeIn()
       $('.va').css {
         top: '',
@@ -63,12 +66,12 @@ $(document).ready ->
     setCurrentView('selectedWorks')
 
   $('.selecItem').click ->
-    $('.collection').hide()
-    setGrid '.item'
+    $('.collection').fadeOut 500, ->
+      setGrid '.item'
 
   $('.selecCol').click ->
-    $('.item').hide()
-    setGrid '.collection'
+    $('.item').fadeOut 500, ->
+      setGrid '.collection'
 
   $('.post').click ->
     $('.itemInfoOverlay .loading').show()

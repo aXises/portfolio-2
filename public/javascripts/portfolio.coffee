@@ -30,7 +30,7 @@ $(document).ready ->
     typeof callback == 'function' && callback()
 
   setCurrentView = (view) ->
-    $('#allWorks .loading').fadeIn()
+    $('#allWorks .loading').show()
     if view == 'allWorks'
       $('.va').css {
         top: 0,
@@ -47,7 +47,7 @@ $(document).ready ->
         $('#allWorks .loading').fadeOut()
 
     else if view == 'selectedWorks'
-      $('#allWorks .loading').hide()
+      $('#allWorks .loading').fadeOut()
       $('#selectedWorks').fadeIn()
       $('.va').css {
         top: '',
@@ -57,13 +57,15 @@ $(document).ready ->
         height: '',
         overflow: ''
       }
+      if $('.itemInfoOverlay').hasClass 'overlayVisible'
+        $('.itemInfoOverlay').removeClass 'overlayVisible'
 
   $('.stat').click ->
-    $(this).closest('.work').find('.info.proj').toggleClass('showLay')
-    $(this).closest('.head').find('.shift').toggleClass('left')
+    $(this).closest('.work').find('.info.proj').toggleClass 'showLay'
+    $(this).closest('.head').find('.shift').toggleClass 'left'
 
   $('.anchor').click ->
-    setCurrentView('selectedWorks')
+    setCurrentView 'selectedWorks'
 
   $('.selecItem').click ->
     $('.collection').fadeOut 500, ->
@@ -91,10 +93,10 @@ $(document).ready ->
     setCurrentView 'allWorks'
 
   $('.teamInfoView').click ->
-    $(this).closest('.work').find('.team').toggleClass('showLay')
+    $(this).closest('.work').find('.team').toggleClass 'showLay'
 
   $('.info.team .close').click ->
-    $(this).parent().toggleClass('showLay')
+    $(this).parent().toggleClass 'showLay'
 
   $('.closeOverlay').click ->
     $('.itemInfoOverlay').removeClass 'overlayVisible'

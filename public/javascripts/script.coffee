@@ -90,6 +90,8 @@ $(document).ready ->
   loaded = 0
   before = 0
   after = 0
+  failedImg = 0
+  loadedImg = 0
   $(document).imagesLoaded().progress((instance, image) ->
     animateText = (from, to) ->
       $(current: from).animate { current: to },
@@ -101,8 +103,18 @@ $(document).ready ->
       loaded += segment
       after = loaded
       animateText before, after
+      loadedImg++
     else
+      failedImg++
       $('.failed').append '<p>Fail to load: ' + image.img.src + '</p>'
+    if failedImg > 0 && failedImg + loadedImg == imagesTotal
+      $('.failed').append '<p>' + failedImg + ' Image/s failed to load</p>'
+      setTimeout ->
+        $('.failed').append '<p>Initialising...</p>'
+        setTimeout ->
+          load()
+        , 2000
+      , 1000
   ).done ->
     setTimeout ->
       $('.progress-text p').text '100.00'

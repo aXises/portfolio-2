@@ -43,9 +43,7 @@ $(document).ready ->
       }
       setGrid '.post', ->
         $('#selectedWorks').fadeOut()
-        setTimeout ->
-          $('#allWorks .loading').fadeOut()
-        , 500
+        $('#allWorks .loading').fadeOut()
     else if view == 'selectedWorks'
       $('#selectedWorks').fadeIn()
       $('.va').css {
@@ -58,6 +56,7 @@ $(document).ready ->
       }
 
   $('.stat').click ->
+    $(this).closest('.work').find('.info.proj').toggleClass('showLay')
     $(this).closest('.head').find('.shift').toggleClass('left')
 
   $('.anchor').click ->
@@ -89,8 +88,10 @@ $(document).ready ->
     setCurrentView 'allWorks'
 
   $('.teamInfoView').click ->
+    $(this).closest('.work').find('.team').toggleClass('showLay')
 
   $('.info.team .close').click ->
+    $(this).parent().toggleClass('showLay')
 
   $('.closeOverlay').click ->
     $('.itemInfoOverlay').removeClass 'overlayVisible'

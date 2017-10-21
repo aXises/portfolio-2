@@ -8,6 +8,9 @@
     height: 100vh;
     border-right: @borderOutline;
     .transition(0.2s, ease-in-out);
+    @media (max-width: 900px) {
+      left: -200px;
+    }
     &:hover {
       border-right: 1px solid @cyan-const;
     }
@@ -55,6 +58,9 @@
     position: relative;
     margin-left: 200px;
     z-index: 2;
+    @media (max-width: 900px) {
+      margin-left: 0;
+    }
     .work {
       height: 1000px;
       overflow: hidden;
@@ -124,6 +130,9 @@
         .transition(0.45s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
         .centerY;
         top: 40%;
+        @media (max-width: 900px) {
+          .centerXY;
+        }
         .title {
           font-weight: 600;
         }
@@ -141,6 +150,9 @@
       }
       .team {
         left: 0;
+        top: 0;
+        height: 100%;
+        transform: none;
         img {
           max-height: 200px;
           .centerX;
@@ -200,6 +212,19 @@
         }
       }
     }
+    .loading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: @std-bg;
+      z-index: 3;
+      .spinnerContainer {
+        #loader.spinnerContainer;
+        .centerXY;
+      }
+    }
     .itemInfoOverlay {
       position: fixed;
       top: -600px;
@@ -210,6 +235,10 @@
       z-index: 2;
       padding: 40px;
       .transition(0.2s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
+      .loading {
+        .loading;
+        height: 100%;
+      }
       .title {
         font-weight: bold;
       }
@@ -227,11 +256,12 @@
           text-align: center;
           border: 1px solid black;
           margin: auto;
-          margin-top: 15%;
+          margin-top: 5vh;
         }
         .disabled {
           text-decoration: line-through;
           cursor: auto;
+          opacity: 0.6;
         }
       }
     }
@@ -245,45 +275,6 @@
   .isCol{
     background-color: @cyan-const;
   }
-  .loading {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: @std-bg;
-    z-index: 3;
-    .anim {
-      .centerXY;
-      .dot {
-        width: 10px;
-        height: 10px;
-        float: left;
-        margin: 5px;
-        border-radius: 10px;
-        border: 1px solid @dark-shade;
-        background-color: transparent;
-        animation: shift 1.5s infinite;
-        &:nth-child(2) {
-          animation-delay: 0.5s;
-        }
-        &:nth-child(3) {
-          animation-delay: 1s;
-        }
-      }
-    }
-    @keyframes shift {
-      0% {
-        background-color: transparent;
-      }
-      50% {
-        background-color: @oran-const;
-      }
-      100% {
-        background-color: transparent;
-      }
-    }
-  }
 }
 
 .showLay {
@@ -293,4 +284,7 @@
 
 .left {
   left: -40% !important;
+  @media (max-width: 900px) {
+    left: initial !important;
+  }
 }

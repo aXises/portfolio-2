@@ -44,7 +44,7 @@ $(document).ready ->
       'letter-spacing': '30px'
   prepAnimations()
 
-  navActive = null;
+  navActive = false;
 
   navToggle = ->
     $('.navtoggle .default,.navtoggle .back').toggleClass 'disable'
@@ -63,13 +63,8 @@ $(document).ready ->
     navActive = !navActive
   
   setAside = ->
-    displayImg = $('#display img')
-    i = 0
-    while i < displayImg.length
-      img = $(displayImg[i])
-      img.next('aside').css 'height', img.height()
-      img.next('aside').css 'width', img.width()
-      i++
+    if !navActive
+      $('#globalnav').css 'left', $('#globalnav').width()
 
   load = ->
     $('body').removeClass 'no-transitions'

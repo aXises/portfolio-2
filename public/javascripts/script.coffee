@@ -54,12 +54,14 @@ $(document).ready ->
       $('#globalnav a').css 'pointer-events', ''
       $('.navtoggle .default').css 'left', '-50px'
       $('.navtoggle .back').css 'left', '0px'
+      $('.home').fadeIn()
     else
       $('#globalnav').css 'left', $('#globalnav').width()
       $('#globalnav .buttonContainer').fadeOut();
       $('#globalnav a').css 'pointer-events', 'none'
       $('.navtoggle .default').css 'left', ''
       $('.navtoggle .back').css 'left', ''
+      $('.home').fadeOut()
     navActive = !navActive
   
   setAside = ->

@@ -84,6 +84,48 @@ nav#globalnav {
   }
 }
 
+.home {
+  display: none;
+  z-index: 6;
+  width: 44px;
+  left: 200px;
+  height: 44px;
+  opacity: 0.8;
+  border-radius: 25px;
+  border: @borderOutline;
+  .centerX;
+  position: fixed;
+  top: 3px;
+  &:hover {
+    opacity: 1;
+    &:before,
+    &:after {
+      opacity: 1;
+    }
+  }
+  &:before,
+  &:after {
+    position: absolute;
+    top: 25%;
+    white-space: nowrap;
+    opacity: 0;
+    .transition(0.2s, ease);
+  }
+  &:before {
+    right: 50px;
+    content: 'Portfolio 2.0.144';
+  }
+  &:after {
+    left: 50px;
+    content: 'Xinyi Li';
+  }
+  img {
+    max-height: 75%;
+    max-width: 70%;
+    .centerXY;
+  }
+}
+
 .navtoggle {
   position: fixed;
   z-index: 6;

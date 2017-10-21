@@ -85,7 +85,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 .vscode/settings.json
-*.png
 
 # Custom
 views/showcases

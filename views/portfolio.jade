@@ -36,9 +36,14 @@ block content
                     button.stat
                       i.ion-stats-bars
                 .col-lg-6.col-sm-6.col
-                  a
-                    button
-                      i.ion-ios-lightbulb-outline
+                  - if (collection.showcase == 'true')
+                    a(href='showcases/' + collection.itemType + '/' + collection._id)
+                      button
+                        i.ion-ios-lightbulb-outline
+                  - else
+                    .click
+                      button.disabled
+                        i.ion-ios-lightbulb-outline
               
             .container.info.proj
                 p=collection.description
@@ -83,9 +88,9 @@ block content
               p.desc
             .col-lg-3
               .buttonContainer
-                a.disabled.showcase Showcase View
-                a.disabled.parent Parent Collection
-                a.disabled.team Team Information
+                a.disabled.showcase.hidden-xs View Showcase
+                button.disabled.parent.hidden-xs Parent Collection
+                button.disabled.team.hidden-xs Team Information
                 button.closeOverlay Close
       .container-fluid.allWorkContainer
         .row

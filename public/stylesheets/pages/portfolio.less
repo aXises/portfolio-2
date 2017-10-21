@@ -98,6 +98,13 @@
           .col {
             height: inherit;
           }
+          .disabled {
+            opacity: 0.4;
+            pointer-events: none;
+            &:after {
+              content: "unavaliable"
+            }
+          }
           a, 
           .click {
             display: inline-block;
@@ -110,6 +117,10 @@
               border: @borderOutline;
               border-radius: 25px;
               color: @dark2Shade;
+              .transition(0.1s, ease);
+              &:hover {
+                border: 1px solid @oran-const;
+              }
               i {
                 font-size: 2em;
                 .centerXY;

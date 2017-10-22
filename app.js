@@ -12,7 +12,6 @@ var app = express();
 
 // routes setup
 var index = require('./routes/index');
-var users = require('./routes/users');
 var portfolio = require('./routes/portfolio');
 var showcases = require('./routes/showcases');
 var itemData = require('./routes/itemdata');
@@ -37,7 +36,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // views setup
 app.use('/', index);
-app.use('/users', users);
 app.use('/portfolio', portfolio);
 app.use('/showcases', showcases);
 app.use('/itemdata', itemData);

@@ -88,6 +88,6 @@ $RECYCLE.BIN/
 
 # Custom
 views/showcases
-public/stylesheets/*.css
+public/stylesheets/**/*.css
 routes/*.js
 public/javascripts/*.js

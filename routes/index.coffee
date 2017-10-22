@@ -6,7 +6,7 @@ item = require '../routes/item'
 router.get '/', (req, res, next) ->
   db = database.getDb()
   res.render 'index', {
-    title: 'Axisesio'
+    title: 'AXISESIO'
   }
 
 module.exports = router

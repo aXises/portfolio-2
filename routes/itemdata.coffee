@@ -23,6 +23,10 @@ router.post '/getData', (req, res, next) ->
   database.getDb().collection('item').findOne({'_id': database.getId req.body.id}).then (result) ->
     res.send result
 
+router.post '/getChildren', (req, res, next) ->
+  database.getDb().collection('item').find({'parentCollection': req.body.id}).toArray (err, result) ->
+    if err then throw err else res.send result
+
 router.post '/delete', (req, res, next) ->
   db.deleteOne({'_id': database.getId req.body.id}).then () ->
     res.send true

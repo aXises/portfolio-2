@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "test": "mocha",
-    "postinstall": "bower install && coffee -c . && tsc"
+    "postinstall": "bower install && grunt && tsc"
   },
   "author": "aXises",
   "license": "BSD 3-Clause",
@@ -41,6 +41,7 @@
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-cssmin": "^2.2.1",
     "grunt-contrib-less": "^1.4.1",
-    "grunt-contrib-uglify": "^3.1.0"
+    "grunt-contrib-uglify": "^3.1.0",
+    "grunt-contrib-watch": "^1.0.0"
   }
 }

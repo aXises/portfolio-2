@@ -2,11 +2,11 @@ module.exports = (grunt) ->
   grunt.initConfig
     pkg: grunt.file.readJSON 'package.json'
     cssmin:
-      compileMain:
+      buildMain:
         src: 'public/stylesheets/style.css'
         dest: 'public/stylesheets/style.min.css'
-    less: 
-      dev:
+    less:
+      compile:
         options:
           paths: ['public/stylesheets/']
         files:
@@ -46,9 +46,28 @@ module.exports = (grunt) ->
           dest: 'public/javascripts/'
           ext: '.min.js'
         ]
+    watch:
+      less:
+        files: 'public/stylesheets/*.less'
+        tasks: ['less']
+      cssmin:
+        files: 'public/stylesheets/style.css'
+        tasks: ['cssmin']
+      coffee:
+        files: ['public/coffeescripts/*.coffee', 'routes/coffeescripts/*.coffee']
+        tasks: ['coffee']
+      concat:
+        files: 'public/javscripts/*.js'
+        tasks: ['concat']
+      uglify:
+        files: 'public/javscripts/*.js'
+        tasks: ['uglify']
 
   grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-cssmin'
   grunt.loadNpmTasks 'grunt-contrib-concat'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
+  grunt.loadNpmTasks 'grunt-contrib-watch'
+
+  grunt.registerTask 'default', ['less', 'cssmin', 'coffee', 'concat', 'uglify']

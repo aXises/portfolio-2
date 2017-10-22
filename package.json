@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "test": "mocha",
-    "postinstall": "bower install && grunt && tsc"
+    "postinstall": "bower install && tsc"
   },
   "author": "aXises",
   "license": "BSD-3-Clause",

@@ -57,7 +57,7 @@ $(document).ready ->
     childInfo = (callback) ->
       getChildren('item', data._id).then (res) ->
         for child in res
-          $('.info .child').append $('<p>' + child.name + '</p>')
+          $('.info .child').append $('<p class="temp">' + child.name + '</p>')
         callback()
     projInfo ->
       $('.itemInfoOverlay .info .proj .loading').fadeOut 500, ->

@@ -8,13 +8,9 @@ cache:
 install:
   - ps: Install-Product node $env:nodejs_version
   - npm install
-  - npm install coffeescript -g
-  - npm install typescript -g
 before_test:
-  - coffee -v
   - tsc -v
-  - coffee -c .
-  - tsc --module commonjs routes/database
+  - tsc
 test_script:
   - node --version
   - npm --version

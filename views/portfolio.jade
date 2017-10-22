@@ -107,24 +107,6 @@ block content
           .block
           .spinner.top
           .spinner.bot
-      .itemInfoOverlay
-        .loading
-          .spinnerContainer
-            .block
-            .spinner.top
-            .spinner.bot
-        .container-fluid
-          .row
-            .col-lg-9
-              h1.title
-              p.date
-              p.desc
-            .col-lg-3
-              .buttonContainer
-                a.disabled.showcase.hidden-xs View Showcase
-                button.disabled.parent.hidden-xs Parent Collection
-                button.disabled.team.hidden-xs Team Information
-                button.closeOverlay Close
       .container-fluid.allWorkContainer
         .row
           each item in items
@@ -163,7 +145,7 @@ block content
       .col-lg-4
         p.title=title
       .col-lg-4.col-xs-8
-        p=desc
+        p.value(class=title.toLowerCase())=desc
       .col-lg-4.col-xs-4.link
         button(class=cls)=btnTxt
 
@@ -174,8 +156,8 @@ block content
       - if(typeof(desc) == 'object')
         .col-lg-8
           each elem in desc
-            p=elem
+            p.value(class=title.toLowerCase())=elem
       - else
         .col-lg-8
-          p=desc
+          p.value(class=title.toLowerCase())=desc
   script(type="text/javascript" src="/javascripts/portfolio.js")

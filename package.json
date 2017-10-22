@@ -26,6 +26,7 @@
     "cors": "^2.8.4",
     "debug": "~2.6.3",
     "express": "~4.15.2",
+    "grunt-cli": "^1.2.0",
     "jade": "~1.11.0",
     "less-middleware": "^2.2.0",
     "mocha": "^3.4.2",

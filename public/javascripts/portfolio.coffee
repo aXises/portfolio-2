@@ -8,17 +8,29 @@ $(document).ready ->
       type: 'POST'
   
   generateInfo = (data) ->
-    $('.itemInfoOverlay .title').text data.name
-    $('.itemInfoOverlay .date').text data.date
-    $('.itemInfoOverlay .desc').text data.description
-    $('.itemInfoOverlay .title').text data.title
+    $('.itemInfoOverlay .main .title').text data.name
+    $('.itemInfoOverlay .main .date').text data.date
+    $('.itemInfoOverlay .main .desc').text data.description
+    $('.itemInfoOverlay .main .title').text data.title
+    $('.info .proj .name').text data.name
+    $('.info .proj .type').text data.type
+    $('.info .proj .status').text data.status
+    $('.info .proj .client').text data.for
+    if data.link
+      $('.info .proj .link').text data.link
+    else
+      $('.info .proj .link').text 'Unavaliable'
+    if $.isArray data.technologies
+      $('.info .proj .technologies').text data.technologies.join(', ')
+    else
+      $('.info .proj .technologies').text data.technologies
+    if data.parentTeam
+      getData('team', data.parentTeam).then (res) ->
     if data.showcase == 'true'
       $('.itemInfoOverlay .showcase').removeClass 'disabled'
       $('.itemInfoOverlay .showcase').attr 'href', 'showcases/' + data.itemType + '/' + data._id
     if data.parentCollection
-      $('.itemInfoOverlay .parent').removeClass 'disabled'
-    if data.parentTeam 
-      $('.itemInfoOverlay .team').removeClass 'disabled'
+      $('.itemInfoOverlay .parent').attr 'target', data.parentCollection
     $('.itemInfoOverlay .loading').fadeOut()
 
   setGrid = (selec, callback) ->

@@ -13,11 +13,44 @@ block content
           button.va.vaSelec View All
           .container-fluid.va.vaExt
             .row
-              button.selecItem Items
+              button.selecItem Item
               .itemType.isItem
             .row
-              button.selecCol Collections
+              button.selecCol Collection
               .itemType.isCol
+    .itemInfoOverlay
+      .loading
+        .spinnerContainer
+          .block
+          .spinner.top
+          .spinner.bot
+      .container-fluid
+        .row
+          .col-lg-9
+            .row.main
+              h1.title
+              p.date
+              p.desc
+            .row.info
+              .col-lg-4.proj
+                p.infoHead Project
+                +Info('Name :', '#')
+                +Info('Type :', '#')
+                +Info('Status :', '#')
+                +Info('Client :', '#')
+                +Info('Technologies :', '#')
+                +Info('Link :', '#')
+              .col-lg-4.team
+                p.infoHead Team
+                +Info('Type :', '#')
+                +Info('Status :', '#')
+                +Info('Technologies :', '#')
+              .col-lg-4.child
+                p.infoHead Childrens
+          .col-lg-3
+            .buttonContainer
+              a.disabled.showcase.hidden-xs View Showcase
+              button.closeOverlay Close
     #selectedWorks
       - var infos = ['Type', 'Status', 'Technologies']
       .container-fluid

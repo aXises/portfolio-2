@@ -71,3 +71,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
   grunt.registerTask 'default', ['less', 'cssmin', 'coffee', 'concat', 'uglify']
+  grunt.registerTask 'heroku', ['less', 'cssmin', 'coffee', 'concat', 'uglify']

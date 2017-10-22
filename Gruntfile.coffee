@@ -33,8 +33,22 @@ module.exports = (grunt) ->
           dest: 'public/javascripts/'
           ext: '.js'
         ]
+    concat:
+      build:
+        dist:
+          src: ['public/javascripts/*.js']
+    uglify:
+      build:
+        files: [
+          expand: true
+          cwd: 'public/javascripts'
+          src: ['*.js']
+          dest: 'public/javascripts/'
+          ext: '.min.js'
+        ]
 
   grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-cssmin'
+  grunt.loadNpmTasks 'grunt-contrib-concat'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-coffee'

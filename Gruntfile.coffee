@@ -35,9 +35,10 @@ module.exports = (grunt) ->
         files: [
           expand: true
           cwd: 'public/javascripts'
-          src: ['*.js']
+          src: ['*.js', '!*min.js']
           dest: 'public/javascripts/'
-          ext: '.min.js'
+          rename: (dest, src) ->
+            return dest + '/' + src.replace '.js', '.min.js'
         ]
     watch:
       less:
@@ -63,5 +64,5 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
 
-  grunt.registerTask 'default', ['less', 'cssmin', 'coffee', 'concat', 'uglify']
-  grunt.registerTask 'heroku', ['less', 'cssmin', 'coffee', 'concat', 'uglify']
+  grunt.registerTask 'default', ['coffee', 'concat', 'uglify']
+  grunt.registerTask 'heroku', ['coffee', 'concat', 'uglify']

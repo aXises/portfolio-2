@@ -19,7 +19,11 @@ var collectionData = require('./routes/collectiondata');
 var teamData = require('./routes/teamdata');
 
 // middleware setup
-app.use(lessMiddleware(__dirname + '/public'));
+app.use(lessMiddleware(__dirname + '/public', [{
+  render: {
+    compress: true
+  }
+}]));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
 app.use(cors());
 

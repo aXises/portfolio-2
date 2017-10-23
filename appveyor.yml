@@ -12,6 +12,7 @@ install:
 before_test:
   - tsc -v
   - tsc
+  - grunt
 test_script:
   - node --version
   - npm --version

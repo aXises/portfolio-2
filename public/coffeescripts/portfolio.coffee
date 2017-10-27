@@ -12,6 +12,13 @@ $(document).ready ->
       url: type + 'data/getChildren'
       data: 'id': id
       type: 'POST'
+
+  initOverlay = ->
+    $('.itemInfoOverlay .loading').show()
+    $('.itemInfoOverlay').addClass 'overlayVisible'
+    $('.itemInfoOverlay .buttonContainer .showcase, .itemInfoOverlay .buttonContainer .parent').addClass 'disabled'
+    $('.itemInfoOverlay .buttonContainer .showcase').attr 'href', ''
+    $('.itemInfoOverlay .buttonContainer .parent').attr 'target', ''
   
   generateInfo = (data) ->
     $('.itemInfoOverlay .info .proj, 
@@ -21,8 +28,8 @@ $(document).ready ->
     $('.itemInfoOverlay .temp').remove()
     $('.itemInfoOverlay .info .title, .itemInfoOverlay .info .value').show()
     if data.itemType == 'item' && data.parentCollection
-      $('.itemInfoOverlay .buttonContainer .parent').removeClass('disabled').attr 'target', data.parentCollection
       getData('collection', data.parentCollection).then (res) ->
+        $('.itemInfoOverlay .buttonContainer .parent').removeClass('disabled').attr('target', res._id)
         $('.itemInfoOverlay .col-lg-9 .main').prepend $('<p class="temp"><i>Part of Collection - ' + res.name + '</i></p>')
         $('.itemInfoOverlay .loading.main').fadeOut()
     else
@@ -111,7 +118,14 @@ $(document).ready ->
       if $('.itemInfoOverlay').hasClass 'overlayVisible'
         $('.itemInfoOverlay').removeClass 'overlayVisible'
 
-  $('.itemInfoOverlay .team')
+  $('.itemInfoOverlay .buttonContainer .parent').click ->
+    targetId = $(this).attr('target')
+    $('.itemInfoOverlay').removeClass('overlayVisible')
+    setTimeout ->
+      initOverlay()
+      getData('collection', targetId).then (res) ->
+        generateInfo res
+    , 200
 
   $('.stat').click ->
     $(this).closest('.work').find('.info.proj').toggleClass 'showLay'
@@ -129,9 +143,7 @@ $(document).ready ->
       setGrid '.collection'
 
   $('.post').click ->
-    $('.itemInfoOverlay .loading').show()
-    $('.itemInfoOverlay').addClass 'overlayVisible'
-    $('.itemInfoOverlay .showcase').addClass 'disabled'
+    initOverlay()
     getData($(this).attr('id').split(':')[0], $(this).attr('id').split(':')[1]).then (res) ->
       generateInfo res
 

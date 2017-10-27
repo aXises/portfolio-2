@@ -41,21 +41,9 @@ module.exports = (grunt) ->
             return dest + '/' + src.replace '.js', '.min.js'
         ]
     watch:
-      less:
-        files: 'public/stylesheets/*.less'
-        tasks: ['less']
-      cssmin:
-        files: 'public/stylesheets/style.css'
-        tasks: ['cssmin']
       coffee:
         files: ['public/coffeescripts/*.coffee', 'routes/coffeescripts/*.coffee']
-        tasks: ['coffee']
-      concat:
-        files: 'public/javscripts/*.js'
-        tasks: ['concat']
-      uglify:
-        files: 'public/javscripts/*.js'
-        tasks: ['uglify']
+        tasks: ['default']
 
   grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-cssmin'

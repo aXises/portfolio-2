@@ -165,7 +165,7 @@
         height: 100%;
         transform: none;
         img {
-          max-height: 200px;
+          max-height: 100px;
           .centerX;
         }
         h3,
@@ -173,7 +173,7 @@
           text-align: center;
         }
         .teamInfo {
-          margin-top: 220px;
+          margin-top: 120px;
         }
         .close {
           position: absolute;
@@ -205,7 +205,11 @@
         position: relative;
         float: left;
         margin-top: 10px;
+        border: 1px solid transparent;
         cursor: pointer;
+        &:hover {
+          border: 1px solid lightgrey;
+        }
         img {
           height: 200px;
           max-width: 100%;
@@ -276,6 +280,15 @@
         font-weight: initial;
       }
     }
+    .child {
+      .childTarg {
+        color: grey;
+        .transition(0.1s, ease);
+        &:hover {
+          color: @oran-const;
+        }
+      }
+    }
     .buttonContainer {
       a,
       button {
@@ -288,6 +301,10 @@
         border-bottom: @borderOutline;
         margin: auto;
         margin-top: 5vh;
+        .transition(0.2s, ease);
+        &:hover {
+          border-bottom-color: @oran-const; 
+        }
       }
       .disabled {
         pointer-events: none;

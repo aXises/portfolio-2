@@ -20,7 +20,13 @@ $(document).ready ->
     ').append $('.itemInfoOverlay .loading').clone().removeClass 'main'
     $('.itemInfoOverlay .temp').remove()
     $('.itemInfoOverlay .info .title, .itemInfoOverlay .info .value').show()
-    $('.itemInfoOverlay .loading.main').fadeOut()
+    if data.itemType == 'item' && data.parentCollection
+      $('.itemInfoOverlay .buttonContainer .parent').removeClass('disabled').attr 'target', data.parentCollection
+      getData('collection', data.parentCollection).then (res) ->
+        $('.itemInfoOverlay .col-lg-9 .main').prepend $('<p class="temp"><i>Part of Collection - ' + res.name + '</i></p>')
+        $('.itemInfoOverlay .loading.main').fadeOut()
+    else
+      $('.itemInfoOverlay .loading.main').fadeOut()
     projInfo = (callback) ->
       $('.itemInfoOverlay .main .title').text data.name
       $('.itemInfoOverlay .main .date').text data.date
@@ -30,14 +36,8 @@ $(document).ready ->
       $('.info .proj .type').text data.type
       $('.info .proj .status').text data.status
       $('.info .proj .client').text data.for
-      if data.link
-        $('.info .proj .link').text data.link
-      else
-        $('.info .proj .link').text 'Unavaliable'
-      if $.isArray data.technologies
-        $('.info .proj .technologies').text data.technologies.join(', ')
-      else
-        $('.info .proj .technologies').text data.technologies
+      if data.link then $('.info .proj .link').text data.link else $('.info .proj .link').text 'Unavaliable'
+      if $.isArray data.technologies then $('.info .proj .technologies').text data.technologies.join(', ') else $('.info .proj .technologies').text data.technologies
       callback()
     teamInfo = (callback) ->
       if data.parentTeam
@@ -45,19 +45,20 @@ $(document).ready ->
           team = res
           $('.info .team .name').text team.name
           $('.info .team .status').text team.status
-          if team.link
-            $('.info .team .link').text team.link
-          else
-            $('.info .team .link').text 'Unavaliable'
+          if team.link then $('.info .team .link').text team.link else $('.info .team .link').text 'Unavaliable'
           callback()
       else
         $('.info .team').append $('<p class="temp">Unavaliable</p>')
         $('.info .team .title, .info .team .value').hide()
         callback()
     childInfo = (callback) ->
-      getChildren('item', data._id).then (res) ->
-        for child in res
-          $('.info .child').append $('<p class="temp">' + child.name + '</p>')
+      if data.itemType == 'collection'
+        getChildren('item', data._id).then (res) ->
+          for child in res
+            $('.info .child').append $('<p class="temp">' + child.name + '</p>')
+          callback()
+      else
+        $('.info .child').append $('<p class="temp">Unavaliable</p>')
         callback()
     projInfo ->
       $('.itemInfoOverlay .info .proj .loading').fadeOut 500, ->
@@ -69,10 +70,7 @@ $(document).ready ->
       $('.itemInfoOverlay .info .child .loading').fadeOut 500, ->
         $(this).remove()
     if data.showcase == 'true'
-      $('.itemInfoOverlay .showcase').removeClass 'disabled'
-      $('.itemInfoOverlay .showcase').attr 'href', 'showcases/' + data.itemType + '/' + data._id
-    if data.parentCollection
-      return
+      $('.itemInfoOverlay .buttonContainer .showcase').removeClass('disabled').attr 'href', 'showcases/' + data.itemType + '/' + data._id
 
   setGrid = (selec, callback) ->
     $(".allWorkContainer .row").rowGrid {

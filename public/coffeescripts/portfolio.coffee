@@ -13,6 +13,14 @@ $(document).ready ->
       data: 'id': id
       type: 'POST'
 
+  linkTo = (type, id) ->
+    if $('.itemInfoOverlay').hasClass 'overlayVisible' then $('.itemInfoOverlay').removeClass 'overlayVisible'
+    setTimeout ->
+      initOverlay()
+      getData(type, id).then (res) ->
+        generateInfo res
+    , 200
+
   initOverlay = ->
     $('.itemInfoOverlay .loading').show()
     $('.itemInfoOverlay').addClass 'overlayVisible'
@@ -29,7 +37,7 @@ $(document).ready ->
     $('.itemInfoOverlay .info .title, .itemInfoOverlay .info .value').show()
     if data.itemType == 'item' && data.parentCollection
       getData('collection', data.parentCollection).then (res) ->
-        $('.itemInfoOverlay .buttonContainer .parent').removeClass('disabled').attr('target', res._id)
+        $('.itemInfoOverlay .buttonContainer .parent').removeClass('disabled').attr('target', 'collection:' + res._id)
         $('.itemInfoOverlay .col-lg-9 .main').prepend $('<p class="temp"><i>Part of Collection - ' + res.name + '</i></p>')
         $('.itemInfoOverlay .loading.main').fadeOut()
     else
@@ -62,7 +70,18 @@ $(document).ready ->
       if data.itemType == 'collection'
         getChildren('item', data._id).then (res) ->
           for child in res
-            $('.info .child').append $('<p class="temp">' + child.name + '</p>')
+            $('.info .child').append $('
+              <div class="row temp">
+                <div class="col-lg-8 col-xs-8">
+                  <p class="temp">' + child.name + '</p>
+                </div>
+                <div class="col-lg-4 col-xs-4">
+                  <button class="temp childTarg" target=item:' + child._id + '>View</button>
+                </div>
+              </row>
+            ')
+          $('.itemInfoOverlay .info .childTarg').one 'click', ->
+            linkTo $(this).attr('target').split(':')[0], $(this).attr('target').split(':')[1]
           callback()
       else
         $('.info .child').append $('<p class="temp">Unavaliable</p>')
@@ -115,17 +134,10 @@ $(document).ready ->
         height: '',
         overflow: ''
       }
-      if $('.itemInfoOverlay').hasClass 'overlayVisible'
-        $('.itemInfoOverlay').removeClass 'overlayVisible'
+      if $('.itemInfoOverlay').hasClass 'overlayVisible' then $('.itemInfoOverlay').removeClass 'overlayVisible'
 
-  $('.itemInfoOverlay .buttonContainer .parent').click ->
-    targetId = $(this).attr('target')
-    $('.itemInfoOverlay').removeClass('overlayVisible')
-    setTimeout ->
-      initOverlay()
-      getData('collection', targetId).then (res) ->
-        generateInfo res
-    , 200
+  $('.itemInfoOverlay .buttonContainer .parent, .itemInfoOverlay .info .childTarg').click ->
+    linkTo $(this).attr('target').split(':')[0], $(this).attr('target').split(':')[1]
 
   $('.stat').click ->
     $(this).closest('.work').find('.info.proj').toggleClass 'showLay'

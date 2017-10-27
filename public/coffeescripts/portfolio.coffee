@@ -29,6 +29,7 @@ $(document).ready ->
     $('.itemInfoOverlay .buttonContainer .parent').attr 'target', ''
   
   generateInfo = (data) ->
+    if !$.isArray data.image then data.image = [data.image]
     $('.itemInfoOverlay .info .proj, 
        .itemInfoOverlay .info .team,
        .itemInfoOverlay .info .child
@@ -70,6 +71,11 @@ $(document).ready ->
       if data.itemType == 'collection'
         getChildren('item', data._id).then (res) ->
           for child in res
+            if $.isArray child.image 
+              for elem in child.image
+                data.image.push elem
+            else
+              data.image.push child.image
             $('.info .child').append $('
               <div class="row temp">
                 <div class="col-lg-8 col-xs-8">
@@ -95,9 +101,21 @@ $(document).ready ->
     childInfo ->
       $('.itemInfoOverlay .info .child .loading').fadeOut 500, ->
         $(this).remove()
+        for image in data.image
+          $('.itemInfoOverlay .gallery .imgContainer').append $('<div class="imgItem temp">
+             <img src="' + image + '"/>
+           </div>')
+        if data.itemType == 'item' then $('.itemInfoOverlay .gallery .imgContainer img').css 'max-width', '100%'
+        $('.itemInfoOverlay .gallery .imgContainer').imagesLoaded().progress (ins, img) ->
+          $(img.img).css 'opacity', 1
+        .done ->
+          $('.itemInfoOverlay .gallery .imgContainer').rowGrid
+            minMargin: 5
+            maxMargin: 10
+            itemSelector: '.imgItem'
     if data.showcase == 'true'
       $('.itemInfoOverlay .buttonContainer .showcase').removeClass('disabled').attr 'href', 'showcases/' + data.itemType + '/' + data._id
-
+  
   setGrid = (selec, callback) ->
     $(".allWorkContainer .row").rowGrid {
       minMargin: 5

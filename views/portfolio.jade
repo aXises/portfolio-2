@@ -63,7 +63,7 @@ block content
           .row.work(id=collection._id)
             .container-fluid.head
               .shift
-                img(src=collection.image[0][0] alt=collection.image[0][1])
+                img.lightBoxItem(src=collection.image[0][0] alt=collection.image[0][1])
                 .name
                   h1=collection.name
                   h5=collection.for
@@ -121,6 +121,11 @@ block content
                 .itemType.isCol
               -else if(item.itemType == "item")
                 .itemType.isItem
+    #lightBox
+      p
+      .close
+        i.ion-ios-close-empty
+      
 
   mixin InfowButton(title, desc, btnTxt, cls)
     .row

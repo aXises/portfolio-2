@@ -21,6 +21,11 @@ $(document).ready ->
         generateInfo res
     , 200
 
+  setLightbox = (src, desc) ->
+    $('#lightBox').append $('<img class="temp" src="' + src + '" alt="' + desc + '"/>')
+    $('#lightBox p').text desc
+    $('#lightBox').toggleClass 'showLay'
+
   initOverlay = ->
     $('.itemInfoOverlay .loading').show()
     $('.itemInfoOverlay').addClass 'overlayVisible'
@@ -106,6 +111,7 @@ $(document).ready ->
              <img class="lightBoxItem" src="' + image[0] + '" alt="' + image[1] + '"/>
              <p class="altDesc">' + image[1] + '</p>
            </div>').on 'click', ->
+            setLightbox $(this).find('.lightBoxItem').attr('src'), $(this).find('.lightBoxItem').attr('alt')
         if data.itemType == 'item' then $('.itemInfoOverlay .gallery .imgContainer img').css 'max-width', '100%'
         $('.itemInfoOverlay .gallery .imgContainer').imagesLoaded().progress (ins, img) ->
           $(img.img).css 'opacity', 1
@@ -187,8 +193,12 @@ $(document).ready ->
   $('.teamInfoView').click ->
     $(this).closest('.work').find('.team').toggleClass 'showLay'
 
-  $('.info.team .close').click ->
+  $('.info.team .close, #lightBox .close').click ->
+    $(this).parent().find('.temp').remove()
     $(this).parent().toggleClass 'showLay'
 
   $('.closeOverlay').click ->
     $('.itemInfoOverlay').removeClass 'overlayVisible'
+
+  $('.shift').click ->
+    setLightbox $(this).find('.lightBoxItem').attr('src'), $(this).find('.lightBoxItem').attr('alt')

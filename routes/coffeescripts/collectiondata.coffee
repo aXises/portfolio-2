@@ -4,11 +4,27 @@ database = require '../routes/database'
 item = require '../routes/item'
 db = null
 
+convertToArrayIfNot = (arr) ->
+  if typeof(arr) != 'object' then return [arr] else return arr
+
+getDelta = (arr1, arr2) ->
+  res = arr1.filter((x) => arr2.indexOf(x) == -1)
+  if !(res[0]) then return null else return res
+
+splitImgDesc = (arr) ->
+  placeholdArr = []
+  for arr in convertToArrayIfNot arr
+    arr = arr.split ','
+    if !arr[1] then arr[1] = ''
+    placeholdArr.push [arr[0], arr[1]]
+  return placeholdArr
+
 router.post '/new', (req, res, next) ->
   req.body._id = database.getId()
   showcase = req.body.showcase == 'true'
   req.body.itemType = 'collection'
-  db.insertOne(req.body).then () ->
+  req.body.image = splitImgDesc req.body.image
+  db.insertOne(req.body).then ->
     if showcase
       database.generateShowcase 'collections', req.params.id, req.body
     res.redirect 'back'
@@ -27,16 +43,17 @@ router.post '/delete', (req, res, next) ->
         'parentCollection': ''
         }
     }
-  ).then () ->
+  ).then ->
       db.deleteOne({'_id': database.getId req.body.id}).then () ->
         res.send true
 
 router.post '/update/:id', (req, res, next) ->
   showcase = req.body.showcase == 'true'
+  req.body.image = splitImgDesc req.body.image
   db.updateOne(
     {'_id': database.getId req.params.id},
     {$set: req.body}
-  ).then () ->
+  ).then ->
     if showcase
       database.generateShowcase 'collections', req.params.id, req.body
     res.redirect 'back'

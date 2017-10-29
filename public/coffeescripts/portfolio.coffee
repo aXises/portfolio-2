@@ -103,8 +103,9 @@ $(document).ready ->
         $(this).remove()
         for image in data.image
           $('.itemInfoOverlay .gallery .imgContainer').append $('<div class="imgItem temp">
-             <img src="' + image + '"/>
-           </div>')
+             <img class="lightBoxItem" src="' + image[0] + '" alt="' + image[1] + '"/>
+             <p class="altDesc">' + image[1] + '</p>
+           </div>').on 'click', ->
         if data.itemType == 'item' then $('.itemInfoOverlay .gallery .imgContainer img').css 'max-width', '100%'
         $('.itemInfoOverlay .gallery .imgContainer').imagesLoaded().progress (ins, img) ->
           $(img.img).css 'opacity', 1

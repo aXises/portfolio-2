@@ -52,11 +52,10 @@ block content
               button.disabled.parent.hidden-xs View Parent Collection
               button.closeOverlay Close
       .container-fluid.gallery
-        .row
-          .col-lg-9
-            .row
-              p.infoHead Gallery
-            .row.imgContainer
+        .col-lg-9
+          .row
+            p.infoHead Gallery
+          .row.imgContainer
     #selectedWorks
       - var infos = ['Type', 'Status', 'Technologies']
       .container-fluid
@@ -64,7 +63,7 @@ block content
           .row.work(id=collection._id)
             .container-fluid.head
               .shift
-                <img src=#{collection.image} />
+                img(src=collection.image[0][0] alt=collection.image[0][1])
                 .name
                   h1=collection.name
                   h5=collection.for
@@ -117,50 +116,7 @@ block content
         .row
           each item in items
             .post(id=item.itemType + ':' + item._id class=item.itemType)
-              -if(typeof(item.images) == 'object')
-                <img src=#{item.image[0]}>
-              - else
-                <img src=#{item.image}>
-              -if(item.itemType == "collection")
-                .itemType.isCol
-              -else if(item.itemType == "item")
-                .itemType.isItem
-          each item in items
-            .post(id=item.itemType + ':' + item._id class=item.itemType)
-              -if(typeof(item.images) == 'object')
-                <img src=#{item.image[0]}>
-              - else
-                <img src=#{item.image}>
-              -if(item.itemType == "collection")
-                .itemType.isCol
-              -else if(item.itemType == "item")
-                .itemType.isItem
-          each item in items
-            .post(id=item.itemType + ':' + item._id class=item.itemType)
-              -if(typeof(item.images) == 'object')
-                <img src=#{item.image[0]}>
-              - else
-                <img src=#{item.image}>
-              -if(item.itemType == "collection")
-                .itemType.isCol
-              -else if(item.itemType == "item")
-                .itemType.isItem
-          each item in items
-            .post(id=item.itemType + ':' + item._id class=item.itemType)
-              -if(typeof(item.images) == 'object')
-                <img src=#{item.image[0]}>
-              - else
-                <img src=#{item.image}>
-              -if(item.itemType == "collection")
-                .itemType.isCol
-              -else if(item.itemType == "item")
-                .itemType.isItem
-          each item in items
-            .post(id=item.itemType + ':' + item._id class=item.itemType)
-              -if(typeof(item.images) == 'object')
-                <img src=#{item.image[0]}>
-              - else
-                <img src=#{item.image}>
+              img(src=item.image[0][0] alt=item.image[0][1])
               -if(item.itemType == "collection")
                 .itemType.isCol
               -else if(item.itemType == "item")

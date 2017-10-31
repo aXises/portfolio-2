@@ -25,7 +25,7 @@ router.post '/new', (req, res, next) ->
   req.body.image = splitImgDesc req.body.image
   db.insertOne(req.body).then ->
      if showcase
-       database.generateShowcase 'items', req.params.id, req.body
+       database.generateShowcase 'items', req.body._id, req.body
   res.redirect 'back'
 
 router.post '/getData', (req, res, next) ->

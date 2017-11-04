@@ -27,6 +27,8 @@ $(document).ready ->
     $('#lightBox').toggleClass 'showLay'
 
   initOverlay = ->
+    $('.itemInfoOverlay .temp').remove()
+    $('.itemInfoOverlay p.value').text ''
     $('.itemInfoOverlay .loading').show()
     $('.itemInfoOverlay').addClass 'overlayVisible'
     $('.itemInfoOverlay .buttonContainer .showcase, .itemInfoOverlay .buttonContainer .parent').addClass 'disabled'
@@ -88,7 +90,6 @@ $(document).ready ->
        .itemInfoOverlay .info .team,
        .itemInfoOverlay .info .child
     ').append $('.itemInfoOverlay .loading').clone().removeClass 'main'
-    $('.itemInfoOverlay .temp').remove()
     $('.itemInfoOverlay .info .title, .itemInfoOverlay .info .value').show()
     if data.itemType == 'item' && data.parentCollection
       getData('collection', data.parentCollection).then (res) ->
@@ -99,11 +100,13 @@ $(document).ready ->
         $('.itemInfoOverlay .buttonContainer .parent').removeClass('disabled').attr('target', 'collection:' + res._id)
         $('.itemInfoOverlay .col-lg-9 .main').prepend $('<p class="temp"><i>Part of Collection - ' + res.name + '</i></p>')
         $('.itemInfoOverlay .loading.main').fadeOut()
-    else
+    else if data.itemType == 'item'
       $('.itemInfoOverlay .loading.main').fadeOut()
       teamInfo ->
         $('.itemInfoOverlay .info .team .loading').fadeOut 500, ->
           $(this).remove()
+    else
+      $('.itemInfoOverlay .loading.main').fadeOut()
     if data.itemType != 'item'
       teamInfo ->
         $('.itemInfoOverlay .info .team .loading').fadeOut 500, ->

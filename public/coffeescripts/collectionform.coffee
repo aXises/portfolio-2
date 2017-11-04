@@ -12,7 +12,6 @@ $(document).ready ->
       if $(fields[i]).attr('extra')
         $(fields[i]).remove()
       i++
-    return
 
   insertFields = (data) ->
     dataKeys = Object.keys(data)
@@ -36,21 +35,17 @@ $(document).ready ->
       while i < data.length
         $(field).after $(field).clone().css('display', 'block').attr('extra', true).val(data[i])
         i++
-    return
     
   $('.newfield').click ->
     field = $(this).parent().find('input:first-of-type')
     $(field).after $(field).clone().css('display', 'block').attr('extra', true).val('')
-    return
 
   $('.new').click ->
     $('#mode-display').text 'Create new collection'
     $('form').attr 'action', 'collectiondata/new'
-    return
 
   $('.clear').click ->
     clearFields()
-    return
 
   $('.edit').click ->
     parentId = $(this).parent().attr('id')
@@ -64,19 +59,9 @@ $(document).ready ->
       success: (data) ->
         clearFields()
         insertFields data
-        return
-    return
     
   $('.delete').click ->
     parentId = $(this).parent().attr('id')
-    $.ajax
-      url: '/collectiondata/delete'
-      data: 'id': parentId.split(':')[1]
-      type: 'POST',
-      success: ->
-        location.reload()
-    return
-  return
     if confirm 'delete ' + parentId + '?'
       $.ajax
         url: '/collectiondata/delete'

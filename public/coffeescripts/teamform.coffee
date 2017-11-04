@@ -63,15 +63,6 @@ $(document).ready ->
     
   $('.delete').click ->
     parentId = $(this).parent().attr('id')
-    $.ajax
-      url: '/teamdata/delete'
-      data: 'id': parentId.split(':')[1]
-      type: 'POST',
-      success: (res) ->
-        if res
-          location.reload()
-    return
-  return
     if confirm 'delete ' + parentId + '?'
       $.ajax
         url: '/teamdata/delete'

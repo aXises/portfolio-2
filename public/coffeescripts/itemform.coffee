@@ -89,3 +89,11 @@ $(document).ready ->
         location.reload()
     return
   return
+    if confirm 'delete ' + parentId + '?'
+      $.ajax
+        url: '/itemdata/delete'
+        data: 'id': parentId.split(':')[1]
+        type: 'POST',
+        success: (res) ->
+          if res
+            location.reload()

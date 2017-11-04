@@ -34,25 +34,6 @@ $(document).ready ->
     $('.itemInfoOverlay .buttonContainer .parent').attr 'target', ''
   
   generateInfo = (data) ->
-    if !$.isArray data.image then data.image = [data.image]
-    $('.itemInfoOverlay .info .proj, 
-       .itemInfoOverlay .info .team,
-       .itemInfoOverlay .info .child
-    ').append $('.itemInfoOverlay .loading').clone().removeClass 'main'
-    $('.itemInfoOverlay .temp').remove()
-    $('.itemInfoOverlay .info .title, .itemInfoOverlay .info .value').show()
-    if data.itemType == 'item' && data.parentCollection
-      getData('collection', data.parentCollection).then (res) ->
-        if res.parentTeam then data.parentTeam = res.parentTeam
-        teamInfo ->
-          $('.itemInfoOverlay .info .team .loading').fadeOut 500, ->
-            $(this).remove()
-        $('.itemInfoOverlay .buttonContainer .parent').removeClass('disabled').attr('target', 'collection:' + res._id)
-        $('.itemInfoOverlay .col-lg-9 .main').prepend $('<p class="temp"><i>Part of Collection - ' + res.name + '</i></p>')
-        $('.itemInfoOverlay .loading.main').fadeOut()
-
-    else
-      $('.itemInfoOverlay .loading.main').fadeOut()
     projInfo = (callback) ->
       $('.itemInfoOverlay .main .title').text data.name
       $('.itemInfoOverlay .main .date').text data.date
@@ -102,6 +83,27 @@ $(document).ready ->
       else
         $('.info .child').append $('<p class="temp">Unavaliable</p>')
         callback()
+    if !$.isArray data.image then data.image = [data.image]
+    $('.itemInfoOverlay .info .proj, 
+       .itemInfoOverlay .info .team,
+       .itemInfoOverlay .info .child
+    ').append $('.itemInfoOverlay .loading').clone().removeClass 'main'
+    $('.itemInfoOverlay .temp').remove()
+    $('.itemInfoOverlay .info .title, .itemInfoOverlay .info .value').show()
+    if data.itemType == 'item' && data.parentCollection
+      getData('collection', data.parentCollection).then (res) ->
+        if res.parentTeam then data.parentTeam = res.parentTeam
+        teamInfo ->
+          $('.itemInfoOverlay .info .team .loading').fadeOut 500, ->
+            $(this).remove()
+        $('.itemInfoOverlay .buttonContainer .parent').removeClass('disabled').attr('target', 'collection:' + res._id)
+        $('.itemInfoOverlay .col-lg-9 .main').prepend $('<p class="temp"><i>Part of Collection - ' + res.name + '</i></p>')
+        $('.itemInfoOverlay .loading.main').fadeOut()
+    else
+      $('.itemInfoOverlay .loading.main').fadeOut()
+      teamInfo ->
+        $('.itemInfoOverlay .info .team .loading').fadeOut 500, ->
+          $(this).remove()
     if data.itemType != 'item'
       teamInfo ->
         $('.itemInfoOverlay .info .team .loading').fadeOut 500, ->

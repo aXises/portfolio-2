@@ -26,7 +26,7 @@ router.post '/new', (req, res, next) ->
   req.body.image = splitImgDesc req.body.image
   db.insertOne(req.body).then ->
     if showcase
-      database.generateShowcase 'collections', req.params.id, req.body
+      database.generateShowcase 'collections', req.body._id, req.body
     res.redirect 'back'
 
 router.post '/getData', (req, res, next) ->
@@ -44,8 +44,9 @@ router.post '/delete', (req, res, next) ->
         }
     }
   ).then ->
-      db.deleteOne({'_id': database.getId req.body.id}).then () ->
-        res.send true
+    database.delShowcase 'collections', req.body.id
+    db.deleteOne({'_id': database.getId req.body.id}).then () ->
+      res.send true
 
 router.post '/update/:id', (req, res, next) ->
   showcase = req.body.showcase == 'true'

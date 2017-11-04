@@ -37,6 +37,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/showcases', express.static(__dirname + '/views/showcases'))
 
 // views setup
 app.use('/', index);

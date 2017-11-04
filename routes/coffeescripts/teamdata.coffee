@@ -10,7 +10,7 @@ router.post '/new', (req, res, next) ->
   req.body.itemType = 'team'
   db.insertOne(req.body).then () ->
     if showcase
-      database.generateShowcase 'teams', req.params.id, req.body
+      database.generateShowcase 'teams', req.body._id, req.body
     res.redirect 'back'
 
 router.post '/getData', (req, res, next) ->
@@ -28,6 +28,7 @@ router.post '/delete', (req, res, next) ->
         }
     }
   ).then () ->
+      database.delShowcase 'teams', req.body.id
       db.deleteOne({'_id': database.getId req.body.id}).then () ->
         res.send true
 

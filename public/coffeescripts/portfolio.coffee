@@ -43,9 +43,14 @@ $(document).ready ->
     $('.itemInfoOverlay .info .title, .itemInfoOverlay .info .value').show()
     if data.itemType == 'item' && data.parentCollection
       getData('collection', data.parentCollection).then (res) ->
+        if res.parentTeam then data.parentTeam = res.parentTeam
+        teamInfo ->
+          $('.itemInfoOverlay .info .team .loading').fadeOut 500, ->
+            $(this).remove()
         $('.itemInfoOverlay .buttonContainer .parent').removeClass('disabled').attr('target', 'collection:' + res._id)
         $('.itemInfoOverlay .col-lg-9 .main').prepend $('<p class="temp"><i>Part of Collection - ' + res.name + '</i></p>')
         $('.itemInfoOverlay .loading.main').fadeOut()
+
     else
       $('.itemInfoOverlay .loading.main').fadeOut()
     projInfo = (callback) ->
@@ -97,11 +102,12 @@ $(document).ready ->
       else
         $('.info .child').append $('<p class="temp">Unavaliable</p>')
         callback()
+    if data.itemType != 'item'
+      teamInfo ->
+        $('.itemInfoOverlay .info .team .loading').fadeOut 500, ->
+          $(this).remove()
     projInfo ->
       $('.itemInfoOverlay .info .proj .loading').fadeOut 500, ->
-        $(this).remove()
-    teamInfo ->
-      $('.itemInfoOverlay .info .team .loading').fadeOut 500, ->
         $(this).remove()
     childInfo ->
       $('.itemInfoOverlay .info .child .loading').fadeOut 500, ->

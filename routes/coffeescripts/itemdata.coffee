@@ -25,7 +25,7 @@ router.post '/new', (req, res, next) ->
   req.body.image = splitImgDesc req.body.image
   db.insertOne(req.body).then ->
      if showcase
-       database.generateShowcase 'items', req.params.id, req.body
+       database.generateShowcase 'items', req.body._id, req.body
   res.redirect 'back'
 
 router.post '/getData', (req, res, next) ->
@@ -37,6 +37,7 @@ router.post '/getChildren', (req, res, next) ->
     if err then throw err else res.send result
 
 router.post '/delete', (req, res, next) ->
+  database.delShowcase 'items', req.body.id
   db.deleteOne({'_id': database.getId req.body.id}).then ->
     res.send true
 

@@ -89,7 +89,7 @@ block content
                   h5 Project Information
                     hr
                   each info in infos
-                    +Info(info + ' :', collection[info.toLowerCase()])
+                    +Info(info, collection[info.toLowerCase()])
                   +InfowButton('Project Size :', collection.collectionSize + ' Item/s', 'View', 'projectSizeView')
                 - if (collection.parentTeamData)
                   .container-fluid

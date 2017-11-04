@@ -28,6 +28,7 @@ router.post '/delete', (req, res, next) ->
         }
     }
   ).then () ->
+      database.delShowcase 'teams', req.body.id
       db.deleteOne({'_id': database.getId req.body.id}).then () ->
         res.send true
 

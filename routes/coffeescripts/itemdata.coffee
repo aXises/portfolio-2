@@ -37,6 +37,7 @@ router.post '/getChildren', (req, res, next) ->
     if err then throw err else res.send result
 
 router.post '/delete', (req, res, next) ->
+  database.delShowcase 'items', req.body.id
   db.deleteOne({'_id': database.getId req.body.id}).then ->
     res.send true
 

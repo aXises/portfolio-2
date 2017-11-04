@@ -33,7 +33,7 @@ module.exports = {
 		return new ObjectID(id);
 	},
   generateShowcase: function(type: string, id: string, data) {
-		var path =  __dirname + '/../views/showcases/' + type + '/' + id 
+		var path =  __dirname + '/../views/showcases/' + type + '/' + id;
 		if (!fs.existsSync(path)) {
 			fs.mkdirSync(path);
 		};
@@ -71,6 +71,29 @@ module.exports = {
 		], function () {
 			console.log('generated files');
 		});
-  }
+	},
+	delShowcase: function (type: string, id: string) {
+		var path =  __dirname + '/../views/showcases/' + type + '/' + id;
+		if (fs.existsSync(path)) {
+			fs.readdir(path, function (err, files) {
+				files.forEach(file => {
+					fs.unlink(path + '/' + file, function (err) {
+						if (err) {
+							throw err;
+						} else {
+							console.log('removed', path + '/' + file);
+						}
+					});
+				});
+				fs.rmdir(path, function (err) {
+					if (err) {
+						throw err;
+					} else {
+						console.log('removed', path);
+					}
+				});
+			}); 
+		};
+	}
 };
 

@@ -44,8 +44,9 @@ router.post '/delete', (req, res, next) ->
         }
     }
   ).then ->
-      db.deleteOne({'_id': database.getId req.body.id}).then () ->
-        res.send true
+    database.delShowcase 'collections', req.body.id
+    db.deleteOne({'_id': database.getId req.body.id}).then () ->
+      res.send true
 
 router.post '/update/:id', (req, res, next) ->
   showcase = req.body.showcase == 'true'

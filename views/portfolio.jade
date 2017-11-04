@@ -34,16 +34,16 @@ block content
             .row.info
               .col-lg-4.proj
                 p.infoHead Project
-                +Info('Name :', '#')
-                +Info('Type :', '#')
-                +Info('Status :', '#')
-                +Info('Client :', '#')
-                +Info('Technologies :', '#')
-                +Info('Link :', '#')
+                +Info('Name', '#')
+                +Info('Type', '#')
+                +Info('Status', '#')
+                +Info('Client', '#')
+                +Info('Technologies', '#')
+                +Info('Link', '#')
               .col-lg-4.team
                 p.infoHead Team
-                +Info('Name :', '#')
-                +Info('Status :', '#')
+                +Info('Name', '#')
+                +Info('Status', '#')
               .col-lg-4.child
                 p.infoHead Child Items
           .col-lg-3
@@ -140,7 +140,7 @@ block content
   mixin Info(title, desc)
     .row
       .col-lg-4
-        p.title=title
+        p.title=title + ' :'
       - if(typeof(desc) == 'object')
         .col-lg-8
           each elem in desc

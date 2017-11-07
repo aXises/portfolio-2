@@ -5,16 +5,19 @@ $(document).ready ->
     if navActive
       navToggle()
 
+  toHash = (hash) ->
+    $('html, body').animate {
+      scrollTop: $(hash).offset().top
+    }, 350
+
   $('a').click (e) ->
     e.preventDefault()
     href = $(this).attr 'href'
-    if !$(this).hasClass 'anchor'
+    if href.charAt(0) == '#'
+        toHash href
+    else
       $('body').fadeOut 250, ->
         window.location = href
-    else
-      $('html, body').animate {
-        scrollTop: $(href).offset().top
-      }, 350
 
   $('#globalnav a').hover ->
     $('#globalnav .followBar').css {

@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  #index.container-fluid
+  section#index.container-fluid
     header.row
       #pbg
       .elem-container
@@ -23,7 +23,7 @@ block content
           a.corner.cornerbr(href="/shop")
             .text-container.hidden-xs
               h6 SHOP
-  #about
+  section#about
     .container-fluid
       .row
         .col-lg-4.elem
@@ -86,5 +86,22 @@ block content
           hr.hrleft.head
           .text
             a(href='showcases/custom/portfolio/index.html') Portfolio Design Process.
-    #contact
+  section#contact
+    .container-fluid
+      h1 Get in touch
+      p 
+        i.ion-ios-email
+        | info@ahxdesign.me
+      p 
+        i.ion-ios-email
+        | leletonyli.13944@yahoo.com.au
+      form(action="")
+        p Name
+        input(type="text" Placeholder="Fatton" name="name") 
+        p Email
+        input(type="text" Placeholder="email@email" name="email") 
+        p Message
+        textarea(rows=5 Placeholder="Message" name="message")
+        input.submit(type="submit")
+
   script(type="text/javascript" src="/javascripts/index.min.js")

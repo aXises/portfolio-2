@@ -63,24 +63,27 @@ $(document).ready ->
     childInfo = (callback) ->
       if data.itemType == 'collection'
         getChildren('item', data._id).then (res) ->
-          for child in res
-            if $.isArray child.image 
-              for elem in child.image
-                data.image.push elem
-            else
-              data.image.push child.image
-            $('.info .child').append $('
-              <div class="row temp">
-                <div class="col-lg-8 col-xs-8">
-                  <p class="temp">' + child.name + '</p>
-                </div>
-                <div class="col-lg-4 col-xs-4">
-                  <button class="temp childTarg" target=item:' + child._id + '>View</button>
-                </div>
-              </row>
-            ')
-          $('.itemInfoOverlay .info .childTarg').one 'click', ->
-            linkTo $(this).attr('target').split(':')[0], $(this).attr('target').split(':')[1]
+          if res.length != 0
+            for child in res
+              if $.isArray child.image 
+                for elem in child.image
+                  data.image.push elem
+              else
+                data.image.push child.image
+              $('.info .child').append $('
+                <div class="row temp">
+                  <div class="col-lg-8 col-xs-8">
+                    <p class="temp">' + child.name + '</p>
+                  </div>
+                  <div class="col-lg-4 col-xs-4">
+                    <button class="temp childTarg" target=item:' + child._id + '>View</button>
+                  </div>
+                </row>
+              ')
+            $('.itemInfoOverlay .info .childTarg').one 'click', ->
+              linkTo $(this).attr('target').split(':')[0], $(this).attr('target').split(':')[1]
+          else
+            $('.info .child').append $('<p class="temp">Unavaliable</p>')
           callback()
       else
         $('.info .child').append $('<p class="temp">Unavaliable</p>')

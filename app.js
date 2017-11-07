@@ -14,6 +14,7 @@ var app = express();
 var index = require('./routes/index');
 var portfolio = require('./routes/portfolio');
 var showcases = require('./routes/showcases');
+var designBlogs = require('./routes/designblogs');
 var itemData = require('./routes/itemdata');
 var collectionData = require('./routes/collectiondata');
 var teamData = require('./routes/teamdata');
@@ -43,6 +44,7 @@ app.use('/showcases', express.static(__dirname + '/views/showcases'))
 app.use('/', index);
 app.use('/portfolio', portfolio);
 app.use('/showcases', showcases);
+app.use('/designblogs', designBlogs);
 app.use('/itemdata', itemData);
 app.use('/collectiondata', collectionData);
 app.use('/teamdata', teamData);

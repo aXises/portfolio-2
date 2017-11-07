@@ -37,7 +37,10 @@ html
     nav#globalnav
       .followBar.hidden-xs.hidden-sm
       .buttonContainer
-        - var links = [['About', 'about'], ['Portfolio', 'portfolio'], ['Design Blogs', 'designblogs'], ['Shop', 'shop'], ['Contact', 'contact']]
+        if(isHome)
+          - var links = [['About', '#about'], ['Portfolio', 'portfolio'], ['Design Blogs', 'designblogs'], ['Shop', 'shop'], ['Contact', '#contact']]
+        else
+          - var links = [['About', '/#about'], ['Portfolio', 'portfolio'], ['Design Blogs', 'designblogs'], ['Shop', 'shop'], ['Contact', '/#contact']]
         each link in links
           a(href=link[1])
             h6 #{link[0]}

@@ -40,7 +40,7 @@ router.get '/', (req, res, next) ->
       db.collection('item').find({}).toArray (err, allItems) ->
         db.collection('collection').find({}).toArray (err, allCollections) ->
           res.render 'portfolio', {
-            title: 'AXISIO'
+            title: 'AXISESIO'
             selectedCollections: sortDate(colDatas).reverse(),
             items: sortDate(allItems.concat(allCollections)).reverse()
           }

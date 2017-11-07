@@ -1,0 +1,97 @@
+[
+    {
+        "_id": "59fdb6e4a0d9f239f40d1d00",
+        "image": [
+            [
+                "https://i.imgur.com/wonzgLE.png",
+                " Bygone concept designs"
+            ]
+        ],
+        "name": "BYGONE, Concept Designs",
+        "date": "30/10/2017",
+        "description": "Initial concept designs for BYGONE",
+        "link": "",
+        "status": "Completed",
+        "type": "Academic Project",
+        "technologies": "Adobe Photoshop",
+        "showcase": "false",
+        "parentCollection": "59ce3b1166679367f0458ce5",
+        "itemType": "item"
+    },
+    {
+        "_id": "59fdc1dddf025a2248aca126",
+        "image": [
+            [
+                "https://i.imgur.com/shBQQIq.png",
+                " Dotma Logo designs"
+            ]
+        ],
+        "name": "DOTMA, Logo Designs",
+        "date": "7/8/2016",
+        "description": "Set of potential logos to use for the Dotma branding.",
+        "link": "",
+        "status": "Completed",
+        "type": "Client Specified",
+        "technologies": "Adobe Photoshop",
+        "showcase": "false",
+        "parentCollection": "59fdc14fdf025a2248aca125",
+        "itemType": "item"
+    },
+    {
+        "_id": "59fdc23cdf025a2248aca127",
+        "image": [
+            [
+                "https://i.imgur.com/xpmkT4M.jpg",
+                " Dotma Mockups"
+            ]
+        ],
+        "name": "DOTMA, Mockup Designs",
+        "date": "7/8/2016",
+        "description": "Mockup designs on objects of the DOTMA Identity",
+        "link": "",
+        "status": "Completed",
+        "type": "Client Specified",
+        "technologies": "Adobe Photoshop",
+        "showcase": "false",
+        "parentCollection": "59fdc14fdf025a2248aca125",
+        "itemType": "item"
+    },
+    {
+        "_id": "59fdc36fdf025a2248aca128",
+        "image": [
+            [
+                "https://i.imgur.com/041lnVT.jpg",
+                " Blocks skins"
+            ]
+        ],
+        "name": "Blocks",
+        "date": "4/6/2016",
+        "description": "Rainmeter skin, Blocks. A set of skins built on squares.",
+        "link": "",
+        "status": "Completed",
+        "type": "Personal",
+        "technologies": "",
+        "showcase": "false",
+        "parentCollection": "",
+        "itemType": "item"
+    },
+    {
+        "_id": "59fdc9d7ee52930a883f315c",
+        "image": [
+            [
+                "https://i.imgur.com/zSv7T7k.jpg",
+                " ITEM A Showcase image"
+            ]
+        ],
+        "name": "ITEM A",
+        "date": "3/18/2015",
+        "description": "For year 11 Information Technology Systems a client will be used to help guide the development of the product. A design for the next edition of J Mag is required which includes all the features of the item and attract customers of age between 14-25. With the use of professional software we aim to give them an edge in the competitive market.  The requested deadline is in three weeks so this advertisement can be in the next edition of J Mag.",
+        "link": "",
+        "status": "Completed",
+        "type": "Academic Project",
+        "technologies": "Adobe Photoshop",
+        "showcase": "false",
+        "parentCollection": "",
+        "itemType": "item"
+    }
+]

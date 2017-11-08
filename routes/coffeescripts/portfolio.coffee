@@ -41,7 +41,6 @@ router.get '/', (req, res, next) ->
     , (err) ->
       db.collection('item').find({}).toArray (err, allItems) ->
         db.collection('collection').find({}).toArray (err, allCollections) ->
-          console.log sortDate(allItems.concat(allCollections))
           res.render 'portfolio', {
             title: 'AXISESIO'
             selectedCollections: sortDate(colDatas),

@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var lessMiddleware = require('less-middleware');
 var mocha = require('mocha');
 var cors = require('cors');
+var package = require('./package.json');
 
 var app = express();
 
@@ -19,6 +20,10 @@ var itemData = require('./routes/itemdata');
 var collectionData = require('./routes/collectiondata');
 var teamData = require('./routes/teamdata');
 
+// Global vars
+app.locals.appVersion = package.version;
+app.locals.appAuthor = package.author;
+  
 // middleware setup
 app.use(lessMiddleware(__dirname + '/public', [{
   render: {

@@ -10,12 +10,15 @@ install:
   - npm install
   - npm install typescript -g
   - npm install grunt-cli -g
+configuration: Release
 before_test:
-  - tsc -v
   - tsc
   - grunt
 test_script:
+  - tsc -v
   - node --version
   - npm --version
   - npm test
+after_build:
+  - npm version %APPVEYOR_BUILD_VERSION% -m 'v%APPVEYOR_BUILD_VERSION%'
 build: off

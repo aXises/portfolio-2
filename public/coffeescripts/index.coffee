@@ -9,22 +9,27 @@ class imgSlide
     @images = $(@elem).find 'img'
     @seqs = $(@elem).find '.slideSeq .seq'
 
-  autoTransit: ->
+  autoTransit: (method) ->
     self = this
     bar = $(self.elem).find '.bar'
     interval = randInt 3000, 9000
-    bar.animate {
-      width: 0;
-    }, interval, 'swing', ->
+    if method == 'stop'
+      clearInterval @transition
+      bar.stop()
+    else
       bar.css 'width', '100%'
-    setInterval ->
-      self.next()
       bar.animate {
         width: 0;
       }, interval, 'swing', ->
         bar.css 'width', '100%'
-      interval = randInt 3000, 9000
-    , interval
+      @transition = setInterval ->
+        self.next()
+        bar.animate {
+          width: 0;
+        }, interval, 'swing', ->
+          bar.css 'width', '100%'
+        interval = randInt 3000, 9000
+      , interval
 
   init: ->
     for image, i in @images
@@ -63,9 +68,17 @@ $(document).ready ->
 
   $('.imgContainer.col .slideSeq .seq').click ->
     colSlide.setIndex $(this).attr 'index'
+    colSlide.autoTransit 'stop'
+    setTimeout ->
+      colSlide.autoTransit()
+    , 5000
 
   $('.imgContainer.side .slideSeq .seq').click ->
     rowSlide.setIndex $(this).attr 'index'
+    rowSlide.autoTransit 'stop'
+    setTimeout ->
+      rowSlide.autoTransit()
+    , 5000
     
   $(window).scroll ->
      $('#index').css 'opacity', 1 - $(window).scrollTop() / 1000

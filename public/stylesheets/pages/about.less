@@ -13,6 +13,7 @@
       padding: 20px;
     }
     .head {
+      z-index: 1;
       h1 {
         color: white;
         font-weight: 900;
@@ -21,24 +22,88 @@
     }
     .row {
       border-radius: 20px;
+      img {
+        position: absolute;
+        opacity: 0;
+        .transition(0.3s, ease-in-out);
+      }
       .imgContainer {
+        position: relative;
         height: 100%;
+        width: 100%;
         overflow: hidden;
-        .centerXYFlex;
+        left: 0;
+        background-color: black;
+        .transition(0.3s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
+        .centerXFlex;
+        .bar {
+          width: 100%;
+          height: 2px;
+          background-color: white;
+          z-index: 1;
+        }
         img {
           max-height: 100%;
+        }
+        .active {
+          opacity: 1;
         }
       }
       .col {
         height: 200%;
+        &:hover {
+          width: 200%;
+          left: -100%;
+        }
       }
       .side {
         position: absolute;
         left: -300px;
         width: 200%;
-        z-index: -1;
         img {
           max-height: 115%;
+        }
+        .slideSeq {
+          width: initial;
+          top: 10px;
+          bottom: initial;
+          .seq {
+            float: left;
+            margin-bottom: 0;
+            margin-right: 5px;
+          }
+        }
+        .bar {
+          position: absolute;
+          bottom: 0;
+        }
+      }
+      .slideSeq {
+        @size: 12px;
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        width: @size;
+        z-index: 1;
+        .transition(0.3s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
+        .seq {
+          width: @size;
+          height: @size;
+          border: 1px solid white;
+          border-radius: 25px;
+          margin-bottom: 5px;
+          background-color: transparent;
+          cursor: pointer;
+          .transition(0.3s, ease);
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+          }
+        }
+        .active {
+          background-color: white;
+          &:hover {
+            background-color: white;
+          }
         }
       }
     }
@@ -67,5 +132,8 @@
         background-color: @cyan-const;
       }
     }
+  }
+  .inactive {
+    pointer-events: none;
   }
 }

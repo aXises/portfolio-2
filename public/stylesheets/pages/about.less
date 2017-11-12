@@ -1,86 +1,71 @@
 #about {
-  width: 100%;
-  .row {
-    &:first-of-type,
-    &:last-of-type {
-      hr {
-        border-bottom: 4px solid @oran-const !important;
-      }
+  height: 1080px;
+  .centerXYFlex;
+  main {
+    width: 900px;
+    height: 900px;
+    .row {
+      height: 33%;
     }
     .elem {
-      height: 330px;
-      padding: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      .transition(0.6s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
-      &:first-of-type {
-        text-align: right;
-        .head {
-          width: 100%;
-          text-align: right;
+      position: relative;
+      height: 100%;
+      padding: 20px;
+    }
+    .head {
+      h1 {
+        color: white;
+        font-weight: 900;
+        margin: 0;
+      }
+    }
+    .row {
+      border-radius: 20px;
+      .imgContainer {
+        height: 100%;
+        overflow: hidden;
+        .centerXYFlex;
+        img {
+          max-height: 100%;
         }
       }
-      &:last-of-type {
-        text-align: left;
-        .head {
-          width: 100%;
-          text-align: left;
+      .col {
+        height: 200%;
+      }
+      .side {
+        position: absolute;
+        left: -300px;
+        width: 200%;
+        z-index: -1;
+        img {
+          max-height: 115%;
         }
+      }
+    }
+    .row.center {
+      .elem {
+        padding: 0;
       }
       .head {
-        position: absolute;
-        top: 0;
-        font-size: 1em;
-        font-weight: 600;
-      }
-      .center {
-        text-align: center;
-      }
-      .text {
-        width: 100%;
-        a {
-          color: @dark-shade;
-          padding: 50px;
-          border: @borderOutline;
-          border-radius: 4px;
+        padding: 20px;
+        background-color: rgba(19, 214, 232, 0.6);
+        .transition(0.2s, ease-in-out);
+        &:hover {
+          background-color: transparent;
         }
-      }
-      hr {
-        width: 15px !important;
-        top: 20px !important;
-        right: 2px;
-        border-bottom: 4px solid @cyan-const;
-      }
-      .hrleft {
-        right: initial;
-        left: 2px;
       }
     }
-    .mid {
-      padding: 50px;
+    .row.oran {
+      background-color: rgba(251, 120, 61, 0.1);
+      .head {
+        background-color: @oran-const;
+      }
     }
-    .main {
-      display: flex;
-      align-items: initial;
-      justify-content: center;
-      opacity: 1;
-      .text {
-        text-align: center;
-        h2 {
-          font-weight: bold;
-        }
-        span {
-          color: @oran-const;
-        }
+    .row.cyan {
+      background-color: rgba(19, 214, 232, 0.1);
+      .head {
+        background-color: @cyan-const;
       }
     }
   }
-}
-
-.elemVisible {
-  opacity: 1 !important;
-  pointer-events: all !important;
 }

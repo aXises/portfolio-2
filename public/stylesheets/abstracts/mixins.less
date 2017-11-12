@@ -33,6 +33,25 @@
   transform: translate(-50%, -50%);
 }
 
+.centerXFlex,
+.centerYFlex,
+.centerXYFlex {
+  display: flex;
+}
+
+.centerXFlex {
+  justify-content: center;
+}
+
+.centerYFlex {
+  align-items: center;
+}
+
+.centerXYFlex {
+  .centerXFlex;
+  .centerYFlex;
+}
+
 .no-transitions * {
   -webkit-transition: none !important;
   -moz-transition: none !important;

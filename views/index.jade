@@ -37,12 +37,16 @@ block content
         .col-lg-4.col-xs-4.elem
           .imgContainer.col
             .slideSeq
-              .seq.active
-              .seq
-              .seq
-            img.active(src="https://i.imgur.com/7cDlQVG.png")
-            img(src="https://i.imgur.com/uuOvkl6.jpg")
-            img(src="https://i.imgur.com/zSv7T7k.jpg")
+              each elem, i in latestA
+                - if (i == 0)
+                  .seq.active
+                - else
+                  .seq
+            each elem, i in latestA
+              - if (i == 0)
+                img.active(src=elem.image[0][0] alt=elem.image[0][1])
+              - else
+                img(src=elem.image[0][0] alt=elem.image[0][1])
             .bar
         .col-lg-4.col-xs-4.elem.head
           h1 Latest 
@@ -50,12 +54,16 @@ block content
         .col-lg-4.col-xs-4.elem
           .imgContainer.side
             .slideSeq
-              .seq.active
-              .seq
-              .seq
-            img.active(src="https://i.imgur.com/7cDlQVG.png")
-            img(src="https://i.imgur.com/uuOvkl6.jpg")
-            img(src="https://i.imgur.com/zSv7T7k.jpg")
+              each elem, i in latestB
+                - if (i == 0)
+                  .seq.active
+                - else
+                  .seq
+            each elem, i in latestB
+              - if (i == 0)
+                img.active(src=elem.image[0][0] alt=elem.image[0][1])
+              - else
+                img(src=elem.image[0][0] alt=elem.image[0][1])
             .bar
       .row.cyan
         .col-lg-4.col-xs-4.elem.inactive
@@ -65,17 +73,6 @@ block content
           h1 ABOUT
           h1 THIS
           h1 SITE.
-
-
-
-
-
-
-
-
-
-
-
 
   section#contact
     .container-fluid

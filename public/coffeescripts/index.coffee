@@ -28,7 +28,6 @@ class imgSlide
           width: 0;
         }, interval, 'swing', ->
           bar.css 'width', '100%'
-        interval = randInt 3000, 9000
       , interval
 
   init: ->

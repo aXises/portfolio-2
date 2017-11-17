@@ -94,7 +94,6 @@
 }
 
 #gridSection {
-  height: 1080px;
   .centerXYFlex;
   main > #about,
   main > #contact {
@@ -111,7 +110,8 @@
     }
     .head {
       z-index: 1;
-      h1 {
+      h1,
+      h3 {
         color: white;
         font-weight: 900;
         margin: 0;
@@ -232,9 +232,58 @@
   }
   main > #contact {
     height: 900px;
+    margin-top: -9px;
     .row {
       height: 33%;
       border-radius: 0;
+      .center {
+        height: initial;
+        position: absolute;
+        left: 285px;
+        padding-bottom: 36px;
+      }
+    }
+    form {
+      padding-bottom: 10px;
+      input,
+      textarea {
+        width: 100%;
+        background-color: transparent;
+        border-style: none;
+        border-bottom: 3px solid white;
+        margin-bottom: 10px;
+        color: white;
+      }
+      textarea {
+        resize: vertical;
+      }
+      .submit {
+        border: 3px dashed transparent;
+        cursor: pointer;
+        .transition(0.3s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
+        hr {
+          position: absolute;
+          top: 45px;
+          border-top: 4px solid white;
+          width: 0px;
+          text-align: left;
+          .transition(0.3s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
+        }
+        &:hover {
+          border: 3px dashed @oran-const;
+          hr {
+            width: 125px;
+          }
+        }
+      }
+    }
+    .inactive {
+      .centerXYFlex;
+      hr {
+        width: 30px;
+        border-top: 3px solid grey;
+        transform: rotate(45deg);
+      }
     }
   }
   .inactive {

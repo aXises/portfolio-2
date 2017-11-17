@@ -23,73 +23,88 @@ block content
           a.corner.cornerbr(href="/shop")
             .text-container.hidden-xs
               h6 SHOP
-  section#about
+              
+  section#gridSection
     main.container-fluid
-      .row.oran
-        .col-lg-4.col-xs-4.elem.head
-          h1 ABOUT
-          h1 ME.
-        .col-lg-4.col-xs-4.elem
-          p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        .col-lg-4.col-xs-4.elem
-          p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      .row.center
-        .col-lg-4.col-xs-4.elem
-          .imgContainer.col
-            .slideSeq
+      section#about
+        .row.oran
+          .col-lg-4.col-xs-4.elem.head
+            h1 ABOUT
+            h1 ME.
+          .col-lg-4.col-xs-4.elem
+            p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          .col-lg-4.col-xs-4.elem
+            p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        .row.center
+          .col-lg-4.col-xs-4.elem
+            .imgContainer.col
+              .slideSeq
+                each elem, i in latestA
+                  - if (i == 0)
+                    .seq.active
+                  - else
+                    .seq
               each elem, i in latestA
                 - if (i == 0)
-                  .seq.active
+                  img.active(src=elem.image[0][0] alt=elem.image[0][1])
                 - else
-                  .seq
-            each elem, i in latestA
-              - if (i == 0)
-                img.active(src=elem.image[0][0] alt=elem.image[0][1])
-              - else
-                img(src=elem.image[0][0] alt=elem.image[0][1])
-            .bar
-        .col-lg-4.col-xs-4.elem.head
-          h1 Latest 
-          h1 Works.
-        .col-lg-4.col-xs-4.elem
-          .imgContainer.side
-            .slideSeq
+                  img(src=elem.image[0][0] alt=elem.image[0][1])
+              .bar
+          .col-lg-4.col-xs-4.elem.head
+            h1 Latest 
+            h1 Works.
+          .col-lg-4.col-xs-4.elem
+            .imgContainer.side
+              .slideSeq
+                each elem, i in latestB
+                  - if (i == 0)
+                    .seq.active
+                  - else
+                    .seq
               each elem, i in latestB
                 - if (i == 0)
-                  .seq.active
+                  img.active(src=elem.image[0][0] alt=elem.image[0][1])
                 - else
-                  .seq
-            each elem, i in latestB
-              - if (i == 0)
-                img.active(src=elem.image[0][0] alt=elem.image[0][1])
-              - else
-                img(src=elem.image[0][0] alt=elem.image[0][1])
-            .bar
-      .row.cyan
-        .col-lg-4.col-xs-4.elem.inactive
-        .col-lg-4.col-xs-4.elem
-          p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        .col-lg-4.col-xs-4.elem.head
-          h1 ABOUT
-          h1 THIS
-          h1 SITE.
+                  img(src=elem.image[0][0] alt=elem.image[0][1])
+              .bar
+        .row.cyan
+          .col-lg-4.col-xs-4.elem.inactive
+          .col-lg-4.col-xs-4.elem
+            p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          .col-lg-4.col-xs-4.elem.head
+            h1 ABOUT
+            h1 THIS
+            h1 SITE.
+      section#contact
+          .row
+            .col-lg-4.col-xs-4.elem.head.cyanBg
+              h1 GET
+              h1 IN
+              h1 TOUCH.
+            .col-lg-4.col-xs-4.elem.inactive
+              hr
+            .col-lg-4.col-xs-4.elem.inactive
+              hr
+          form.row
+            .col-lg-4.col-xs-4.elem.inactive
+              hr
+            .col-lg-4.col-xs-4.elem.head.orangeBg.center
+              h3 NAME
+              input(type="text" name="name")
+              h3 EMAIL
+              input(type="text" name="name")
+              h3 MESSAGE
+              textarea(name="message" rows=3)
+            .col-lg-offset-4.col-lg-4.col-xs-4.elem.inactive
+              hr
+          form.row
+            .col-lg-4.col-xs-4.elem.inactive
+              hr
+            .col-lg-4.col-xs-4.elem.inactive
+              hr
+            .col-lg-4.col-xs-4.elem.head.cyanBg.submit
+              h1 Submit
+              hr
 
-  section#contact
-    .container-fluid
-      h1 Get in touch
-      p 
-        i.ion-ios-email
-        | info@ahxdesign.me
-      p 
-        i.ion-ios-email
-        | leletonyli.13944@yahoo.com.au
-      form(action="")
-        p Name
-        input(type="text" Placeholder="Fatton" name="name") 
-        p Email
-        input(type="text" Placeholder="email@email" name="email") 
-        p Message
-        textarea(rows=5 Placeholder="Message" name="message")
-        input.submit(type="submit")
-
+    
   script(type="text/javascript" src="/javascripts/index.min.js")

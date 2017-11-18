@@ -57,55 +57,42 @@ block content
             p.infoHead Gallery
           .row.imgContainer
     #selectedWorks
-      - var infos = ['Type', 'Status', 'Technologies']
-      .container-fluid
-        each collection in selectedCollections
+      - var infos = ['Type', 'Status', 'Link']
+      each collection in selectedCollections
+        .container-fluid
           .row.work(id=collection._id)
-            .container-fluid.head
-              .shift
-                img.lightBoxItem(src=collection.image[0][0] alt=collection.image[0][1])
-                .name
-                  h1=collection.name
-                  h5=collection.for
-                  h6=collection.date
-              .buttonContainer
-                .col-lg-6.col-sm-6.col
-                  .click
-                    button.stat
-                      i.ion-stats-bars
-                .col-lg-6.col-sm-6.col
-                  - if (collection.showcase == 'true')
-                    a(href='showcases/' + collection.itemType + '/' + collection._id)
-                      button
-                        i.ion-ios-lightbulb-outline
-                  - else
-                    .click
-                      button.disabled
-                        i.ion-ios-lightbulb-outline
-              
-            .container.info.proj
-                p=collection.description
-                .container-fluid
-                  h5 Project Information
-                    hr
-                  each info in infos
-                    +Info(info, collection[info.toLowerCase()])
-                  +InfowButton('Project Size :', collection.collectionSize + ' Item/s', 'View', 'projectSizeView')
-                - if (collection.parentTeamData)
-                  .container-fluid
-                    +InfowButton('Part of Team :', collection.parentTeamData.name, 'More Info', 'teamInfoView')
-                - if (collection.parentTeamData)
-                  .container.info.team.overlay
-                    h3=collection.parentTeamData.name
-                    img(src=collection.parentTeamData.logo)
-                    .container-fluid.teamInfo
-                      p.text=collection.parentTeamData.description
-                      h5 Team Information
-                        hr
-                      +Info('Status', collection.parentTeamData.status)
-                      +Info('Members', collection.parentTeamData.members)
-                    .close
-                      i.ion-ios-close-empty
+            img(src=collection.image[0][0] alt=collection.image[0][1])
+            .buttonContainer
+              button.team
+                i.ion-person-stalker
+              button.stats
+                i.ion-stats-bars
+              - if (collection.showcase == 'true')
+                a(href='showcases/' + collection.itemType + '/' + collection._id)
+                  i.ion-ios-star
+              - else
+                a.disabled(href='showcases/' + collection.itemType + '/' + collection._id)
+                  i.ion-ios-star
+            .info.container-fluid
+              .row
+                .col.col-lg-4.col-md-4
+                  h5.head Description
+                  p= collection.description
+                .col.col-lg-4.col-md-4
+                  h1.head BYGONE, A Soldier's Tale
+                  p.head.orange=collection.date
+                  p.head=collection.for
+                .col.col-lg-4.col-md-4
+                  h5.head Project Information
+                  .col-lg-6.seperator
+                    each info in infos
+                      - if (collection[info.toLowerCase()])
+                        +Info(info, collection[info.toLowerCase()])
+                    +Info('Client', collection.for)
+                    +Info('Part of Team', collection.parentTeamData.name)
+                    +Info('Project Size', collection.collectionSize + ' Item/s')
+                  .col-lg-6
+                    +Info('Technologies', collection.technologies)
     #allWorks
       .loading
         .spinnerContainer
@@ -139,13 +126,13 @@ block content
 
   mixin Info(title, desc)
     .row
-      .col-lg-4
+      .col-lg-4.col-xs-4
         p.title=title + ' :'
       - if(typeof(desc) == 'object')
-        .col-lg-8
+        .col-lg-8.col-xs-8
           each elem in desc
             p.value(class=title.toLowerCase())=elem
       - else
-        .col-lg-8
+        .col-lg-8.col-xs-8
           p.value(class=title.toLowerCase())=desc
   script(type="text/javascript" src="/javascripts/portfolio.min.js")

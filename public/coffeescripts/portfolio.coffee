@@ -178,9 +178,9 @@ $(document).ready ->
   $('.itemInfoOverlay .buttonContainer .parent, .itemInfoOverlay .info .childTarg').click ->
     linkTo $(this).attr('target').split(':')[0], $(this).attr('target').split(':')[1]
 
-  $('.stat').click ->
-    $(this).closest('.work').find('.info.proj').toggleClass 'showLay'
-    $(this).closest('.head').find('.shift').toggleClass 'left'
+  $('#selectedWorks .work button.stats').click ->
+    $('#selectedWorks .work .info').toggleClass 'showLay'
+    $(this).parent('.buttonContainer').toggleClass('hiddenBg').find('button, a').toggleClass('dark')
 
   $('.anchor').click ->
     setCurrentView 'selectedWorks'
@@ -204,15 +204,9 @@ $(document).ready ->
   $('.vaSelec').click ->
     setCurrentView 'allWorks'
 
-  $('.teamInfoView').click ->
-    $(this).closest('.work').find('.team').toggleClass 'showLay'
-
   $('.info.team .close, #lightBox .close').click ->
     $(this).parent().find('.temp').remove()
     $(this).parent().toggleClass 'showLay'
 
   $('.closeOverlay').click ->
     $('.itemInfoOverlay').removeClass 'overlayVisible'
-
-  $('.shift').click ->
-    setLightbox $(this).find('.lightBoxItem').attr('src'), $(this).find('.lightBoxItem').attr('alt')

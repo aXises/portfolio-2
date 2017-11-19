@@ -180,15 +180,13 @@ $(document).ready ->
 
   infoActive = false
   $('#selectedWorks .work .buttonContainer button').click ->
-    if !infoActive || infoActive && $(this).hasClass 'buttonActive'
+    if !infoActive || $(this).hasClass 'buttonActive'
       $('#selectedWorks .work .info').toggleClass 'showLay hoverable'
       $(this).parent('.buttonContainer').toggleClass('hiddenBg hoverableNext').find('button, a').toggleClass 'dark'
+      infoActive = !infoActive
     if !$(this).hasClass 'buttonActive'
       $(this).addClass 'buttonActive'
       $(this).siblings().removeClass 'buttonActive'
-    else
-      infoActive = !infoActive
-    
 
   $('.anchor').click ->
     setCurrentView 'selectedWorks'

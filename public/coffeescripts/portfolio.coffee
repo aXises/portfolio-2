@@ -188,6 +188,14 @@ $(document).ready ->
       $(this).addClass 'buttonActive'
       $(this).siblings().removeClass 'buttonActive'
 
+  $('#selectedWorks .work .buttonContainer button.stats').click ->
+    $('#selectedWorks .work .info .team').fadeOut 200, ->
+      $('#selectedWorks .work .info .proj').fadeIn()
+
+  $('#selectedWorks .work .buttonContainer button.team').click ->
+    $('#selectedWorks .work .info .proj').fadeOut 200, ->
+      $('#selectedWorks .work .info .team').fadeIn()
+
   $('.anchor').click ->
     setCurrentView 'selectedWorks'
 

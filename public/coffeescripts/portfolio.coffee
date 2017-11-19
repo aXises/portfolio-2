@@ -178,9 +178,17 @@ $(document).ready ->
   $('.itemInfoOverlay .buttonContainer .parent, .itemInfoOverlay .info .childTarg').click ->
     linkTo $(this).attr('target').split(':')[0], $(this).attr('target').split(':')[1]
 
-  $('#selectedWorks .work button.stats').click ->
-    $('#selectedWorks .work .info').toggleClass 'showLay'
-    $(this).parent('.buttonContainer').toggleClass('hiddenBg').find('button, a').toggleClass('dark')
+  infoActive = false
+  $('#selectedWorks .work .buttonContainer button').click ->
+    if !infoActive || infoActive && $(this).hasClass 'buttonActive'
+      $('#selectedWorks .work .info').toggleClass 'showLay hoverable'
+      $(this).parent('.buttonContainer').toggleClass('hiddenBg hoverableNext').find('button, a').toggleClass 'dark'
+    if !$(this).hasClass 'buttonActive'
+      $(this).addClass 'buttonActive'
+      $(this).siblings().removeClass 'buttonActive'
+    else
+      infoActive = !infoActive
+    
 
   $('.anchor').click ->
     setCurrentView 'selectedWorks'

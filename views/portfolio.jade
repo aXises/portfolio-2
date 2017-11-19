@@ -119,7 +119,7 @@ block content
               -if(item.itemType == "collection")
                 .itemType.isCol
               -else if(item.itemType == "item")
-                .itemType.isItem
+                .itemType.isItem(parent=item.parentCollection)
     #lightBox
       p
       .close

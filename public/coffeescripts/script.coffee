@@ -1,5 +1,10 @@
+isFirefox = typeof InstallTrigger != 'undefined'
+
 $(document).ready ->
   'use strict'
+
+  if isFirefox
+    $('#loader .elem-container').attr 'style', 'left: calc(50% - 8px) !important'
 
   $(window).scroll ->
     if navActive

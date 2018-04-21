@@ -61,131 +61,84 @@
     @media (max-width: 900px) {
       margin-left: 0;
     }
+  }
+  #selectedWorks {
     .work {
-      height: 1000px;
-      overflow: hidden;
       position: relative;
-      .head {
-        height: 600px;
-        .shift {
-          position: relative;
-          left: 0px;
-          cursor: pointer;
-          .transition(0.45s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
+      @media (max-width: 1000px) {
+        height: 100vh;
+      }
+      img {
+        max-width: 100%;
+      }
+      .buttonContainer {
+        width: 300px;
+        height: 60px;
+        bottom: 50px;
+        padding: 5px;
+        background-color: @nav-secondary;
+        border-radius: 6px;
+        z-index: 2;
+        .centerX;
+        .centerXFlex;
+        .transition(0.3s, ease-in-out);
+        @media (max-width: 1000px) {
+          bottom: initial;
+          margin-top: 10px;
         }
-        .centerXY;
-        img {
-          left: 50px;
-          width: 700px;
-          padding: 20px;
-          pointer-events: none;
-          border-radius: 5px;
+        a,
+        button {
+          width: 50px;
+          height: 100%;
+          border: 1px solid white;
+          border-radius: 25px;
+          margin: 0 auto;
+          .centerXYFlex;
+          .transition(0.2s, ease-in-out);
+          i {
+            color: white;
+            font-size: 2em;
+            .transition(0.3s, ease-in-out);
+          }
+          &:hover {
+            transform: translateY(-5px);
+            border-color: @oran-const;
+          }
         }
-        .name {
-          padding: 10px;
-          left: 650px;
-          bottom: 0;
-          text-align: center;
-          h1 {
-            font-size: 3em;
+      }
+      .info {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 300px;
+        background-color: @navPrimary;
+        opacity: 0;
+        .transition(0.3s, ease-in-out);
+        @media (max-width: 1000px) {
+          bottom: initial;
+          margin-top: 60px;
+        }
+        .col {
+          padding: 10px 20px 10px 20px;
+          h5.head {
+            border-bottom: @borderOutline;
+            padding-bottom: 2px;
+          }
+          h1.head {
+            text-align: center;
             font-weight: bold;
+          }
+          p.head {
+            text-align: center;
+          }
+          .title {
             white-space: nowrap;
           }
-        }
-        .buttonContainer {
-          width: 100%;
-          height: 50px;
-          margin-top: 50px;
-          .col {
-            height: inherit;
+          .value {
+            text-align: right;
           }
-          .disabled {
-            opacity: 0.4;
-            pointer-events: none;
-            &:after {
-              content: "unavaliable"
-            }
-          }
-          a, 
-          .click {
-            display: inline-block;
-            height: 100%;
-            .centerX;
-            button {
-              position: relative;
-              height: 100%;
-              width: 100px;
-              border: @borderOutline;
-              border-radius: 25px;
-              color: @dark2Shade;
-              .transition(0.1s, ease);
-              &:hover {
-                border: 1px solid @oran-const;
-              }
-              i {
-                font-size: 2em;
-                .centerXY;
-              }
-            }
-          }
-        }
-      }
-      .info,
-      .team {
-        opacity: 0;
-        width: 400px;
-        padding: 10px;
-        right: 20%;
-        pointer-events: none;
-        background-color: @light-shade;
-        .transition(0.45s, cubic-bezier(0.98,-0.01, 0.39, 1.01));
-        .centerY;
-        top: 40%;
-        @media (max-width: 900px) {
-          .centerXY;
-        }
-        .title {
-          font-weight: 600;
-        }
-        hr {
-          margin: 7px 0 7px 0;
-          border-top: @borderOutline;
-        }
-        .link {
-          text-align: right;
-        }
-        button {
-          color: grey;
-
-        }
-      }
-      .team {
-        left: 0;
-        top: 0;
-        height: 100%;
-        transform: none;
-        img {
-          max-height: 100px;
-          .centerX;
-        }
-        h3,
-        .text {
-          text-align: center;
-        }
-        .teamInfo {
-          margin-top: 120px;
-        }
-        .close {
-          position: absolute;
-          width: 50px;
-          height: 50px;
-          top: 10px;
-          right: 10px;
-          opacity: 0.8;
-          i {
-            font-size: 2em;
-            color: @dark-shade;
-            .centerXY;
+          .seperator {
+            border-right: 1px solid @borderOutline;
           }
         }
       }
@@ -207,9 +160,6 @@
         margin-top: 10px;
         border: 1px solid transparent;
         cursor: pointer;
-        &:hover {
-          border: 1px solid @oran-const;
-        }
         img {
           height: 300px;
           max-width: 100%;
@@ -223,6 +173,22 @@
           left: 10px;
           border-radius: 5px;
           box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(255, 255, 255, 0.60);
+        }
+      }
+      .post.item {
+        &:hover {
+          border: 1px solid @oran-const;
+        }
+        .itemType {
+          top: initial;
+          left: initial;
+          bottom: 10px;
+          right: 10px;
+        }
+      } 
+      .post.collection {
+        &:hover {
+          border: 1px solid @cyan-const;
         }
       }
     }
@@ -357,6 +323,13 @@
   .isCol{
     background-color: @cyan-const;
   }
+  .connectingLine {
+    position: absolute;
+    height: 2px;
+    border-radius: 1px;
+    z-index: 2;
+    transform-origin: 0;
+  } 
 }
 
 #lightBox {
@@ -397,6 +370,36 @@
 .showLay {
   opacity: 1 !important;
   pointer-events: all !important;
+}
+
+.hoverable {
+  opacity: 0.2 !important;
+  &:hover {
+    opacity: 1 !important;
+  }
+}
+
+.hoverableNext {
+  &:hover {
+    ~ .info {
+      opacity: 1 !important;
+    }
+  }
+}
+
+.hiddenBg {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.dark {
+  border-color: @dark-shade !important;
+  i {
+    color: @dark-shade !important;
+  }
+}
+
+.buttonActive {
+  border-color: @oran-const !important;
 }
 
 .left {

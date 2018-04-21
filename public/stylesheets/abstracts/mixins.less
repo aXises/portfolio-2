@@ -33,9 +33,36 @@
   transform: translate(-50%, -50%);
 }
 
+.centerXFlex,
+.centerYFlex,
+.centerXYFlex {
+  display: flex;
+}
+
+.centerXFlex {
+  justify-content: center;
+}
+
+.centerYFlex {
+  align-items: center;
+}
+
+.centerXYFlex {
+  .centerXFlex;
+  .centerYFlex;
+}
+
 .no-transitions * {
   -webkit-transition: none !important;
   -moz-transition: none !important;
   -ms-transition: none !important;
   -o-transition: none !important;
+}
+
+.orangeBg {
+  background-color: @oran-const;
+}
+
+.cyanBg {
+  background-color: @cyan-const;
 }

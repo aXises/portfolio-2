@@ -21,6 +21,32 @@ $(document).ready ->
         generateInfo res
     , 200
 
+  drawLine = (elem1, elem2, color) ->
+    e1x = $(elem1).offset().left + ($(elem1).width() / 2)
+    e1y = $(elem1).offset().top + ($(elem1).height() / 2)
+    e2x = $(elem2).offset().left + ($(elem2).width() / 2)
+    e2y = $(elem2).offset().top + ($(elem2).height() / 2)
+    dist = Math.sqrt Math.pow(e2x - e1x, 2) + Math.pow(e2y - e1y, 2)
+    angle = Math.atan2((e2y - e1y), (e2x - e1x))
+    $('#portfolio').append $('<div class="connectingLine">').css 
+      width: dist
+      top: e1y
+      left: e1x
+      transform: 'rotate(' + angle + 'rad)'
+      'background-color': color
+
+  viewAll = false
+  $('#portfolio .post').hover ->
+    self = $(this).find '.itemType'
+    if self && viewAll 
+      if self.hasClass('isItem') && self.attr('parent')
+        drawLine self, $('#collection\\:' + self.attr('parent')).find('.itemType'), '#fb783d'
+      else if self.hasClass('isCol') && $('.itemType.isItem[parent=' + $(this).attr('id').split(':')[1] + ']').length > 0
+        for elem in $('.itemType.isItem[parent=' + $(this).attr('id').split(':')[1] + ']')
+          drawLine $(elem), self, '#13D6E8'
+  , ->
+    $('#portfolio .connectingLine').remove()
+
   setLightbox = (src, desc) ->
     $('#lightBox').append $('<img class="temp" src="' + src + '" alt="' + desc + '"/>')
     $('#lightBox p').text desc
@@ -148,6 +174,7 @@ $(document).ready ->
   setCurrentView = (view) ->
     $('#allWorks .loading').show()
     if view == 'allWorks'
+      viewAll = true
       $('.va').css {
         top: 0,
         opacity: 1,
@@ -178,9 +205,23 @@ $(document).ready ->
   $('.itemInfoOverlay .buttonContainer .parent, .itemInfoOverlay .info .childTarg').click ->
     linkTo $(this).attr('target').split(':')[0], $(this).attr('target').split(':')[1]
 
-  $('.stat').click ->
-    $(this).closest('.work').find('.info.proj').toggleClass 'showLay'
-    $(this).closest('.head').find('.shift').toggleClass 'left'
+  infoActive = false
+  $('#selectedWorks .work .buttonContainer button').click ->
+    if !infoActive || $(this).hasClass 'buttonActive'
+      $('#selectedWorks .work .info').toggleClass 'showLay hoverable'
+      $(this).parent('.buttonContainer').toggleClass('hiddenBg hoverableNext').find('button, a').toggleClass 'dark'
+      infoActive = !infoActive
+    if !$(this).hasClass 'buttonActive'
+      $(this).addClass 'buttonActive'
+      $(this).siblings().removeClass 'buttonActive'
+
+  $('#selectedWorks .work .buttonContainer button.stats').click ->
+    $('#selectedWorks .work .info .team').fadeOut 200, ->
+      $('#selectedWorks .work .info .proj').fadeIn()
+
+  $('#selectedWorks .work .buttonContainer button.team').click ->
+    $('#selectedWorks .work .info .proj').fadeOut 200, ->
+      $('#selectedWorks .work .info .team').fadeIn()
 
   $('.anchor').click ->
     setCurrentView 'selectedWorks'
@@ -188,10 +229,12 @@ $(document).ready ->
   $('.selecItem').click ->
     $('.collection').fadeOut 500, ->
       setGrid '.item'
+    viewAll = false
 
   $('.selecCol').click ->
     $('.item').fadeOut 500, ->
       setGrid '.collection'
+    viewAll = false
 
   $('.post').click ->
     initOverlay()
@@ -204,15 +247,9 @@ $(document).ready ->
   $('.vaSelec').click ->
     setCurrentView 'allWorks'
 
-  $('.teamInfoView').click ->
-    $(this).closest('.work').find('.team').toggleClass 'showLay'
-
   $('.info.team .close, #lightBox .close').click ->
     $(this).parent().find('.temp').remove()
     $(this).parent().toggleClass 'showLay'
 
   $('.closeOverlay').click ->
     $('.itemInfoOverlay').removeClass 'overlayVisible'
-
-  $('.shift').click ->
-    setLightbox $(this).find('.lightBoxItem').attr('src'), $(this).find('.lightBoxItem').attr('alt')
